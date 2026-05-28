@@ -1,11 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { CONTRACTS } from "@/lib/contracts";
+import { CONTRACTS, EstadoObra } from "@/lib/contracts";
 import { ConciliationResult } from "@/lib/conciliation";
 import { fmtCLP, fmtUF, fmtDate, fmtDateLong, fmtPct } from "@/lib/format";
 import StatusPill from "./StatusPill";
-import { ChevronDown, FileText, MapPin, User, Calendar, CreditCard, AlertTriangle } from "lucide-react";
+import { ChevronDown, FileText, MapPin, User, Calendar, CreditCard, AlertTriangle, CheckCircle2, Circle, Clock } from "lucide-react";
 
 interface Props {
   result: ConciliationResult;
@@ -40,6 +40,7 @@ export default function Contracts({ result }: Props) {
           const pag = cuotasVencidas.reduce((s, x) => s + x.totalPagado, 0);
           const pct = fact > 0 ? pag / fact : 0;
           const isOpen = expanded === c.id;
+          const hasObra = !!(c.recepciones?.length || c.pendientesObra?.length);
 
           return (
             <div
@@ -59,6 +60,7 @@ export default function Contracts({ result }: Props) {
                     </span>
                     <span className="text-[10px] text-ink-400">·</span>
                     <span className="text-[10px] text-ink-400">{c.nCuotas} cuotas</span>
+                    {c.estadoObra && <ObraPill estado={c.estadoObra} />}
                   </div>
                   <h3 className="text-lg font-display font-semibold text-ink-900 truncate">
                     {c.proyecto}
@@ -116,6 +118,66 @@ export default function Contracts({ result }: Props) {
                         <AlertTriangle className="w-4 h-4 text-amber-600 mt-0.5 shrink-0" />
                         <p className="text-xs text-ink-700 leading-relaxed">{c.obs}</p>
                       </div>
+                    </div>
+                  )}
+
+                  {/* Recepción de obra */}
+                  {hasObra && (
+                    <div className="px-6 py-5 border-t border-black/[0.04]">
+                      <div className="flex items-center justify-between mb-4">
+                        <h4 className="text-sm font-display font-semibold text-ink-900">
+                          Recepción de obra
+                        </h4>
+                        {c.estadoObra && <ObraPill estado={c.estadoObra} />}
+                      </div>
+
+                      {c.recepciones && c.recepciones.length > 0 && (
+                        <div className="space-y-3 mb-5">
+                          {c.recepciones.map((r, i) => (
+                            <div key={i} className="flex items-start gap-3">
+                              {r.tipo === "definitiva" ? (
+                                <CheckCircle2 className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" />
+                              ) : (
+                                <Clock className="w-4 h-4 text-amber-500 mt-0.5 shrink-0" />
+                              )}
+                              <div className="min-w-0">
+                                <div className="text-xs font-medium text-ink-800 capitalize">
+                                  Recepción {r.tipo} · {fmtDateLong(r.fecha)}
+                                </div>
+                                <div className="text-[11px] text-ink-500 leading-relaxed">{r.doc}</div>
+                                <div className="text-[11px] text-ink-400">{r.firmante}</div>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+
+                      {c.pendientesObra && c.pendientesObra.length > 0 && (
+                        <div>
+                          <div className="text-[10px] uppercase tracking-wider text-ink-400 mb-2">
+                            Partidas observadas en recepción provisoria
+                          </div>
+                          <ul className="space-y-2">
+                            {c.pendientesObra.map((p, i) => (
+                              <li key={i} className="flex items-start gap-2 text-xs">
+                                {p.resuelto ? (
+                                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 mt-0.5 shrink-0" />
+                                ) : (
+                                  <Circle className="w-3.5 h-3.5 text-amber-500 mt-0.5 shrink-0" />
+                                )}
+                                <span>
+                                  <span className={p.resuelto ? "text-ink-500" : "text-ink-800 font-medium"}>
+                                    {p.item}
+                                  </span>
+                                  {p.nota && (
+                                    <span className="block text-[11px] text-ink-400 leading-relaxed">{p.nota}</span>
+                                  )}
+                                </span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
                     </div>
                   )}
 
@@ -182,6 +244,22 @@ export default function Contracts({ result }: Props) {
         })}
       </div>
     </section>
+  );
+}
+
+const OBRA_STYLES: Record<EstadoObra, { bg: string; text: string; dot: string; label: string }> = {
+  "en-ejecucion": { bg: "bg-ink-50", text: "text-ink-500", dot: "bg-ink-300", label: "Obra en ejecución" },
+  "recepcion-provisoria": { bg: "bg-amber-50", text: "text-amber-700", dot: "bg-amber-500", label: "Recepción provisoria" },
+  "recepcion-definitiva": { bg: "bg-emerald-50", text: "text-emerald-700", dot: "bg-emerald-500", label: "Obra recepcionada" },
+};
+
+function ObraPill({ estado }: { estado: EstadoObra }) {
+  const s = OBRA_STYLES[estado];
+  return (
+    <span className={`pill ${s.bg} ${s.text}`}>
+      <span className={`w-1.5 h-1.5 rounded-full ${s.dot}`} />
+      {s.label}
+    </span>
   );
 }
 

@@ -6720,7 +6720,7 @@ export const LEDGER: LedgerEntry[] = [
   },
   {
     fecha: "2026-02-03",
-    descripcion: "Geist - Factura no encontrada",
+    descripcion: "Geist - Vikingos (factura no encontrada)",
     abono: 0,
     egreso: 5000000,
     saldoContable: 17774550,
@@ -6738,7 +6738,7 @@ export const LEDGER: LedgerEntry[] = [
   },
   {
     fecha: "2026-02-04",
-    descripcion: "Geist - Factura no encontrada",
+    descripcion: "Geist - Vikingos (factura no encontrada)",
     abono: 0,
     egreso: 5000000,
     saldoContable: 12774550,
@@ -6756,7 +6756,7 @@ export const LEDGER: LedgerEntry[] = [
   },
   {
     fecha: "2026-02-04",
-    descripcion: "Geist - Factura no encontrada",
+    descripcion: "Geist - Vikingos (factura no encontrada)",
     abono: 0,
     egreso: 5000000,
     saldoContable: 7774550,
@@ -6774,7 +6774,7 @@ export const LEDGER: LedgerEntry[] = [
   },
   {
     fecha: "2026-02-04",
-    descripcion: "Geist - Factura no encontrada",
+    descripcion: "Geist - Vikingos (factura no encontrada)",
     abono: 0,
     egreso: 5000000,
     saldoContable: 2774550,

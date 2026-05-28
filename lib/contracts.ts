@@ -3,6 +3,21 @@
 
 export const IVA = 0.19;
 
+export type EstadoObra = "en-ejecucion" | "recepcion-provisoria" | "recepcion-definitiva";
+
+export interface HitoRecepcion {
+  tipo: "provisoria" | "definitiva";
+  fecha: string;      // ISO date
+  firmante: string;
+  doc: string;
+}
+
+export interface PendienteObra {
+  item: string;
+  resuelto: boolean;
+  nota?: string;
+}
+
 export interface Contract {
   id: string;
   proyecto: string;
@@ -29,6 +44,10 @@ export interface Contract {
   cuentaDestino: string;
   docFuente: string;
   obs: string;
+  // Hitos de recepción de obra (opcional — sólo proyectos de instalación)
+  estadoObra?: EstadoObra;
+  recepciones?: HitoRecepcion[];
+  pendientesObra?: PendienteObra[];
 }
 
 export const CONTRACTS: Contract[] = [
@@ -55,7 +74,29 @@ export const CONTRACTS: Contract[] = [
     interesMora: "Interés máximo convencional",
     cuentaDestino: "Banco Santander Cta. Cte. N° 9427-8910",
     docFuente: "Contrato_Comunidad.pdf (24/10/2025) — protocolizado en Contrato_firmado__Vilanova.pdf y Contrato_firmado__Geist_1_VILANOVA.pdf (02/12/2025). Los 3 PDFs son el MISMO contrato.",
-    obs: "Renta: 67,127 UF + IVA × 36 cuotas. Anticipo: $10.000.000 + IVA en 6 cuotas de $1.666.667 pagaderas junto con las cuotas 1 a 6. Partner instalador: Servicios de Ingeniería Geist SpA (RUT 77.275.038-2). Equipos: 2× Bombas de Calor Powerworld 60kW + 2× Friwasta Plus 60 + 4× estanques 1.700L + bombas circuladoras.",
+    obs: "Renta: 67,127 UF + IVA × 36 cuotas. Anticipo: $10.000.000 + IVA en 6 cuotas de $1.666.667 pagaderas junto con las cuotas 1 a 6. Partner instalador: Servicios de Ingeniería Geist SpA (RUT 77.275.038-2). Equipos: 2× Bombas de Calor Powerworld Air Heat Pump 60 kW R290 + 2× sistemas de recirculación Friwasta Z-60-K + 4× estanques de inercia 1.700L + sistema de bombeo + tablero eléctrico de fuerza y control con monitoreo PHI.",
+    estadoObra: "recepcion-definitiva",
+    recepciones: [
+      {
+        tipo: "provisoria",
+        fecha: "2026-03-17",
+        firmante: "Sebastián Esteban Lorca Tapia (Representante Comunidad)",
+        doc: "Carta Recepción Provisoria de Obra (17/03/2026) — activa pago de cuotas 1 en adelante",
+      },
+      {
+        tipo: "definitiva",
+        fecha: "2026-04-08",
+        firmante: "Juan González Muñoz (Administrador Comunidad)",
+        doc: "Carta Recepción Definitiva de Obra (08/04/2026) — obra recepcionada en su totalidad, sin observaciones",
+      },
+    ],
+    pendientesObra: [
+      { item: "Instalación de reja perimetral de seguridad del área de equipos", resuelto: true, nota: "Confirmada como completada en la recepción definitiva." },
+      { item: "Certificación SEC del tablero eléctrico y componentes del sistema", resuelto: true, nota: "Confirmada como completada en la recepción definitiva." },
+      { item: "Bomba de calor en observación por falla (a subsanar en garantía)", resuelto: true, nota: "Recepción definitiva declara el sistema operativo sin observaciones pendientes." },
+      { item: "Prueba del sistema de agua caliente para calefacción", resuelto: true, nota: "Recepción definitiva verifica cumplimiento total del alcance de obra." },
+      { item: "Conexión del sistema al grupo electrógeno del edificio", resuelto: true, nota: "Recepción definitiva declara el sistema en servicio sin observaciones." },
+    ],
   },
   {
     id: "C-002",
