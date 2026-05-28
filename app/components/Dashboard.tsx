@@ -1,0 +1,214 @@
+"use client";
+
+import { ConciliationResult } from "@/lib/conciliation";
+import { CONTRACTS } from "@/lib/contracts";
+import { LEDGER } from "@/lib/ledger";
+import { fmtCLP, fmtPct } from "@/lib/format";
+import { ArrowUpRight, AlertCircle, CheckCircle2, Clock, Wallet, Sparkles } from "lucide-react";
+
+interface Props {
+  result: ConciliationResult;
+}
+
+export default function Dashboard({ result }: Props) {
+  const today = new Date();
+  const cuotasVencidas = result.cuotas.filter(c => {
+    const f = new Date(c.fecha + "T00:00:00");
+    return f <= today && c.totalFacturado > 0;
+  });
+  const totalFacturado = cuotasVencidas.reduce((s, c) => s + c.totalFacturado, 0);
+  const totalPagado = cuotasVencidas.reduce((s, c) => s + c.totalPagado, 0);
+  const totalPendiente = totalFacturado - totalPagado;
+  const pctCobranza = totalFacturado > 0 ? totalPagado / totalFacturado : 0;
+
+  const alertas = result.cuotas.filter(c => c.estado === "vencida-sin-pago").length;
+  const enRiesgo = result.cuotas.filter(c => c.estado === "pagada-parcial").length;
+
+  const saldoBancario = LEDGER[LEDGER.length - 1]?.saldoContable ?? 0;
+  const subsidios = LEDGER.filter(e => e.conceptoGeneral === "Abono_Subsidio").reduce((s, e) => s + e.abono, 0);
+  const accionesPagadas = LEDGER.filter(e => e.conceptoGeneral === "Pago_de_Acciones").reduce((s, e) => s + e.abono, 0);
+  const inversionProyectos = LEDGER.filter(e => e.conceptoGeneral === "Desarrollo_Proyecto").reduce((s, e) => s + e.egreso, 0);
+
+  const perContract = CONTRACTS.map(c => {
+    const cu = result.porContrato[c.id].filter(x => {
+      const f = new Date(x.fecha + "T00:00:00");
+      return f <= today && x.totalFacturado > 0;
+    });
+    const fact = cu.reduce((s, x) => s + x.totalFacturado, 0);
+    const pag = cu.reduce((s, x) => s + x.totalPagado, 0);
+    return {
+      ...c,
+      facturado: fact,
+      pagado: pag,
+      pendiente: fact - pag,
+      pct: fact > 0 ? pag / fact : 0,
+    };
+  });
+
+  return (
+    <section id="dashboard" className="py-16">
+      <div className="mb-10">
+        <div className="text-[11px] font-mono uppercase tracking-[0.15em] text-csl-600 mb-2">
+          Resumen ejecutivo · {new Intl.DateTimeFormat("es-CL", { dateStyle: "long" }).format(today)}
+        </div>
+        <h2 className="text-4xl md:text-5xl font-display font-semibold text-ink-900 tracking-tight">
+          Estado financiero
+        </h2>
+        <p className="text-ink-500 mt-3 max-w-2xl">
+          Vista consolidada al día de hoy: contratos vigentes con clientes,
+          conciliación con la cuenta Santander 9427-8910 y libro mayor completo.
+        </p>
+      </div>
+
+      {/* Cobranza KPIs */}
+      <div className="mb-2 text-[10px] font-mono uppercase tracking-[0.15em] text-ink-400">
+        Cobranza de contratos
+      </div>
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-8">
+        <KpiCard
+          label="Facturado a la fecha"
+          value={fmtCLP(totalFacturado)}
+          sub={`${cuotasVencidas.length} cuotas vencidas`}
+          icon={<ArrowUpRight className="w-4 h-4" />}
+          accent="text-ink-900"
+        />
+        <KpiCard
+          label="Cobrado"
+          value={fmtCLP(totalPagado)}
+          sub={fmtPct(pctCobranza) + " de cobranza"}
+          icon={<CheckCircle2 className="w-4 h-4" />}
+          accent="text-csl-600"
+        />
+        <KpiCard
+          label="Pendiente"
+          value={fmtCLP(totalPendiente)}
+          sub={`${alertas} cuotas vencidas sin pago`}
+          icon={<AlertCircle className="w-4 h-4" />}
+          accent="text-rose-600"
+        />
+        <KpiCard
+          label="En riesgo"
+          value={`${enRiesgo}`}
+          sub="cuotas con pago parcial"
+          icon={<Clock className="w-4 h-4" />}
+          accent="text-amber-600"
+        />
+      </div>
+
+      {/* Per-contract grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3 mb-12">
+        {perContract.map((c) => (
+          <a
+            key={c.id}
+            href={`#contrato-${c.id}`}
+            className="card-interactive bg-bg-card rounded-2xl shadow-soft border border-black/[0.04] p-6 block"
+          >
+            <div className="flex items-center justify-between mb-4">
+              <div className="min-w-0 flex-1">
+                <div className="text-[10px] font-mono text-ink-400 mb-1">{c.id}</div>
+                <h3 className="text-base font-display font-semibold text-ink-900 leading-tight truncate">
+                  {c.proyecto}
+                </h3>
+                <p className="text-xs text-ink-500 mt-0.5 truncate">{c.cliente}</p>
+              </div>
+              <div className="text-right ml-3 shrink-0">
+                <div className={`text-xl font-display font-semibold tabular ${
+                  c.pct >= 0.9 ? "text-csl-600" :
+                  c.pct >= 0.5 ? "text-amber-600" :
+                  "text-rose-600"
+                }`}>
+                  {fmtPct(c.pct, 0)}
+                </div>
+                <div className="text-[10px] text-ink-400">cobrado</div>
+              </div>
+            </div>
+
+            <div className="w-full h-1 bg-ink-50 rounded-full overflow-hidden mb-3">
+              <div
+                className={`h-full rounded-full transition-all duration-500 ${
+                  c.pct >= 0.9 ? "bg-csl-500" :
+                  c.pct >= 0.5 ? "bg-amber-500" :
+                  "bg-rose-500"
+                }`}
+                style={{ width: `${Math.min(c.pct * 100, 100)}%` }}
+              />
+            </div>
+
+            <div className="grid grid-cols-2 gap-2 text-xs">
+              <div>
+                <div className="text-ink-400">Facturado</div>
+                <div className="font-medium tabular text-ink-900">{fmtCLP(c.facturado)}</div>
+              </div>
+              <div className="text-right">
+                <div className="text-ink-400">Pendiente</div>
+                <div className="font-medium tabular text-rose-600">{fmtCLP(c.pendiente)}</div>
+              </div>
+            </div>
+          </a>
+        ))}
+      </div>
+
+      {/* Global financial position from full ledger */}
+      <div className="mb-2 text-[10px] font-mono uppercase tracking-[0.15em] text-ink-400">
+        Posición financiera global · libro mayor completo
+      </div>
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+        <KpiCard
+          label="Saldo contable actual"
+          value={fmtCLP(saldoBancario)}
+          sub="al último movimiento"
+          icon={<Wallet className="w-4 h-4" />}
+          accent="text-ink-900"
+        />
+        <KpiCard
+          label="Aportes de capital"
+          value={fmtCLP(accionesPagadas)}
+          sub="Acciones pagadas"
+          icon={<Sparkles className="w-4 h-4" />}
+          accent="text-indigo-600"
+        />
+        <KpiCard
+          label="Subsidios CORFO"
+          value={fmtCLP(subsidios)}
+          sub="recibidos"
+          icon={<CheckCircle2 className="w-4 h-4" />}
+          accent="text-csl-600"
+        />
+        <KpiCard
+          label="Inversión I+D"
+          value={fmtCLP(inversionProyectos)}
+          sub="Desarrollo de proyectos"
+          icon={<ArrowUpRight className="w-4 h-4" />}
+          accent="text-orange-600"
+        />
+      </div>
+    </section>
+  );
+}
+
+function KpiCard({
+  label,
+  value,
+  sub,
+  icon,
+  accent,
+}: {
+  label: string;
+  value: string;
+  sub: string;
+  icon: React.ReactNode;
+  accent: string;
+}) {
+  return (
+    <div className="bg-bg-card rounded-2xl shadow-soft border border-black/[0.04] p-5">
+      <div className="flex items-center justify-between mb-3">
+        <div className="text-xs font-medium text-ink-500">{label}</div>
+        <div className={accent}>{icon}</div>
+      </div>
+      <div className={`text-2xl md:text-3xl font-display font-semibold tabular ${accent} tracking-tight`}>
+        {value}
+      </div>
+      <div className="text-[11px] text-ink-400 mt-1">{sub}</div>
+    </div>
+  );
+}
