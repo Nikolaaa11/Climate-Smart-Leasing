@@ -13,6 +13,7 @@ import Accounting from "./components/Accounting";
 import GeistReconciliation from "./components/GeistReconciliation";
 import Cobranza from "./components/Cobranza";
 import { ABONOS, Abono } from "@/lib/abonos";
+import { CONTRACTS } from "@/lib/contracts";
 import { buildConciliation } from "@/lib/conciliation";
 
 export default function Home() {
@@ -63,7 +64,7 @@ export default function Home() {
             <span>·</span>
             <span className="tabular">436 movimientos contables</span>
             <span>·</span>
-            <span className="tabular">5 contratos vigentes</span>
+            <span className="tabular">{CONTRACTS.length} contratos vigentes</span>
           </div>
         </div>
       </section>

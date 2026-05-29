@@ -11,7 +11,7 @@ Consolida los contratos de arrendamiento contra los movimientos de la cuenta cor
 ## Pantallas
 
 1. **Resumen ejecutivo** — KPIs en vivo (facturado, cobrado, pendiente, % cobranza, alertas) + indicadores globales del libro mayor (saldo, aportes de capital, subsidios CORFO, inversión I+D).
-2. **Contratos** — Las 5 vigentes con metadata completa, cronograma de cuotas y estado de pagos.
+2. **Contratos** — Los 7 vigentes con metadata completa, cronograma de cuotas y estado de pagos.
 3. **Contabilidad** — Libro mayor con 436 movimientos clasificados, agrupados por categoría y proyecto interno (Axolot, Opticept, Micronizador, Sensores, AFIS, FIP, Flota, etc.).
 4. **Cronograma maestro** — Las 167 cuotas proyectadas (Ene 2025 → Mar 2029) con filtro por estado.
 5. **Movimientos bancarios** — 77 abonos extraídos de 13 cartolas, asignados al contrato correspondiente.
@@ -113,7 +113,7 @@ csl-app/
 │   ├── layout.tsx
 │   └── page.tsx
 ├── lib/
-│   ├── contracts.ts                       # Datos verificados de 5 contratos
+│   ├── contracts.ts                       # Datos verificados de 7 contratos
 │   ├── abonos.ts                          # 77 abonos extraídos
 │   ├── ledger.ts                          # 436 movimientos contables
 │   ├── conciliation.ts                    # Motor de conciliación

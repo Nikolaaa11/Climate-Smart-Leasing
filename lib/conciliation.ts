@@ -65,6 +65,10 @@ export function identifyContract(abono: Abono): { contract: Contract | null; rea
   if (glosa.includes("0772212038") || glosa.includes("AGROTECN") || glosa.includes("TRONGKAI")) {
     return { contract: CONTRACTS.find(c => c.id === "C-003")!, reason: "RUT/Nombre Trongkai" };
   }
+  // === Barranco Amarillo (RUT 0781918873 — único) ===
+  if (glosa.includes("0781918873") || glosa.includes("BARRANCO") || glosa.includes("BORQUEZ")) {
+    return { contract: CONTRACTS.find(c => c.id === "C-006")!, reason: "RUT/Nombre Barranco Amarillo" };
+  }
 
   // === SCG (RUT 0141831984 compartido entre Flota 1 y 2) ===
   // Desambiguar por monto, con fecha como tiebreaker

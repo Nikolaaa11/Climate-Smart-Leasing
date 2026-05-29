@@ -500,7 +500,7 @@ export default function Cobranza() {
           <span className="text-csl-600">comunicación de cobro.</span>
         </h2>
         <p className="text-lg text-ink-500 mt-6 max-w-3xl leading-relaxed">
-          Estado de cuenta consolidado al {HOY} para los 5 contratos vigentes.
+          Estado de cuenta consolidado al {HOY} para los {DEUDORES.length} contratos con cobranza activa.
           Cada deudor tiene un mail personalizado listo para enviar — adaptado
           a la severidad de su atraso.
         </p>
@@ -515,7 +515,7 @@ export default function Cobranza() {
           <div className="text-2xl font-display font-semibold tabular text-ink-900">
             {fmtCLP(totalEsperado)}
           </div>
-          <div className="text-xs text-ink-400 mt-1">5 contratos vigentes</div>
+          <div className="text-xs text-ink-400 mt-1">{DEUDORES.length} contratos con cobranza activa</div>
         </div>
         <div className="rounded-2xl bg-white border border-black/[0.06] shadow-soft p-5">
           <div className="text-[11px] font-mono uppercase tracking-wider text-ink-400 mb-2">

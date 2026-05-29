@@ -24,7 +24,7 @@ export default function Contracts({ result }: Props) {
           Contratos
         </h2>
         <p className="text-ink-500 mt-3 max-w-2xl">
-          5 contratos vigentes. Toca cualquier tarjeta para ver las cuotas y los pagos conciliados.
+          {CONTRACTS.length} contratos vigentes. Toca cualquier tarjeta para ver las cuotas y los pagos conciliados.
         </p>
       </div>
 
