@@ -72,7 +72,7 @@ export default function Home() {
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <Dashboard result={result} />
         <Contracts result={result} />
-        <Cobranza />
+        <Cobranza result={result} />
         <Accounting />
         <GeistReconciliation />
         <Schedule result={result} />

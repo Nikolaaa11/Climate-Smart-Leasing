@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { fmtCLP, fmtPct } from "@/lib/format";
+import { ConciliationResult } from "@/lib/conciliation";
 import {
   AlertTriangle,
   AlertOctagon,
@@ -22,22 +23,25 @@ import {
 } from "lucide-react";
 
 // ============================================================================
-// DEUDORES — datos oficiales del Excel CSL_Reconciliacion_Pagos
-// Período cubierto: ene-2024 al 12-may-2026
-// Fuente: libro contable CSL + cartolas Santander 9427891-0
+// DEUDORES — metadata cualitativa por contrato (severidad, narrativa, contacto).
+// Las cifras financieras (esperado / pagado / deuda / % cobranza) se DERIVAN
+// en tiempo de ejecución desde el motor de conciliación (result.porContrato),
+// para mantener consistencia con el Dashboard y la sección Contratos.
 // ============================================================================
 export interface Deudor {
   id: string;
+  contractId: string;          // ID del contrato (C-001, ...) — clave para derivar cifras
   proyecto: string;
   cliente: string;
   rut: string;
   repLegal: string;
   emailRepLegal: string;       // (placeholder — editable en cada caso)
   emailContacto?: string;
-  esperadoClp: number;
-  pagadoClp: number;
-  deudaClp: number;
-  cumplimiento: number;        // 0..1
+  // Snapshot histórico (opcional, no se usa en runtime — sólo referencia)
+  esperadoClp?: number;
+  pagadoClp?: number;
+  deudaClp?: number;
+  cumplimiento?: number;        // 0..1
   cuotasPagadas: string;       // ej. "15 de 16"
   inicioFacturacion: string;
   severidad: "leve" | "moderado" | "grave" | "nunca_pago";
@@ -54,6 +58,7 @@ const HOY = "29-Mayo-2026";
 export const DEUDORES: Deudor[] = [
   {
     id: "PP",
+    contractId: "C-001",
     proyecto: "Puerta Patagonia — Calderas Vilanova",
     cliente: "Comunidad Edificio Puerta Patagonia Habitacional",
     rut: "53.319.273-4",
@@ -86,6 +91,7 @@ export const DEUDORES: Deudor[] = [
   },
   {
     id: "VK",
+    contractId: "C-002",
     proyecto: "Vikingos — Sistema ACS",
     cliente: "Comunidad Edificio Los Vikingos",
     rut: "53.321.997-7",
@@ -115,6 +121,7 @@ export const DEUDORES: Deudor[] = [
   },
   {
     id: "F1",
+    contractId: "C-004",
     proyecto: "Flota — Volvo EX30 PLUS",
     cliente: "SCG SpA",
     rut: "78.096.656-4",
@@ -143,6 +150,7 @@ export const DEUDORES: Deudor[] = [
   },
   {
     id: "F2",
+    contractId: "C-005",
     proyecto: "Flota — Volvo EX30 CORE",
     cliente: "SCG SpA",
     rut: "78.096.656-4",
@@ -171,6 +179,7 @@ export const DEUDORES: Deudor[] = [
   },
   {
     id: "TK",
+    contractId: "C-003",
     proyecto: "Trongkai — Electroporación ODIN Opticept",
     cliente: "Agrotecnologías e Ingeniería SpA",
     rut: "77.221.203-8",
@@ -451,23 +460,45 @@ Climate Smart Leasing SpA`,
 // ============================================================================
 // COMPONENTE
 // ============================================================================
-export default function Cobranza() {
+interface CobranzaProps {
+  result: ConciliationResult;
+}
+
+export default function Cobranza({ result }: CobranzaProps) {
   const [expanded, setExpanded] = useState<string | null>(null);
   const [mailOpen, setMailOpen] = useState<string | null>(null);
   const [copied, setCopied] = useState<"asunto" | "cuerpo" | "todo" | null>(null);
+
+  // Cifras derivadas en tiempo real desde la conciliación. Usa la misma
+  // ventana temporal que el Dashboard (cuotas con fecha ≤ hoy) para que
+  // todos los dashboards muestren el mismo número.
+  const today = new Date();
+  const finByContract: Record<string, { esperado: number; pagado: number; deuda: number; cumplimiento: number }> = {};
+  for (const cid of Object.keys(result.porContrato)) {
+    const vencidas = result.porContrato[cid].filter(x => {
+      const f = new Date(x.fecha + "T00:00:00");
+      return f <= today && x.totalFacturado > 0;
+    });
+    const esperado = vencidas.reduce((s, x) => s + x.totalFacturado, 0);
+    const pagado = vencidas.reduce((s, x) => s + x.totalPagado, 0);
+    const deuda = Math.max(0, esperado - pagado);
+    const cumplimiento = esperado > 0 ? Math.min(1, pagado / esperado) : 1;
+    finByContract[cid] = { esperado, pagado, deuda, cumplimiento };
+  }
+  const fin = (d: Deudor) => finByContract[d.contractId] || { esperado: 0, pagado: 0, deuda: 0, cumplimiento: 1 };
 
   // Ordenar por severidad (más grave primero) y deuda descendente
   const deudores = [...DEUDORES].sort((a, b) => {
     const ap = SEVERIDAD_META[a.severidad].priority;
     const bp = SEVERIDAD_META[b.severidad].priority;
     if (ap !== bp) return ap - bp;
-    return b.deudaClp - a.deudaClp;
+    return fin(b).deuda - fin(a).deuda;
   });
 
-  const totalEsperado = deudores.reduce((s, d) => s + d.esperadoClp, 0);
-  const totalPagado = deudores.reduce((s, d) => s + d.pagadoClp, 0);
-  const totalDeuda = deudores.reduce((s, d) => s + d.deudaClp, 0);
-  const cumpGlobal = totalPagado / totalEsperado;
+  const totalEsperado = deudores.reduce((s, d) => s + fin(d).esperado, 0);
+  const totalPagado = deudores.reduce((s, d) => s + fin(d).pagado, 0);
+  const totalDeuda = deudores.reduce((s, d) => s + fin(d).deuda, 0);
+  const cumpGlobal = totalEsperado > 0 ? totalPagado / totalEsperado : 1;
 
   const copyText = async (text: string, kind: "asunto" | "cuerpo" | "todo") => {
     try {
@@ -536,7 +567,7 @@ export default function Cobranza() {
             {fmtCLP(totalDeuda)}
           </div>
           <div className="text-xs text-red-500 mt-1">
-            {deudores.filter((d) => d.deudaClp > 0).length} deudores activos
+            {deudores.filter((d) => fin(d).deuda > 0).length} deudores activos
           </div>
         </div>
         <div className="rounded-2xl bg-gradient-to-br from-csl-50 to-csl-100/50 border border-csl-200 shadow-soft p-5">
@@ -559,6 +590,7 @@ export default function Cobranza() {
           const Icon = meta.icon;
           const isExpanded = expanded === d.id;
           const mail = generarMail(d);
+          const f = fin(d);
 
           return (
             <div
@@ -603,7 +635,7 @@ export default function Cobranza() {
                         Esperado
                       </div>
                       <div className="text-sm font-semibold tabular text-ink-700">
-                        {fmtCLP(d.esperadoClp)}
+                        {fmtCLP(f.esperado)}
                       </div>
                     </div>
                     <div>
@@ -611,7 +643,7 @@ export default function Cobranza() {
                         Pagado
                       </div>
                       <div className="text-sm font-semibold tabular text-csl-600">
-                        {fmtCLP(d.pagadoClp)}
+                        {fmtCLP(f.pagado)}
                       </div>
                     </div>
                     <div>
@@ -619,7 +651,7 @@ export default function Cobranza() {
                         Deuda
                       </div>
                       <div className="text-base font-semibold tabular text-red-700">
-                        {fmtCLP(d.deudaClp)}
+                        {fmtCLP(f.deuda)}
                       </div>
                     </div>
                     <div>
@@ -627,7 +659,7 @@ export default function Cobranza() {
                         Cumplim.
                       </div>
                       <div className="text-sm font-semibold tabular text-ink-700">
-                        {fmtPct(d.cumplimiento)}
+                        {fmtPct(f.cumplimiento)}
                       </div>
                     </div>
                   </div>
@@ -687,16 +719,16 @@ export default function Cobranza() {
                   <div className="h-1.5 w-full bg-ink-50 rounded-full overflow-hidden">
                     <div
                       className={`h-full transition-all duration-700 ${
-                        d.cumplimiento >= 0.9
+                        f.cumplimiento >= 0.9
                           ? "bg-csl-500"
-                          : d.cumplimiento >= 0.7
+                          : f.cumplimiento >= 0.7
                           ? "bg-amber-500"
-                          : d.cumplimiento >= 0.3
+                          : f.cumplimiento >= 0.3
                           ? "bg-orange-500"
                           : "bg-red-500"
                       }`}
                       style={{
-                        width: `${Math.max(d.cumplimiento * 100, 2)}%`,
+                        width: `${Math.max(f.cumplimiento * 100, 2)}%`,
                       }}
                     />
                   </div>

@@ -251,80 +251,36 @@ export function generateCuotasForContract(c: Contract): Cuota[] {
 }
 
 /**
- * Allocate abonos to cuotas using a magnitude-matching algorithm:
- *  - For each abono, prefer a cuota of similar amount (±25%);
- *  - Apply remainder forward to next cuotas of similar size;
- *  - Apply final remainder oldest-first to any open cuota.
+ * Allocate abonos to cuotas using pure FIFO:
+ *  - For each abono (in chronological order), apply to the oldest open cuota
+ *    of the contract; spill the remainder forward to the next open cuotas.
+ *  - Any final excess is credited to the last cuota as prepayment.
+ *
+ * Rationale: simpler and more honest than magnitude-matching. Each abono
+ * settles the oldest outstanding obligation first, which matches how
+ * accounts-receivable allocations work in practice.
  */
 function allocateAbonos(cuotas: Cuota[], abonos: Abono[]): void {
-  // Sort abonos chronologically
   const sortedAbonos = [...abonos].sort((a, b) => a.fecha.localeCompare(b.fecha));
 
   for (const ab of sortedAbonos) {
-    const open = cuotas.filter(c => c.totalFacturado > 0 && c.totalPagado < c.totalFacturado);
-    if (open.length === 0) {
-      // Overflow — credit to last cuota
-      if (cuotas.length > 0) {
-        const last = cuotas[cuotas.length - 1];
-        last.matchedAbonos.push({ fecha: ab.fecha, monto: ab.monto, glosa: ab.glosa, aplicado: ab.monto });
-        last.totalPagado += ab.monto;
-      }
-      continue;
-    }
-    open.sort((a, b) => a.fecha.localeCompare(b.fecha));
-
     let restante = ab.monto;
 
-    // Pass 1: try to match a single cuota with similar magnitude (±25%)
-    const similarMatch = open.find(c =>
-      restante >= c.totalFacturado * 0.75 && restante <= c.totalFacturado * 1.25
-    );
-    if (similarMatch) {
-      const falta = similarMatch.totalFacturado - similarMatch.totalPagado;
+    const open = cuotas
+      .filter(c => c.totalFacturado > 0 && c.totalPagado < c.totalFacturado)
+      .sort((a, b) => a.fecha.localeCompare(b.fecha));
+
+    for (const c of open) {
+      if (restante <= 0) break;
+      const falta = c.totalFacturado - c.totalPagado;
+      if (falta <= 0) continue;
       const aplicar = Math.min(restante, falta);
-      similarMatch.matchedAbonos.push({ fecha: ab.fecha, monto: ab.monto, glosa: ab.glosa, aplicado: aplicar });
-      similarMatch.totalPagado += aplicar;
+      c.matchedAbonos.push({ fecha: ab.fecha, monto: ab.monto, glosa: ab.glosa, aplicado: aplicar });
+      c.totalPagado += aplicar;
       restante -= aplicar;
-
-      // Pass 2a: leftover applies forward to next cuotas of similar size only
-      const matchedDate = similarMatch.fecha;
-      const matchedAmount = similarMatch.totalFacturado;
-      const nextSimilar = open
-        .filter(c =>
-          c !== similarMatch &&
-          c.fecha >= matchedDate &&
-          c.totalPagado < c.totalFacturado &&
-          matchedAmount / c.totalFacturado >= 0.5 &&
-          matchedAmount / c.totalFacturado <= 2.0
-        )
-        .sort((a, b) => a.fecha.localeCompare(b.fecha));
-      for (const c of nextSimilar) {
-        if (restante <= 0) break;
-        const f = c.totalFacturado - c.totalPagado;
-        if (f <= 0) continue;
-        const ap = Math.min(restante, f);
-        c.matchedAbonos.push({ fecha: ab.fecha, monto: ab.monto, glosa: ab.glosa, aplicado: ap });
-        c.totalPagado += ap;
-        restante -= ap;
-      }
     }
 
-    // Pass 2b: any remaining goes oldest-first to ANY open cuota
-    if (restante > 0) {
-      const stillOpen = cuotas.filter(c => c.totalFacturado > 0 && c.totalPagado < c.totalFacturado);
-      stillOpen.sort((a, b) => a.fecha.localeCompare(b.fecha));
-      for (const c of stillOpen) {
-        if (restante <= 0) break;
-        const f = c.totalFacturado - c.totalPagado;
-        if (f <= 0) continue;
-        const ap = Math.min(restante, f);
-        c.matchedAbonos.push({ fecha: ab.fecha, monto: ab.monto, glosa: ab.glosa, aplicado: ap });
-        c.totalPagado += ap;
-        restante -= ap;
-      }
-    }
-
-    // Final remainder: prepayment to last cuota
+    // Final excess: prepayment credited to the last cuota
     if (restante > 0 && cuotas.length > 0) {
       const last = cuotas[cuotas.length - 1];
       last.matchedAbonos.push({ fecha: ab.fecha, monto: ab.monto, glosa: ab.glosa, aplicado: restante });
