@@ -60,7 +60,7 @@ export const CONTRACTS: Contract[] = [
     repLegal: "Juan Moisés González Muñoz (RUT 12.436.839-1)",
     direccion: "Vilanova 250, Las Condes, Región Metropolitana",
     fechaFirma: "2025-10-24",
-    fechaInicioPagos: "2026-02-01",
+    fechaInicioPagos: "2026-04-01",
     monedaRenta: "UF",
     rentaUf: 67.127,
     nCuotas: 36,

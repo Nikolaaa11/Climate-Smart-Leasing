@@ -49,7 +49,7 @@ export interface Deudor {
   archivoPpt?: string;         // ruta a la PPT (sólo PP)
 }
 
-const HOY = "12-Mayo-2026";
+const HOY = "29-Mayo-2026";
 
 export const DEUDORES: Deudor[] = [
   {
@@ -59,27 +59,27 @@ export const DEUDORES: Deudor[] = [
     rut: "53.319.273-4",
     repLegal: "Juan Moisés González Muñoz",
     emailRepLegal: "administracion@puertapatagonia.cl",
-    esperadoClp: 15_104_851,
+    esperadoClp: 10_316_383,
     pagadoClp: 10_316_383,
-    deudaClp: 4_788_468,
-    cumplimiento: 0.6830,
-    cuotasPagadas: "5 de 6 anticipo + renta mayo en plazo",
-    inicioFacturacion: "Anticipo: dic-2025 · Renta: may-2026 (post-recepción)",
+    deudaClp: 0,
+    cumplimiento: 1.0,
+    cuotasPagadas: "2 de 2 facturadas (al día)",
+    inicioFacturacion: "Cuota 1: abril 2026 (post-recepción definitiva 08-abr-2026)",
     severidad: "leve",
-    diagnostico: "Saldo bajo — solo $1.583.621 vencido (anticipo cuotas 2/6 y 5/6); renta mayo dentro de plazo",
+    diagnostico: "CUENTA AL DÍA al 29-may-2026. Cuotas 1 (abril) y 2 (mayo) íntegramente cubiertas: renta + anticipo prorrateado.",
     rentaTexto:
-      "Renta mensual: 67,127 UF + IVA (36 cuotas desde may-2026) · Anticipo $10.000.000 + IVA en 6 cuotas ($1.983.334 c/u IVA inc.)",
+      "Renta mensual: 67,127 UF + IVA (36 cuotas desde abril-2026) · Anticipo $10.000.000 + IVA prorrateado en 6 cuotas de $1.983.334 IVA inc., pagadero junto con cuotas 1-6.",
     detalleAtraso: [
-      "RECTIFICADO: la renta mensual corre desde mayo-2026 (post-recepción definitiva 02-abr-2026), no desde dic-2025.",
-      "Anticipo prorrateado: pagaron 5 de 6 cuotas completas. Falta cuota 2/6 (enero 2026, $1.983.334) y diferencia cuota 5/6 (abril, $799.719).",
-      "Renta mayo 2026 ($3.204.847): factura emitida ~5-may, vence ~20-may. Aún dentro de plazo contractual.",
-      "Saldo vencido real: $1.583.621 (solo anticipo). Cumplimiento del anticipo: 86,7%.",
+      "Cuota 1 (abril 2026): $5.150.283 — renta $3.166.949 + anticipo $1.983.334. PAGADA (renta 18-mar y anticipo 17-dic-2025).",
+      "Cuota 2 (mayo 2026): $5.166.100 — renta $3.182.766 + anticipo $1.983.334. PAGADA (renta 05-may y anticipo 20-feb-2026).",
+      "Próximo vencimiento: cuota 3 (junio 2026), ≈$5,2M (incluye anticipo prorrateado c3/6). Vence ~05-jul-2026.",
+      "Las cuotas 3 a 6 (jun-sep 2026) llevan anticipo prorrateado (≈$5,2M c/u). Desde cuota 7 (octubre 2026), solo renta (≈$3,2M).",
     ],
     notasInternas: [
-      "⚠ Cifra RECTIFICADA. Anteriormente se calculaba $20.887.958 sin considerar la fecha de recepción definitiva.",
-      "Base legal del recálculo: Cláusula Tercera contrato + Carta recepción definitiva del 02-abr-2026 firmada por Juan Moisés González.",
-      "Los tres PDF — Contrato_Comunidad, Vilanova y Geist_1_VILANOVA — son el mismo contrato.",
-      "Pendiente: enviar mail de rectificación a Juan Moisés González con disculpas + Excel + PPT corregidos.",
+      "✅ Recalculado con fechaInicioPagos = 01-abr-2026 (contrato empezó a regir en abril, post-recepción definitiva 08-abr-2026).",
+      "PP ha pagado 4 abonos: 2× anticipo prorrateado ($1.983.334) y 2× renta ($3.166.949 y $3.182.766) = $10.316.383.",
+      "Los 2 anticipos se aplican FIFO a las cuotas 1 y 2 del anticipo prorrateado del contrato.",
+      "Base legal: Cláusula Tercera del contrato + Carta de recepción definitiva del 08-abr-2026 firmada por Juan González Muñoz.",
     ],
     archivoExcel: "/downloads/CSL_EstadoCuenta_PuertaPatagonia.xlsx",
     archivoPpt: "/downloads/CSL_Presentacion_PuertaPatagonia.pptx",
