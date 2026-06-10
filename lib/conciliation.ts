@@ -66,6 +66,12 @@ export function identifyContract(abono: Abono): { contract: Contract | null; rea
     return { contract: CONTRACTS.find(c => c.id === "C-003")!, reason: "RUT/Nombre Trongkai" };
   }
   // === Barranco Amarillo (RUT 0781918873 — único) ===
+  // Excepción: el "Traspaso de cuenta" de $145.563.465 (28/04/2026) excede por
+  // mucho cualquier cuota de arriendo → NO se concilia automáticamente como
+  // pago de cuotas; clasificar con contabilidad antes de imputarlo.
+  if (glosa.includes("0781918873") && glosa.includes("TRASPASO DE CUENTA")) {
+    return { contract: null, reason: "Traspaso de cuenta desde Procesadora Barranco Amarillo ($145,5MM) — monto excede cuotas de arriendo; confirmar naturaleza con contabilidad antes de imputar" };
+  }
   if (glosa.includes("0781918873") || glosa.includes("BARRANCO") || glosa.includes("BORQUEZ")) {
     return { contract: CONTRACTS.find(c => c.id === "C-006")!, reason: "RUT/Nombre Barranco Amarillo" };
   }
@@ -152,9 +158,49 @@ export function identifyContract(abono: Abono): { contract: Contract | null; rea
   if (glosa.includes("076441865") || glosa.includes("CREATIVE SEARCH") || glosa.includes("CREATIVESEARCH")) {
     return { contract: null, reason: "Cliente histórico: Creative Searching (sin contrato vigente en sistema)" };
   }
+  if (glosa.includes("0770187397") || glosa.includes("INGENIERIA E IN")) {
+    return { contract: null, reason: "Ingeniería e Innovación SpA (REVTECH, empresa relacionada) — aporte/préstamo intercompañía, no es pago de contrato" };
+  }
+  if (glosa.includes("0779619931") || glosa.includes("ECOIL")) {
+    return { contract: null, reason: "ECOIL SpA — tercero sin contrato vigente en sistema" };
+  }
+  if (glosa.includes("0076715299K") || glosa.includes("PAGO DE ASIGNA")) {
+    return { contract: null, reason: "Pago de Asigna (RUT 76.715.299-K) — por clasificar con contabilidad" };
+  }
+  if (glosa.includes("DEV IMPUESTO") || glosa.includes("TESORER")) {
+    return { contract: null, reason: "Devolución de impuestos Tesorería General de la República" };
+  }
+  if (glosa.includes("DEP CON DOC ATM") || glosa.includes("00211778202")) {
+    return { contract: null, reason: "Depósito con documento ATM $270MM (27/03/2026) — clasificar con contabilidad (no es pago de contrato de arriendo)" };
+  }
 
   return { contract: null, reason: "Sin identificar — revisar manualmente" };
 }
+
+// ============================================================================
+// Puerta Patagonia (C-001) — facturación REAL según facturas electrónicas SII.
+// El anticipo de $10MM + IVA se facturó en 6 facturas mensuales INDEPENDIENTES
+// (dic-2025 → may-2026, $1.983.334 IVA inc. c/u) y la renta mensual (67,13 UF
+// + IVA) se factura por separado desde marzo-2026.
+// Fuente: facturas electrónicas N°43, 47, 52, 53, 63, 64 y 69 (CSL → Comunidad
+// Edificio Puerta Patagonia, RUT 53.319.273-4).
+// ============================================================================
+const C001_ANTICIPOS: Array<{ fecha: string; factura: string }> = [
+  { fecha: "2025-12-06", factura: "Anticipo cuota 01/06 — factura dic-2025 (n° por confirmar)" },
+  { fecha: "2026-01-06", factura: "Anticipo cuota 02/06 — factura ene-2026 (n° por confirmar)" },
+  { fecha: "2026-02-06", factura: "Anticipo cuota 03/06 — Factura electrónica N°43 (06/02/2026)" },
+  { fecha: "2026-03-06", factura: "Anticipo cuota 04/06 — Factura electrónica N°47 (06/03/2026)" },
+  { fecha: "2026-04-07", factura: "Anticipo cuota 05/06 — Factura electrónica N°53 (07/04/2026)" },
+  { fecha: "2026-05-06", factura: "Anticipo cuota 06/06 — Factura electrónica N°63 (06/05/2026)" },
+];
+
+// Rentas mensuales C-001 ya emitidas: monto neto EXACTO según factura
+const C001_RENTAS_EMITIDAS: Record<string, { neto: number; factura: string }> = {
+  "2026-03-06": { neto: 2_661_302, factura: "Renta cuota 01/36 — factura mar-2026 (n° por confirmar; monto inferido del pago exacto del 18/03/2026)" },
+  "2026-04-06": { neto: 2_674_593, factura: "Renta cuota 02/36 — Factura electrónica N°52 (07/04/2026)" },
+  "2026-05-06": { neto: 2_698_626, factura: "Renta cuota 03/36 — Factura electrónica N°64 (06/05/2026)" },
+  "2026-06-06": { neto: 2_732_997, factura: "Renta cuota 04/36 — Factura electrónica N°69 (06/06/2026); plazo de pago 30 días → vence ~06/07/2026" },
+};
 
 /**
  * Generate the full cuota schedule for a contract.
@@ -183,6 +229,29 @@ export function generateCuotasForContract(c: Contract): Cuota[] {
       estado: "vencida-sin-pago",
       matchedAbonos: [],
       notas: "Pagada en el momento de firmar el contrato (primera renta).",
+    });
+  }
+
+  // Special: Puerta Patagonia — 6 cuotas de anticipo facturadas por separado
+  if (c.id === "C-001" && c.anticipoCuota) {
+    C001_ANTICIPOS.forEach((a, i) => {
+      const neto = c.anticipoCuota!;
+      const iva = Math.round(neto * IVA);
+      cuotas.push({
+        contractId: c.id,
+        proyecto: c.proyecto,
+        numero: `Anticipo ${i + 1}/6`,
+        fecha: a.fecha,
+        uf: null,
+        ufValorMes: null,
+        netoClp: neto,
+        ivaClp: iva,
+        totalFacturado: neto + iva,
+        totalPagado: 0,
+        estado: "vencida-sin-pago",
+        matchedAbonos: [],
+        notas: a.factura,
+      });
     });
   }
 
@@ -215,13 +284,16 @@ export function generateCuotasForContract(c: Contract): Cuota[] {
     let notas = "";
 
     if (c.monedaRenta === "UF" && c.rentaUf) {
-      ufVal = ufForBilling(fecha);
       uf = c.rentaUf;
-      neto = Math.round(c.rentaUf * ufVal);
-      // Puerta Patagonia: añadir anticipo prorrateado primeras 6 cuotas
-      if (c.id === "C-001" && c.anticipoCuota && c.anticipoNCuotas && k <= c.anticipoNCuotas) {
-        neto += c.anticipoCuota;
-        notas = `Incluye anticipo prorrateado $${c.anticipoCuota.toLocaleString("es-CL")} (cuota ${k} de ${c.anticipoNCuotas}).`;
+      // Puerta Patagonia: usar el monto EXACTO de la factura emitida si existe
+      const emitida = c.id === "C-001" ? C001_RENTAS_EMITIDAS[isoDate(fecha)] : undefined;
+      if (emitida) {
+        neto = emitida.neto;
+        ufVal = Math.round(neto / c.rentaUf);
+        notas = emitida.factura;
+      } else {
+        ufVal = ufForBilling(fecha);
+        neto = Math.round(c.rentaUf * ufVal);
       }
       iva = Math.round(neto * IVA);
     } else if (c.monedaRenta === "CLP" && c.rentaClpNeta) {
@@ -251,26 +323,41 @@ export function generateCuotasForContract(c: Contract): Cuota[] {
 }
 
 /**
- * Allocate abonos to cuotas using pure FIFO:
- *  - For each abono (in chronological order), apply to the oldest open cuota
- *    of the contract; spill the remainder forward to the next open cuotas.
- *  - Any final excess is credited to the last cuota as prepayment.
- *
- * Rationale: simpler and more honest than magnitude-matching. Each abono
- * settles the oldest outstanding obligation first, which matches how
- * accounts-receivable allocations work in practice.
+ * Allocate abonos to cuotas:
+ *  1. EXACT MATCH first: if the abono amount coincides (±1,5%) with the
+ *     outstanding balance of a specific open cuota, apply it there (oldest
+ *     matching cuota if several). This reflects how clients actually pay —
+ *     one transfer per factura, with the exact invoiced amount — and avoids
+ *     smearing a renta payment across older anticipo cuotas.
+ *  2. FIFO for the rest: apply the remainder to the oldest open cuota and
+ *     spill forward. Any final excess is credited to the last cuota.
  */
 function allocateAbonos(cuotas: Cuota[], abonos: Abono[]): void {
   const sortedAbonos = [...abonos].sort((a, b) => a.fecha.localeCompare(b.fecha));
 
-  for (const ab of sortedAbonos) {
-    let restante = ab.monto;
-
-    const open = cuotas
+  const openCuotas = () =>
+    cuotas
       .filter(c => c.totalFacturado > 0 && c.totalPagado < c.totalFacturado)
       .sort((a, b) => a.fecha.localeCompare(b.fecha));
 
-    for (const c of open) {
+  for (const ab of sortedAbonos) {
+    let restante = ab.monto;
+
+    // Paso 1: calce exacto contra una cuota específica
+    const exacta = openCuotas().find(c => {
+      const falta = c.totalFacturado - c.totalPagado;
+      return falta > 0 && Math.abs(ab.monto - falta) / falta <= 0.015;
+    });
+    if (exacta) {
+      const falta = exacta.totalFacturado - exacta.totalPagado;
+      const aplicar = Math.min(restante, falta);
+      exacta.matchedAbonos.push({ fecha: ab.fecha, monto: ab.monto, glosa: ab.glosa, aplicado: aplicar });
+      exacta.totalPagado += aplicar;
+      restante -= aplicar;
+    }
+
+    // Paso 2: FIFO con el remanente
+    for (const c of openCuotas()) {
       if (restante <= 0) break;
       const falta = c.totalFacturado - c.totalPagado;
       if (falta <= 0) continue;

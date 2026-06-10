@@ -1,5 +1,6 @@
 // All ABONOS (credits) extracted from cartolas Santander 9427-8910
-// Source: 12 monthly cartolas (Ene-Dic 2025) + cartola provisoria May 2026
+// Source: 12 monthly cartolas (Ene-Dic 2025) + cartolas oficiales N°21-25
+// (30/12/2025 - 29/05/2026) + cartola provisoria N°26 (29/05 - 10/06/2026)
 // Each abono has the original glosa to preserve traceability
 
 export interface Abono {
@@ -114,30 +115,54 @@ export const ABONOS: Abono[] = [
   { fecha: "2025-12-12", monto: 895_880, glosa: "0141831984 Transf. Cristian Eduard", doc: "016001306", cartolaMes: "Diciembre 2025" },
   { fecha: "2025-12-17", monto: 1_983_334, glosa: "0533192734 Transf de CONDOMINIO PUE", doc: "0", cartolaMes: "Diciembre 2025" },
 
-  // ============ ENERO 2026 (libro mayor — cartola no disponible aún) ============
-  { fecha: "2026-01-27", monto: 1_208_171, glosa: "0141831984 Transf. Cristian Eduardo Allende Tapia", doc: "0", cartolaMes: "Enero 2026 (libro mayor)" },
-  { fecha: "2026-01-27", monto: 896_918, glosa: "0141831984 Transf. Cristian Eduardo Allende Tapia", doc: "0", cartolaMes: "Enero 2026 (libro mayor)" },
+  // ============ ENERO 2026 (Cartola oficial N°21: 30/12/2025 - 30/01/2026) ============
+  { fecha: "2026-01-02", monto: 1_900_000, glosa: "0768585725 Transf. BEBIDAS FUNCION", doc: "012311817", cartolaMes: "Cartola N°21 (Enero 2026)" },
+  { fecha: "2026-01-06", monto: 7_000_000, glosa: "0774235566 Transf.", doc: "039260059", cartolaMes: "Cartola N°21 (Enero 2026)" },
+  { fecha: "2026-01-06", monto: 2_950_000, glosa: "0774235566 Transf.", doc: "039260059", cartolaMes: "Cartola N°21 (Enero 2026)" },
+  { fecha: "2026-01-27", monto: 1_208_171, glosa: "0141831984 Transf. Cristian Eduard", doc: "016001332", cartolaMes: "Cartola N°21 (Enero 2026)" },
+  { fecha: "2026-01-27", monto: 896_918, glosa: "0141831984 Transf. Cristian Eduard", doc: "016001332", cartolaMes: "Cartola N°21 (Enero 2026)" },
+  { fecha: "2026-01-29", monto: 5_000_000, glosa: "0533219977 Transf. EDIFICIO LOS VI (anticipo 1/4)", doc: "016001333", cartolaMes: "Cartola N°21 (Enero 2026)" },
 
-  // ============ FEBRERO 2026 (libro mayor) ============
-  { fecha: "2026-02-03", monto: 20_000_000, glosa: "0533219977 Transf. EDIFICIO LOS VIKINGOS (anticipo)", doc: "0", cartolaMes: "Febrero 2026 (libro mayor)" },
-  { fecha: "2026-02-20", monto: 897_868, glosa: "0141831984 Transf. Cristian Eduardo Allende Tapia", doc: "0", cartolaMes: "Febrero 2026 (libro mayor)" },
-  { fecha: "2026-02-20", monto: 1_209_451, glosa: "0141831984 Transf. Cristian Eduardo Allende Tapia", doc: "0", cartolaMes: "Febrero 2026 (libro mayor)" },
-  { fecha: "2026-02-20", monto: 1_983_334, glosa: "0533192734 Transf de CONDOMINIO PUE", doc: "0", cartolaMes: "Febrero 2026 (libro mayor)" },
+  // ============ FEBRERO 2026 (Cartola oficial N°22: 30/01 - 27/02/2026) ============
+  // El anticipo Vikingos de $20MM llegó en 4 transferencias de $5MM (29/01 + 02/02 ×2 + 03/02)
+  { fecha: "2026-02-02", monto: 5_000_000, glosa: "0533219977 Transf. EDIFICIO LOS VI (anticipo 2/4)", doc: "016001335", cartolaMes: "Cartola N°22 (Febrero 2026)" },
+  { fecha: "2026-02-02", monto: 5_000_000, glosa: "0533219977 Transf. EDIFICIO LOS VI (anticipo 3/4)", doc: "016001336", cartolaMes: "Cartola N°22 (Febrero 2026)" },
+  { fecha: "2026-02-03", monto: 5_000_000, glosa: "0533219977 Transf. EDIFICIO LOS VI (anticipo 4/4)", doc: "016001336", cartolaMes: "Cartola N°22 (Febrero 2026)" },
+  { fecha: "2026-02-20", monto: 5_000_000, glosa: "0770187397 Transf. INGENIERIA E IN", doc: "001123533", cartolaMes: "Cartola N°22 (Febrero 2026)" },
+  { fecha: "2026-02-20", monto: 5_000_000, glosa: "0770187397 Transf. INGENIERIA E IN", doc: "001123533", cartolaMes: "Cartola N°22 (Febrero 2026)" },
+  { fecha: "2026-02-20", monto: 5_000_000, glosa: "0770187397 Transf. INGENIERIA E IN", doc: "001123533", cartolaMes: "Cartola N°22 (Febrero 2026)" },
+  { fecha: "2026-02-20", monto: 5_000_000, glosa: "0770187397 Transf. INGENIERIA E IN", doc: "001123533", cartolaMes: "Cartola N°22 (Febrero 2026)" },
+  { fecha: "2026-02-20", monto: 1_000_000, glosa: "0770187397 Transf. INGENIERIA E IN", doc: "001123533", cartolaMes: "Cartola N°22 (Febrero 2026)" },
+  { fecha: "2026-02-20", monto: 1_983_334, glosa: "0533192734 Transf de CODOMINIO PUE", doc: "0", cartolaMes: "Cartola N°22 (Febrero 2026)" },
+  { fecha: "2026-02-20", monto: 1_209_451, glosa: "0141831984 Transf. Cristian Eduard", doc: "016001346", cartolaMes: "Cartola N°22 (Febrero 2026)" },
+  { fecha: "2026-02-20", monto: 897_868, glosa: "0141831984 Transf. Cristian Eduard", doc: "016001346", cartolaMes: "Cartola N°22 (Febrero 2026)" },
 
-  // ============ MARZO 2026 (libro mayor) ============
-  { fecha: "2026-03-18", monto: 3_166_949, glosa: "0533192734 Transf de CONDOMINIO PUERTA PATAGONIA", doc: "0", cartolaMes: "Marzo 2026 (libro mayor)" },
-  { fecha: "2026-03-23", monto: 1_210_029, glosa: "0141831984 Transf. Cristian Eduardo Allende Tapia", doc: "0", cartolaMes: "Marzo 2026 (libro mayor)" },
-  { fecha: "2026-03-23", monto: 898_296, glosa: "0141831984 Transf. Cristian Eduardo Allende Tapia", doc: "0", cartolaMes: "Marzo 2026 (libro mayor)" },
+  // ============ MARZO 2026 (Cartola oficial N°23: 27/02 - 31/03/2026) ============
+  { fecha: "2026-03-18", monto: 3_166_949, glosa: "0533192734 Transf de CODOMINIO PUE", doc: "0", cartolaMes: "Cartola N°23 (Marzo 2026)" },
+  { fecha: "2026-03-23", monto: 1_210_029, glosa: "0141831984 Transf. Cristian Eduard", doc: "016001364", cartolaMes: "Cartola N°23 (Marzo 2026)" },
+  { fecha: "2026-03-23", monto: 898_296, glosa: "0141831984 Transf. Cristian Eduard", doc: "016001364", cartolaMes: "Cartola N°23 (Marzo 2026)" },
+  { fecha: "2026-03-27", monto: 270_033_596, glosa: "00211778202 Dep con Doc ATM 698186", doc: "3698186", cartolaMes: "Cartola N°23 (Marzo 2026)" },
+  { fecha: "2026-03-27", monto: 7_000_000, glosa: "077751766K Transf.", doc: "039260862", cartolaMes: "Cartola N°23 (Marzo 2026)" },
+  { fecha: "2026-03-27", monto: 7_000_000, glosa: "077751766K Transf.", doc: "039260862", cartolaMes: "Cartola N°23 (Marzo 2026)" },
+  { fecha: "2026-03-27", monto: 7_000_000, glosa: "077751766K Transf.", doc: "039260862", cartolaMes: "Cartola N°23 (Marzo 2026)" },
+  { fecha: "2026-03-27", monto: 7_000_000, glosa: "077751766K Transf.", doc: "039260862", cartolaMes: "Cartola N°23 (Marzo 2026)" },
 
-  // ============ ABRIL 2026 (libro mayor) ============
-  { fecha: "2026-04-27", monto: 1_212_798, glosa: "0141831984 Transf. Cristian Eduardo Allende Tapia", doc: "0", cartolaMes: "Abril 2026 (libro mayor)" },
-  { fecha: "2026-04-27", monto: 900_354, glosa: "0141831984 Transf. Cristian Eduardo Allende Tapia", doc: "0", cartolaMes: "Abril 2026 (libro mayor)" },
+  // ============ ABRIL 2026 (Cartola oficial N°24: 31/03 - 30/04/2026) ============
+  { fecha: "2026-04-21", monto: 717_151, glosa: "0076715299K Pago de Asigna", doc: "458610715", cartolaMes: "Cartola N°24 (Abril 2026)" },
+  { fecha: "2026-04-27", monto: 1_212_798, glosa: "0141831984 Transf. Cristian Eduard", doc: "016001384", cartolaMes: "Cartola N°24 (Abril 2026)" },
+  { fecha: "2026-04-27", monto: 900_354, glosa: "0141831984 Transf. Cristian Eduard", doc: "016001384", cartolaMes: "Cartola N°24 (Abril 2026)" },
+  { fecha: "2026-04-28", monto: 145_563_465, glosa: "00781918873 Traspaso de cuenta", doc: "459723652", cartolaMes: "Cartola N°24 (Abril 2026)" },
+  { fecha: "2026-04-28", monto: 450_000, glosa: "0779619931 Transf. ECOIL SPA", doc: "016001385", cartolaMes: "Cartola N°24 (Abril 2026)" },
 
-  // ============ MAYO 2026 (provisoria — actualizada al 26/05/2026) ============
-  { fecha: "2026-05-05", monto: 3_182_766, glosa: "0533192734 Transf de CODOMINIO PUE", doc: "0", cartolaMes: "Mayo 2026 (provisoria)" },
-  { fecha: "2026-05-06", monto: 2_431_760, glosa: "0533219977 Transf. EDIFICIO LOS VI", doc: "001600139", cartolaMes: "Mayo 2026 (provisoria)" },
-  { fecha: "2026-05-06", monto: 2_430_357, glosa: "0533219977 Transf. EDIFICIO LOS VI", doc: "001600139", cartolaMes: "Mayo 2026 (provisoria)" },
-  { fecha: "2026-05-12", monto: 2_452_817, glosa: "0533219977 Transf. EDIFICIO LOS VI", doc: "001600139", cartolaMes: "Mayo 2026 (provisoria)" },
-  { fecha: "2026-05-26", monto: 903_938, glosa: "0141831984 Transf. Cristian Eduard", doc: "001600140", cartolaMes: "Mayo 2026 (provisoria)" },
-  { fecha: "2026-05-26", monto: 1_027_223, glosa: "0141831984 Transf. Cristian Eduard", doc: "001600140", cartolaMes: "Mayo 2026 (provisoria)" },
+  // ============ MAYO 2026 (Cartola oficial N°25: 30/04 - 29/05/2026) ============
+  { fecha: "2026-05-05", monto: 3_182_766, glosa: "0533192734 Transf de CODOMINIO PUE", doc: "0", cartolaMes: "Cartola N°25 (Mayo 2026)" },
+  { fecha: "2026-05-06", monto: 2_431_760, glosa: "0533219977 Transf. EDIFICIO LOS VI", doc: "016001391", cartolaMes: "Cartola N°25 (Mayo 2026)" },
+  { fecha: "2026-05-06", monto: 2_430_357, glosa: "0533219977 Transf. EDIFICIO LOS VI", doc: "016001391", cartolaMes: "Cartola N°25 (Mayo 2026)" },
+  { fecha: "2026-05-12", monto: 2_452_817, glosa: "0533219977 Transf. EDIFICIO LOS VI", doc: "016001395", cartolaMes: "Cartola N°25 (Mayo 2026)" },
+  { fecha: "2026-05-26", monto: 1_027_223, glosa: "0141831984 Transf. Cristian Eduard", doc: "016001402", cartolaMes: "Cartola N°25 (Mayo 2026)" },
+  { fecha: "2026-05-26", monto: 903_938, glosa: "0141831984 Transf. Cristian Eduard", doc: "016001402", cartolaMes: "Cartola N°25 (Mayo 2026)" },
+  { fecha: "2026-05-27", monto: 276_351, glosa: "0608050000 DEV IMPUESTO TESORERIA", doc: "0", cartolaMes: "Cartola N°25 (Mayo 2026)" },
+
+  // ============ JUNIO 2026 (Cartola provisoria N°26: 29/05 - 10/06/2026) ============
+  { fecha: "2026-06-01", monto: 7_447_842, glosa: "00781918873 30.05 NOMINA PAGO PROV", doc: "003500260", cartolaMes: "Cartola N°26 (provisoria al 10/06/2026)" },
 ];

@@ -60,7 +60,7 @@ export const CONTRACTS: Contract[] = [
     repLegal: "Juan Moisés González Muñoz (RUT 12.436.839-1)",
     direccion: "Vilanova 250, Las Condes, Región Metropolitana",
     fechaFirma: "2025-10-24",
-    fechaInicioPagos: "2026-04-01",
+    fechaInicioPagos: "2026-03-06", // 1ª renta facturada en marzo 2026 (pagada 18/03/2026) — confirmado contra facturas SII reales
     monedaRenta: "UF",
     rentaUf: 67.127,
     nCuotas: 36,
@@ -74,7 +74,7 @@ export const CONTRACTS: Contract[] = [
     interesMora: "Interés máximo convencional",
     cuentaDestino: "Banco Santander Cta. Cte. N° 9427-8910",
     docFuente: "Contrato_Comunidad.pdf (24/10/2025) — protocolizado en Contrato_firmado__Vilanova.pdf y Contrato_firmado__Geist_1_VILANOVA.pdf (02/12/2025). Los 3 PDFs son el MISMO contrato.",
-    obs: "Renta: 67,127 UF + IVA × 36 cuotas. Anticipo: $10.000.000 + IVA en 6 cuotas de $1.666.667 pagaderas junto con las cuotas 1 a 6. Partner instalador: Servicios de Ingeniería Geist SpA (RUT 77.275.038-2). Equipos: 2× Bombas de Calor Powerworld Air Heat Pump 60 kW R290 + 2× sistemas de recirculación Friwasta Z-60-K + 4× estanques de inercia 1.700L + sistema de bombeo + tablero eléctrico de fuerza y control con monitoreo PHI.",
+    obs: "Renta: 67,127 UF + IVA × 36 cuotas, facturadas desde marzo-2026 (facturas N°52, 64, 69...). Anticipo: $10.000.000 + IVA facturado en 6 facturas mensuales INDEPENDIENTES de $1.666.667 + IVA c/u, dic-2025 → may-2026 (facturas N°43, 47, 53, 63 + 2 anteriores). Facturación real confirmada contra PDFs SII el 10/06/2026. Partner instalador: Servicios de Ingeniería Geist SpA (RUT 77.275.038-2). Equipos: 2× Bombas de Calor Powerworld Air Heat Pump 60 kW R290 + 2× sistemas de recirculación Friwasta Z-60-K + 4× estanques de inercia 1.700L + sistema de bombeo + tablero eléctrico de fuerza y control con monitoreo PHI.",
     estadoObra: "recepcion-definitiva",
     recepciones: [
       {
