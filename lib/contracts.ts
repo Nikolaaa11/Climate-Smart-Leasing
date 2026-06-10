@@ -70,7 +70,7 @@ export const CONTRACTS: Contract[] = [
     ivaIncluido: false,
     vigenciaMeses: 36,
     facturacionDia: "Dentro de los 5 primeros días hábiles de cada mes",
-    plazoPagoDias: "30 días corridos desde recepción de factura",
+    plazoPagoDias: "15 días corridos desde la emisión de la factura (Cláusula Tercera, contrato protocolizado 02-dic-2025)",
     interesMora: "Interés máximo convencional",
     cuentaDestino: "Banco Santander Cta. Cte. N° 9427-8910",
     docFuente: "Contrato_Comunidad.pdf (24/10/2025) — protocolizado en Contrato_firmado__Vilanova.pdf y Contrato_firmado__Geist_1_VILANOVA.pdf (02/12/2025). Los 3 PDFs son el MISMO contrato.",

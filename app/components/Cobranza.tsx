@@ -72,16 +72,16 @@ export const DEUDORES: Deudor[] = [
     inicioFacturacion: "Anticipo: dic-2025 · Rentas: mar-2026",
     severidad: "grave",
     diagnostico:
-      "DEUDA GRAVE al 10-jun-2026: $14.396.967 en 6 facturas impagas (4 de anticipo + 2 de renta). Verificado contra facturas SII reales y cartolas Santander N°21-26. De ese total, $11.144.701 está vencido; la factura N°69 ($3.252.266) vence ~06-jul-2026.",
+      "DEUDA GRAVE al 10-jun-2026: $14.396.967 en 6 facturas impagas (4 de anticipo + 2 de renta). Verificado contra facturas SII reales y cartolas Santander N°21-26. De ese total, $11.144.701 está vencido; la factura N°69 ($3.252.266) vence ~21-jun-2026 (plazo: 15 días corridos desde emisión).",
     rentaTexto:
       "Renta mensual: 67,127 UF + IVA × 36 cuotas facturadas desde marzo-2026 · Anticipo $10.000.000 + IVA en 6 facturas mensuales independientes de $1.983.334 IVA inc. (dic-2025 → may-2026).",
     detalleAtraso: [
-      "Factura N°43 (06-feb-2026, anticipo 3/6): $1.983.334 — IMPAGA, vencida 08-mar-2026.",
-      "Factura N°47 (06-mar-2026, anticipo 4/6): $1.983.334 — IMPAGA, vencida 05-abr-2026.",
-      "Factura N°53 (07-abr-2026, anticipo 5/6): $1.983.334 — IMPAGA, vencida 07-may-2026.",
-      "Factura N°63 (06-may-2026, anticipo 6/6): $1.983.334 — IMPAGA, vencida 05-jun-2026.",
-      "Factura N°64 (06-may-2026, renta 3/36): $3.211.365 — IMPAGA, vencida 05-jun-2026.",
-      "Factura N°69 (06-jun-2026, renta 4/36): $3.252.266 — IMPAGA, en plazo (vence ~06-jul-2026).",
+      "Factura N°43 (06-feb-2026, anticipo 3/6): $1.983.334 — IMPAGA, vencida 21-feb-2026.",
+      "Factura N°47 (06-mar-2026, anticipo 4/6): $1.983.334 — IMPAGA, vencida 21-mar-2026.",
+      "Factura N°53 (07-abr-2026, anticipo 5/6): $1.983.334 — IMPAGA, vencida 22-abr-2026.",
+      "Factura N°63 (06-may-2026, anticipo 6/6): $1.983.334 — IMPAGA, vencida 21-may-2026.",
+      "Factura N°64 (06-may-2026, renta 3/36): $3.211.365 — IMPAGA, vencida 21-may-2026.",
+      "Factura N°69 (06-jun-2026, renta 4/36): $3.252.266 — IMPAGA, en plazo (vence ~21-jun-2026).",
       "Pagos recibidos: anticipos 1 y 2 ($1.983.334 el 17-dic-2025 y 20-feb-2026) + renta marzo ($3.166.949 el 18-mar-2026) + renta abril / Factura N°52 ($3.182.766 el 05-may-2026).",
     ],
     notasInternas: [
@@ -306,7 +306,7 @@ Sin embargo, a la fecha quedan seis facturas pendientes de pago:
 
 Total pendiente: $14.396.967
 
-De ese total, $11.144.701 corresponde a facturas ya vencidas según el plazo contractual de 30 días corridos desde la recepción de cada factura (las cinco primeras de la lista). La factura N°69, de la renta de junio, se encuentra dentro de plazo y vence alrededor del 6 de julio.
+De ese total, $11.144.701 corresponde a facturas ya vencidas según el plazo contractual de 15 días corridos desde la emisión de cada factura, establecido en la Cláusula Tercera del contrato (las cinco primeras de la lista). La factura N°69, de la renta de junio, se encuentra dentro de plazo y vence alrededor del 21 de junio.
 
 El proyecto fue recepcionado definitivamente por ustedes el 8 de abril de 2026 sin observaciones, por lo que no existen pendientes de obra asociados a estos pagos.
 

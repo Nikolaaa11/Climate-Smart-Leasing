@@ -199,7 +199,7 @@ const C001_RENTAS_EMITIDAS: Record<string, { neto: number; factura: string }> = 
   "2026-03-06": { neto: 2_661_302, factura: "Renta cuota 01/36 — factura mar-2026 (n° por confirmar; monto inferido del pago exacto del 18/03/2026)" },
   "2026-04-06": { neto: 2_674_593, factura: "Renta cuota 02/36 — Factura electrónica N°52 (07/04/2026)" },
   "2026-05-06": { neto: 2_698_626, factura: "Renta cuota 03/36 — Factura electrónica N°64 (06/05/2026)" },
-  "2026-06-06": { neto: 2_732_997, factura: "Renta cuota 04/36 — Factura electrónica N°69 (06/06/2026); plazo de pago 30 días → vence ~06/07/2026" },
+  "2026-06-06": { neto: 2_732_997, factura: "Renta cuota 04/36 — Factura electrónica N°69 (06/06/2026); plazo de pago 15 días corridos → vence ~21/06/2026" },
 };
 
 /**
