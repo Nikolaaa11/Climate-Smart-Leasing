@@ -1,6 +1,7 @@
 import { Contract, CONTRACTS, IVA } from "./contracts";
 import { Abono, ABONOS } from "./abonos";
 import { ufForBilling } from "./uf";
+import { FACTURA_POR_CUOTA } from "./facturas";
 
 export type EstadoCuota =
   | "pagada"
@@ -29,6 +30,7 @@ export interface Cuota {
     aplicado: number; // amount of the abono allocated to this cuota
   }>;
   notas: string;
+  factura?: string;   // folio de la factura SII real (ej. "F43"), si existe
 }
 
 /** Add months to a date, preserving day-of-month when valid. */
@@ -66,12 +68,10 @@ export function identifyContract(abono: Abono): { contract: Contract | null; rea
     return { contract: CONTRACTS.find(c => c.id === "C-003")!, reason: "RUT/Nombre Trongkai" };
   }
   // === Barranco Amarillo (RUT 0781918873 — único) ===
-  // Excepción: el "Traspaso de cuenta" de $145.563.465 (28/04/2026) excede por
-  // mucho cualquier cuota de arriendo → NO se concilia automáticamente como
-  // pago de cuotas; clasificar con contabilidad antes de imputarlo.
-  if (glosa.includes("0781918873") && glosa.includes("TRASPASO DE CUENTA")) {
-    return { contract: null, reason: "Traspaso de cuenta desde Procesadora Barranco Amarillo ($145,5MM) — monto excede cuotas de arriendo; confirmar naturaleza con contabilidad antes de imputar" };
-  }
+  // El "Traspaso de cuenta" de $145.563.465 (28/04/2026) corresponde al PAGO
+  // INICIAL del contrato: factura SII F58 (01/05/2026), 3.051,93 UF = $145.563.464
+  // total. Se identifica como pago de Barranco (se concilia contra la cuota de
+  // pago inicial de C-006). Confirmado contra factura F58 adjunta.
   if (glosa.includes("0781918873") || glosa.includes("BARRANCO") || glosa.includes("BORQUEZ")) {
     return { contract: CONTRACTS.find(c => c.id === "C-006")!, reason: "RUT/Nombre Barranco Amarillo" };
   }
@@ -144,7 +144,13 @@ export function identifyContract(abono: Abono): { contract: Contract | null; rea
     return { contract: null, reason: "Transferencia de socio Juan Pablo González (aporte de capital)" };
   }
   if (glosa.includes("0768585725") || glosa.includes("BEBIDAS FUNCION") || glosa.includes("CAELUM")) {
-    return { contract: null, reason: "Cliente histórico: Bebidas Funcionales Caelum SpA (sin contrato vigente en sistema)" };
+    // Bebidas Funcionales Caelum SpA firmó el contrato Axopur (C-007) el 26/05/2026,
+    // con pagos desde junio 2026. Los abonos DESDE esa fecha se concilian a C-007;
+    // los anteriores son transferencias históricas de otro origen (no del contrato).
+    if (abono.fecha >= "2026-06-01") {
+      return { contract: CONTRACTS.find(c => c.id === "C-007")!, reason: "RUT/Nombre Bebidas Funcionales Caelum — contrato Axopur (C-007)" };
+    }
+    return { contract: null, reason: "Cliente histórico: Bebidas Funcionales Caelum SpA (transferencia anterior al contrato Axopur, 05/2026)" };
   }
   if (glosa.includes("0774235566") || glosa.includes("077751766K")) {
     return { contract: null, reason: "Aporte de capital socio (préstamo / pago de acciones)" };
@@ -238,6 +244,27 @@ export function generateCuotasForContract(c: Contract): Cuota[] {
     });
   }
 
+  // Special: pago inicial en CLP neto facturado al firmar (ej. Axopur)
+  if (c.pagoInicialNeto) {
+    const neto = c.pagoInicialNeto;
+    const iva = Math.round(neto * IVA);
+    cuotas.push({
+      contractId: c.id,
+      proyecto: c.proyecto,
+      numero: "Pago inicial",
+      fecha: c.fechaFirma,
+      uf: null,
+      ufValorMes: null,
+      netoClp: neto,
+      ivaClp: iva,
+      totalFacturado: neto + iva,
+      totalPagado: 0,
+      estado: "vencida-sin-pago",
+      matchedAbonos: [],
+      notas: "Pago inicial facturado frente al contrato (Cláusula Sexto).",
+    });
+  }
+
   // Special: Puerta Patagonia — 6 cuotas de anticipo facturadas por separado
   if (c.id === "C-001" && c.anticipoCuota) {
     C001_ANTICIPOS.forEach((a, i) => {
@@ -290,16 +317,21 @@ export function generateCuotasForContract(c: Contract): Cuota[] {
     let notas = "";
 
     if (c.monedaRenta === "UF" && c.rentaUf) {
-      uf = c.rentaUf;
+      // Renta vigente para esta cuota (considera rebaja escalonada, ej. SCG)
+      const rentaUfVig =
+        c.rentaUf2 && c.rentaUf2DesdeCuota && k >= c.rentaUf2DesdeCuota
+          ? c.rentaUf2
+          : c.rentaUf;
+      uf = rentaUfVig;
       // Puerta Patagonia: usar el monto EXACTO de la factura emitida si existe
       const emitida = c.id === "C-001" ? C001_RENTAS_EMITIDAS[isoDate(fecha)] : undefined;
       if (emitida) {
         neto = emitida.neto;
-        ufVal = Math.round(neto / c.rentaUf);
+        ufVal = Math.round(neto / rentaUfVig);
         notas = emitida.factura;
       } else {
         ufVal = ufForBilling(fecha);
-        neto = Math.round(c.rentaUf * ufVal);
+        neto = Math.round(rentaUfVig * ufVal);
       }
       iva = Math.round(neto * IVA);
     } else if (c.monedaRenta === "CLP" && c.rentaClpNeta) {
@@ -418,6 +450,23 @@ export function buildConciliation(
     const cuotas = generateCuotasForContract(c);
     porContrato[c.id] = cuotas;
     allCuotas.push(...cuotas);
+  }
+
+  // Overlay de montos REALES: donde exista una factura SII emitida, se usan sus
+  // cifras exactas (neto/IVA/total, UF, fecha de emisión y folio) en vez del
+  // estimado por modelo UF. Se aplica ANTES de asignar abonos para que el calce
+  // exacto por monto trabaje contra las cifras reales facturadas.
+  for (const cu of allCuotas) {
+    const f = FACTURA_POR_CUOTA[`${cu.contractId}|${cu.numero}`];
+    if (!f) continue;
+    cu.netoClp = f.neto;
+    cu.ivaClp = f.iva;
+    cu.totalFacturado = f.total;
+    if (f.uf != null) cu.uf = f.uf;
+    if (f.valorUf != null) cu.ufValorMes = f.valorUf;
+    cu.fecha = f.fecha;
+    cu.factura = `F${f.folio}`;
+    cu.notas = cu.notas ? `${cu.notas} · Factura SII F${f.folio}` : `Factura SII F${f.folio}`;
   }
 
   // Group abonos by contract

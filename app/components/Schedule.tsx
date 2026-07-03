@@ -94,7 +94,7 @@ export default function Schedule({ result }: Props) {
                 <tr key={i} className="border-b border-ink-50 hover:bg-ink-50/40 transition-colors">
                   <td className="px-4 py-2.5 text-ink-700 font-medium whitespace-nowrap">{c.proyecto}</td>
                   <td className="px-4 py-2.5 text-ink-600">{c.numero}</td>
-                  <td className="px-4 py-2.5 text-ink-400 tabular">—</td>
+                  <td className={`px-4 py-2.5 tabular ${c.factura ? "text-ink-600 font-medium" : "text-ink-300"}`}>{c.factura ?? "—"}</td>
                   <td className="px-4 py-2.5 text-ink-500 tabular whitespace-nowrap">{fmtDate(c.fecha)}</td>
                   <td className="px-4 py-2.5 text-right tabular text-ink-500">{c.uf ? c.uf.toFixed(2) : "—"}</td>
                   <td className="px-4 py-2.5 text-right tabular font-medium text-ink-900 whitespace-nowrap">{fmtCLP(c.totalFacturado)}</td>

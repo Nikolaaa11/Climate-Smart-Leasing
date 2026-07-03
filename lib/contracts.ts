@@ -31,7 +31,13 @@ export interface Contract {
   monedaRenta: "UF" | "CLP";
   rentaUf?: number;
   rentaUfPrimera?: number;
+  // Rebaja/cambio de renta a partir de cierta cuota (ej. SCG bajó su renta UF
+  // por reducción de un costo de garantías). Desde `rentaUf2DesdeCuota` en adelante
+  // la renta pasa a ser `rentaUf2`.
+  rentaUf2?: number;
+  rentaUf2DesdeCuota?: number;
   rentaClpNeta?: number;
+  pagoInicialNeto?: number;   // Pago inicial en CLP neto facturado al firmar (ej. Axopur $7.500.000)
   nCuotas: number;
   anticipoTotal?: number;
   anticipoNCuotas?: number;
@@ -160,6 +166,8 @@ export const CONTRACTS: Contract[] = [
     fechaInicioPagos: "2025-02-21",
     monedaRenta: "UF",
     rentaUf: 25.58,
+    rentaUf2: 21.58,          // rebaja por reducción de costo de garantías
+    rentaUf2DesdeCuota: 15,   // desde la cuota 15/48 (factura F60, may-2026)
     rentaUfPrimera: 82.86,
     nCuotas: 48,
     anticipoTotal: 0,
@@ -186,6 +194,8 @@ export const CONTRACTS: Contract[] = [
     fechaInicioPagos: "2025-06-21",
     monedaRenta: "UF",
     rentaUf: 22.93,
+    rentaUf2: 18.99,          // rebaja por reducción de costo de garantías
+    rentaUf2DesdeCuota: 4,    // desde la cuota 4/48 (factura F23, sep-2025)
     rentaUfPrimera: 70.91,
     nCuotas: 48,
     anticipoTotal: 0,
@@ -212,7 +222,7 @@ export const CONTRACTS: Contract[] = [
     fechaInicioPagos: "2026-05-05",
     monedaRenta: "UF",
     rentaUf: 155.74,
-    rentaUfPrimera: 183,
+    rentaUfPrimera: 3051.93, // Pago Inicial real según factura SII F58 (01/05/2026): 3.051,93 UF = $145.563.464 total. Pagado vía "Traspaso de cuenta" $145.563.465 el 28/04/2026. (El contrato mencionaba 183 UF, pero la factura emitida y pagada es por 3.051,93 UF.)
     nCuotas: 24,
     ivaIncluido: false,
     vigenciaMeses: 24,
@@ -221,29 +231,30 @@ export const CONTRACTS: Contract[] = [
     interesMora: "Interés penal 1,5% mensual",
     cuentaDestino: "Banco Santander Cta. Cte. N° 9427-8910",
     docFuente: "Contrato firmado. Barranco Amarillo.pdf (firma electrónica avanzada Juan Pablo González Jaramillo, 04/05/2026).",
-    obs: "Contrato de arrendamiento de equipos usados/reacondicionados, plazo fijo 24 meses (término 05/04/2028). Pago inicial 183 UF + IVA al firmar + 24 cuotas mensuales de 155,74 UF + IVA (anticipadas, 05/05/2026 → 05/04/2028), reajuste por UF. Equipos: Generador de hielo en escama 10 TON/24h (ICEMTS MIFE-HT, R507), Máquina Baader Ba200, Unidad condensadora ICEMTS 10 TONS (2× compresores Bock HGX66E + condensador HCV6304) y tablero eléctrico de fuerza (Siemens TP700 Comfort / PLC S7-1200). RUT pagador por verificar contra cartola.",
+    obs: "Contrato de arrendamiento de equipos usados/reacondicionados, plazo fijo 24 meses (término 05/04/2028). Pago inicial de 3.051,93 UF + IVA = $145.563.464 (factura SII F58, 01/05/2026), pagado vía 'Traspaso de cuenta' $145.563.465 el 28/04/2026 + 24 cuotas mensuales de 155,74 UF + IVA (anticipadas, 05/05/2026 → 05/04/2028, facturas F62 cuota 1/24, F71 cuota 2/24…), reajuste por UF. Equipos: Generador de hielo en escama 10 TON/24h (ICEMTS MIFE-HT, R507), Máquina Baader Ba200, Unidad condensadora ICEMTS 10 TONS (2× compresores Bock HGX66E + condensador HCV6304) y tablero eléctrico de fuerza (Siemens TP700 Comfort / PLC S7-1200). RUT pagador por verificar contra cartola.",
   },
   {
     id: "C-007",
     proyecto: "Axopur 1",
-    cliente: "Por confirmar",
-    rutCliente: "Por confirmar",
-    rutPagadorBanco: "Por confirmar",
-    repLegal: "Por confirmar",
-    direccion: "Por confirmar",
-    fechaFirma: "2026-05-03",
-    fechaInicioPagos: "2026-06-01",
+    cliente: "Bebidas Funcionales Caelum SpA",
+    rutCliente: "76.858.572-5",
+    rutPagadorBanco: "0768585725",
+    repLegal: "Sebastián Riquelme Riffo (RUT 15.354.775-0)",
+    direccion: "Badajoz 21, San Pedro de la Paz, Concepción, Región del Biobío",
+    fechaFirma: "2026-05-26",
+    fechaInicioPagos: "2026-06-05", // 48 cuotas emitidas los primeros 5 días de cada mes, a contar de junio 2026
     monedaRenta: "UF",
     rentaUf: 22.66,
+    pagoInicialNeto: 7_500_000, // SEXTO: pago inicial $7.500.000 netos facturados frente al contrato
     nCuotas: 48,
     ivaIncluido: false,
     vigenciaMeses: 48,
-    facturacionDia: "Por confirmar",
-    plazoPagoDias: "Por confirmar",
-    interesMora: "Por confirmar",
+    facturacionDia: "Primeros 5 días de cada mes, a contar de junio 2026",
+    plazoPagoDias: "Por confirmar (contrato no lo detalla)",
+    interesMora: "Término anticipado del contrato por retraso > 90 días corridos",
     cuentaDestino: "Banco Santander Cta. Cte. N° 9427-8910",
-    docFuente: "Proyecto Leasing 1. Axopur 1. Rev 1.xlsx (modelo de negocio / caso de negocio, SIN contrato firmado).",
-    obs: "⚠️ MODELO DE NEGOCIO (Rev 1) — aún SIN contrato firmado. Leasing Operativo de un Sistema Eléctrico. Valor activo $32.000.000 CLP financiado 100% (796,81 UF a UF $40.160 del 03/05/2026). 48 cuotas de ≈22,66 UF/mes, tasa 1,35% mensual (16,2% anual), sin cuota final. PENDIENTE de confirmar: cliente, RUT, representante legal, dirección, fecha de firma y fecha de inicio de pagos (las fechas mostradas son tentativas, basadas en el modelo).",
+    docFuente: "Contrato firmado. Axopur 1.pdf (firmado 26/05/2026, Concepción).",
+    obs: "Contrato de arriendo de equipo Axopur (electrocoagulación / electropulsos), fabricado por Axolot (Suecia), capacidad 55 L/hora. Equipo entregado físicamente 01/06/2026 en instalaciones de Caelum. Precio (Cláusula Sexto): pago inicial $7.500.000 netos + 48 cuotas de 22,66 UF + IVA, emitidas los primeros 5 días de cada mes desde junio 2026. Término anticipado por retraso > 90 días corridos. Contacto: Sebastián Riquelme, s.riquelme@udt.cl, +56 9 6909 2261. Facturas emitidas a la fecha: F77, F78, F79 (pendientes de cargar montos exactos y conciliar pagos).",
   },
 ];
 

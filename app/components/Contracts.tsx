@@ -218,7 +218,7 @@ export default function Contracts({ result }: Props) {
                             return (
                             <tr key={i} className="border-b border-ink-50 last:border-0">
                               <td className="py-2.5 pr-3 text-ink-700 font-medium">{cu.numero}</td>
-                              <td className="py-2.5 pr-3 text-ink-400 tabular">—</td>
+                              <td className={`py-2.5 pr-3 tabular ${cu.factura ? "text-ink-600 font-medium" : "text-ink-300"}`}>{cu.factura ?? "—"}</td>
                               <td className="py-2.5 pr-3 text-ink-600 tabular whitespace-nowrap">{fmtDate(cu.fecha)}</td>
                               <td className="py-2.5 pr-3 text-ink-500 tabular">
                                 {cu.uf ? `${cu.uf.toFixed(2)}` : "—"}
