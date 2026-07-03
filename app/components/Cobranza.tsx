@@ -101,21 +101,21 @@ export const DEUDORES: Deudor[] = [
     rut: "53.321.997-7",
     repLegal: "María Pilar Alliende Wielandt",
     emailRepLegal: "administracion@edificiovikingos.cl",
-    esperadoClp: 29_837_838,
+    esperadoClp: 29_798_758,
     pagadoClp: 29_798_758,
-    deudaClp: 39_080,
-    cumplimiento: 0.9987,
+    deudaClp: 0,
+    cumplimiento: 1.0,
     cuotasPagadas: "Anticipo + 4 de 4 rentas",
     inicioFacturacion: "Anticipo: ene-2026 · Rentas: abr-2026",
     severidad: "leve",
     diagnostico:
-      "AL DÍA al 03-jul-2026 — anticipo $20MM pagado completo y las 4 rentas (abr-jul) cubiertas; la de julio la pagaron ANTICIPADA el 16-jun. Diferencia residual de $39.080 por ajuste UF.",
+      "AL DÍA al 03-jul-2026 — sin deuda. Anticipo $20MM pagado completo y las 4 rentas (abr-jul) cubiertas; la de julio la pagaron ANTICIPADA el 16-jun. Conciliado contra las facturas reales N°54/55/65/70, sin diferencias.",
     rentaTexto:
       "Renta mensual: 51,29 UF + IVA · Anticipo $20.000.000 IVA incluido (pagado) · 24 cuotas en total",
     detalleAtraso: [
       "Anticipo de $20.000.000 IVA incluido: PAGADO completo en 4 transferencias de $5MM (29-ene, 02-feb ×2 y 03-feb-2026). ✓",
-      "Rentas abril a julio 2026: PAGADAS ($2.431.760 y $2.430.357 el 06-may; $2.452.817 el 12-may; $2.483.824 el 16-jun — julio anticipada). ✓",
-      "Solo queda una diferencia residual de $39.080 acumulada por ajustes de UF — mencionar en el próximo contacto, no amerita cobranza.",
+      "Rentas abril a julio 2026 (facturas N°54/55/65/70): PAGADAS ($2.431.760 y $2.430.357 el 06-may; $2.452.817 el 12-may; $2.483.824 el 16-jun — julio anticipada). ✓",
+      "Sin saldo pendiente: lo facturado coincide exacto con lo pagado.",
     ],
     notasInternas: [
       "⚠️ RUT en contrato (53.319.273-4) NO COINCIDE con RUT pagador real en cartola (53.321.997-7). Emitir adenda para corregir.",
@@ -131,20 +131,20 @@ export const DEUDORES: Deudor[] = [
     rut: "78.096.656-4",
     repLegal: "Cristian Eduardo Allende Tapia",
     emailRepLegal: "cristian.allende@scg.cl",
-    esperadoClp: 24_196_345,
+    esperadoClp: 23_581_255,
     pagadoClp: 22_453_494,
-    deudaClp: 1_742_851,
-    cumplimiento: 0.928,
-    cuotasPagadas: "16 de 17",
+    deudaClp: 1_127_761,
+    cumplimiento: 0.952,
+    cuotasPagadas: "16 de 18",
     inicioFacturacion: "21-Feb-2025",
     severidad: "leve",
     diagnostico: "Pagador puntual — pequeño saldo arrastrado de la última cuota",
     rentaTexto:
-      "Renta mensual: 25,58 UF + IVA · 1ª renta: 82,86 UF · 48 cuotas en total",
+      "Renta mensual: 25,58 UF + IVA (rebajada a 21,58 UF desde la cuota 15, may-2026, por reducción de costo de garantías) · 1ª renta: 82,86 UF · 48 cuotas en total",
     detalleAtraso: [
       "Cliente con historial impecable de pagos mensuales durante todo 2025 y 2026.",
-      "Diferencia de $1.742.851 al cierre del 03-jul-2026 (~1 cuota; siguió pagando puntual en junio: $1.038.558 el 25-jun).",
-      "Cumplimiento actual: 92,8% del facturado esperado.",
+      "Diferencia de $1.127.761 al cierre del 03-jul-2026 (~1 cuota; siguió pagando puntual en junio: $1.038.558 el 25-jun).",
+      "Cumplimiento actual: 95,2% del facturado esperado.",
     ],
     notasInternas: [
       "Pagos vía RUT pagador 0141831984 (Cristian Eduardo Allende Tapia, persona natural).",
@@ -160,20 +160,20 @@ export const DEUDORES: Deudor[] = [
     rut: "78.096.656-4",
     repLegal: "Cristian Eduardo Allende Tapia",
     emailRepLegal: "cristian.allende@scg.cl",
-    esperadoClp: 17_374_382,
+    esperadoClp: 15_523_704,
     pagadoClp: 14_606_362,
-    deudaClp: 2_768_020,
-    cumplimiento: 0.8407,
-    cuotasPagadas: "12 de 13",
+    deudaClp: 917_342,
+    cumplimiento: 0.941,
+    cuotasPagadas: "13 de 14",
     inicioFacturacion: "21-Jun-2025",
-    severidad: "moderado",
-    diagnostico: "Atraso moderado — falta aprox. 1 cuota completa",
+    severidad: "leve",
+    diagnostico: "Pagador puntual — pequeño saldo arrastrado (~1 cuota)",
     rentaTexto:
-      "Renta mensual: 22,93 UF + IVA · 1ª renta: 70,91 UF · 48 cuotas en total",
+      "Renta mensual: 22,93 UF + IVA (rebajada a 18,99 UF desde la cuota 4, sep-2025, por reducción de costo de garantías) · 1ª renta: 70,91 UF · 48 cuotas en total",
     detalleAtraso: [
       "Mismo titular que Flota Volvo EX30 PLUS — historial general de pagos puntuales.",
-      "Saldo pendiente de $2.768.020 al 03-jul-2026, equivalente a poco más de 1 cuota mensual (pagó $913.913 el 25-jun).",
-      "Cumplimiento actual: 84,1% del facturado esperado.",
+      "Saldo pendiente de $917.342 al 03-jul-2026, equivalente a ~1 cuota mensual (pagó $913.913 el 25-jun).",
+      "Cumplimiento actual: 94,1% del facturado esperado.",
     ],
     notasInternas: [
       "$3.300.000 pagado en may-2025 cubrió la primera factura adelantada.",
@@ -217,26 +217,25 @@ export const DEUDORES: Deudor[] = [
     rut: "78.191.887-3",
     repLegal: "Washington Gilberto Borquez Mansilla",
     emailRepLegal: "contacto@barrancoamarillo.cl",
-    esperadoClp: 23_805_695,
-    pagadoClp: 14_989_870,
-    deudaClp: 8_815_825,
-    cumplimiento: 0.6297,
-    cuotasPagadas: "2 de 2 cuotas mensuales pagadas",
-    inicioFacturacion: "Pago inicial: 04-may-2026 · Cuotas: 05-may-2026",
-    severidad: "moderado",
+    esperadoClp: 160_553_334,
+    pagadoClp: 160_553_334,
+    deudaClp: 0,
+    cumplimiento: 1.0,
+    cuotasPagadas: "Pago inicial + 2 de 2 cuotas pagadas",
+    inicioFacturacion: "Pago inicial: 01-may-2026 · Cuotas: 05-may-2026",
+    severidad: "leve",
     diagnostico:
-      "Cuotas de mayo y junio PAGADAS ($7.447.842 el 01-jun y $7.542.028 el 15-jun). Pendiente SOLO el pago inicial de 183 UF + IVA (aprox. $8,8MM). Cuota de julio vence el 05-jul. OJO: hay un traspaso de $145,5MM del 28-abr-2026 desde su RUT sin clasificar que podría cubrir el pago inicial — confirmar con contabilidad antes de cobrar.",
+      "AL DÍA al 03-jul-2026 — sin deuda. El pago inicial (factura N°58, 3.051,93 UF = $145.563.464) fue pagado mediante el 'Traspaso de cuenta' de $145.563.465 del 28-abr-2026 (antes figuraba sin clasificar; ya está identificado y conciliado). Las cuotas 1 y 2 (may-jun) también están pagadas. La cuota 3 (julio) vence el 05-jul.",
     rentaTexto:
-      "Pago inicial: 183 UF + IVA al firmar (04-may-2026) · Renta mensual: 155,74 UF + IVA × 24 cuotas anticipadas (primeros 5 días del mes) · Interés penal 1,5% mensual",
+      "Pago inicial: 3.051,93 UF + IVA = $145.563.464 (factura N°58) · Renta mensual: 155,74 UF + IVA × 24 cuotas anticipadas (primeros 5 días del mes) · Interés penal 1,5% mensual",
     detalleAtraso: [
-      "Cuota mayo 2026 ($7.435.501): PAGADA el 01-jun-2026 vía transferencia de $7.447.842 (glosa 'NOMINA PAGO PROV'). ✓",
-      "Cuota junio 2026 ($7.526.404): PAGADA el 15-jun-2026 vía transferencia de $7.542.028 (glosa 'Pago de Provee'). ✓",
-      "Pago inicial 183 UF + IVA (≈$8.843.790): sin pago identificado como tal en cartolas.",
-      "Cuota julio 2026 (aprox. $7.526.404): por vencer el 05-jul-2026.",
-      "⚠️ ANTES DE COBRAR: confirmar la naturaleza del traspaso de $145.563.465 recibido el 28-abr-2026 desde el RUT de Barranco — si corresponde a este contrato, la cuenta podría estar pagada por adelantado.",
+      "Pago inicial (factura N°58, $145.563.464): PAGADO vía 'Traspaso de cuenta' de $145.563.465 el 28-abr-2026. ✓",
+      "Cuota 1/24 mayo 2026 (factura N°62, $7.447.842): PAGADA el 01-jun-2026. ✓",
+      "Cuota 2/24 junio 2026 (factura N°71, $7.542.028): PAGADA el 15-jun-2026. ✓",
+      "Cuota 3/24 julio 2026 (≈$7,5MM): por vencer el 05-jul-2026.",
     ],
     notasInternas: [
-      "El traspaso de $145,5MM (28-abr-2026, doc 459723652, glosa 'Traspaso de cuenta') NO se concilió automáticamente: excede cualquier cuota. Clasificar con MCG/contabilidad.",
+      "✅ Resuelto: el traspaso de $145,5MM (28-abr-2026, glosa 'Traspaso de cuenta') era el pago inicial (factura N°58 por 3.051,93 UF). Antes estaba en 'abonos no identificados'; ahora se concilia contra la cuota de pago inicial de C-006.",
       "Email del representante legal es PROVISORIO — confirmar antes de enviar.",
       "Contrato firmado 04-may-2026 con firma electrónica avanzada. Término: 05-abr-2028.",
     ],
@@ -335,18 +334,18 @@ Junto con saludar, le escribo desde Climate Smart Leasing SpA con el estado de c
 
 Quiero partir agradeciendo la excelente puntualidad de la comunidad: el anticipo de $20.000.000 IVA incluido quedó cubierto en su totalidad (recibido en cuatro transferencias entre el 29 de enero y el 3 de febrero de 2026) y las rentas de abril a julio están todas pagadas — la de julio incluso de forma anticipada, el 16 de junio.
 
-Al conciliar contra los movimientos de la cuenta Santander N° 9427891-0 al 3 de julio de 2026, la cuenta está al día — queda solamente una diferencia residual menor por ajuste del valor de la UF.
+Al conciliar contra los movimientos de la cuenta Santander N° 9427891-0 al 3 de julio de 2026, la cuenta está completamente al día, sin saldo pendiente.
 
 Estado de cuenta al 3 de julio de 2026:
 
-Facturado esperado: $29.837.838
+Facturado esperado: $29.798.758
 Recibido a la fecha: $29.798.758
-Diferencia residual: $39.080
-Cumplimiento: 99,9%
+Saldo pendiente: $0
+Cumplimiento: 100%
 
 Le recuerdo que la renta mensual del contrato es de 51,29 UF más IVA (aproximadamente $2,4 a $2,5 millones IVA incluido al valor UF vigente), por 24 cuotas.
 
-La diferencia de $44.227 se puede regularizar junto con la próxima renta mensual, sin urgencia. También quería comentarle que estamos preparando una adenda menor al contrato para corregir el RUT del cliente (quedó 53.319.273-4 en el documento original, cuando el correcto y desde el cual ustedes pagan es 53.321.997-7); se la haré llegar en los próximos días para su firma.
+Aprovecho también de comentarle que estamos preparando una adenda menor al contrato para corregir el RUT del cliente (quedó 53.319.273-4 en el documento original, cuando el correcto y desde el cual ustedes pagan es 53.321.997-7); se la haré llegar en los próximos días para su firma.
 
 Adjunto el estado de cuenta detallado en Excel.
 
@@ -369,25 +368,25 @@ Climate Smart Leasing SpA`,
       asunto: "Estado de cuenta SCG · Flota Volvo EX30 PLUS y CORE — conciliación al 12-may-2026",
       cuerpo: `Estimado Cristian,
 
-Junto con saludar, te escribo desde Climate Smart Leasing SpA con el estado de cuenta de los dos contratos de arrendamiento de SCG SpA — Flota Volvo EX30 PLUS y Flota Volvo EX30 CORE — conciliado al 10 de junio de 2026 contra los movimientos de la cuenta Santander N° 9427891-0.
+Junto con saludar, te escribo desde Climate Smart Leasing SpA con el estado de cuenta de los dos contratos de arrendamiento de SCG SpA — Flota Volvo EX30 PLUS y Flota Volvo EX30 CORE — conciliado al 3 de julio de 2026 contra los movimientos de la cuenta Santander N° 9427891-0.
 
 Partir diciendo que SCG ha sido nuestro cliente más puntual en lo que va de los contratos, con un historial impecable de pagos mensuales durante todo 2025 y 2026. Al cierre quedan dos pequeñas diferencias que probablemente corresponden a cuotas en tránsito o ajustes de UF, pero te las paso para que las revisemos en conjunto.
 
-Flota Volvo EX30 PLUS (renta 25,58 UF + IVA, inicio facturación 21 feb 2025):
+Flota Volvo EX30 PLUS (renta 25,58 UF + IVA, rebajada a 21,58 UF desde may-2026, inicio facturación 21 feb 2025):
 
-Facturado esperado: $22.960.148
-Recibido a la fecha: $21.414.936
-Saldo pendiente: $1.545.212
-Cumplimiento: 93,3%
+Facturado esperado: $23.581.255
+Recibido a la fecha: $22.453.494
+Saldo pendiente: $1.127.761
+Cumplimiento: 95,2%
 
-Flota Volvo EX30 CORE (renta 22,93 UF + IVA, inicio facturación 21 jun 2025):
+Flota Volvo EX30 CORE (renta 22,93 UF + IVA, rebajada a 18,99 UF desde sep-2025, inicio facturación 21 jun 2025):
 
-Facturado esperado: $16.266.250
-Recibido a la fecha: $13.692.449
-Saldo pendiente: $2.573.801
-Cumplimiento: 84,2%
+Facturado esperado: $15.523.704
+Recibido a la fecha: $14.606.362
+Saldo pendiente: $917.342
+Cumplimiento: 94,1%
 
-Saldo consolidado: $4.119.013
+Saldo consolidado: $2.045.103
 
 Si de tu lado los pagos están al día, avísame para revisar bien si hay alguna transferencia que no me figura registrada y conciliarlo. Si efectivamente queda esa diferencia, agradezco regularizarla cuando puedas.
 
@@ -412,25 +411,25 @@ Climate Smart Leasing SpA`,
       asunto: "Estado de cuenta SCG · Flota Volvo EX30 PLUS y CORE — conciliación al 12-may-2026",
       cuerpo: `Estimado Cristian,
 
-Junto con saludar, te escribo desde Climate Smart Leasing SpA con el estado de cuenta de los dos contratos de arrendamiento de SCG SpA — Flota Volvo EX30 PLUS y Flota Volvo EX30 CORE — conciliado al 10 de junio de 2026 contra los movimientos de la cuenta Santander N° 9427891-0.
+Junto con saludar, te escribo desde Climate Smart Leasing SpA con el estado de cuenta de los dos contratos de arrendamiento de SCG SpA — Flota Volvo EX30 PLUS y Flota Volvo EX30 CORE — conciliado al 3 de julio de 2026 contra los movimientos de la cuenta Santander N° 9427891-0.
 
 Partir diciendo que SCG ha sido nuestro cliente más puntual en lo que va de los contratos, con un historial impecable de pagos mensuales durante todo 2025 y 2026. Al cierre quedan dos pequeñas diferencias que probablemente corresponden a cuotas en tránsito o ajustes de UF, pero te las paso para que las revisemos en conjunto.
 
-Flota Volvo EX30 PLUS (renta 25,58 UF + IVA, inicio facturación 21 feb 2025):
+Flota Volvo EX30 PLUS (renta 25,58 UF + IVA, rebajada a 21,58 UF desde may-2026, inicio facturación 21 feb 2025):
 
-Facturado esperado: $22.960.148
-Recibido a la fecha: $21.414.936
-Saldo pendiente: $1.545.212
-Cumplimiento: 93,3%
+Facturado esperado: $23.581.255
+Recibido a la fecha: $22.453.494
+Saldo pendiente: $1.127.761
+Cumplimiento: 95,2%
 
-Flota Volvo EX30 CORE (renta 22,93 UF + IVA, inicio facturación 21 jun 2025):
+Flota Volvo EX30 CORE (renta 22,93 UF + IVA, rebajada a 18,99 UF desde sep-2025, inicio facturación 21 jun 2025):
 
-Facturado esperado: $16.266.250
-Recibido a la fecha: $13.692.449
-Saldo pendiente: $2.573.801
-Cumplimiento: 84,2%
+Facturado esperado: $15.523.704
+Recibido a la fecha: $14.606.362
+Saldo pendiente: $917.342
+Cumplimiento: 94,1%
 
-Saldo consolidado: $4.119.013
+Saldo consolidado: $2.045.103
 
 Si de tu lado los pagos están al día, avísame para revisar bien si hay alguna transferencia que no me figura registrada y conciliarlo. Si efectivamente queda esa diferencia, agradezco regularizarla cuando puedas.
 
