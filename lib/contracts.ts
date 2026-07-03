@@ -138,7 +138,7 @@ export const CONTRACTS: Contract[] = [
     repLegal: "José Cuevas Valenzuela (RUT 15.354.775-0)",
     direccion: "Parral, sector Talquita, Región del Maule (operación) — 1 Sur N° 690 Of. 815, Talca (administrativo)",
     fechaFirma: "2025-12-05",
-    fechaInicioPagos: "2026-05-01",
+    fechaInicioPagos: "2026-06-01", // primera cuota jun-2026 (confirmado por JP)
     monedaRenta: "CLP",
     rentaClpNeta: 400_000,
     nCuotas: 8,

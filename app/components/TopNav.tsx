@@ -6,6 +6,7 @@ import Image from "next/image";
 const NAV_ITEMS = [
   { href: "#dashboard", label: "Resumen" },
   { href: "#contratos", label: "Contratos" },
+  { href: "#ordenes-compra", label: "Órdenes de compra" },
   { href: "#cobranza", label: "Cobranza" },
   { href: "#conciliacion-geist", label: "Geist" },
   { href: "#cronograma", label: "Cronograma" },

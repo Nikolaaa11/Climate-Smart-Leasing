@@ -189,21 +189,20 @@ export const DEUDORES: Deudor[] = [
     rut: "77.221.203-8",
     repLegal: "José Cuevas Valenzuela",
     emailRepLegal: "jcuevas@trongkai.cl",
-    esperadoClp: 1_428_000,
+    esperadoClp: 952_000,
     pagadoClp: 0,
-    deudaClp: 1_428_000,
+    deudaClp: 952_000,
     cumplimiento: 0,
-    cuotasPagadas: "0 de 3",
-    inicioFacturacion: "01-May-2026",
+    cuotasPagadas: "0 de 2",
+    inicioFacturacion: "01-Jun-2026",
     severidad: "nunca_pago",
-    diagnostico: "Nunca ha pagado — cuotas de mayo, junio y julio 2026 vencidas ($1.428.000 total)",
+    diagnostico: "Nunca ha pagado — cuotas de junio y julio 2026 vencidas ($952.000 total)",
     rentaTexto:
       "Renta: $400.000 netos/mes durante 2026 (pruebas) · Vigencia 5 años + 3 prórrogas · Desde 01-Ene-2027 tarifa por hora",
     detalleAtraso: [
-      "Inicio de facturación: 01-may-2026.",
-      "Cuota mayo 2026 ($476.000 IVA inc.): vencida, sin pago.",
+      "Inicio de facturación: 01-jun-2026 (primera cuota).",
       "Cuota junio 2026 ($476.000 IVA inc.): vencida, sin pago.",
-      "Cuota julio 2026 ($476.000 IVA inc.): vencida (pago anticipado dia 1), sin pago.",
+      "Cuota julio 2026 ($476.000 IVA inc.): vencida (pago anticipado día 1), sin pago.",
       "Equipo ODIN Opticept ya entregado el 01-mar-2026 — sin ningún pago a la fecha (verificado contra cartolas hasta el 30-jun-2026).",
     ],
     notasInternas: [
@@ -458,9 +457,9 @@ Climate Smart Leasing SpA`,
 
 Junto con saludar, le escribo desde Climate Smart Leasing SpA en relación al contrato de arrendamiento del equipo de electroporación ODIN Opticept entregado a Agrotecnologías e Ingeniería SpA el 1 de marzo de 2026.
 
-Según lo establecido en el contrato, la facturación inició el 1 de mayo de 2026. Al revisar nuestros registros conciliados con la cuenta Santander N° 9427891-0 al 10 de junio de 2026, las cuotas de mayo y junio figuran pendientes de pago.
+Según lo establecido en el contrato, la facturación inició el 1 de junio de 2026. Al revisar nuestros registros conciliados con la cuenta Santander N° 9427891-0 al 3 de julio de 2026, las cuotas de junio y julio figuran pendientes de pago.
 
-Estado de cuenta al 10 de junio de 2026:
+Estado de cuenta al 3 de julio de 2026:
 
 Facturado esperado: $952.000
 Recibido a la fecha: $0

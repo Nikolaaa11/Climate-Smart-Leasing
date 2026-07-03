@@ -5,6 +5,7 @@ import Image from "next/image";
 import TopNav from "./components/TopNav";
 import Dashboard from "./components/Dashboard";
 import Contracts from "./components/Contracts";
+import OrdenesCompra from "./components/OrdenesCompra";
 import Schedule from "./components/Schedule";
 import Movements from "./components/Movements";
 import AccountVerification from "./components/AccountVerification";
@@ -69,6 +70,7 @@ export default function Home() {
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <Dashboard result={result} />
         <Contracts result={result} />
+        <OrdenesCompra />
         <Cobranza result={result} />
         <GeistReconciliation />
         <Schedule result={result} />
