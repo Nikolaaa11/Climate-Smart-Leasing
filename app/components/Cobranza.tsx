@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { fmtCLP, fmtPct } from "@/lib/format";
-import { ConciliationResult } from "@/lib/conciliation";
+import { ConciliationResult, estaAtrasada } from "@/lib/conciliation";
 import {
   AlertTriangle,
   AlertOctagon,
@@ -576,7 +576,11 @@ export default function Cobranza({ result }: CobranzaProps) {
     });
     const esperado = vencidas.reduce((s, x) => s + x.totalFacturado, 0);
     const pagado = vencidas.reduce((s, x) => s + x.totalPagado, 0);
-    const deuda = Math.max(0, esperado - pagado);
+    // "Deuda" = sólo lo ATRASADO (facturas impagas con 30+ días desde emisión).
+    // Lo emitido hace <30 días y aún impago está "en plazo", no es deuda vencida.
+    const deuda = vencidas
+      .filter((x) => estaAtrasada(x.fecha, today))
+      .reduce((s, x) => s + Math.max(0, x.totalFacturado - x.totalPagado), 0);
     const cumplimiento = esperado > 0 ? Math.min(1, pagado / esperado) : 1;
     finByContract[cid] = { esperado, pagado, deuda, cumplimiento };
   }

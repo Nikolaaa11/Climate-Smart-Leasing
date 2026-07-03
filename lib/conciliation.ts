@@ -414,6 +414,20 @@ function allocateAbonos(cuotas: Cuota[], abonos: Abono[]): void {
   }
 }
 
+/**
+ * Días de gracia desde la emisión de una factura antes de considerarla ATRASADA.
+ * Regla de negocio CSL: una factura impaga recién pasa a estar atrasada 30 días
+ * después de emitida; dentro de esos 30 días está "en plazo / por vencer".
+ */
+export const DIAS_GRACIA_ATRASO = 30;
+
+/** true si una factura impaga ya está atrasada (pasaron ≥30 días desde su emisión). */
+export function estaAtrasada(fechaEmisionISO: string, today: Date): boolean {
+  const venc = new Date(fechaEmisionISO + "T00:00:00");
+  venc.setDate(venc.getDate() + DIAS_GRACIA_ATRASO);
+  return today > venc;
+}
+
 /** Compute status of each cuota relative to a reference date (today) */
 function computeStatus(cuotas: Cuota[], today: Date): void {
   for (const c of cuotas) {
@@ -428,7 +442,9 @@ function computeStatus(cuotas: Cuota[], today: Date): void {
       const diffPct = Math.abs(c.totalPagado - c.totalFacturado) / c.totalFacturado;
       c.estado = diffPct < 0.10 ? "pagada-diferencia" : "pagada-parcial";
     } else {
-      c.estado = "vencida-sin-pago";
+      // Impaga y ya emitida: sólo se marca vencida si pasaron ≥30 días desde
+      // la emisión; dentro de la gracia queda "por-vencer" (en plazo).
+      c.estado = estaAtrasada(c.fecha, today) ? "vencida-sin-pago" : "por-vencer";
     }
   }
 }
