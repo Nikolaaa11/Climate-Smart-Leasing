@@ -9,7 +9,6 @@ import Schedule from "./components/Schedule";
 import Movements from "./components/Movements";
 import AccountVerification from "./components/AccountVerification";
 import CartolaUpload from "./components/CartolaUpload";
-import Accounting from "./components/Accounting";
 import GeistReconciliation from "./components/GeistReconciliation";
 import Cobranza from "./components/Cobranza";
 import { ABONOS, Abono } from "@/lib/abonos";
@@ -55,14 +54,12 @@ export default function Home() {
           </div>
           <p className="text-lg text-ink-500 mt-6 max-w-2xl leading-relaxed">
             Plataforma de consolidación financiera para CSL. Contratos vigentes,
-            cobranza, libro mayor completo y conciliación con la cuenta Santander N° 9427-8910.
+            cobranza y conciliación con la cuenta Santander N° 9427-8910.
           </p>
           <div className="flex flex-wrap items-center gap-x-3 gap-y-1 mt-10 text-xs text-ink-400">
             <span className="tabular">{result.cuotas.length} cuotas modeladas</span>
             <span>·</span>
             <span className="tabular">{allAbonos.length} abonos conciliados</span>
-            <span>·</span>
-            <span className="tabular">436 movimientos contables</span>
             <span>·</span>
             <span className="tabular">{CONTRACTS.length} contratos vigentes</span>
           </div>
@@ -73,7 +70,6 @@ export default function Home() {
         <Dashboard result={result} />
         <Contracts result={result} />
         <Cobranza result={result} />
-        <Accounting />
         <GeistReconciliation />
         <Schedule result={result} />
         <Movements abonos={allAbonos} />

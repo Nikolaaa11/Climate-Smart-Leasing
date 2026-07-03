@@ -2,9 +2,8 @@
 
 import { ConciliationResult } from "@/lib/conciliation";
 import { CONTRACTS } from "@/lib/contracts";
-import { LEDGER } from "@/lib/ledger";
 import { fmtCLP, fmtPct } from "@/lib/format";
-import { ArrowUpRight, AlertCircle, CheckCircle2, Clock, Wallet, Sparkles } from "lucide-react";
+import { ArrowUpRight, AlertCircle, CheckCircle2, Clock } from "lucide-react";
 
 interface Props {
   result: ConciliationResult;
@@ -23,11 +22,6 @@ export default function Dashboard({ result }: Props) {
 
   const alertas = result.cuotas.filter(c => c.estado === "vencida-sin-pago").length;
   const enRiesgo = result.cuotas.filter(c => c.estado === "pagada-parcial").length;
-
-  const saldoBancario = LEDGER[LEDGER.length - 1]?.saldoContable ?? 0;
-  const subsidios = LEDGER.filter(e => e.conceptoGeneral === "Abono_Subsidio").reduce((s, e) => s + e.abono, 0);
-  const accionesPagadas = LEDGER.filter(e => e.conceptoGeneral === "Pago_de_Acciones").reduce((s, e) => s + e.abono, 0);
-  const inversionProyectos = LEDGER.filter(e => e.conceptoGeneral === "Desarrollo_Proyecto").reduce((s, e) => s + e.egreso, 0);
 
   const perContract = CONTRACTS.map(c => {
     const cu = result.porContrato[c.id].filter(x => {
@@ -148,40 +142,6 @@ export default function Dashboard({ result }: Props) {
         ))}
       </div>
 
-      {/* Global financial position from full ledger */}
-      <div className="mb-2 text-[10px] font-mono uppercase tracking-[0.15em] text-ink-400">
-        Posición financiera global · libro mayor completo
-      </div>
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
-        <KpiCard
-          label="Saldo contable actual"
-          value={fmtCLP(saldoBancario)}
-          sub="al último movimiento"
-          icon={<Wallet className="w-4 h-4" />}
-          accent="text-ink-900"
-        />
-        <KpiCard
-          label="Aportes de capital"
-          value={fmtCLP(accionesPagadas)}
-          sub="Acciones pagadas"
-          icon={<Sparkles className="w-4 h-4" />}
-          accent="text-indigo-600"
-        />
-        <KpiCard
-          label="Subsidios CORFO"
-          value={fmtCLP(subsidios)}
-          sub="recibidos"
-          icon={<CheckCircle2 className="w-4 h-4" />}
-          accent="text-csl-600"
-        />
-        <KpiCard
-          label="Inversión I+D"
-          value={fmtCLP(inversionProyectos)}
-          sub="Desarrollo de proyectos"
-          icon={<ArrowUpRight className="w-4 h-4" />}
-          accent="text-orange-600"
-        />
-      </div>
     </section>
   );
 }
