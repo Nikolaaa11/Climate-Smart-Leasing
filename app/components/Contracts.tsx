@@ -196,20 +196,30 @@ export default function Contracts({ result }: Props) {
                         <thead>
                           <tr className="text-left text-[10px] uppercase tracking-wider text-ink-400 border-b border-ink-100">
                             <th className="py-2 pr-3 font-medium">N°</th>
-                            <th className="py-2 pr-3 font-medium">Fecha</th>
+                            <th className="py-2 pr-3 font-medium">Factura</th>
+                            <th className="py-2 pr-3 font-medium">Fecha de emisión</th>
                             <th className="py-2 pr-3 font-medium">UF</th>
                             <th className="py-2 pr-3 font-medium text-right">Neto</th>
                             <th className="py-2 pr-3 font-medium text-right">IVA</th>
                             <th className="py-2 pr-3 font-medium text-right">Total</th>
                             <th className="py-2 pr-3 font-medium text-right">Pagado</th>
+                            <th className="py-2 pr-3 font-medium">Fecha de pago</th>
                             <th className="py-2 font-medium">Estado</th>
                           </tr>
                         </thead>
                         <tbody>
-                          {cuotas.slice(0, 30).map((cu, i) => (
+                          {cuotas.slice(0, 30).map((cu, i) => {
+                            // Fecha de pago: fecha del último abono conciliado a esta cuota
+                            // (derivada del motor, no escrita a mano). "—" si aún no se paga.
+                            const fechasPago = cu.matchedAbonos.map(a => a.fecha).sort();
+                            const fechaPago = fechasPago.length
+                              ? fmtDate(fechasPago[fechasPago.length - 1])
+                              : "—";
+                            return (
                             <tr key={i} className="border-b border-ink-50 last:border-0">
                               <td className="py-2.5 pr-3 text-ink-700 font-medium">{cu.numero}</td>
-                              <td className="py-2.5 pr-3 text-ink-600 tabular">{fmtDate(cu.fecha)}</td>
+                              <td className="py-2.5 pr-3 text-ink-400 tabular">—</td>
+                              <td className="py-2.5 pr-3 text-ink-600 tabular whitespace-nowrap">{fmtDate(cu.fecha)}</td>
                               <td className="py-2.5 pr-3 text-ink-500 tabular">
                                 {cu.uf ? `${cu.uf.toFixed(2)}` : "—"}
                               </td>
@@ -223,11 +233,15 @@ export default function Contracts({ result }: Props) {
                               }`}>
                                 {fmtCLP(cu.totalPagado)}
                               </td>
+                              <td className={`py-2.5 pr-3 tabular whitespace-nowrap ${fechaPago === "—" ? "text-ink-300" : "text-ink-600"}`}>
+                                {fechaPago}
+                              </td>
                               <td className="py-2.5">
                                 <StatusPill estado={cu.estado} />
                               </td>
                             </tr>
-                          ))}
+                            );
+                          })}
                         </tbody>
                       </table>
                       {cuotas.length > 30 && (

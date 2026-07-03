@@ -73,18 +73,28 @@ export default function Schedule({ result }: Props) {
               <tr className="text-left text-[10px] uppercase tracking-wider text-ink-400">
                 <th className="px-4 py-3 font-medium">Proyecto</th>
                 <th className="px-4 py-3 font-medium">Cuota</th>
-                <th className="px-4 py-3 font-medium">Fecha</th>
+                <th className="px-4 py-3 font-medium">Factura</th>
+                <th className="px-4 py-3 font-medium">Fecha de emisión</th>
                 <th className="px-4 py-3 font-medium text-right">UF</th>
                 <th className="px-4 py-3 font-medium text-right">Facturado</th>
                 <th className="px-4 py-3 font-medium text-right">Pagado</th>
+                <th className="px-4 py-3 font-medium">Fecha de pago</th>
                 <th className="px-4 py-3 font-medium">Estado</th>
               </tr>
             </thead>
             <tbody>
-              {filtered.map((c, i) => (
+              {filtered.map((c, i) => {
+                // Fecha de pago: fecha del último abono conciliado a esta cuota
+                // (derivada del motor, no escrita a mano). "—" si aún no se paga.
+                const fechasPago = c.matchedAbonos.map(a => a.fecha).sort();
+                const fechaPago = fechasPago.length
+                  ? fmtDate(fechasPago[fechasPago.length - 1])
+                  : "—";
+                return (
                 <tr key={i} className="border-b border-ink-50 hover:bg-ink-50/40 transition-colors">
                   <td className="px-4 py-2.5 text-ink-700 font-medium whitespace-nowrap">{c.proyecto}</td>
                   <td className="px-4 py-2.5 text-ink-600">{c.numero}</td>
+                  <td className="px-4 py-2.5 text-ink-400 tabular">—</td>
                   <td className="px-4 py-2.5 text-ink-500 tabular whitespace-nowrap">{fmtDate(c.fecha)}</td>
                   <td className="px-4 py-2.5 text-right tabular text-ink-500">{c.uf ? c.uf.toFixed(2) : "—"}</td>
                   <td className="px-4 py-2.5 text-right tabular font-medium text-ink-900 whitespace-nowrap">{fmtCLP(c.totalFacturado)}</td>
@@ -95,11 +105,15 @@ export default function Schedule({ result }: Props) {
                   }`}>
                     {fmtCLP(c.totalPagado)}
                   </td>
+                  <td className={`px-4 py-2.5 tabular whitespace-nowrap ${fechaPago === "—" ? "text-ink-300" : "text-ink-500"}`}>
+                    {fechaPago}
+                  </td>
                   <td className="px-4 py-2.5">
                     <StatusPill estado={c.estado} />
                   </td>
                 </tr>
-              ))}
+                );
+              })}
             </tbody>
           </table>
         </div>
