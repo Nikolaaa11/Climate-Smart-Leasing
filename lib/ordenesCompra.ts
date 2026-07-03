@@ -47,4 +47,15 @@ export const ORDENES_COMPRA: OrdenCompra[] = [
       { folio: 17, fecha: "2025-07-01", uf: null, neto: 4_863_867, total: 5_788_002, pagado: 5_788_002, fechaPago: "2025-07-10" },
     ],
   },
+  {
+    id: "OC-003",
+    titulo: "Cabezal maquinaria fertilizantes",
+    cliente: "Comercializadora Resin & Polimers Technology Limitada",
+    fechaOrdenCompra: undefined, // documento por subir
+    facturas: [
+      // Curtain lamella model H008647. Pagada: 4 transferencias de COMERCIALIZADORA
+      // (RUT 76.058.363-4) el 26-jun-2026 = $17.205.087 exacto (resuelve pendiente #1 del HANDOFF).
+      { folio: 74, fecha: "2026-05-11", uf: null, neto: 14_458_056, total: 17_205_087, pagado: 17_205_087, fechaPago: "2026-06-26" },
+    ],
+  },
 ];
