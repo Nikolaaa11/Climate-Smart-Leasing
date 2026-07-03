@@ -240,6 +240,36 @@ export const DEUDORES: Deudor[] = [
       "Contrato firmado 04-may-2026 con firma electrónica avanzada. Término: 05-abr-2028.",
     ],
   },
+  {
+    id: "AX",
+    contractId: "C-007",
+    proyecto: "Axopur 1 — Equipo de electropulsos",
+    cliente: "Bebidas Funcionales Caelum SpA",
+    rut: "76.858.572-5",
+    repLegal: "Sebastián Riquelme Riffo",
+    emailRepLegal: "s.riquelme@udt.cl",
+    esperadoClp: 11_104_371,
+    pagadoClp: 0,
+    deudaClp: 11_104_371,
+    cumplimiento: 0,
+    cuotasPagadas: "0 de 3 facturas (por conciliar)",
+    inicioFacturacion: "Pago inicial + cuotas 1-2: 30-jun-2026",
+    severidad: "moderado",
+    diagnostico:
+      "Contrato firmado el 26-may-2026. El 30-jun-2026 se emitieron 3 facturas: pago inicial (N°79, $8.925.000), cuota 1/48 (N°77) y cuota 2/48 (N°78). Aún NO conciliadas — falta cargar la cartola de junio/julio. La factura N°79 indica 'Forma de pago: Contado', por lo que el pago inicial probablemente ya está cursado: CONFIRMAR con la cartola antes de cobrar.",
+    rentaTexto:
+      "Pago inicial: $7.500.000 neto + IVA · Renta mensual: 22,66 UF + IVA × 48 cuotas (primeros 5 días de cada mes desde jun-2026)",
+    detalleAtraso: [
+      "Pago inicial (factura N°79, 30-jun-2026): $8.925.000 — sin pago conciliado aún.",
+      "Cuota 1/48 (factura N°77, 30-jun-2026): $1.082.931 — sin pago conciliado aún.",
+      "Cuota 2/48 (factura N°78, 30-jun-2026): $1.096.440 — sin pago conciliado aún.",
+      "⚠️ Cargar la cartola de junio/julio 2026 para confirmar los pagos (la N°79 es al contado) antes de gestionar cobranza.",
+    ],
+    notasInternas: [
+      "Equipo Axopur (Axolot, 55 L/h) entregado el 01-jun-2026. Contacto: Sebastián Riquelme, s.riquelme@udt.cl.",
+      "Los abonos de Caelum en el sistema (mar-2025, ene-2026) son ANTERIORES al contrato y corresponden a otras OC (estudios), no a Axopur.",
+    ],
+  },
 ];
 
 const SEVERIDAD_META = {
@@ -470,6 +500,37 @@ Le recuerdo que el contrato considera $400.000 netos mensuales durante 2026 como
 Le agradecería coordinar el pago de estas dos cuotas a la brevedad. Si hay alguna observación respecto al funcionamiento del equipo o alguna condición del contrato que necesitemos revisar antes de la regularización, avíseme y lo conversamos.
 
 Adjunto el estado de cuenta detallado en Excel.
+
+Los datos para transferencia son:
+
+Banco Santander
+Climate Smart Leasing SpA
+RUT 77.868.887-5
+Cuenta corriente 9427891-0
+Confirmación a: nikolasromero@climatesmartleasing.com
+
+Quedo atento a sus comentarios.
+
+Saludos cordiales,
+
+Nikolás Romero
+Climate Smart Leasing SpA`,
+    },
+    AX: {
+      asunto: "Confirmación de pagos · Contrato Axopur — Bebidas Funcionales Caelum",
+      cuerpo: `Estimado Sebastián,
+
+Junto con saludar, le escribo desde Climate Smart Leasing SpA en relación al contrato de arriendo del equipo Axopur, firmado el 26 de mayo de 2026.
+
+El 30 de junio de 2026 emitimos las tres primeras facturas del contrato:
+
+- Factura N°79 — Pago inicial: $8.925.000 (IVA incluido)
+- Factura N°77 — Cuota 1/48: $1.082.931
+- Factura N°78 — Cuota 2/48: $1.096.440
+
+Total: $11.104.371
+
+Estamos actualizando la conciliación con la cuenta Santander N° 9427891-0 y quería confirmar con usted si estos pagos ya fueron cursados de su lado, en particular el pago inicial (pactado al contado). Si ya los realizaron, le agradezco reenviarme el comprobante para dejar la cuenta cuadrada; si aún están pendientes, quedo atento para coordinar.
 
 Los datos para transferencia son:
 
