@@ -53,7 +53,7 @@ export interface Deudor {
   archivoPpt?: string;         // ruta a la PPT (sólo PP)
 }
 
-const HOY = "10-Junio-2026";
+const HOY = "03-Julio-2026";
 
 export const DEUDORES: Deudor[] = [
   {
@@ -65,30 +65,30 @@ export const DEUDORES: Deudor[] = [
     repLegal: "Juan Moisés González Muñoz",
     emailRepLegal: "administracion@puertapatagonia.cl",
     esperadoClp: 24_713_350,
-    pagadoClp: 10_316_383,
-    deudaClp: 14_396_967,
-    cumplimiento: 0.4175,
-    cuotasPagadas: "4 de 10 facturas pagadas",
+    pagadoClp: 12_299_717,
+    deudaClp: 12_413_633,
+    cumplimiento: 0.4977,
+    cuotasPagadas: "5 de 10 facturas pagadas",
     inicioFacturacion: "Anticipo: dic-2025 · Rentas: mar-2026",
     severidad: "grave",
     diagnostico:
-      "DEUDA GRAVE al 10-jun-2026: $14.396.967 en 6 facturas impagas (4 de anticipo + 2 de renta). Verificado contra facturas SII reales y cartolas Santander N°21-26. De ese total, $11.144.701 está vencido; la factura N°69 ($3.252.266) vence ~21-jun-2026 (plazo: 15 días corridos desde emisión).",
+      "DEUDA GRAVE al 03-jul-2026: $12.413.633 en 5 facturas impagas, TODAS VENCIDAS (3 de anticipo + 2 de renta). El 11-jun-2026 pagaron la Factura N°43 ($1.983.334) — primer pago desde el 05-may. Verificado contra facturas SII reales y cartolas Santander N°21-26 (hasta 30-jun-2026).",
     rentaTexto:
       "Renta mensual: 67,127 UF + IVA × 36 cuotas facturadas desde marzo-2026 · Anticipo $10.000.000 + IVA en 6 facturas mensuales independientes de $1.983.334 IVA inc. (dic-2025 → may-2026).",
     detalleAtraso: [
-      "Factura N°43 (06-feb-2026, anticipo 3/6): $1.983.334 — IMPAGA, vencida 21-feb-2026.",
       "Factura N°47 (06-mar-2026, anticipo 4/6): $1.983.334 — IMPAGA, vencida 21-mar-2026.",
       "Factura N°53 (07-abr-2026, anticipo 5/6): $1.983.334 — IMPAGA, vencida 22-abr-2026.",
       "Factura N°63 (06-may-2026, anticipo 6/6): $1.983.334 — IMPAGA, vencida 21-may-2026.",
       "Factura N°64 (06-may-2026, renta 3/36): $3.211.365 — IMPAGA, vencida 21-may-2026.",
-      "Factura N°69 (06-jun-2026, renta 4/36): $3.252.266 — IMPAGA, en plazo (vence ~21-jun-2026).",
-      "Pagos recibidos: anticipos 1 y 2 ($1.983.334 el 17-dic-2025 y 20-feb-2026) + renta marzo ($3.166.949 el 18-mar-2026) + renta abril / Factura N°52 ($3.182.766 el 05-may-2026).",
+      "Factura N°69 (06-jun-2026, renta 4/36): $3.252.266 — IMPAGA, vencida 21-jun-2026.",
+      "Pagos recibidos: anticipos 1, 2 y 3/F43 ($1.983.334 el 17-dic-2025, 20-feb y 11-jun-2026) + renta marzo ($3.166.949 el 18-mar-2026) + renta abril / Factura N°52 ($3.182.766 el 05-may-2026). Total: $12.299.717.",
     ],
     notasInternas: [
-      "✅ Recalculado el 10-jun-2026 contra las 7 facturas SII reales (F43/47/52/53/63/64/69) + cartolas oficiales N°21-26.",
+      "✅ Recalculado el 03-jul-2026 contra las 7 facturas SII reales (F43/47/52/53/63/64/69) + cartolas oficiales N°21-26 (hasta 30-jun).",
+      "✅ Factura N°43 PAGADA el 11-jun-2026 ($1.983.334 exactos desde RUT PP) — se imputó a la cuota 3/6 del anticipo.",
       "⚠️ La Factura N°52 que figuraba como adeudada FUE PAGADA: transferencia exacta de $3.182.766 el 05-may-2026 desde RUT 53.319.273-4.",
       "La facturación real difiere del contrato: anticipo facturado en 6 facturas mensuales separadas (dic-may) y rentas desde marzo — el sistema ya refleja este esquema.",
-      "Patrón de pago: PP paga 1 factura puntual por transferencia exacta; dejó de pagar anticipos desde la cuota 3 (feb-2026) y rentas desde mayo-2026.",
+      "Patrón de pago: PP paga de a 1 factura exacta por transferencia, aproximadamente 1 vez al mes, siempre quedando ~5 facturas atrás. Próxima renta (cuota 5/36, ~$3,24MM) se factura ~06-jul-2026.",
     ],
     archivoExcel: "/downloads/CSL_EstadoCuenta_PuertaPatagonia.xlsx",
     archivoPpt: "/downloads/CSL_Presentacion_PuertaPatagonia.pptx",
@@ -101,21 +101,21 @@ export const DEUDORES: Deudor[] = [
     rut: "53.321.997-7",
     repLegal: "María Pilar Alliende Wielandt",
     emailRepLegal: "administracion@edificiovikingos.cl",
-    esperadoClp: 27_359_161,
-    pagadoClp: 27_314_934,
-    deudaClp: 44_227,
-    cumplimiento: 0.9984,
-    cuotasPagadas: "Anticipo + 3 de 3 rentas",
+    esperadoClp: 29_837_838,
+    pagadoClp: 29_798_758,
+    deudaClp: 39_080,
+    cumplimiento: 0.9987,
+    cuotasPagadas: "Anticipo + 4 de 4 rentas",
     inicioFacturacion: "Anticipo: ene-2026 · Rentas: abr-2026",
     severidad: "leve",
     diagnostico:
-      "PRÁCTICAMENTE AL DÍA al 10-jun-2026 — anticipo $20MM pagado completo y las 3 rentas (abr-may-jun) cubiertas. Diferencia residual de $44.227 por ajuste UF.",
+      "AL DÍA al 03-jul-2026 — anticipo $20MM pagado completo y las 4 rentas (abr-jul) cubiertas; la de julio la pagaron ANTICIPADA el 16-jun. Diferencia residual de $39.080 por ajuste UF.",
     rentaTexto:
       "Renta mensual: 51,29 UF + IVA · Anticipo $20.000.000 IVA incluido (pagado) · 24 cuotas en total",
     detalleAtraso: [
       "Anticipo de $20.000.000 IVA incluido: PAGADO completo en 4 transferencias de $5MM (29-ene, 02-feb ×2 y 03-feb-2026). ✓",
-      "Rentas abril, mayo y junio 2026: PAGADAS ($2.431.760 y $2.430.357 el 06-may; $2.452.817 el 12-may). ✓",
-      "Solo queda una diferencia residual de $44.227 acumulada por ajustes de UF — mencionar en el próximo contacto, no amerita cobranza.",
+      "Rentas abril a julio 2026: PAGADAS ($2.431.760 y $2.430.357 el 06-may; $2.452.817 el 12-may; $2.483.824 el 16-jun — julio anticipada). ✓",
+      "Solo queda una diferencia residual de $39.080 acumulada por ajustes de UF — mencionar en el próximo contacto, no amerita cobranza.",
     ],
     notasInternas: [
       "⚠️ RUT en contrato (53.319.273-4) NO COINCIDE con RUT pagador real en cartola (53.321.997-7). Emitir adenda para corregir.",
@@ -131,11 +131,11 @@ export const DEUDORES: Deudor[] = [
     rut: "78.096.656-4",
     repLegal: "Cristian Eduardo Allende Tapia",
     emailRepLegal: "cristian.allende@scg.cl",
-    esperadoClp: 21_940_172,
-    pagadoClp: 20_387_713,
-    deudaClp: 1_552_459,
-    cumplimiento: 0.9292,
-    cuotasPagadas: "15 de 16",
+    esperadoClp: 24_196_345,
+    pagadoClp: 22_453_494,
+    deudaClp: 1_742_851,
+    cumplimiento: 0.928,
+    cuotasPagadas: "16 de 17",
     inicioFacturacion: "21-Feb-2025",
     severidad: "leve",
     diagnostico: "Pagador puntual — pequeño saldo arrastrado de la última cuota",
@@ -143,8 +143,8 @@ export const DEUDORES: Deudor[] = [
       "Renta mensual: 25,58 UF + IVA · 1ª renta: 82,86 UF · 48 cuotas en total",
     detalleAtraso: [
       "Cliente con historial impecable de pagos mensuales durante todo 2025 y 2026.",
-      "Pequeña diferencia de $1.545.212 al cierre del 10-jun-2026 (probable cuota en tránsito o ajuste UF).",
-      "Cumplimiento actual: 93,3% del facturado esperado.",
+      "Diferencia de $1.742.851 al cierre del 03-jul-2026 (~1 cuota; siguió pagando puntual en junio: $1.038.558 el 25-jun).",
+      "Cumplimiento actual: 92,8% del facturado esperado.",
     ],
     notasInternas: [
       "Pagos vía RUT pagador 0141831984 (Cristian Eduardo Allende Tapia, persona natural).",
@@ -160,11 +160,11 @@ export const DEUDORES: Deudor[] = [
     rut: "78.096.656-4",
     repLegal: "Cristian Eduardo Allende Tapia",
     emailRepLegal: "cristian.allende@scg.cl",
-    esperadoClp: 15_307_125,
-    pagadoClp: 12_788_511,
-    deudaClp: 2_518_614,
-    cumplimiento: 0.8355,
-    cuotasPagadas: "11 de 12",
+    esperadoClp: 17_374_382,
+    pagadoClp: 14_606_362,
+    deudaClp: 2_768_020,
+    cumplimiento: 0.8407,
+    cuotasPagadas: "12 de 13",
     inicioFacturacion: "21-Jun-2025",
     severidad: "moderado",
     diagnostico: "Atraso moderado — falta aprox. 1 cuota completa",
@@ -172,8 +172,8 @@ export const DEUDORES: Deudor[] = [
       "Renta mensual: 22,93 UF + IVA · 1ª renta: 70,91 UF · 48 cuotas en total",
     detalleAtraso: [
       "Mismo titular que Flota Volvo EX30 PLUS — historial general de pagos puntuales.",
-      "Saldo pendiente de $2.573.801 al 10-jun-2026, equivalente a aproximadamente 1 cuota mensual completa.",
-      "Cumplimiento actual: 84,2% del facturado esperado.",
+      "Saldo pendiente de $2.768.020 al 03-jul-2026, equivalente a poco más de 1 cuota mensual (pagó $913.913 el 25-jun).",
+      "Cumplimiento actual: 84,1% del facturado esperado.",
     ],
     notasInternas: [
       "$3.300.000 pagado en may-2025 cubrió la primera factura adelantada.",
@@ -189,21 +189,22 @@ export const DEUDORES: Deudor[] = [
     rut: "77.221.203-8",
     repLegal: "José Cuevas Valenzuela",
     emailRepLegal: "jcuevas@trongkai.cl",
-    esperadoClp: 952_000,
+    esperadoClp: 1_428_000,
     pagadoClp: 0,
-    deudaClp: 952_000,
+    deudaClp: 1_428_000,
     cumplimiento: 0,
-    cuotasPagadas: "0 de 2",
+    cuotasPagadas: "0 de 3",
     inicioFacturacion: "01-May-2026",
     severidad: "nunca_pago",
-    diagnostico: "Nunca ha pagado — cuotas de mayo y junio 2026 vencidas ($952.000 total)",
+    diagnostico: "Nunca ha pagado — cuotas de mayo, junio y julio 2026 vencidas ($1.428.000 total)",
     rentaTexto:
       "Renta: $400.000 netos/mes durante 2026 (pruebas) · Vigencia 5 años + 3 prórrogas · Desde 01-Ene-2027 tarifa por hora",
     detalleAtraso: [
       "Inicio de facturación: 01-may-2026.",
       "Cuota mayo 2026 ($476.000 IVA inc.): vencida, sin pago.",
       "Cuota junio 2026 ($476.000 IVA inc.): vencida, sin pago.",
-      "Equipo ODIN Opticept ya entregado el 01-mar-2026 — sin ningún pago a la fecha (verificado contra cartolas N°25-26).",
+      "Cuota julio 2026 ($476.000 IVA inc.): vencida (pago anticipado dia 1), sin pago.",
+      "Equipo ODIN Opticept ya entregado el 01-mar-2026 — sin ningún pago a la fecha (verificado contra cartolas hasta el 30-jun-2026).",
     ],
     notasInternas: [
       "Contrato vigente por 5 años + 3 prórrogas. Tarifa por hora inicia 01-ene-2027 (mínimo $400.000/mes).",
@@ -218,20 +219,21 @@ export const DEUDORES: Deudor[] = [
     repLegal: "Washington Gilberto Borquez Mansilla",
     emailRepLegal: "contacto@barrancoamarillo.cl",
     esperadoClp: 23_805_695,
-    pagadoClp: 7_447_842,
-    deudaClp: 16_357_853,
-    cumplimiento: 0.3128,
-    cuotasPagadas: "1 de 3 (cuota may-2026 pagada)",
+    pagadoClp: 14_989_870,
+    deudaClp: 8_815_825,
+    cumplimiento: 0.6297,
+    cuotasPagadas: "2 de 2 cuotas mensuales pagadas",
     inicioFacturacion: "Pago inicial: 04-may-2026 · Cuotas: 05-may-2026",
     severidad: "moderado",
     diagnostico:
-      "Cuota de mayo PAGADA el 01-jun-2026 ($7.447.842). Pendientes: pago inicial de 183 UF + IVA (≈$8,8MM) y cuota de junio (≈$7,5MM). OJO: hay un traspaso de $145,5MM del 28-abr-2026 desde su RUT sin clasificar que podría cubrir esto — confirmar con contabilidad antes de cobrar.",
+      "Cuotas de mayo y junio PAGADAS ($7.447.842 el 01-jun y $7.542.028 el 15-jun). Pendiente SOLO el pago inicial de 183 UF + IVA (aprox. $8,8MM). Cuota de julio vence el 05-jul. OJO: hay un traspaso de $145,5MM del 28-abr-2026 desde su RUT sin clasificar que podría cubrir el pago inicial — confirmar con contabilidad antes de cobrar.",
     rentaTexto:
       "Pago inicial: 183 UF + IVA al firmar (04-may-2026) · Renta mensual: 155,74 UF + IVA × 24 cuotas anticipadas (primeros 5 días del mes) · Interés penal 1,5% mensual",
     detalleAtraso: [
       "Cuota mayo 2026 ($7.435.501): PAGADA el 01-jun-2026 vía transferencia de $7.447.842 (glosa 'NOMINA PAGO PROV'). ✓",
+      "Cuota junio 2026 ($7.526.404): PAGADA el 15-jun-2026 vía transferencia de $7.542.028 (glosa 'Pago de Provee'). ✓",
       "Pago inicial 183 UF + IVA (≈$8.843.790): sin pago identificado como tal en cartolas.",
-      "Cuota junio 2026 (≈$7.526.404): vencida el 05-jun-2026, sin pago identificado.",
+      "Cuota julio 2026 (aprox. $7.526.404): por vencer el 05-jul-2026.",
       "⚠️ ANTES DE COBRAR: confirmar la naturaleza del traspaso de $145.563.465 recibido el 28-abr-2026 desde el RUT de Barranco — si corresponde a este contrato, la cuenta podría estar pagada por adelantado.",
     ],
     notasInternas: [
@@ -291,26 +293,25 @@ function generarMail(d: Deudor): { asunto: string; cuerpo: string } {
       asunto: "Facturas pendientes de pago · Contrato Calderas Vilanova — Puerta Patagonia",
       cuerpo: `Estimado Juan Moisés,
 
-Junto con saludar, le escribo desde Climate Smart Leasing SpA respecto del estado de cuenta del contrato de solución energética del Edificio Puerta Patagonia, conciliado al 10 de junio de 2026 contra nuestra cuenta Santander N° 9427891-0 y las facturas electrónicas emitidas.
+Junto con saludar, le escribo desde Climate Smart Leasing SpA respecto del estado de cuenta del contrato de solución energética del Edificio Puerta Patagonia, conciliado al 3 de julio de 2026 contra nuestra cuenta Santander N° 9427891-0 y las facturas electrónicas emitidas.
 
-Primero, agradezco los pagos que tenemos correctamente registrados: las dos primeras cuotas del anticipo ($1.983.334 recibidos el 17 de diciembre de 2025 y el 20 de febrero de 2026), la renta de marzo ($3.166.949 recibida el 18 de marzo) y la renta de abril, factura N°52 ($3.182.766 recibida el 5 de mayo).
+Primero, agradezco los pagos que tenemos correctamente registrados: las cuotas 1, 2 y 3 del anticipo ($1.983.334 recibidos el 17 de diciembre de 2025, el 20 de febrero y el 11 de junio de 2026 — esta última correspondiente a la factura N°43), la renta de marzo ($3.166.949 recibida el 18 de marzo) y la renta de abril, factura N°52 ($3.182.766 recibida el 5 de mayo).
 
-Sin embargo, a la fecha quedan seis facturas pendientes de pago:
+Sin embargo, a la fecha quedan cinco facturas pendientes de pago, todas ya vencidas:
 
-- Factura N°43 (06-feb-2026) — Anticipo cuota 3 de 6: $1.983.334
 - Factura N°47 (06-mar-2026) — Anticipo cuota 4 de 6: $1.983.334
 - Factura N°53 (07-abr-2026) — Anticipo cuota 5 de 6: $1.983.334
 - Factura N°63 (06-may-2026) — Anticipo cuota 6 de 6: $1.983.334
 - Factura N°64 (06-may-2026) — Renta mensual cuota 3 de 36: $3.211.365
 - Factura N°69 (06-jun-2026) — Renta mensual cuota 4 de 36: $3.252.266
 
-Total pendiente: $14.396.967
+Total pendiente: $12.413.633
 
-De ese total, $11.144.701 corresponde a facturas ya vencidas según el plazo contractual de 15 días corridos desde la emisión de cada factura, establecido en la Cláusula Tercera del contrato (las cinco primeras de la lista). La factura N°69, de la renta de junio, se encuentra dentro de plazo y vence alrededor del 21 de junio.
+Las cinco facturas se encuentran vencidas según el plazo contractual de 15 días corridos desde la emisión de cada factura, establecido en la Cláusula Tercera del contrato (la última en vencer fue la N°69, el 21 de junio). En los próximos días se emitirá además la renta de julio (cuota 5 de 36).
 
 El proyecto fue recepcionado definitivamente por ustedes el 8 de abril de 2026 sin observaciones, por lo que no existen pendientes de obra asociados a estos pagos.
 
-Le agradecería coordinar a la brevedad la regularización de las cinco facturas vencidas, o indicarme si alguno de estos pagos ya fue cursado y no figura aún en nuestra cuenta. Si necesitan un calendario de regularización, estoy disponible para conversarlo.
+Valoro el pago recibido en junio; sin embargo, al ritmo actual de un pago mensual la deuda vencida se mantiene en torno a los $12 millones y sigue devengando interés máximo convencional conforme al contrato. Le agradecería coordinar a la brevedad la regularización total de las cinco facturas vencidas, o indicarme si alguno de estos pagos ya fue cursado y no figura aún en nuestra cuenta. Si necesitan un calendario de regularización, estoy disponible para conversarlo.
 
 Los datos para transferencia son:
 
@@ -333,16 +334,16 @@ Climate Smart Leasing SpA`,
 
 Junto con saludar, le escribo desde Climate Smart Leasing SpA con el estado de cuenta actualizado del contrato del Sistema ACS de la Comunidad Edificio Los Vikingos.
 
-Quiero partir agradeciendo la excelente puntualidad de la comunidad: el anticipo de $20.000.000 IVA incluido quedó cubierto en su totalidad (recibido en cuatro transferencias entre el 29 de enero y el 3 de febrero de 2026) y las rentas de abril, mayo y junio están todas pagadas.
+Quiero partir agradeciendo la excelente puntualidad de la comunidad: el anticipo de $20.000.000 IVA incluido quedó cubierto en su totalidad (recibido en cuatro transferencias entre el 29 de enero y el 3 de febrero de 2026) y las rentas de abril a julio están todas pagadas — la de julio incluso de forma anticipada, el 16 de junio.
 
-Al conciliar contra los movimientos de la cuenta Santander N° 9427891-0 al 10 de junio de 2026, la cuenta está prácticamente al día — queda solamente una diferencia residual menor por ajuste del valor de la UF.
+Al conciliar contra los movimientos de la cuenta Santander N° 9427891-0 al 3 de julio de 2026, la cuenta está al día — queda solamente una diferencia residual menor por ajuste del valor de la UF.
 
-Estado de cuenta al 10 de junio de 2026:
+Estado de cuenta al 3 de julio de 2026:
 
-Facturado esperado: $27.359.161
-Recibido a la fecha: $27.314.934
-Diferencia residual: $44.227
-Cumplimiento: 99,8%
+Facturado esperado: $29.837.838
+Recibido a la fecha: $29.798.758
+Diferencia residual: $39.080
+Cumplimiento: 99,9%
 
 Le recuerdo que la renta mensual del contrato es de 51,29 UF más IVA (aproximadamente $2,4 a $2,5 millones IVA incluido al valor UF vigente), por 24 cuotas.
 

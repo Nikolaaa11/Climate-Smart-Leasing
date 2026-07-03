@@ -170,6 +170,12 @@ export function identifyContract(abono: Abono): { contract: Contract | null; rea
   if (glosa.includes("DEV IMPUESTO") || glosa.includes("TESORER")) {
     return { contract: null, reason: "Devolución de impuestos Tesorería General de la República" };
   }
+  if (glosa.includes("0760583634") || glosa.includes("COMERCIALIZADOR")) {
+    return { contract: null, reason: "Transferencias de COMERCIALIZADORA (RUT 76.058.363-4) por $17,2MM el 26/06/2026 — sin contrato en sistema; clasificar (¿nuevo cliente / venta de equipos?)" };
+  }
+  if (glosa.includes("PTEC")) {
+    return { contract: null, reason: "Pago Factura N°41 código PTEC ($10,71MM el 11/06/2026) — OJO: el 15/06 sale un CARGO por el mismo monto total (posible reversa o traspaso); clasificar con contabilidad" };
+  }
   if (glosa.includes("DEP CON DOC ATM") || glosa.includes("00211778202")) {
     return { contract: null, reason: "Depósito con documento ATM $270MM (27/03/2026) — clasificar con contabilidad (no es pago de contrato de arriendo)" };
   }

@@ -163,6 +163,17 @@ export const ABONOS: Abono[] = [
   { fecha: "2026-05-26", monto: 903_938, glosa: "0141831984 Transf. Cristian Eduard", doc: "016001402", cartolaMes: "Cartola N°25 (Mayo 2026)" },
   { fecha: "2026-05-27", monto: 276_351, glosa: "0608050000 DEV IMPUESTO TESORERIA", doc: "0", cartolaMes: "Cartola N°25 (Mayo 2026)" },
 
-  // ============ JUNIO 2026 (Cartola provisoria N°26: 29/05 - 10/06/2026) ============
-  { fecha: "2026-06-01", monto: 7_447_842, glosa: "00781918873 30.05 NOMINA PAGO PROV", doc: "003500260", cartolaMes: "Cartola N°26 (provisoria al 10/06/2026)" },
+  // ============ JUNIO 2026 (Cartola oficial N°26: 29/05 - 30/06/2026) ============
+  { fecha: "2026-06-01", monto: 7_447_842, glosa: "00781918873 30.05 NOMINA PAGO PROV", doc: "466674200", cartolaMes: "Cartola N°26 (Junio 2026)" },
+  { fecha: "2026-06-11", monto: 7_000_000, glosa: "Factura 41. PTEC CODIGO25PTECVR30", doc: "094278910", cartolaMes: "Cartola N°26 (Junio 2026)" },
+  { fecha: "2026-06-11", monto: 3_710_000, glosa: "Factura 41. PTEC CODIGO25PTECVR30", doc: "094278910", cartolaMes: "Cartola N°26 (Junio 2026)" },
+  { fecha: "2026-06-11", monto: 1_983_334, glosa: "0533192734 Transf de CODOMINIO PUE", doc: "0", cartolaMes: "Cartola N°26 (Junio 2026)" },
+  { fecha: "2026-06-15", monto: 7_542_028, glosa: "00781918873 Pago de Provee", doc: "469563714", cartolaMes: "Cartola N°26 (Junio 2026)" },
+  { fecha: "2026-06-16", monto: 2_483_824, glosa: "0533219977 Transf. EDIFICIO LOS VI", doc: "016001415", cartolaMes: "Cartola N°26 (Junio 2026)" },
+  { fecha: "2026-06-25", monto: 1_038_558, glosa: "0141831984 Transf. Cristian Eduard", doc: "016001420", cartolaMes: "Cartola N°26 (Junio 2026)" },
+  { fecha: "2026-06-25", monto: 913_913, glosa: "0141831984 Transf. Cristian Eduard", doc: "016001420", cartolaMes: "Cartola N°26 (Junio 2026)" },
+  { fecha: "2026-06-26", monto: 5_000_000, glosa: "0760583634 Transf. COMERCIALIZADOR", doc: "001305015", cartolaMes: "Cartola N°26 (Junio 2026)" },
+  { fecha: "2026-06-26", monto: 5_000_000, glosa: "0760583634 Transf. COMERCIALIZADOR", doc: "001305014", cartolaMes: "Cartola N°26 (Junio 2026)" },
+  { fecha: "2026-06-26", monto: 5_000_000, glosa: "0760583634 Transf. COMERCIALIZADOR", doc: "001305014", cartolaMes: "Cartola N°26 (Junio 2026)" },
+  { fecha: "2026-06-26", monto: 2_205_087, glosa: "0760583634 Transf. COMERCIALIZADOR", doc: "001305014", cartolaMes: "Cartola N°26 (Junio 2026)" },
 ];
