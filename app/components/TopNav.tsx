@@ -8,6 +8,7 @@ const NAV_ITEMS = [
   { href: "#contratos", label: "Contratos" },
   { href: "#ordenes-compra", label: "Órdenes de compra" },
   { href: "#cobranza", label: "Cobranza" },
+  { href: "#contabilidad", label: "Contabilidad" },
   { href: "#conciliacion-geist", label: "Geist" },
   { href: "#cronograma", label: "Cronograma" },
   { href: "#movimientos", label: "Movimientos" },

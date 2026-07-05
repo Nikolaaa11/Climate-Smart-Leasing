@@ -12,6 +12,7 @@ import AccountVerification from "./components/AccountVerification";
 import CartolaUpload from "./components/CartolaUpload";
 import GeistReconciliation from "./components/GeistReconciliation";
 import Cobranza from "./components/Cobranza";
+import Accounting from "./components/Accounting";
 import { ABONOS, Abono } from "@/lib/abonos";
 import { CONTRACTS } from "@/lib/contracts";
 import { buildConciliation } from "@/lib/conciliation";
@@ -72,6 +73,7 @@ export default function Home() {
         <Contracts result={result} />
         <OrdenesCompra />
         <Cobranza result={result} />
+        <Accounting />
         <GeistReconciliation />
         <Schedule result={result} />
         <Movements abonos={allAbonos} />
