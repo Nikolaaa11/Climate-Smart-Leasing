@@ -395,6 +395,14 @@ export function generateCuotasForContract(c: Contract): Cuota[] {
  *     spill forward. Any final excess is credited to the last cuota.
  */
 function allocateAbonos(cuotas: Cuota[], abonos: Abono[]): void {
+  // Tolerancia de redondeo: al conciliar por UF quedan residuos de unos pocos
+  // pesos (ej. $1, $382). Sin este umbral, ese residuo se "derrama" a la
+  // siguiente cuota abierta y la marca como pagada-parcial siendo en realidad
+  // impaga. Ningún pago real de estos contratos es menor a $5.000 (la cuota más
+  // pequeña supera $470.000), por lo que descartar residuos bajo este umbral es
+  // seguro y no oculta pagos parciales legítimos.
+  const EPS_REDONDEO = 5_000;
+
   const sortedAbonos = [...abonos].sort((a, b) => a.fecha.localeCompare(b.fecha));
 
   const openCuotas = () =>
@@ -418,9 +426,9 @@ function allocateAbonos(cuotas: Cuota[], abonos: Abono[]): void {
       restante -= aplicar;
     }
 
-    // Paso 2: FIFO con el remanente
+    // Paso 2: FIFO con el remanente (se detiene cuando sólo queda ruido de redondeo)
     for (const c of openCuotas()) {
-      if (restante <= 0) break;
+      if (restante <= EPS_REDONDEO) break;
       const falta = c.totalFacturado - c.totalPagado;
       if (falta <= 0) continue;
       const aplicar = Math.min(restante, falta);
@@ -429,8 +437,9 @@ function allocateAbonos(cuotas: Cuota[], abonos: Abono[]): void {
       restante -= aplicar;
     }
 
-    // Final excess: prepayment credited to the last cuota
-    if (restante > 0 && cuotas.length > 0) {
+    // Final excess: prepayment credited to the last cuota (sólo si es material,
+    // no un residuo de redondeo).
+    if (restante > EPS_REDONDEO && cuotas.length > 0) {
       const last = cuotas[cuotas.length - 1];
       last.matchedAbonos.push({ fecha: ab.fecha, monto: ab.monto, glosa: ab.glosa, aplicado: restante });
       last.totalPagado += restante;
