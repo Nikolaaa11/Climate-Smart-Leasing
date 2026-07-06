@@ -22,9 +22,9 @@ export interface Totales {
   pagado: number;
   /** Pagado aplicado a cuotas ya emitidas */
   pagadoEmitido: number;
-  /** Saldo impago de cuotas emitidas hace 15+ días (plazo contractual vencido) */
+  /** Saldo impago de cuotas emitidas hace más de 30 días (atrasadas / vencidas) */
   atrasado: number;
-  /** Saldo impago de cuotas emitidas hace <15 días (aún dentro del plazo de pago) */
+  /** Saldo impago de cuotas emitidas hace 30 días o menos (aún en plazo / por vencer) */
   enPlazo: number;
   /** Saldo por cobrar de lo ya emitido = atrasado + enPlazo */
   saldoEmitido: number;
