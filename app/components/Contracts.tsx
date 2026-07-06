@@ -38,6 +38,11 @@ export default function Contracts({ result }: Props) {
           const fact = cuotasVencidas.reduce((s, x) => s + x.totalFacturado, 0);
           const pag = cuotasVencidas.reduce((s, x) => s + x.totalPagado, 0);
           const pct = fact > 0 ? pag / fact : 0;
+          // Totales del CONTRATO COMPLETO (todas las cuotas, no solo las vencidas)
+          const cuotasConValor = cuotas.filter(x => x.totalFacturado > 0);
+          const totalContrato = cuotasConValor.reduce((s, x) => s + x.totalFacturado, 0);
+          const pagadoTotal = cuotasConValor.reduce((s, x) => s + x.totalPagado, 0);
+          const porPagar = Math.max(0, totalContrato - pagadoTotal);
           const isOpen = expanded === c.id;
           const hasObra = !!(c.recepciones?.length || c.pendientesObra?.length);
 
@@ -47,9 +52,12 @@ export default function Contracts({ result }: Props) {
               id={`contrato-${c.id}`}
               className="bg-bg-card rounded-2xl shadow-soft border border-black/[0.04] overflow-hidden scroll-mt-20"
             >
-              <button
+              <div
+                role="button"
+                tabIndex={0}
                 onClick={() => setExpanded(isOpen ? null : c.id)}
-                className="w-full text-left p-6 flex items-center justify-between hover:bg-ink-50/40 transition-colors"
+                onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") setExpanded(isOpen ? null : c.id); }}
+                className="w-full text-left p-6 flex items-center justify-between hover:bg-ink-50/40 transition-colors cursor-pointer"
               >
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-3 mb-1">
@@ -65,6 +73,17 @@ export default function Contracts({ result }: Props) {
                     {c.proyecto}
                   </h3>
                   <p className="text-sm text-ink-500 mt-0.5">{c.cliente}</p>
+                  {c.archivoPdf && (
+                    <a
+                      href={c.archivoPdf}
+                      download
+                      onClick={(e) => e.stopPropagation()}
+                      className="inline-flex items-center gap-1.5 mt-2 text-[11px] font-medium text-csl-700 bg-csl-50 border border-csl-200 rounded-lg px-2.5 py-1.5 hover:bg-csl-100 transition-colors"
+                    >
+                      <Download className="w-3 h-3" />
+                      Descargar contrato (PDF)
+                    </a>
+                  )}
                 </div>
                 <div className="flex items-center gap-6 ml-6">
                   <div className="text-right">
@@ -75,11 +94,16 @@ export default function Contracts({ result }: Props) {
                     }`}>
                       {fmtPct(pct, 0)}
                     </div>
-                    <div className="text-[10px] text-ink-400">{fmtCLP(pag)} / {fmtCLP(fact)}</div>
+                    <div className="text-[10px] text-ink-400">{fmtCLP(pag)} / {fmtCLP(fact)} vencido</div>
+                    <div className="text-[10px] tabular mt-0.5">
+                      <span className="text-emerald-600 font-medium">{fmtCLP(pagadoTotal)} pagado</span>
+                      <span className="text-ink-300"> · </span>
+                      <span className="text-ink-500 font-medium">{fmtCLP(porPagar)} por pagar</span>
+                    </div>
                   </div>
                   <ChevronDown className={`w-5 h-5 text-ink-300 transition-transform ${isOpen ? "rotate-180" : ""}`} />
                 </div>
-              </button>
+              </div>
 
               {isOpen && (
                 <div className="border-t border-black/[0.04] animate-fade-up">
@@ -267,6 +291,40 @@ export default function Contracts({ result }: Props) {
                           + {cuotas.length - 30} cuotas adicionales (descarga el Excel para ver todas)
                         </div>
                       )}
+                    </div>
+
+                    {/* Totales del contrato completo */}
+                    <div className="mt-5 grid grid-cols-1 sm:grid-cols-3 gap-3">
+                      <div className="rounded-xl bg-ink-50/60 border border-ink-100 p-4">
+                        <div className="text-[10px] font-mono uppercase tracking-wider text-ink-400 mb-1">
+                          Total del contrato
+                        </div>
+                        <div className="text-lg font-display font-semibold tabular text-ink-900">
+                          {fmtCLP(totalContrato)}
+                        </div>
+                      </div>
+                      <div className="rounded-xl bg-emerald-50/60 border border-emerald-200 p-4">
+                        <div className="text-[10px] font-mono uppercase tracking-wider text-emerald-700 mb-1">
+                          Lo que han pagado
+                        </div>
+                        <div className="text-lg font-display font-semibold tabular text-emerald-600">
+                          {fmtCLP(pagadoTotal)}
+                        </div>
+                        <div className="text-[10px] text-ink-400 mt-0.5">
+                          {totalContrato > 0 ? fmtPct(pagadoTotal / totalContrato) : "—"} del contrato
+                        </div>
+                      </div>
+                      <div className="rounded-xl bg-amber-50/60 border border-amber-200 p-4">
+                        <div className="text-[10px] font-mono uppercase tracking-wider text-amber-700 mb-1">
+                          Lo que queda por pagar
+                        </div>
+                        <div className="text-lg font-display font-semibold tabular text-amber-700">
+                          {fmtCLP(porPagar)}
+                        </div>
+                        <div className="text-[10px] text-ink-400 mt-0.5">
+                          incluye cuotas futuras hasta el término del contrato
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
