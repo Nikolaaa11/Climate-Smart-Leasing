@@ -70,15 +70,15 @@ export const DEUDORES: Deudor[] = [
     inicioFacturacion: "Anticipo: dic-2025 · Rentas: mar-2026",
     severidad: "grave",
     diagnostico:
-      "DEUDA GRAVE al 06-jul-2026: $12.413.633 en 5 facturas VENCIDAS (3 de anticipo + 2 de renta) + la renta de julio (cuota 5/36, ~$3,24MM) recién facturada que vence ~21-jul. El 11-jun-2026 pagaron la Factura N°43 — primer pago desde el 05-may. Verificado contra facturas SII reales y cartolas Santander N°21-26 (hasta 30-jun-2026).",
+      "DEUDA GRAVE al 06-jul-2026 (según indicador de atraso, >30 días desde emisión): $9.161.367 en 4 facturas VENCIDAS (3 de anticipo + 1 de renta). La renta de junio (N°69, cuota 4/36, $3.252.266) está impaga pero aún 'por vencer' (recién cumple 30 días de emitida). Deuda total pendiente: $12.413.633. El 11-jun-2026 pagaron la Factura N°43 — primer pago desde el 05-may. Verificado contra facturas SII reales y cartolas Santander N°21-26 (hasta 30-jun-2026).",
     rentaTexto:
       "Renta mensual: 67,127 UF + IVA × 36 cuotas facturadas desde marzo-2026 · Anticipo $10.000.000 + IVA en 6 facturas mensuales independientes de $1.983.334 IVA inc. (dic-2025 → may-2026).",
     detalleAtraso: [
-      "Factura N°47 (06-mar-2026, anticipo 4/6): $1.983.334 — IMPAGA, vencida 21-mar-2026.",
-      "Factura N°53 (07-abr-2026, anticipo 5/6): $1.983.334 — IMPAGA, vencida 22-abr-2026.",
-      "Factura N°63 (06-may-2026, anticipo 6/6): $1.983.334 — IMPAGA, vencida 21-may-2026.",
-      "Factura N°64 (06-may-2026, renta 3/36): $3.211.365 — IMPAGA, vencida 21-may-2026.",
-      "Factura N°69 (06-jun-2026, renta 4/36): $3.252.266 — IMPAGA, vencida 21-jun-2026.",
+      "Factura N°47 (06-mar-2026, anticipo 4/6): $1.983.334 — IMPAGA, vencida (>30 días) desde el 05-abr-2026.",
+      "Factura N°53 (07-abr-2026, anticipo 5/6): $1.983.334 — IMPAGA, vencida (>30 días) desde el 07-may-2026.",
+      "Factura N°63 (06-may-2026, anticipo 6/6): $1.983.334 — IMPAGA, vencida (>30 días) desde el 05-jun-2026.",
+      "Factura N°64 (06-may-2026, renta 3/36): $3.211.365 — IMPAGA, vencida (>30 días) desde el 05-jun-2026.",
+      "Factura N°69 (06-jun-2026, renta 4/36): $3.252.266 — IMPAGA, aún 'por vencer' según el indicador de atraso; pasa a vencida al superar los 30 días de emitida.",
       "Pagos recibidos: anticipos 1, 2 y 3/F43 ($1.983.334 el 17-dic-2025, 20-feb y 11-jun-2026) + renta marzo ($3.166.949 el 18-mar-2026) + renta abril / Factura N°52 ($3.182.766 el 05-may-2026). Total: $12.299.717.",
     ],
     notasInternas: [
@@ -318,21 +318,24 @@ Junto con saludar, le escribo desde Climate Smart Leasing SpA respecto del estad
 
 Primero, agradezco los pagos que tenemos correctamente registrados: las cuotas 1, 2 y 3 del anticipo ($1.983.334 recibidos el 17 de diciembre de 2025, el 20 de febrero y el 11 de junio de 2026 — esta última correspondiente a la factura N°43), la renta de marzo ($3.166.949 recibida el 18 de marzo) y la renta de abril, factura N°52 ($3.182.766 recibida el 5 de mayo).
 
-Sin embargo, a la fecha quedan cinco facturas pendientes de pago, todas ya vencidas:
+Sin embargo, a la fecha quedan cinco facturas pendientes de pago. Cuatro de ellas ya están vencidas (más de 30 días desde su emisión) y una, la más reciente, está por vencer:
 
+Vencidas (más de 30 días desde su emisión):
 - Factura N°47 (06-mar-2026) — Anticipo cuota 4 de 6: $1.983.334
 - Factura N°53 (07-abr-2026) — Anticipo cuota 5 de 6: $1.983.334
 - Factura N°63 (06-may-2026) — Anticipo cuota 6 de 6: $1.983.334
 - Factura N°64 (06-may-2026) — Renta mensual cuota 3 de 36: $3.211.365
+
+Por vencer (emitida hace ~30 días):
 - Factura N°69 (06-jun-2026) — Renta mensual cuota 4 de 36: $3.252.266
 
-Total pendiente: $12.413.633
+Total vencido: $9.161.367 · Total pendiente (incluida la N°69 por vencer): $12.413.633
 
-Las cinco facturas se encuentran vencidas según el plazo contractual de 15 días corridos desde la emisión de cada factura, establecido en la Cláusula Tercera del contrato (la última en vencer fue la N°69, el 21 de junio). En los próximos días se emitirá además la renta de julio (cuota 5 de 36).
+Las cuatro primeras facturas superan los 30 días desde su emisión, sin perjuicio de que el plazo de pago contractual es de 15 días corridos (Cláusula Tercera del contrato). En los próximos días se emitirá además la renta de julio (cuota 5 de 36).
 
 El proyecto fue recepcionado definitivamente por ustedes el 8 de abril de 2026 sin observaciones, por lo que no existen pendientes de obra asociados a estos pagos.
 
-Valoro el pago recibido en junio; sin embargo, al ritmo actual de un pago mensual la deuda vencida se mantiene en torno a los $12 millones y sigue devengando interés máximo convencional conforme al contrato. Le agradecería coordinar a la brevedad la regularización total de las cinco facturas vencidas, o indicarme si alguno de estos pagos ya fue cursado y no figura aún en nuestra cuenta. Si necesitan un calendario de regularización, estoy disponible para conversarlo.
+Valoro el pago recibido en junio; sin embargo, al ritmo actual de un pago mensual la deuda pendiente se mantiene en torno a los $12 millones (de los cuales $9.161.367 ya están vencidos) y sigue devengando interés máximo convencional conforme al contrato. Le agradecería coordinar a la brevedad la regularización de las cuatro facturas vencidas y de la N°69 próxima a vencer, o indicarme si alguno de estos pagos ya fue cursado y no figura aún en nuestra cuenta. Si necesitan un calendario de regularización, estoy disponible para conversarlo.
 
 Los datos para transferencia son:
 
