@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { fmtCLP, fmtPct } from "@/lib/format";
+import { descargarExcelEstadoCuenta, descargarPptEstadoCuenta, DatosEstadoCuenta } from "@/lib/exports";
 import { ConciliationResult } from "@/lib/conciliation";
 import {
   AlertTriangle,
@@ -53,7 +54,7 @@ export interface Deudor {
   archivoPpt?: string;         // ruta a la PPT (sólo PP)
 }
 
-const HOY = "03-Julio-2026";
+const HOY = "06-Julio-2026";
 
 export const DEUDORES: Deudor[] = [
   {
@@ -72,7 +73,7 @@ export const DEUDORES: Deudor[] = [
     inicioFacturacion: "Anticipo: dic-2025 · Rentas: mar-2026",
     severidad: "grave",
     diagnostico:
-      "DEUDA GRAVE al 03-jul-2026: $12.413.633 en 5 facturas impagas, TODAS VENCIDAS (3 de anticipo + 2 de renta). El 11-jun-2026 pagaron la Factura N°43 ($1.983.334) — primer pago desde el 05-may. Verificado contra facturas SII reales y cartolas Santander N°21-26 (hasta 30-jun-2026).",
+      "DEUDA GRAVE al 06-jul-2026: $12.413.633 en 5 facturas VENCIDAS (3 de anticipo + 2 de renta) + la renta de julio (cuota 5/36, ~$3,24MM) recién facturada que vence ~21-jul. El 11-jun-2026 pagaron la Factura N°43 — primer pago desde el 05-may. Verificado contra facturas SII reales y cartolas Santander N°21-26 (hasta 30-jun-2026).",
     rentaTexto:
       "Renta mensual: 67,127 UF + IVA × 36 cuotas facturadas desde marzo-2026 · Anticipo $10.000.000 + IVA en 6 facturas mensuales independientes de $1.983.334 IVA inc. (dic-2025 → may-2026).",
     detalleAtraso: [
@@ -90,8 +91,6 @@ export const DEUDORES: Deudor[] = [
       "La facturación real difiere del contrato: anticipo facturado en 6 facturas mensuales separadas (dic-may) y rentas desde marzo — el sistema ya refleja este esquema.",
       "Patrón de pago: PP paga de a 1 factura exacta por transferencia, aproximadamente 1 vez al mes, siempre quedando ~5 facturas atrás. Próxima renta (cuota 5/36, ~$3,24MM) se factura ~06-jul-2026.",
     ],
-    archivoExcel: "/downloads/CSL_EstadoCuenta_PuertaPatagonia.xlsx",
-    archivoPpt: "/downloads/CSL_Presentacion_PuertaPatagonia.pptx",
   },
   {
     id: "VK",
@@ -121,7 +120,6 @@ export const DEUDORES: Deudor[] = [
       "⚠️ RUT en contrato (53.319.273-4) NO COINCIDE con RUT pagador real en cartola (53.321.997-7). Emitir adenda para corregir.",
       "✅ Cartolas oficiales N°21-22 confirman el anticipo: 4 transferencias de $5MM (no 1 de $20MM como estaba registrado).",
     ],
-    archivoExcel: "/downloads/CSL_EstadoCuenta_Vikingos.xlsx",
   },
   {
     id: "F1",
@@ -150,7 +148,6 @@ export const DEUDORES: Deudor[] = [
       "Pagos vía RUT pagador 0141831984 (Cristian Eduardo Allende Tapia, persona natural).",
       "Cuotas iniciales de ene-2025 anticipadas — primera renta de 82,86 UF cubrió varios meses.",
     ],
-    archivoExcel: "/downloads/CSL_EstadoCuenta_SCG.xlsx",
   },
   {
     id: "F2",
@@ -179,7 +176,6 @@ export const DEUDORES: Deudor[] = [
       "$3.300.000 pagado en may-2025 cubrió la primera factura adelantada.",
       "Pagos vía RUT pagador 0141831984.",
     ],
-    archivoExcel: "/downloads/CSL_EstadoCuenta_SCG.xlsx",
   },
   {
     id: "TK",
@@ -226,14 +222,14 @@ export const DEUDORES: Deudor[] = [
     inicioFacturacion: "Pago inicial: 04-may-2026 · Cuotas: 05-may-2026",
     severidad: "moderado",
     diagnostico:
-      "Cuotas de mayo y junio PAGADAS ($7.447.842 el 01-jun y $7.542.028 el 15-jun). Pendiente SOLO el pago inicial de 183 UF + IVA (aprox. $8,8MM). Cuota de julio vence el 05-jul. OJO: hay un traspaso de $145,5MM del 28-abr-2026 desde su RUT sin clasificar que podría cubrir el pago inicial — confirmar con contabilidad antes de cobrar.",
+      "Cuotas de mayo y junio PAGADAS ($7.447.842 el 01-jun y $7.542.028 el 15-jun). Pendientes: pago inicial de 183 UF + IVA (aprox. $8,8MM) y la cuota de julio, que venció el 05-jul sin pago registrado (cartolas disponibles solo hasta el 30-jun — verificar en la próxima). OJO: hay un traspaso de $145,5MM del 28-abr-2026 desde su RUT sin clasificar que podría cubrir el pago inicial — confirmar con contabilidad antes de cobrar.",
     rentaTexto:
       "Pago inicial: 183 UF + IVA al firmar (04-may-2026) · Renta mensual: 155,74 UF + IVA × 24 cuotas anticipadas (primeros 5 días del mes) · Interés penal 1,5% mensual",
     detalleAtraso: [
       "Cuota mayo 2026 ($7.435.501): PAGADA el 01-jun-2026 vía transferencia de $7.447.842 (glosa 'NOMINA PAGO PROV'). ✓",
       "Cuota junio 2026 ($7.526.404): PAGADA el 15-jun-2026 vía transferencia de $7.542.028 (glosa 'Pago de Provee'). ✓",
       "Pago inicial 183 UF + IVA (≈$8.843.790): sin pago identificado como tal en cartolas.",
-      "Cuota julio 2026 (aprox. $7.526.404): por vencer el 05-jul-2026.",
+      "Cuota julio 2026 (aprox. $7.526.404): venció el 05-jul-2026 — sin pago registrado en cartolas al 30-jun; verificar en la próxima cartola.",
       "⚠️ ANTES DE COBRAR: confirmar la naturaleza del traspaso de $145.563.465 recibido el 28-abr-2026 desde el RUT de Barranco — si corresponde a este contrato, la cuenta podría estar pagada por adelantado.",
     ],
     notasInternas: [
@@ -523,6 +519,33 @@ export default function Cobranza({ result }: CobranzaProps) {
   }
   const fin = (d: Deudor) => finByContract[d.contractId] || { esperado: 0, pagado: 0, deuda: 0, cumplimiento: 1 };
 
+  // Datos para generar Excel/PPT EN EL MOMENTO con las cifras vivas (nunca archivos estáticos)
+  const datosExport = (d: Deudor): DatosEstadoCuenta => {
+    const f = fin(d);
+    const esSCG = d.contractId === "C-004" || d.contractId === "C-005";
+    return {
+      nombreArchivo: d.proyecto.split("—")[0].trim().normalize("NFD").replace(/[^A-Za-z0-9]/g, ""),
+      proyecto: d.proyecto,
+      cliente: d.cliente,
+      rut: d.rut,
+      contractIds: esSCG ? ["C-004", "C-005"] : [d.contractId],
+      esperado: f.esperado,
+      pagado: f.pagado,
+      deuda: f.deuda,
+      cumplimiento: f.cumplimiento,
+      detalle: d.detalleAtraso,
+    };
+  };
+  const [generando, setGenerando] = useState<string | null>(null);
+  const genExcel = async (d: Deudor) => {
+    setGenerando(d.id + "-xls");
+    try { await descargarExcelEstadoCuenta(datosExport(d), result.porContrato); } finally { setGenerando(null); }
+  };
+  const genPpt = async (d: Deudor) => {
+    setGenerando(d.id + "-ppt");
+    try { await descargarPptEstadoCuenta(datosExport(d)); } finally { setGenerando(null); }
+  };
+
   // Ordenar por severidad (más grave primero) y deuda descendente
   const deudores = [...DEUDORES].sort((a, b) => {
     const ap = SEVERIDAD_META[a.severidad].priority;
@@ -709,28 +732,24 @@ export default function Cobranza({ result }: CobranzaProps) {
                       <Mail className="w-3.5 h-3.5" />
                       Ver mail
                     </button>
-                    {d.archivoExcel && (
-                      <a
-                        href={d.archivoExcel}
-                        download
-                        title="Descargar estado de cuenta (Excel)"
-                        className="inline-flex items-center gap-1.5 text-xs font-medium px-3 py-2 rounded-lg bg-emerald-50 text-emerald-700 border border-emerald-200 hover:bg-emerald-100 transition-colors"
-                      >
-                        <FileSpreadsheet className="w-3.5 h-3.5" />
-                        Excel
-                      </a>
-                    )}
-                    {d.archivoPpt && (
-                      <a
-                        href={d.archivoPpt}
-                        download
-                        title="Descargar presentación (PowerPoint)"
-                        className="inline-flex items-center gap-1.5 text-xs font-medium px-3 py-2 rounded-lg bg-amber-50 text-amber-700 border border-amber-200 hover:bg-amber-100 transition-colors"
-                      >
-                        <Presentation className="w-3.5 h-3.5" />
-                        PPT
-                      </a>
-                    )}
+                    <button
+                      onClick={() => genExcel(d)}
+                      disabled={generando === d.id + "-xls"}
+                      title="Genera el Excel al momento con los datos conciliados al día"
+                      className="inline-flex items-center gap-1.5 text-xs font-medium px-3 py-2 rounded-lg bg-emerald-50 text-emerald-700 border border-emerald-200 hover:bg-emerald-100 transition-colors disabled:opacity-50"
+                    >
+                      <FileSpreadsheet className="w-3.5 h-3.5" />
+                      {generando === d.id + "-xls" ? "Generando…" : "Excel al día"}
+                    </button>
+                    <button
+                      onClick={() => genPpt(d)}
+                      disabled={generando === d.id + "-ppt"}
+                      title="Genera la presentación al momento con los datos conciliados al día"
+                      className="inline-flex items-center gap-1.5 text-xs font-medium px-3 py-2 rounded-lg bg-amber-50 text-amber-700 border border-amber-200 hover:bg-amber-100 transition-colors disabled:opacity-50"
+                    >
+                      <Presentation className="w-3.5 h-3.5" />
+                      {generando === d.id + "-ppt" ? "Generando…" : "PPT al día"}
+                    </button>
                     <button
                       onClick={() =>
                         setExpanded(isExpanded ? null : d.id)
@@ -1033,14 +1052,12 @@ export default function Cobranza({ result }: CobranzaProps) {
         </div>
         <p className="text-sm text-ink-700 leading-relaxed">
           Cada deudor cuenta con un mail personalizado en prosa natural
-          (sin cuadros ASCII, listo para Gmail u Outlook), un Excel con el
-          estado de cuenta completo — todas las cuotas del contrato con
-          su pago real conciliado contra la cuenta Santander 9427891-0 — y
-          en el caso de Puerta Patagonia, también una presentación para
-          la reunión de regularización con dos propuestas de pago.
-          Los archivos están listos para descargar y adjuntar al correo.
-          Los emails de los destinatarios son provisorios — revísalos antes
-          de enviar.
+          (listo para Gmail u Outlook), un Excel y una presentación que se
+          GENERAN EN EL MOMENTO con todas las cuotas del contrato y su pago
+          real conciliado contra la cuenta Santander 9427891-0 — siempre con
+          los datos al día, nunca archivos guardados. Descárgalos y adjúntalos
+          al correo. Los emails de los destinatarios son provisorios —
+          revísalos antes de enviar.
         </p>
       </div>
     </section>

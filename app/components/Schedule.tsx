@@ -10,9 +10,29 @@ interface Props {
   result: ConciliationResult;
 }
 
+// Extrae el n° de factura desde las notas de la cuota (ej. "Factura electrónica N°43")
+function facturaDeCuota(notas: string): string {
+  const m = notas.match(/Factura electrónica N°(\d+)/);
+  if (m) return `N°${m[1]}`;
+  if (notas.includes("n° por confirmar")) return "por confirmar";
+  return "—";
+}
+
 export default function Schedule({ result }: Props) {
   const [filter, setFilter] = useState("");
   const [estadoFilter, setEstadoFilter] = useState<EstadoCuota | "all">("all");
+
+  // Totales consolidados de todos los contratos
+  const totales = useMemo(() => {
+    const conValor = result.cuotas.filter(c => c.totalFacturado > 0);
+    const hoy = new Date();
+    const vencidas = conValor.filter(c => new Date(c.fecha + "T00:00:00") <= hoy);
+    const totalContrato = conValor.reduce((s, c) => s + c.totalFacturado, 0);
+    const pagado = conValor.reduce((s, c) => s + c.totalPagado, 0);
+    const deudaVencida = Math.max(0, vencidas.reduce((s, c) => s + c.totalFacturado, 0) - vencidas.reduce((s, c) => s + c.totalPagado, 0));
+    const porCobrar = Math.max(0, totalContrato - pagado - deudaVencida);
+    return { totalContrato, pagado, deudaVencida, porCobrar };
+  }, [result.cuotas]);
 
   const filtered = useMemo(() => {
     return result.cuotas.filter(c => {
@@ -34,11 +54,31 @@ export default function Schedule({ result }: Props) {
           Todas las cuotas
         </div>
         <h2 className="text-4xl md:text-5xl font-display font-semibold text-ink-900 tracking-tight">
-          Cronograma maestro
+          Consolidado de Pago de Cuota
         </h2>
         <p className="text-ink-500 mt-3 max-w-2xl">
           {result.cuotas.length} cuotas proyectadas de todos los contratos vigentes, con su estado de conciliación.
         </p>
+      </div>
+
+      {/* Totales consolidados */}
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-8">
+        <div className="rounded-2xl bg-white border border-black/[0.06] shadow-soft p-4">
+          <div className="text-[10px] font-mono uppercase tracking-wider text-ink-400 mb-1">Total en contratos</div>
+          <div className="text-lg font-display font-semibold tabular text-ink-900">{fmtCLP(totales.totalContrato)}</div>
+        </div>
+        <div className="rounded-2xl bg-white border border-emerald-200 shadow-soft p-4">
+          <div className="text-[10px] font-mono uppercase tracking-wider text-emerald-600 mb-1">Lo que han pagado</div>
+          <div className="text-lg font-display font-semibold tabular text-emerald-600">{fmtCLP(totales.pagado)}</div>
+        </div>
+        <div className="rounded-2xl bg-white border border-red-200 shadow-soft p-4">
+          <div className="text-[10px] font-mono uppercase tracking-wider text-red-600 mb-1">En deuda (atrasado)</div>
+          <div className="text-lg font-display font-semibold tabular text-red-700">{fmtCLP(totales.deudaVencida)}</div>
+        </div>
+        <div className="rounded-2xl bg-white border border-black/[0.06] shadow-soft p-4">
+          <div className="text-[10px] font-mono uppercase tracking-wider text-ink-400 mb-1">Por cobrar a futuro</div>
+          <div className="text-lg font-display font-semibold tabular text-ink-700">{fmtCLP(totales.porCobrar)}</div>
+        </div>
       </div>
 
       <div className="bg-bg-card rounded-2xl shadow-soft border border-black/[0.04] overflow-hidden">
@@ -94,7 +134,7 @@ export default function Schedule({ result }: Props) {
                 <tr key={i} className="border-b border-ink-50 hover:bg-ink-50/40 transition-colors">
                   <td className="px-4 py-2.5 text-ink-700 font-medium whitespace-nowrap">{c.proyecto}</td>
                   <td className="px-4 py-2.5 text-ink-600">{c.numero}</td>
-                  <td className="px-4 py-2.5 text-ink-400 tabular">—</td>
+                  <td className={`px-4 py-2.5 tabular ${facturaDeCuota(c.notas) === "—" ? "text-ink-400" : "text-ink-700"}`}>{facturaDeCuota(c.notas)}</td>
                   <td className="px-4 py-2.5 text-ink-500 tabular whitespace-nowrap">{fmtDate(c.fecha)}</td>
                   <td className="px-4 py-2.5 text-right tabular text-ink-500">{c.uf ? c.uf.toFixed(2) : "—"}</td>
                   <td className="px-4 py-2.5 text-right tabular font-medium text-ink-900 whitespace-nowrap">{fmtCLP(c.totalFacturado)}</td>

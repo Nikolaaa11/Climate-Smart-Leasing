@@ -170,8 +170,9 @@ export function identifyContract(abono: Abono): { contract: Contract | null; rea
   if (glosa.includes("DEV IMPUESTO") || glosa.includes("TESORER")) {
     return { contract: null, reason: "Devolución de impuestos Tesorería General de la República" };
   }
+  // === Compraventa Comercializadora (RUT 0760583634 — C-008, por confirmar) ===
   if (glosa.includes("0760583634") || glosa.includes("COMERCIALIZADOR")) {
-    return { contract: null, reason: "Transferencias de COMERCIALIZADORA (RUT 76.058.363-4) por $17,2MM el 26/06/2026 — sin contrato en sistema; clasificar (¿nuevo cliente / venta de equipos?)" };
+    return { contract: CONTRACTS.find(c => c.id === "C-008")!, reason: "RUT Comercializadora — compraventa C-008 (datos por confirmar)" };
   }
   if (glosa.includes("PTEC")) {
     return { contract: null, reason: "Pago Factura N°41 código PTEC ($10,71MM el 11/06/2026) — OJO: el 15/06 sale un CARGO por el mismo monto total (posible reversa o traspaso); clasificar con contabilidad" };
@@ -259,6 +260,29 @@ export function generateCuotasForContract(c: Contract): Cuota[] {
         notas: a.factura,
       });
     });
+  }
+
+  // Special: Compraventa Comercializadora (C-008) — pago único.
+  // Precio asumido = monto recibido el 26/06/2026 (POR CONFIRMAR contra contrato).
+  if (c.id === "C-008") {
+    const total = 17_205_087;
+    const neto = Math.round(total / (1 + IVA));
+    cuotas.push({
+      contractId: c.id,
+      proyecto: c.proyecto,
+      numero: "Pago compraventa",
+      fecha: "2026-06-26",
+      uf: null,
+      ufValorMes: null,
+      netoClp: neto,
+      ivaClp: total - neto,
+      totalFacturado: total,
+      totalPagado: 0,
+      estado: "vencida-sin-pago",
+      matchedAbonos: [],
+      notas: "⚠️ Precio asumido = $17.205.087 recibidos el 26/06/2026 (4 transferencias, cartola N°26). Confirmar contra contrato de compraventa (precio pactado, neto/IVA).",
+    });
+    return cuotas;
   }
 
   // Special: Vikingos has an anticipo of $20M IVA included as first "cuota"

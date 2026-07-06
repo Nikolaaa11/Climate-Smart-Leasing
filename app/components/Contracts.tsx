@@ -5,7 +5,15 @@ import { CONTRACTS, EstadoObra } from "@/lib/contracts";
 import { ConciliationResult } from "@/lib/conciliation";
 import { fmtCLP, fmtUF, fmtDate, fmtDateLong, fmtPct } from "@/lib/format";
 import StatusPill from "./StatusPill";
-import { ChevronDown, FileText, MapPin, User, Calendar, CreditCard, AlertTriangle, CheckCircle2, Circle, Clock } from "lucide-react";
+import { ChevronDown, FileText, MapPin, User, Calendar, CreditCard, AlertTriangle, CheckCircle2, Circle, Clock, Download } from "lucide-react";
+
+// Extrae el n° de factura desde las notas de la cuota (ej. "Factura electrónica N°43")
+function facturaDeCuota(notas: string): string {
+  const m = notas.match(/Factura electrónica N°(\d+)/);
+  if (m) return `N°${m[1]}`;
+  if (notas.includes("n° por confirmar")) return "por confirmar";
+  return "—";
+}
 
 interface Props {
   result: ConciliationResult;
@@ -112,6 +120,25 @@ export default function Contracts({ result }: Props) {
                     </Meta>
                   </div>
 
+                  {/* Descarga del contrato firmado (solo contratos — sin órdenes de compra) */}
+                  <div className="px-6 py-3 border-t border-black/[0.04] bg-csl-50/30 flex items-center justify-between flex-wrap gap-2">
+                    {c.archivoPdf ? (
+                      <a
+                        href={c.archivoPdf}
+                        download
+                        className="inline-flex items-center gap-2 text-xs font-medium px-3 py-2 rounded-lg bg-csl-600 text-white hover:bg-csl-700 transition-colors"
+                      >
+                        <Download className="w-3.5 h-3.5" />
+                        Descargar contrato firmado (PDF)
+                      </a>
+                    ) : (
+                      <span className="text-xs text-ink-400 italic">
+                        Contrato firmado no disponible — {c.id === "C-007" ? "aún sin firmar (solo modelo de negocio)" : "documento por recibir"}
+                      </span>
+                    )}
+                    <span className="text-[10px] text-ink-400">{c.docFuente.slice(0, 90)}{c.docFuente.length > 90 ? "…" : ""}</span>
+                  </div>
+
                   {c.obs && (
                     <div className="px-6 py-4 bg-amber-50/40 border-t border-amber-100/60">
                       <div className="flex items-start gap-3">
@@ -185,7 +212,7 @@ export default function Contracts({ result }: Props) {
                   <div className="p-6">
                     <div className="flex items-center justify-between mb-4">
                       <h4 className="text-sm font-display font-semibold text-ink-900">
-                        Cronograma de cuotas
+                        Consolidado de pago de cuotas
                       </h4>
                       <div className="text-[10px] text-ink-400">
                         {cuotas.length} cuotas totales
@@ -218,7 +245,7 @@ export default function Contracts({ result }: Props) {
                             return (
                             <tr key={i} className="border-b border-ink-50 last:border-0">
                               <td className="py-2.5 pr-3 text-ink-700 font-medium">{cu.numero}</td>
-                              <td className="py-2.5 pr-3 text-ink-400 tabular">—</td>
+                              <td className={`py-2.5 pr-3 tabular ${facturaDeCuota(cu.notas) === "—" ? "text-ink-400" : "text-ink-700"}`}>{facturaDeCuota(cu.notas)}</td>
                               <td className="py-2.5 pr-3 text-ink-600 tabular whitespace-nowrap">{fmtDate(cu.fecha)}</td>
                               <td className="py-2.5 pr-3 text-ink-500 tabular">
                                 {cu.uf ? `${cu.uf.toFixed(2)}` : "—"}

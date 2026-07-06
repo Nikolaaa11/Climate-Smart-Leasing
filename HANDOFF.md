@@ -1,6 +1,6 @@
 # HANDOFF — Plataforma de Control Financiero Climate Smart Leasing
 
-> Documento de traspaso del proyecto. Actualizado al **03-jul-2026**.
+> Documento de traspaso del proyecto. Actualizado al **06-jul-2026**.
 > Dueño saliente: Nicolás Rietta (GitHub: Nikolaaa11) · nicolasrietta@gmail.com
 
 ---
@@ -9,7 +9,7 @@
 
 Plataforma web de control financiero de **Climate Smart Leasing SpA** (RUT 77.868.887-5, "CSL"), empresa de arriendo de maquinarias y equipos del grupo CEHTA. Muestra en un solo lugar:
 
-- Los **7 contratos de arriendo** vigentes/modelados y su calendario de cuotas.
+- Los **8 contratos** vigentes/modelados (7 de arriendo + 1 compraventa por confirmar) y su consolidado de cuotas.
 - La **conciliación bancaria**: cada cuota cruzada contra los abonos reales de la cuenta Banco Santander cta. cte. **0-000-9427891-0**.
 - La sección **Cobranza**: quién debe, cuánto, con mails de cobro listos para copiar/enviar.
 - Conciliación de desembolsos a Geist (partner instalador) y verificación de cuenta.
@@ -50,7 +50,10 @@ Todo el sistema se calcula en tiempo real a partir de **3 archivos fuente** + 1 
 |---|---|---|
 | `lib/contracts.ts` | Los 7 contratos (`CONTRACTS`): cliente, RUT, renta UF, n° cuotas, fechas, RUT pagador en banco. **Single source of truth de los contratos.** | Al firmar/modificar un contrato |
 | `lib/abonos.ts` | TODOS los abonos (ingresos) de la cuenta Santander, extraídos de las cartolas oficiales, con glosa original y n° de cartola. | **Cada mes, al llegar la cartola nueva** |
-| `lib/uf.ts` | Valores UF de fin de mes (fuente SII). | Cada mes (agregar el valor del mes que cerró) |
+| `lib/uf.ts` | Valores UF de fin de mes (fuente SII) para el CÁLCULO de cuotas. | Cada mes (agregar el valor del mes que cerró) |
+| `lib/cargos.ts` | Todos los CARGOS (egresos) de las cartolas — alimenta "lo que se ha gastado" en Movimientos. | Cada mes, junto con abonos.ts |
+| `lib/useUfDia.ts` | Hook que trae la UF DEL DÍA desde mindicador.cl (con fallback) para los totales del Dashboard. | No se toca |
+| `lib/exports.ts` | Genera Excel y PPT de estado de cuenta EN EL MOMENTO con datos vivos (botones en Cobranza). | No se toca |
 | `lib/conciliation.ts` | El motor: genera las cuotas teóricas de cada contrato, identifica de qué cliente es cada abono (por RUT en la glosa) y los asigna a cuotas (primero calce exacto por monto ±1,5%, después FIFO). | Solo si cambia la lógica o se agrega una regla de identificación |
 
 `Dashboard`, `Contratos`, `Cronograma` y `Cobranza` derivan TODAS sus cifras de `buildConciliation()` — **nunca edites números a mano en los componentes**; corrige la fuente. Los textos narrativos de cobranza (diagnósticos, mails) sí viven en `app/components/Cobranza.tsx` (array `DEUDORES`).
@@ -65,8 +68,9 @@ La facturación real difiere del texto del contrato y está **hardcodeada según
 ## 4. Rutina mensual de actualización (el trabajo recurrente)
 
 1. Descargar la(s) cartola(s) nueva(s) del Santander (empresa CSL) en PDF.
-2. Extraer los **abonos** (columna ABONO — cuidado: el PDF entremezcla cargos y abonos; validar contra los "Saldos diarios" de la última página y contra el total "Otros abonos" del encabezado).
-3. Agregar cada abono a `lib/abonos.ts` con fecha ISO, monto, glosa original, n° doc y n° de cartola.
+2. Extraer los **abonos** Y los **cargos** (cuidado: el PDF entremezcla ambos; validar contra los "Saldos diarios" de la última página y contra los totales "Otros abonos"/"Otros cargos" del encabezado).
+3. Agregar cada abono a `lib/abonos.ts` y cada cargo a `lib/cargos.ts` con fecha ISO, monto, glosa original, n° doc y n° de cartola.
+3b. Si Puerta Patagonia emitió una nueva factura de renta, agregar su neto exacto a `C001_RENTAS_EMITIDAS` en `lib/conciliation.ts`.
 4. Agregar el valor UF del mes cerrado a `lib/uf.ts` (`UF_END_OF_MONTH`).
 5. Si aparece un RUT nuevo que el motor no reconoce, agregar una regla en `identifyContract()` de `lib/conciliation.ts` (aunque sea `contract: null` con una razón descriptiva — así queda visible como "no identificado" y no se pierde).
 6. Actualizar los textos de `DEUDORES` en `app/components/Cobranza.tsx` (fecha `HOY`, diagnósticos, mails) con las cifras nuevas.
@@ -74,7 +78,7 @@ La facturación real difiere del texto del contrato y está **hardcodeada según
 
 **Tip de verificación**: crear un script temporal que importe `buildConciliation()` y ejecutarlo con `./node_modules/.bin/sucrase-node script.ts` para ver esperado/pagado/deuda por contrato antes de publicar (borrarlo antes del commit). Los PDFs escaneados se leen con Python `pymupdf` (`fitz`); `pdftoppm` no está disponible en esta máquina.
 
-## 5. Estado al 03-jul-2026 (foto actual)
+## 5. Estado al 06-jul-2026 (foto actual)
 
 | Contrato | Cliente | Estado | Deuda |
 |---|---|---|---|
@@ -85,6 +89,7 @@ La facturación real difiere del texto del contrato y está **hardcodeada según
 | C-005 Flota 2 (Volvo CORE) | SCG SpA | 🟡 ~1 cuota de diferencia | $2.768.020 |
 | C-006 Barranco Amarillo | Procesadora Barranco Amarillo (78.191.887-3) | 🟡 Cuotas may+jun pagadas; **pendiente pago inicial 183 UF (~$8,8MM)** | $8.815.825 |
 | C-007 Axopur 1 | ⚠️ SIN CONTRATO FIRMADO — solo modelo de negocio | (no cobrar) |
+| C-008 Compraventa Comercializadora | RUT 76.058.363-4 | ⚠️ POR CONFIRMAR — $17.205.087 recibidos 26-jun registrados como pago único de compraventa; falta el contrato y datos del cliente | $0 |
 
 **Total cobranza activa: ~$27,2MM.** Cada deudor tiene mail de cobro listo en la sección Cobranza (botón "Ver mail").
 
@@ -123,5 +128,7 @@ La facturación real difiere del texto del contrato y está **hardcodeada según
 - **10-jun-2026**: conciliación contra facturas SII reales de PP + cartolas oficiales N°21-26. Se descubrió que la F52 estaba pagada y que el modelo de PP estaba mal (anticipo separado de rentas). PP pasó a severidad grave. Se agregó Barranco a cobranza. Motor con calce exacto por monto antes de FIFO.
 - **~11-jun-2026**: del contrato protocolizado de Vilanova se corrigió el plazo de pago de PP: 15 días corridos desde emisión (no 30).
 - **03-jul-2026**: cartola N°26 histórica conciliada (PP pagó F43; Barranco cuota jun; Vikingos julio anticipado; aparecen COMERCIALIZADORA y PTEC sin clasificar).
+
+- **06-jul-2026**: ronda "súper prompt" (ver docs/SUPER_PROMPT_CAMBIOS_2026-07-06.md): se elimina Contabilidad (datos incorrectos), UF del día vía mindicador.cl, totales de contratos en el Dashboard (total/pagado/deuda/por cobrar en CLP y UF), contratos PDF descargables (public/contratos, SIN órdenes de compra), C-008 compraventa Comercializadora (por confirmar), "Cronograma" pasa a llamarse "Consolidado de Pago de Cuota", Movimientos muestra cargos + abonos (lib/cargos.ts), y el Excel/PPT de cobranza se generan al momento con datos vivos (lib/exports.ts, dependencias xlsx + pptxgenjs).
 
 El historial completo está en `git log` — los mensajes de commit documentan cada decisión.

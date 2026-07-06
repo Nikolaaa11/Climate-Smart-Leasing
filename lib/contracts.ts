@@ -20,6 +20,8 @@ export interface PendienteObra {
 
 export interface Contract {
   id: string;
+  tipo?: "arriendo" | "compraventa"; // default: arriendo
+  archivoPdf?: string; // ruta en /public al contrato firmado descargable
   proyecto: string;
   cliente: string;
   rutCliente: string;
@@ -53,6 +55,7 @@ export interface Contract {
 export const CONTRACTS: Contract[] = [
   {
     id: "C-001",
+    archivoPdf: "/contratos/C-001_Puerta_Patagonia_Vilanova.pdf",
     proyecto: "Puerta Patagonia (Vilanova)",
     cliente: "Comunidad Edificio Puerta Patagonia Habitacional",
     rutCliente: "53.319.273-4",
@@ -100,6 +103,7 @@ export const CONTRACTS: Contract[] = [
   },
   {
     id: "C-002",
+    archivoPdf: "/contratos/C-002_Vikingos.pdf",
     proyecto: "Vikingos",
     cliente: "Comunidad Edificio Los Vikingos",
     rutCliente: "53.321.997-7",
@@ -125,6 +129,7 @@ export const CONTRACTS: Contract[] = [
   },
   {
     id: "C-003",
+    archivoPdf: "/contratos/C-003_Trongkai.pdf",
     proyecto: "Trongkai",
     cliente: "Agrotecnologías e Ingeniería SpA",
     rutCliente: "77.221.203-8",
@@ -150,6 +155,7 @@ export const CONTRACTS: Contract[] = [
   },
   {
     id: "C-004",
+    archivoPdf: "/contratos/C-004_Flota1_Volvo_EX30_PLUS.pdf",
     proyecto: "Flota 1 (Volvo EX30 PLUS)",
     cliente: "SCG SPA",
     rutCliente: "78.096.656-4",
@@ -176,6 +182,7 @@ export const CONTRACTS: Contract[] = [
   },
   {
     id: "C-005",
+    archivoPdf: "/contratos/C-005_Flota2_Volvo_EX30_CORE.pdf",
     proyecto: "Flota 2 (Volvo EX30 CORE)",
     cliente: "SCG SPA",
     rutCliente: "78.096.656-4",
@@ -202,6 +209,7 @@ export const CONTRACTS: Contract[] = [
   },
   {
     id: "C-006",
+    archivoPdf: "/contratos/C-006_Barranco_Amarillo.pdf",
     proyecto: "Barranco Amarillo",
     cliente: "Procesadora Barranco Amarillo SpA",
     rutCliente: "78.191.887-3",
@@ -244,6 +252,29 @@ export const CONTRACTS: Contract[] = [
     cuentaDestino: "Banco Santander Cta. Cte. N° 9427-8910",
     docFuente: "Proyecto Leasing 1. Axopur 1. Rev 1.xlsx (modelo de negocio / caso de negocio, SIN contrato firmado).",
     obs: "⚠️ MODELO DE NEGOCIO (Rev 1) — aún SIN contrato firmado. Leasing Operativo de un Sistema Eléctrico. Valor activo $32.000.000 CLP financiado 100% (796,81 UF a UF $40.160 del 03/05/2026). 48 cuotas de ≈22,66 UF/mes, tasa 1,35% mensual (16,2% anual), sin cuota final. PENDIENTE de confirmar: cliente, RUT, representante legal, dirección, fecha de firma y fecha de inicio de pagos (las fechas mostradas son tentativas, basadas en el modelo).",
+  },
+  {
+    id: "C-008",
+    tipo: "compraventa",
+    proyecto: "Compraventa Comercializadora",
+    cliente: "Comercializadora (razón social por confirmar)",
+    rutCliente: "76.058.363-4",
+    rutPagadorBanco: "0760583634",
+    repLegal: "Por confirmar",
+    direccion: "Por confirmar",
+    fechaFirma: "2026-06-26",
+    fechaInicioPagos: "2026-06-26",
+    monedaRenta: "CLP",
+    rentaClpNeta: 0,
+    nCuotas: 0,
+    ivaIncluido: true,
+    vigenciaMeses: 0,
+    facturacionDia: "Pago único (compraventa)",
+    plazoPagoDias: "Contado",
+    interesMora: "N/A",
+    cuentaDestino: "Banco Santander Cta. Cte. N° 9427-8910",
+    docFuente: "SIN CONTRATO EN ARCHIVO — registrado a partir de las 4 transferencias recibidas el 26/06/2026 (cartola N°26).",
+    obs: "⚠️ COMPRAVENTA POR CONFIRMAR (contrato N°8): el 26-jun-2026 se recibieron $17.205.087 en 4 transferencias (3× $5.000.000 + $2.205.087) desde el RUT 76.058.363-4, glosa 'Transf. COMERCIALIZADOR'. Se registra como compraventa con precio = monto recibido, a la espera del contrato firmado: confirmar razón social del cliente, precio pactado, detalle de equipos vendidos y si el monto es neto o IVA incluido. Al recibir el PDF, actualizar este registro y subirlo a /public/contratos.",
   },
 ];
 
