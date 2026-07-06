@@ -243,6 +243,7 @@ export const CONTRACTS: Contract[] = [
   },
   {
     id: "C-007",
+    archivoPdf: "/contratos/C-007_Axopur_Caelum.pdf",
     proyecto: "Axopur 1",
     cliente: "Bebidas Funcionales Caelum SpA",
     rutCliente: "76.858.572-5",
