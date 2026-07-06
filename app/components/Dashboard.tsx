@@ -1,6 +1,6 @@
 "use client";
 
-import { ConciliationResult } from "@/lib/conciliation";
+import { ConciliationResult, estaAtrasada } from "@/lib/conciliation";
 import { CONTRACTS } from "@/lib/contracts";
 import { fmtCLP, fmtPct } from "@/lib/format";
 import { useUfDia } from "@/lib/useUfDia";
@@ -19,7 +19,11 @@ export default function Dashboard({ result }: Props) {
   });
   const totalFacturado = cuotasVencidas.reduce((s, c) => s + c.totalFacturado, 0);
   const totalPagado = cuotasVencidas.reduce((s, c) => s + c.totalPagado, 0);
-  const totalPendiente = totalFacturado - totalPagado;
+  // "Atrasado" = sólo facturas impagas con 30+ días desde la emisión (regla CSL).
+  // Lo emitido en los últimos 30 días y aún impago está "en plazo", no atrasado.
+  const totalPendiente = result.cuotas
+    .filter((c) => estaAtrasada(c.fecha, today))
+    .reduce((s, c) => s + Math.max(0, c.totalFacturado - c.totalPagado), 0);
   const pctCobranza = totalFacturado > 0 ? totalPagado / totalFacturado : 0;
 
   // Totales de TODOS los contratos (plata comprometida completa, no solo lo vencido)
@@ -40,11 +44,14 @@ export default function Dashboard({ result }: Props) {
     });
     const fact = cu.reduce((s, x) => s + x.totalFacturado, 0);
     const pag = cu.reduce((s, x) => s + x.totalPagado, 0);
+    const atrasado = cu
+      .filter((x) => estaAtrasada(x.fecha, today))
+      .reduce((s, x) => s + Math.max(0, x.totalFacturado - x.totalPagado), 0);
     return {
       ...c,
       facturado: fact,
       pagado: pag,
-      pendiente: fact - pag,
+      pendiente: atrasado,
       pct: fact > 0 ? pag / fact : 0,
     };
   });
@@ -126,9 +133,9 @@ export default function Dashboard({ result }: Props) {
           accent="text-csl-600"
         />
         <KpiCard
-          label="Pendiente"
+          label="Atrasado (+30 días)"
           value={fmtCLP(totalPendiente)}
-          sub={`${alertas} cuotas vencidas sin pago`}
+          sub={`${alertas} facturas atrasadas sin pago`}
           icon={<AlertCircle className="w-4 h-4" />}
           accent="text-rose-600"
         />
@@ -186,7 +193,7 @@ export default function Dashboard({ result }: Props) {
                 <div className="font-medium tabular text-ink-900">{fmtCLP(c.facturado)}</div>
               </div>
               <div className="text-right">
-                <div className="text-ink-400">Pendiente</div>
+                <div className="text-ink-400">Atrasado</div>
                 <div className="font-medium tabular text-rose-600">{fmtCLP(c.pendiente)}</div>
               </div>
             </div>

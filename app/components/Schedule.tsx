@@ -10,14 +10,6 @@ interface Props {
   result: ConciliationResult;
 }
 
-// Extrae el n° de factura desde las notas de la cuota (ej. "Factura electrónica N°43")
-function facturaDeCuota(notas: string): string {
-  const m = notas.match(/Factura electrónica N°(\d+)/);
-  if (m) return `N°${m[1]}`;
-  if (notas.includes("n° por confirmar")) return "por confirmar";
-  return "—";
-}
-
 export default function Schedule({ result }: Props) {
   const [filter, setFilter] = useState("");
   const [estadoFilter, setEstadoFilter] = useState<EstadoCuota | "all">("all");
@@ -134,7 +126,7 @@ export default function Schedule({ result }: Props) {
                 <tr key={i} className="border-b border-ink-50 hover:bg-ink-50/40 transition-colors">
                   <td className="px-4 py-2.5 text-ink-700 font-medium whitespace-nowrap">{c.proyecto}</td>
                   <td className="px-4 py-2.5 text-ink-600">{c.numero}</td>
-                  <td className={`px-4 py-2.5 tabular ${facturaDeCuota(c.notas) === "—" ? "text-ink-400" : "text-ink-700"}`}>{facturaDeCuota(c.notas)}</td>
+                  <td className={`px-4 py-2.5 tabular ${c.factura ? "text-ink-600 font-medium" : "text-ink-300"}`}>{c.factura ?? "—"}</td>
                   <td className="px-4 py-2.5 text-ink-500 tabular whitespace-nowrap">{fmtDate(c.fecha)}</td>
                   <td className="px-4 py-2.5 text-right tabular text-ink-500">{c.uf ? c.uf.toFixed(2) : "—"}</td>
                   <td className="px-4 py-2.5 text-right tabular font-medium text-ink-900 whitespace-nowrap">{fmtCLP(c.totalFacturado)}</td>

@@ -6,15 +6,6 @@ import { ConciliationResult } from "@/lib/conciliation";
 import { fmtCLP, fmtUF, fmtDate, fmtDateLong, fmtPct } from "@/lib/format";
 import StatusPill from "./StatusPill";
 import { ChevronDown, FileText, MapPin, User, Calendar, CreditCard, AlertTriangle, CheckCircle2, Circle, Clock, Download } from "lucide-react";
-
-// Extrae el n° de factura desde las notas de la cuota (ej. "Factura electrónica N°43")
-function facturaDeCuota(notas: string): string {
-  const m = notas.match(/Factura electrónica N°(\d+)/);
-  if (m) return `N°${m[1]}`;
-  if (notas.includes("n° por confirmar")) return "por confirmar";
-  return "—";
-}
-
 interface Props {
   result: ConciliationResult;
 }
@@ -133,7 +124,7 @@ export default function Contracts({ result }: Props) {
                       </a>
                     ) : (
                       <span className="text-xs text-ink-400 italic">
-                        Contrato firmado no disponible — {c.id === "C-007" ? "aún sin firmar (solo modelo de negocio)" : "documento por recibir"}
+                        Contrato firmado no disponible en la plataforma — PDF por subir
                       </span>
                     )}
                     <span className="text-[10px] text-ink-400">{c.docFuente.slice(0, 90)}{c.docFuente.length > 90 ? "…" : ""}</span>
@@ -245,7 +236,7 @@ export default function Contracts({ result }: Props) {
                             return (
                             <tr key={i} className="border-b border-ink-50 last:border-0">
                               <td className="py-2.5 pr-3 text-ink-700 font-medium">{cu.numero}</td>
-                              <td className={`py-2.5 pr-3 tabular ${facturaDeCuota(cu.notas) === "—" ? "text-ink-400" : "text-ink-700"}`}>{facturaDeCuota(cu.notas)}</td>
+                              <td className={`py-2.5 pr-3 tabular ${cu.factura ? "text-ink-600 font-medium" : "text-ink-300"}`}>{cu.factura ?? "—"}</td>
                               <td className="py-2.5 pr-3 text-ink-600 tabular whitespace-nowrap">{fmtDate(cu.fecha)}</td>
                               <td className="py-2.5 pr-3 text-ink-500 tabular">
                                 {cu.uf ? `${cu.uf.toFixed(2)}` : "—"}

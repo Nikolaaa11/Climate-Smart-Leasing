@@ -87,19 +87,20 @@ La facturación real difiere del texto del contrato y está **hardcodeada según
 | C-003 Trongkai | Agrotecnologías e Ingeniería (77.221.203-8) | 🔴 **NUNCA HA PAGADO** — 3 cuotas vencidas | $1.428.000 |
 | C-004 Flota 1 (Volvo PLUS) | SCG SpA — paga Cristian Allende (14.183.198-4) | 🟡 Puntual, ~1 cuota de diferencia | $1.742.851 |
 | C-005 Flota 2 (Volvo CORE) | SCG SpA | 🟡 ~1 cuota de diferencia | $2.768.020 |
-| C-006 Barranco Amarillo | Procesadora Barranco Amarillo (78.191.887-3) | 🟡 Cuotas may+jun pagadas; **pendiente pago inicial 183 UF (~$8,8MM)** | $8.815.825 |
-| C-007 Axopur 1 | ⚠️ SIN CONTRATO FIRMADO — solo modelo de negocio | (no cobrar) |
+| C-006 Barranco Amarillo | Procesadora Barranco Amarillo (78.191.887-3) | 🟢 AL DÍA — pago inicial F58 ($145,5MM) + cuotas may-jun pagados; julio en plazo | ~$7,5MM en plazo |
+| C-007 Axopur 1 | Bebidas Funcionales Caelum SpA — contrato FIRMADO 26-may-2026 | 🟡 Facturas F77/F78/F79 emitidas 30-jun, aún sin conciliar (falta cartola julio) | por confirmar |
 | C-008 Compraventa Comercializadora | RUT 76.058.363-4 | ⚠️ POR CONFIRMAR — $17.205.087 recibidos 26-jun registrados como pago único de compraventa; falta el contrato y datos del cliente | $0 |
 
 **Total cobranza activa: ~$27,2MM.** Cada deudor tiene mail de cobro listo en la sección Cobranza (botón "Ver mail").
 
 ## 6. Pendientes abiertos (heredas esto)
 
-1. **Clasificar con MCG/contabilidad** (los 3 aparecen en "abonos no identificados" de la plataforma):
-   - Traspaso de **$145.563.465** (28-abr-2026) desde el RUT de Barranco Amarillo, glosa "Traspaso de cuenta" — si es de su contrato, su pago inicial (y mucho más) estaría cubierto. **No cobrar el pago inicial a Barranco sin resolver esto.**
-   - **$17.205.087** (26-jun-2026, 4 transferencias) de "COMERCIALIZADORA" RUT 76.058.363-4 — sin contrato en el sistema. ¿Cliente nuevo? ¿Venta de equipos?
+1. **Clasificar con MCG/contabilidad** (aparecen en "abonos no identificados" de la plataforma):
+   - ✅ RESUELTO (06-jul, JP): el traspaso de $145,5MM del 28-abr era el PAGO INICIAL de Barranco (factura N°58, 3.051,93 UF) — conciliado.
+   - **$17.205.087** de "COMERCIALIZADORA" RUT 76.058.363-4 → registrado como compraventa C-008; falta el contrato y datos del cliente.
    - **$10.710.000** "Factura 41 PTEC" — entró el 11-jun y salió el mismo total el 15-jun (¿reversa/traspaso?).
-   - También sin clasificar: depósito con documento ATM de **$270.033.596** (27-mar-2026).
+   - Depósito con documento ATM de **$270.033.596** (27-mar-2026) y 4×$7MM del socio (27-mar).
+   - Facturas Axopur F77/F78/F79 (30-jun): confirmar pago en la cartola de julio.
 2. **Adenda Vikingos**: el contrato tiene RUT erróneo (dice 53.319.273-4, el real es 53.321.997-7). Redactada la necesidad, falta emitirla y firmarla.
 3. **Cobranza dura a Puerta Patagonia**: 5 facturas vencidas. El contrato (Cláusula Décimo Quinta/Sexta) permite acelerar toda la deuda, suspender el servicio y bloquear equipos con 2+ facturas impagas. Mail listo en la plataforma; decisión comercial pendiente.
 4. **Trongkai**: definir acción de cobro (nunca ha pagado; el contrato permite término anticipado con retraso > 60 días).
