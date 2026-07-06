@@ -47,7 +47,7 @@ export async function descargarExcelEstadoCuenta(
     ["", ""],
     ["Facturado esperado a la fecha", datos.esperado],
     ["Pagado a la fecha", datos.pagado],
-    ["Deuda", datos.deuda],
+    ["Saldo por cobrar (facturado)", datos.deuda],
     ["Cumplimiento", `${(datos.cumplimiento * 100).toFixed(1)}%`],
     ["", ""],
     ["Cuenta para transferencias", `${CSL.cuentaBancaria.banco} Cta. Cte. ${CSL.cuentaBancaria.numero}`],
@@ -111,7 +111,7 @@ export async function descargarPptEstadoCuenta(datos: DatosEstadoCuenta): Promis
   const kpis: Array<[string, string, string]> = [
     ["Facturado esperado", fmt(datos.esperado), TINTA],
     ["Pagado a la fecha", fmt(datos.pagado), VERDE],
-    ["Deuda", fmt(datos.deuda), ROJO],
+    ["Saldo por cobrar", fmt(datos.deuda), ROJO],
     ["Cumplimiento", `${(datos.cumplimiento * 100).toFixed(1)}%`, TINTA],
   ];
   kpis.forEach(([label, valor, color], i) => {

@@ -448,7 +448,7 @@ function allocateAbonos(cuotas: Cuota[], abonos: Abono[]): void {
 // Vikingos y Flotas). Una factura impaga pasa a ATRASADA recién al día 16.
 export const DIAS_GRACIA_ATRASO = 15;
 
-/** true si una factura impaga ya está atrasada (pasaron ≥30 días desde su emisión). */
+/** true si una factura impaga ya está atrasada (pasaron ≥15 días desde su emisión). */
 export function estaAtrasada(fechaEmisionISO: string, today: Date): boolean {
   const venc = new Date(fechaEmisionISO + "T00:00:00");
   venc.setDate(venc.getDate() + DIAS_GRACIA_ATRASO);
@@ -469,7 +469,7 @@ function computeStatus(cuotas: Cuota[], today: Date): void {
       const diffPct = Math.abs(c.totalPagado - c.totalFacturado) / c.totalFacturado;
       c.estado = diffPct < 0.10 ? "pagada-diferencia" : "pagada-parcial";
     } else {
-      // Impaga y ya emitida: sólo se marca vencida si pasaron ≥30 días desde
+      // Impaga y ya emitida: sólo se marca vencida si pasaron ≥15 días desde
       // la emisión; dentro de la gracia queda "por-vencer" (en plazo).
       c.estado = estaAtrasada(c.fecha, today) ? "vencida-sin-pago" : "por-vencer";
     }

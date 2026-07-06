@@ -1,7 +1,8 @@
 "use client";
 
 import { useState, useMemo } from "react";
-import { Cuota, ConciliationResult, EstadoCuota } from "@/lib/conciliation";
+import { ConciliationResult, EstadoCuota } from "@/lib/conciliation";
+import { totalesGlobales } from "@/lib/totales";
 import { fmtCLP, fmtDate } from "@/lib/format";
 import { Search } from "lucide-react";
 import StatusPill from "./StatusPill";
@@ -14,17 +15,8 @@ export default function Schedule({ result }: Props) {
   const [filter, setFilter] = useState("");
   const [estadoFilter, setEstadoFilter] = useState<EstadoCuota | "all">("all");
 
-  // Totales consolidados de todos los contratos
-  const totales = useMemo(() => {
-    const conValor = result.cuotas.filter(c => c.totalFacturado > 0);
-    const hoy = new Date();
-    const vencidas = conValor.filter(c => new Date(c.fecha + "T00:00:00") <= hoy);
-    const totalContrato = conValor.reduce((s, c) => s + c.totalFacturado, 0);
-    const pagado = conValor.reduce((s, c) => s + c.totalPagado, 0);
-    const deudaVencida = Math.max(0, vencidas.reduce((s, c) => s + c.totalFacturado, 0) - vencidas.reduce((s, c) => s + c.totalPagado, 0));
-    const porCobrar = Math.max(0, totalContrato - pagado - deudaVencida);
-    return { totalContrato, pagado, deudaVencida, porCobrar };
-  }, [result.cuotas]);
+  // Totales consolidados — lib/totales.ts (misma fuente que Cobranza y Contratos)
+  const totales = useMemo(() => totalesGlobales(result), [result]);
 
   const filtered = useMemo(() => {
     return result.cuotas.filter(c => {
@@ -53,23 +45,29 @@ export default function Schedule({ result }: Props) {
         </p>
       </div>
 
-      {/* Totales consolidados */}
+      {/* Totales consolidados — cuadran por construcción:
+          Total = Pagado + Saldo emitido + Por facturar (neto) */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-8">
         <div className="rounded-2xl bg-white border border-black/[0.06] shadow-soft p-4">
           <div className="text-[10px] font-mono uppercase tracking-wider text-ink-400 mb-1">Total en contratos</div>
           <div className="text-lg font-display font-semibold tabular text-ink-900">{fmtCLP(totales.totalContrato)}</div>
+          <div className="text-[10px] text-ink-400 mt-0.5">= pagado + saldo + por facturar</div>
         </div>
         <div className="rounded-2xl bg-white border border-emerald-200 shadow-soft p-4">
           <div className="text-[10px] font-mono uppercase tracking-wider text-emerald-600 mb-1">Lo que han pagado</div>
           <div className="text-lg font-display font-semibold tabular text-emerald-600">{fmtCLP(totales.pagado)}</div>
         </div>
         <div className="rounded-2xl bg-white border border-red-200 shadow-soft p-4">
-          <div className="text-[10px] font-mono uppercase tracking-wider text-red-600 mb-1">En deuda (atrasado)</div>
-          <div className="text-lg font-display font-semibold tabular text-red-700">{fmtCLP(totales.deudaVencida)}</div>
+          <div className="text-[10px] font-mono uppercase tracking-wider text-red-600 mb-1">Saldo emitido por cobrar</div>
+          <div className="text-lg font-display font-semibold tabular text-red-700">{fmtCLP(totales.saldoEmitido)}</div>
+          <div className="text-[10px] text-ink-400 mt-0.5 tabular">
+            atrasado {fmtCLP(totales.atrasado)} · en plazo {fmtCLP(totales.enPlazo)}
+          </div>
         </div>
         <div className="rounded-2xl bg-white border border-black/[0.06] shadow-soft p-4">
-          <div className="text-[10px] font-mono uppercase tracking-wider text-ink-400 mb-1">Por cobrar a futuro</div>
-          <div className="text-lg font-display font-semibold tabular text-ink-700">{fmtCLP(totales.porCobrar)}</div>
+          <div className="text-[10px] font-mono uppercase tracking-wider text-ink-400 mb-1">Por facturar a futuro</div>
+          <div className="text-lg font-display font-semibold tabular text-ink-700">{fmtCLP(totales.porFacturarNeto)}</div>
+          <div className="text-[10px] text-ink-400 mt-0.5">cuotas aún no emitidas</div>
         </div>
       </div>
 

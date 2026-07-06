@@ -57,7 +57,7 @@ export default function Home() {
           <div className="flex flex-wrap items-center gap-x-3 gap-y-1 mt-10 text-xs text-ink-400">
             <span className="tabular">{result.cuotas.length} cuotas modeladas</span>
             <span>·</span>
-            <span className="tabular">{allAbonos.length} abonos conciliados</span>
+            <span className="tabular">{allAbonos.length} abonos procesados</span>
             <span>·</span>
             <span className="tabular">{CONTRACTS.length} contratos vigentes</span>
           </div>

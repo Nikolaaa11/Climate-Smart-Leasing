@@ -54,6 +54,7 @@ Todo el sistema se calcula en tiempo real a partir de **3 archivos fuente** + 1 
 | `lib/cargos.ts` | Todos los CARGOS (egresos) de las cartolas — alimenta "lo que se ha gastado" en Movimientos. | Cada mes, junto con abonos.ts |
 | `lib/useUfDia.ts` | Hook que trae la UF DEL DÍA desde mindicador.cl (con fallback) para los totales del Dashboard. | No se toca |
 | `lib/exports.ts` | Genera Excel y PPT de estado de cuenta EN EL MOMENTO con datos vivos (botones en Cobranza). | No se toca |
+| `lib/totales.ts` | **Totales canónicos**: TODAS las secciones calculan sus cifras con estas funciones (emitido = pagado + atrasado + en plazo). Prohibido que un componente sume cuotas por su cuenta. | No se toca |
 | `lib/conciliation.ts` | El motor: genera las cuotas teóricas de cada contrato, identifica de qué cliente es cada abono (por RUT en la glosa) y los asigna a cuotas (primero calce exacto por monto ±1,5%, después FIFO). | Solo si cambia la lógica o se agrega una regla de identificación |
 
 `Dashboard`, `Contratos`, `Cronograma` y `Cobranza` derivan TODAS sus cifras de `buildConciliation()` — **nunca edites números a mano en los componentes**; corrige la fuente. Los textos narrativos de cobranza (diagnósticos, mails) sí viven en `app/components/Cobranza.tsx` (array `DEUDORES`).
@@ -74,7 +75,8 @@ La facturación real difiere del texto del contrato y está **hardcodeada según
 4. Agregar el valor UF del mes cerrado a `lib/uf.ts` (`UF_END_OF_MONTH`).
 5. Si aparece un RUT nuevo que el motor no reconoce, agregar una regla en `identifyContract()` de `lib/conciliation.ts` (aunque sea `contract: null` con una razón descriptiva — así queda visible como "no identificado" y no se pierde).
 6. Actualizar los textos de `DEUDORES` en `app/components/Cobranza.tsx` (fecha `HOY`, diagnósticos, mails) con las cifras nuevas.
-7. `next build` → si compila, commit + push → verificar el sitio.
+7. **`npm run cuadratura`** → verifica que TODOS los números de la plataforma cuadren (identidades aritméticas por contrato y globales). Si falla, NO publicar.
+8. `next build` → si compila, commit + push → verificar el sitio.
 
 **Tip de verificación**: crear un script temporal que importe `buildConciliation()` y ejecutarlo con `./node_modules/.bin/sucrase-node script.ts` para ver esperado/pagado/deuda por contrato antes de publicar (borrarlo antes del commit). Los PDFs escaneados se leen con Python `pymupdf` (`fitz`); `pdftoppm` no está disponible en esta máquina.
 

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { CONTRACTS, EstadoObra } from "@/lib/contracts";
 import { ConciliationResult } from "@/lib/conciliation";
+import { totalesDeCuotas } from "@/lib/totales";
 import { fmtCLP, fmtUF, fmtDate, fmtDateLong, fmtPct } from "@/lib/format";
 import StatusPill from "./StatusPill";
 import { ChevronDown, FileText, MapPin, User, Calendar, CreditCard, AlertTriangle, CheckCircle2, Circle, Clock, Download } from "lucide-react";
@@ -31,18 +32,14 @@ export default function Contracts({ result }: Props) {
         {CONTRACTS.map((c) => {
           const cuotas = result.porContrato[c.id];
           const today = new Date();
-          const cuotasVencidas = cuotas.filter(x => {
-            const f = new Date(x.fecha + "T00:00:00");
-            return f <= today && x.totalFacturado > 0;
-          });
-          const fact = cuotasVencidas.reduce((s, x) => s + x.totalFacturado, 0);
-          const pag = cuotasVencidas.reduce((s, x) => s + x.totalPagado, 0);
-          const pct = fact > 0 ? pag / fact : 0;
-          // Totales del CONTRATO COMPLETO (todas las cuotas, no solo las vencidas)
-          const cuotasConValor = cuotas.filter(x => x.totalFacturado > 0);
-          const totalContrato = cuotasConValor.reduce((s, x) => s + x.totalFacturado, 0);
-          const pagadoTotal = cuotasConValor.reduce((s, x) => s + x.totalPagado, 0);
-          const porPagar = Math.max(0, totalContrato - pagadoTotal);
+          // Totales canónicos del contrato (lib/totales.ts — cuadra con todas las secciones)
+          const t = totalesDeCuotas(cuotas, today);
+          const fact = t.emitido;
+          const pag = t.pagadoEmitido;
+          const pct = t.cumplimiento;
+          const totalContrato = t.totalContrato;
+          const pagadoTotal = t.pagado;
+          const porPagar = t.porPagarTotal;
           const isOpen = expanded === c.id;
           const hasObra = !!(c.recepciones?.length || c.pendientesObra?.length);
 
@@ -94,7 +91,7 @@ export default function Contracts({ result }: Props) {
                     }`}>
                       {fmtPct(pct, 0)}
                     </div>
-                    <div className="text-[10px] text-ink-400">{fmtCLP(pag)} / {fmtCLP(fact)} vencido</div>
+                    <div className="text-[10px] text-ink-400">{fmtCLP(pag)} / {fmtCLP(fact)} emitido</div>
                     <div className="text-[10px] tabular mt-0.5">
                       <span className="text-emerald-600 font-medium">{fmtCLP(pagadoTotal)} pagado</span>
                       <span className="text-ink-300"> · </span>

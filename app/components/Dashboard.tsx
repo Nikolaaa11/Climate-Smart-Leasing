@@ -1,6 +1,7 @@
 "use client";
 
-import { ConciliationResult, estaAtrasada } from "@/lib/conciliation";
+import { ConciliationResult } from "@/lib/conciliation";
+import { totalesContrato } from "@/lib/totales";
 import { CONTRACTS } from "@/lib/contracts";
 import { fmtCLP, fmtPct } from "@/lib/format";
 
@@ -11,21 +12,14 @@ interface Props {
 export default function Dashboard({ result }: Props) {
   const today = new Date();
   const perContract = CONTRACTS.map(c => {
-    const cu = result.porContrato[c.id].filter(x => {
-      const f = new Date(x.fecha + "T00:00:00");
-      return f <= today && x.totalFacturado > 0;
-    });
-    const fact = cu.reduce((s, x) => s + x.totalFacturado, 0);
-    const pag = cu.reduce((s, x) => s + x.totalPagado, 0);
-    const atrasado = cu
-      .filter((x) => estaAtrasada(x.fecha, today))
-      .reduce((s, x) => s + Math.max(0, x.totalFacturado - x.totalPagado), 0);
+    // Totales canónicos (lib/totales.ts) — mismas cifras que Contratos y Cobranza
+    const t = totalesContrato(result, c.id, today);
     return {
       ...c,
-      facturado: fact,
-      pagado: pag,
-      pendiente: atrasado,
-      pct: fact > 0 ? pag / fact : 0,
+      facturado: t.emitido,
+      pendiente: t.saldoEmitido,
+      atrasado: t.atrasado,
+      pct: t.cumplimiento,
     };
   });
 
@@ -89,8 +83,11 @@ export default function Dashboard({ result }: Props) {
                 <div className="font-medium tabular text-ink-900">{fmtCLP(c.facturado)}</div>
               </div>
               <div className="text-right">
-                <div className="text-ink-400">Atrasado</div>
-                <div className="font-medium tabular text-rose-600">{fmtCLP(c.pendiente)}</div>
+                <div className="text-ink-400">Saldo por cobrar</div>
+                <div className={`font-medium tabular ${c.atrasado > 0 ? "text-rose-600" : "text-ink-500"}`}>{fmtCLP(c.pendiente)}</div>
+                <div className={`text-[10px] tabular ${c.atrasado > 0 ? "text-rose-500" : "text-emerald-600"}`}>
+                  {c.atrasado > 0 ? `atrasado: ${fmtCLP(c.atrasado)}` : "sin atraso"}
+                </div>
               </div>
             </div>
           </a>

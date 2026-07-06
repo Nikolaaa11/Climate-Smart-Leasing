@@ -3,7 +3,8 @@
 import { useState } from "react";
 import { fmtCLP, fmtPct } from "@/lib/format";
 import { descargarExcelEstadoCuenta, descargarPptEstadoCuenta, DatosEstadoCuenta } from "@/lib/exports";
-import { ConciliationResult, estaAtrasada } from "@/lib/conciliation";
+import { ConciliationResult } from "@/lib/conciliation";
+import { totalesContrato, Totales } from "@/lib/totales";
 import {
   AlertTriangle,
   AlertOctagon,
@@ -14,11 +15,9 @@ import {
   X,
   ChevronDown,
   ChevronUp,
-  Phone,
   Building2,
   User,
   FileText,
-  Download,
   FileSpreadsheet,
   Presentation,
 } from "lucide-react";
@@ -50,11 +49,9 @@ export interface Deudor {
   detalleAtraso: string[];     // bullet points para el cuerpo del mail
   rentaTexto: string;          // resumen renta
   notasInternas?: string[];    // observaciones para la plataforma (no van al mail)
-  archivoExcel?: string;       // ruta al Excel de estado de cuenta
-  archivoPpt?: string;         // ruta a la PPT (sólo PP)
 }
 
-const HOY = "06-Julio-2026";
+const HOY = new Intl.DateTimeFormat("es-CL", { dateStyle: "long" }).format(new Date());
 
 export const DEUDORES: Deudor[] = [
   {
@@ -192,13 +189,13 @@ export const DEUDORES: Deudor[] = [
     cuotasPagadas: "0 de 2",
     inicioFacturacion: "01-Jun-2026",
     severidad: "nunca_pago",
-    diagnostico: "Nunca ha pagado — cuotas de junio y julio 2026 vencidas ($952.000 total)",
+    diagnostico: "Nunca ha pagado — cuota de junio ATRASADA ($476.000) y cuota de julio emitida en plazo ($476.000). Saldo total $952.000.",
     rentaTexto:
       "Renta: $400.000 netos/mes durante 2026 (pruebas) · Vigencia 5 años + 3 prórrogas · Desde 01-Ene-2027 tarifa por hora",
     detalleAtraso: [
       "Inicio de facturación: 01-jun-2026 (primera cuota).",
-      "Cuota junio 2026 ($476.000 IVA inc.): vencida, sin pago.",
-      "Cuota julio 2026 ($476.000 IVA inc.): vencida (pago anticipado día 1), sin pago.",
+      "Cuota junio 2026 ($476.000 IVA inc.): ATRASADA (15+ días desde emisión), sin pago.",
+      "Cuota julio 2026 ($476.000 IVA inc.): emitida el 01-jul, en plazo hasta el 16-jul, sin pago.",
       "Equipo ODIN Opticept ya entregado el 01-mar-2026 — sin ningún pago a la fecha (verificado contra cartolas hasta el 30-jun-2026).",
     ],
     notasInternas: [
@@ -221,7 +218,7 @@ export const DEUDORES: Deudor[] = [
     inicioFacturacion: "Pago inicial: 01-may-2026 · Cuotas: 05-may-2026",
     severidad: "leve",
     diagnostico:
-      "AL DÍA al 03-jul-2026 — sin deuda. El pago inicial (factura N°58, 3.051,93 UF = $145.563.464) fue pagado mediante el 'Traspaso de cuenta' de $145.563.465 del 28-abr-2026 (antes figuraba sin clasificar; ya está identificado y conciliado). Las cuotas 1 y 2 (may-jun) también están pagadas. La cuota 3 (julio) vence el 05-jul.",
+      "SIN ATRASO (cartolas al 30-jun). El pago inicial (factura N°58, 3.051,93 UF = $145.563.464) fue pagado mediante el 'Traspaso de cuenta' de $145.563.465 del 28-abr-2026. Las cuotas 1 y 2 (may-jun) también están pagadas. La cuota 3 (julio, ~$7,5MM) se emitió el 05-jul y corre su plazo de 15 días — es el saldo que muestra la tarjeta.",
     rentaTexto:
       "Pago inicial: 3.051,93 UF + IVA = $145.563.464 (factura N°58) · Renta mensual: 155,74 UF + IVA × 24 cuotas anticipadas (primeros 5 días del mes) · Interés penal 1,5% mensual",
     detalleAtraso: [
@@ -391,7 +388,7 @@ Nikolás Romero
 Climate Smart Leasing SpA`,
     },
     F1: {
-      asunto: "Estado de cuenta SCG · Flota Volvo EX30 PLUS y CORE — conciliación al 12-may-2026",
+      asunto: "Estado de cuenta SCG · Flota Volvo EX30 PLUS y CORE — conciliación al 03-jul-2026",
       cuerpo: `Estimado Cristian,
 
 Junto con saludar, te escribo desde Climate Smart Leasing SpA con el estado de cuenta de los dos contratos de arrendamiento de SCG SpA — Flota Volvo EX30 PLUS y Flota Volvo EX30 CORE — conciliado al 3 de julio de 2026 contra los movimientos de la cuenta Santander N° 9427891-0.
@@ -434,7 +431,7 @@ Nikolás Romero
 Climate Smart Leasing SpA`,
     },
     F2: {
-      asunto: "Estado de cuenta SCG · Flota Volvo EX30 PLUS y CORE — conciliación al 12-may-2026",
+      asunto: "Estado de cuenta SCG · Flota Volvo EX30 PLUS y CORE — conciliación al 03-jul-2026",
       cuerpo: `Estimado Cristian,
 
 Junto con saludar, te escribo desde Climate Smart Leasing SpA con el estado de cuenta de los dos contratos de arrendamiento de SCG SpA — Flota Volvo EX30 PLUS y Flota Volvo EX30 CORE — conciliado al 3 de julio de 2026 contra los movimientos de la cuenta Santander N° 9427891-0.
@@ -543,6 +540,33 @@ Saludos cordiales,
 Nikolás Romero
 Climate Smart Leasing SpA`,
     },
+    BA: {
+      asunto: "Estado de cuenta al día · Planta de hielo y proceso — Procesadora Barranco Amarillo",
+      cuerpo: `Estimado Washington,
+
+Junto con saludar, le escribo desde Climate Smart Leasing SpA con el estado de cuenta del contrato de arriendo de equipos de la planta (generador de hielo, Baader 200, unidad condensadora y tablero), conciliado contra nuestra cuenta Santander N° 9427891-0 con cartolas al 30 de junio de 2026.
+
+Le agradezco la puntualidad: tenemos correctamente recibidos el pago inicial (factura N°58 por $145.563.464, recibido el 28 de abril) y las cuotas de mayo (factura N°62, $7.447.842) y junio (factura N°71, $7.542.028). La cuenta está al día, sin atrasos.
+
+Le recuerdo que la cuota de julio (~$7,5 millones IVA incluido) se facturó dentro de los primeros días del mes, con el plazo de pago habitual. Si el pago ya está cursado, omita este recordatorio.
+
+Adjunto el estado de cuenta detallado en Excel con las 24 cuotas del contrato.
+
+Los datos para transferencia son los de siempre:
+
+Banco Santander
+Climate Smart Leasing SpA
+RUT 77.868.887-5
+Cuenta corriente 9427891-0
+Confirmación a: nikolasromero@climatesmartleasing.com
+
+Muchas gracias por la buena disposición.
+
+Saludos cordiales,
+
+Nikolás Romero
+Climate Smart Leasing SpA`,
+    },
   };
 
   return mails[d.id] || { asunto: "Estado de cuenta", cuerpo: "Mail no configurado." };
@@ -560,42 +584,39 @@ export default function Cobranza({ result }: CobranzaProps) {
   const [mailOpen, setMailOpen] = useState<string | null>(null);
   const [copied, setCopied] = useState<"asunto" | "cuerpo" | "todo" | null>(null);
 
-  // Cifras derivadas en tiempo real desde la conciliación. Usa la misma
-  // ventana temporal que el Dashboard (cuotas con fecha ≤ hoy) para que
-  // todos los dashboards muestren el mismo número.
+  // Cifras derivadas de lib/totales.ts (fuente canónica — misma que Dashboard,
+  // Contratos y Consolidado, para que TODO cuadre siempre).
   const today = new Date();
-  const finByContract: Record<string, { esperado: number; pagado: number; deuda: number; cumplimiento: number }> = {};
+  const finByContract: Record<string, Totales> = {};
   for (const cid of Object.keys(result.porContrato)) {
-    const vencidas = result.porContrato[cid].filter(x => {
-      const f = new Date(x.fecha + "T00:00:00");
-      return f <= today && x.totalFacturado > 0;
-    });
-    const esperado = vencidas.reduce((s, x) => s + x.totalFacturado, 0);
-    const pagado = vencidas.reduce((s, x) => s + x.totalPagado, 0);
-    // "Deuda" = sólo lo ATRASADO (facturas impagas con 30+ días desde emisión).
-    // Lo emitido hace <30 días y aún impago está "en plazo", no es deuda vencida.
-    const deuda = vencidas
-      .filter((x) => estaAtrasada(x.fecha, today))
-      .reduce((s, x) => s + Math.max(0, x.totalFacturado - x.totalPagado), 0);
-    const cumplimiento = esperado > 0 ? Math.min(1, pagado / esperado) : 1;
-    finByContract[cid] = { esperado, pagado, deuda, cumplimiento };
+    finByContract[cid] = totalesContrato(result, cid, today);
   }
-  const fin = (d: Deudor) => finByContract[d.contractId] || { esperado: 0, pagado: 0, deuda: 0, cumplimiento: 1 };
+  const FIN_VACIO: Totales = { totalContrato: 0, emitido: 0, pagado: 0, pagadoEmitido: 0, atrasado: 0, enPlazo: 0, saldoEmitido: 0, porFacturar: 0, porFacturarNeto: 0, porPagarTotal: 0, cumplimiento: 1 };
+  const fin = (d: Deudor) => finByContract[d.contractId] || FIN_VACIO;
 
   // Datos para generar Excel/PPT EN EL MOMENTO con las cifras vivas (nunca archivos estáticos)
   const datosExport = (d: Deudor): DatosEstadoCuenta => {
-    const f = fin(d);
     const esSCG = d.contractId === "C-004" || d.contractId === "C-005";
+    // SCG: el Excel/PPT lleva las hojas de AMBOS contratos → el resumen debe
+    // sumar ambos para que cuadre con las hojas adjuntas.
+    const ids = esSCG ? ["C-004", "C-005"] : [d.contractId];
+    const fs = ids.map(id => finByContract[id] || FIN_VACIO);
+    const f = {
+      emitido: fs.reduce((s, x) => s + x.emitido, 0),
+      pagadoEmitido: fs.reduce((s, x) => s + x.pagadoEmitido, 0),
+      saldoEmitido: fs.reduce((s, x) => s + x.saldoEmitido, 0),
+    };
+    const cumplimiento = f.emitido > 0 ? f.pagadoEmitido / f.emitido : 1;
     return {
       nombreArchivo: d.proyecto.split("—")[0].trim().normalize("NFD").replace(/[^A-Za-z0-9]/g, ""),
       proyecto: d.proyecto,
       cliente: d.cliente,
       rut: d.rut,
-      contractIds: esSCG ? ["C-004", "C-005"] : [d.contractId],
-      esperado: f.esperado,
-      pagado: f.pagado,
-      deuda: f.deuda,
-      cumplimiento: f.cumplimiento,
+      contractIds: ids,
+      esperado: f.emitido,
+      pagado: f.pagadoEmitido,
+      deuda: f.saldoEmitido,
+      cumplimiento,
       detalle: d.detalleAtraso,
     };
   };
@@ -614,12 +635,14 @@ export default function Cobranza({ result }: CobranzaProps) {
     const ap = SEVERIDAD_META[a.severidad].priority;
     const bp = SEVERIDAD_META[b.severidad].priority;
     if (ap !== bp) return ap - bp;
-    return fin(b).deuda - fin(a).deuda;
+    return fin(b).saldoEmitido - fin(a).saldoEmitido;
   });
 
-  const totalEsperado = deudores.reduce((s, d) => s + fin(d).esperado, 0);
-  const totalPagado = deudores.reduce((s, d) => s + fin(d).pagado, 0);
-  const totalDeuda = deudores.reduce((s, d) => s + fin(d).deuda, 0);
+  const totalEsperado = deudores.reduce((s, d) => s + fin(d).emitido, 0);
+  const totalPagado = deudores.reduce((s, d) => s + fin(d).pagadoEmitido, 0);
+  const totalSaldo = deudores.reduce((s, d) => s + fin(d).saldoEmitido, 0);
+  const totalAtrasado = deudores.reduce((s, d) => s + fin(d).atrasado, 0);
+  const totalEnPlazo = deudores.reduce((s, d) => s + fin(d).enPlazo, 0);
   const cumpGlobal = totalEsperado > 0 ? totalPagado / totalEsperado : 1;
 
   const copyText = async (text: string, kind: "asunto" | "cuerpo" | "todo") => {
@@ -686,10 +709,12 @@ export default function Cobranza({ result }: CobranzaProps) {
             Saldo a cobrar
           </div>
           <div className="text-2xl font-display font-semibold tabular text-red-700">
-            {fmtCLP(totalDeuda)}
+            {fmtCLP(totalSaldo)}
           </div>
-          <div className="text-xs text-red-500 mt-1">
-            {deudores.filter((d) => fin(d).deuda > 0).length} deudores activos
+          <div className="text-xs mt-1">
+            <span className="text-red-500 font-medium tabular">{fmtCLP(totalAtrasado)} atrasado (15+ días)</span>
+            <span className="text-ink-300"> · </span>
+            <span className="text-amber-600 tabular">{fmtCLP(totalEnPlazo)} en plazo</span>
           </div>
         </div>
         <div className="rounded-2xl bg-gradient-to-br from-csl-50 to-csl-100/50 border border-csl-200 shadow-soft p-5">
@@ -757,7 +782,7 @@ export default function Cobranza({ result }: CobranzaProps) {
                         Esperado
                       </div>
                       <div className="text-sm font-semibold tabular text-ink-700">
-                        {fmtCLP(f.esperado)}
+                        {fmtCLP(f.emitido)}
                       </div>
                     </div>
                     <div>
@@ -765,15 +790,18 @@ export default function Cobranza({ result }: CobranzaProps) {
                         Pagado
                       </div>
                       <div className="text-sm font-semibold tabular text-csl-600">
-                        {fmtCLP(f.pagado)}
+                        {fmtCLP(f.pagadoEmitido)}
                       </div>
                     </div>
                     <div>
                       <div className="text-[10px] font-mono uppercase tracking-wider text-ink-400 mb-1">
-                        Deuda
+                        Saldo
                       </div>
                       <div className="text-base font-semibold tabular text-red-700">
-                        {fmtCLP(f.deuda)}
+                        {fmtCLP(f.saldoEmitido)}
+                      </div>
+                      <div className="text-[10px] tabular text-ink-400">
+                        {f.atrasado > 0 ? `atrasado: ${fmtCLP(f.atrasado)}` : "sin atraso"}
                       </div>
                     </div>
                     <div>
@@ -1011,59 +1039,9 @@ export default function Cobranza({ result }: CobranzaProps) {
                         </pre>
                       </div>
 
-                      {/* Adjuntos descargables */}
-                      {(d.archivoExcel || d.archivoPpt) && (
-                        <div>
-                          <div className="text-[10px] font-mono uppercase tracking-wider text-ink-400 mb-2">
-                            Adjuntos para enviar
-                          </div>
-                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                            {d.archivoExcel && (
-                              <a
-                                href={d.archivoExcel}
-                                download
-                                className="flex items-center gap-3 px-4 py-3 rounded-lg bg-emerald-50 border border-emerald-200 hover:bg-emerald-100 transition-colors group"
-                              >
-                                <div className="w-9 h-9 rounded-lg bg-emerald-600 flex items-center justify-center shrink-0">
-                                  <FileSpreadsheet className="w-4 h-4 text-white" />
-                                </div>
-                                <div className="flex-1 min-w-0">
-                                  <div className="text-sm font-semibold text-ink-900 truncate">
-                                    Estado de cuenta
-                                  </div>
-                                  <div className="text-[11px] text-ink-500 truncate">
-                                    Excel con todas las cuotas y pagos
-                                  </div>
-                                </div>
-                                <Download className="w-4 h-4 text-emerald-700 shrink-0 group-hover:translate-y-0.5 transition-transform" />
-                              </a>
-                            )}
-                            {d.archivoPpt && (
-                              <a
-                                href={d.archivoPpt}
-                                download
-                                className="flex items-center gap-3 px-4 py-3 rounded-lg bg-amber-50 border border-amber-200 hover:bg-amber-100 transition-colors group"
-                              >
-                                <div className="w-9 h-9 rounded-lg bg-amber-600 flex items-center justify-center shrink-0">
-                                  <Presentation className="w-4 h-4 text-white" />
-                                </div>
-                                <div className="flex-1 min-w-0">
-                                  <div className="text-sm font-semibold text-ink-900 truncate">
-                                    Presentación
-                                  </div>
-                                  <div className="text-[11px] text-ink-500 truncate">
-                                    PPT para la reunión de regularización
-                                  </div>
-                                </div>
-                                <Download className="w-4 h-4 text-amber-700 shrink-0 group-hover:translate-y-0.5 transition-transform" />
-                              </a>
-                            )}
-                          </div>
-                          <div className="text-[10px] text-ink-400 mt-2 italic">
-                            Descarga los archivos y adjúntalos manualmente al correo antes de enviarlo.
-                          </div>
-                        </div>
-                      )}
+                      <div className="text-[10px] text-ink-400 italic">
+                        Los adjuntos (Excel y PPT) se generan con los botones de la tarjeta del deudor — siempre con los datos conciliados al día.
+                      </div>
                     </div>
 
                     {/* Modal footer */}
