@@ -19,7 +19,8 @@ export interface OrdenCompra {
   titulo: string;             // nombre/título de la orden de compra
   cliente: string;            // razón social del cliente que emite la OC
   fechaOrdenCompra?: string;  // fecha de la OC (ISO); undefined si el documento aún no se sube
-  archivo?: string;           // PDF de respaldo (en base de datos, NO se muestra en la página)
+  archivo?: string;           // PDF de respaldo (nombre interno de referencia)
+  docUrl?: string;            // URL pública de la OC (PDF en /public/documentos/…). Si está, se muestra botón de descarga.
   facturas: FacturaOC[];
 }
 
@@ -29,6 +30,7 @@ export const ORDENES_COMPRA: OrdenCompra[] = [
     titulo: "Estudio IT Reciclaje de aguas",
     cliente: "Bebidas Funcionales Caelum SpA",
     fechaOrdenCompra: undefined, // documento por subir
+    docUrl: "/documentos/ordenes-compra/OC-001.pdf",
     facturas: [
       // Pagadas: los abonos de Caelum ($1MM+$5MM+$4MM mar-2025 + $1,9MM ene-2026 = $11,9MM)
       // cubren el total de la OC. Fecha de pago por factura estimada por orden FIFO.
@@ -42,6 +44,7 @@ export const ORDENES_COMPRA: OrdenCompra[] = [
     titulo: "Estudio analítica de aguas",
     cliente: "CG Metrics SpA",
     fechaOrdenCompra: undefined, // documento por subir
+    docUrl: "/documentos/ordenes-compra/OC-002.pdf",
     facturas: [
       // Pagada: CG Metrics transfirió $788.002 (07-jul) + $5.000.000 (10-jul) = $5.788.002 exacto.
       { folio: 17, fecha: "2025-07-01", uf: null, neto: 4_863_867, total: 5_788_002, pagado: 5_788_002, fechaPago: "2025-07-10" },
@@ -52,6 +55,7 @@ export const ORDENES_COMPRA: OrdenCompra[] = [
     titulo: "Cabezal maquinaria fertilizantes",
     cliente: "Comercializadora Resin & Polimers Technology Limitada",
     fechaOrdenCompra: undefined, // documento por subir
+    docUrl: "/documentos/ordenes-compra/OC-003.pdf",
     facturas: [
       // Curtain lamella model H008647. Pagada: 4 transferencias de COMERCIALIZADORA
       // (RUT 76.058.363-4) el 26-jun-2026 = $17.205.087 exacto (resuelve pendiente #1 del HANDOFF).

@@ -3,7 +3,7 @@
 import { Fragment } from "react";
 import { ORDENES_COMPRA, FacturaOC } from "@/lib/ordenesCompra";
 import { fmtCLP, fmtDate } from "@/lib/format";
-import { FileText } from "lucide-react";
+import { FileText, Download } from "lucide-react";
 
 function estadoDe(f: FacturaOC): { label: string; cls: string } {
   const pagado = f.pagado ?? 0;
@@ -75,6 +75,18 @@ export default function OrdenesCompra() {
                           {" · O.C.: "}
                           {o.fechaOrdenCompra ? fmtDate(o.fechaOrdenCompra) : "—"}
                         </span>
+                        {o.docUrl && (
+                          <a
+                            href={o.docUrl}
+                            download
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-1 ml-3 text-csl-700 hover:text-csl-800 font-medium"
+                          >
+                            <Download className="w-3.5 h-3.5" />
+                            Descargar OC
+                          </a>
+                        )}
                       </td>
                     </tr>
                     {o.facturas.map((f) => {

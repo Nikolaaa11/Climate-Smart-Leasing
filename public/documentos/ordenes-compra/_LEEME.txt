@@ -1,0 +1,16 @@
+ÓRDENES DE COMPRA — PDFs para descarga en la web
+=================================================
+
+Coloca aquí el PDF de cada orden de compra con EXACTAMENTE este nombre.
+El link "Descargar OC" de cada fila-título apunta a estos archivos:
+
+  OC-001.pdf  → Estudio IT Reciclaje de aguas — Bebidas Funcionales Caelum SpA
+  OC-002.pdf  → Estudio analítica de aguas — CG Metrics SpA
+  OC-003.pdf  → Cabezal maquinaria fertilizantes — Comercializadora Resin & Polimers Technology Ltda.
+
+IMPORTANTE:
+- El nombre debe coincidir EXACTO (mayúsculas, guion y extensión .pdf).
+- Si una OC aún no tiene PDF, su link dará error 404 hasta que subas el archivo.
+  Si prefieres que NO aparezca el link para esa OC, avísame y quito su
+  "docUrl" en lib/ordenesCompra.ts.
+- Tras copiar los PDFs, hay que hacer commit + push para que Vercel los publique.

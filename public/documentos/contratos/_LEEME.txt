@@ -1,0 +1,20 @@
+CONTRATOS FIRMADOS — PDFs para descarga en la web
+==================================================
+
+Coloca aquí el PDF de cada contrato con EXACTAMENTE este nombre.
+El botón "Descargar contrato (PDF)" de cada tarjeta apunta a estos archivos:
+
+  C-001.pdf   → Puerta Patagonia (Vilanova) — Comunidad Edificio Puerta Patagonia
+  C-002.pdf   → Vikingos — Comunidad Edificio Los Vikingos
+  C-003.pdf   → Trongkai — Agrotecnologías e Ingeniería SpA
+  C-004.pdf   → Flota 1 (Volvo EX30 PLUS)
+  C-005.pdf   → Flota 2 (Volvo EX30 CORE)
+  C-006.pdf   → Barranco Amarillo
+  C-007.pdf   → Axopur 1 — Bebidas Funcionales Caelum SpA
+
+IMPORTANTE:
+- El nombre debe coincidir EXACTO (mayúsculas, guion y extensión .pdf).
+- Si un contrato aún no tiene PDF, su botón dará error 404 hasta que subas el archivo.
+  Si prefieres que NO aparezca el botón para ese contrato, avísame y quito su
+  "docUrl" en lib/contracts.ts.
+- Tras copiar los PDFs, hay que hacer commit + push para que Vercel los publique.

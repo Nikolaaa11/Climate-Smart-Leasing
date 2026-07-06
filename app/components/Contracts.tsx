@@ -5,7 +5,7 @@ import { CONTRACTS, EstadoObra } from "@/lib/contracts";
 import { ConciliationResult } from "@/lib/conciliation";
 import { fmtCLP, fmtUF, fmtDate, fmtDateLong, fmtPct } from "@/lib/format";
 import StatusPill from "./StatusPill";
-import { ChevronDown, FileText, MapPin, User, Calendar, CreditCard, AlertTriangle, CheckCircle2, Circle, Clock } from "lucide-react";
+import { ChevronDown, FileText, MapPin, User, Calendar, CreditCard, AlertTriangle, CheckCircle2, Circle, Clock, Download } from "lucide-react";
 
 interface Props {
   result: ConciliationResult;
@@ -111,6 +111,22 @@ export default function Contracts({ result }: Props) {
                       {c.interesMora}
                     </Meta>
                   </div>
+
+                  {/* Descarga del contrato firmado */}
+                  {c.docUrl && (
+                    <div className="px-6 py-4 border-t border-black/[0.04]">
+                      <a
+                        href={c.docUrl}
+                        download
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-csl-600 text-white text-sm font-medium hover:bg-csl-700 transition-colors shadow-soft"
+                      >
+                        <Download className="w-4 h-4" />
+                        Descargar contrato (PDF)
+                      </a>
+                    </div>
+                  )}
 
                   {c.obs && (
                     <div className="px-6 py-4 bg-amber-50/40 border-t border-amber-100/60">

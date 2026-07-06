@@ -49,6 +49,7 @@ export interface Contract {
   interesMora: string;
   cuentaDestino: string;
   docFuente: string;
+  docUrl?: string;           // URL pública del contrato firmado (PDF en /public/documentos/…). Si está, se muestra botón de descarga.
   obs: string;
   // Hitos de recepción de obra (opcional — sólo proyectos de instalación)
   estadoObra?: EstadoObra;
@@ -80,6 +81,7 @@ export const CONTRACTS: Contract[] = [
     interesMora: "Interés máximo convencional",
     cuentaDestino: "Banco Santander Cta. Cte. N° 9427-8910",
     docFuente: "Contrato_Comunidad.pdf (24/10/2025) — protocolizado en Contrato_firmado__Vilanova.pdf y Contrato_firmado__Geist_1_VILANOVA.pdf (02/12/2025). Los 3 PDFs son el MISMO contrato.",
+    docUrl: "/documentos/contratos/C-001.pdf",
     obs: "Renta: 67,127 UF + IVA × 36 cuotas, facturadas desde marzo-2026 (facturas N°52, 64, 69...). Anticipo: $10.000.000 + IVA facturado en 6 facturas mensuales INDEPENDIENTES de $1.666.667 + IVA c/u, dic-2025 → may-2026 (facturas N°43, 47, 53, 63 + 2 anteriores). Facturación real confirmada contra PDFs SII el 10/06/2026. Partner instalador: Servicios de Ingeniería Geist SpA (RUT 77.275.038-2). Equipos: 2× Bombas de Calor Powerworld Air Heat Pump 60 kW R290 + 2× sistemas de recirculación Friwasta Z-60-K + 4× estanques de inercia 1.700L + sistema de bombeo + tablero eléctrico de fuerza y control con monitoreo PHI.",
     estadoObra: "recepcion-definitiva",
     recepciones: [
@@ -127,6 +129,7 @@ export const CONTRACTS: Contract[] = [
     interesMora: "Interés máximo convencional + bloqueo/suspensión tras 10 días hábiles de mora",
     cuentaDestino: "Banco Santander Cta. Cte. N° 9427-8910",
     docFuente: "CONTRATO_PROYECTO_DE_SOLUCION_VIKINGOS2_6906770_1.pdf",
+    docUrl: "/documentos/contratos/C-002.pdf",
     obs: "Anticipo: $20.000.000 IVA incluido en UNA cuota para dar inicio a los trabajos. ⚠️ El contrato indica RUT 53.319.273-4 (idéntico a Puerta Patagonia) — corresponde a error de transcripción. El RUT verificado en cartola Mayo/2026 es 53.321.997-7. Confirmar y emitir adenda al contrato.",
   },
   {
@@ -152,6 +155,7 @@ export const CONTRACTS: Contract[] = [
     interesMora: "Término anticipado del contrato por retraso > 60 días corridos",
     cuentaDestino: "Por confirmar (contrato no especifica)",
     docFuente: "CONTRATO_DE_Arrendamiento_equipo_Electroporación_CSLTrongkai__Rev_3_JP_JCV.pdf",
+    docUrl: "/documentos/contratos/C-003.pdf",
     obs: "Equipo: ODIN de Opticept Technologies AB (Suecia) — capacidad 4 m³/h. Entregado físicamente 01/03/2026 en instalaciones RASOIL Talca. Cuota fija $400.000 netos/mes desde 01/05/2026 hasta 31/12/2026 (8 cuotas). Desde 01/01/2027: tarifa por hora escalonada (75k → 4.688 $/h). El modelo de tarifa horaria 2027+ NO se modela en este sistema.",
   },
   {
@@ -180,6 +184,7 @@ export const CONTRACTS: Contract[] = [
     interesMora: "Reajuste por UF",
     cuentaDestino: "Banco Santander Cta. Cte. N° 9427-8910",
     docFuente: "Contrato_firmado__Flota_1.pdf",
+    docUrl: "/documentos/contratos/C-004.pdf",
     obs: "Leasing con opción de compra. Vehículo Volvo EX30 PLUS 100% Eléctrico, nuevo. Proveedor: Automotriz Cordillera S.A. Primera renta (82,86 UF) pagada al firmar; cuotas regulares de 25,58 UF + IVA. El pagador es Cristian Eduardo (representante legal de SCG) desde su cuenta personal.",
   },
   {
@@ -208,6 +213,7 @@ export const CONTRACTS: Contract[] = [
     interesMora: "Reajuste por UF",
     cuentaDestino: "Banco Santander Cta. Cte. N° 9427-8910",
     docFuente: "Contrato_firmado__Flota_2.pdf",
+    docUrl: "/documentos/contratos/C-005.pdf",
     obs: "Leasing con opción de compra. Vehículo Volvo EX30 CORE E60 100% Eléctrico, nuevo, patente SR GY 82. Proveedor: Automotriz Cordillera S.A. Mismo cliente y pagador que Flota 1.",
   },
   {
@@ -231,6 +237,7 @@ export const CONTRACTS: Contract[] = [
     interesMora: "Interés penal 1,5% mensual",
     cuentaDestino: "Banco Santander Cta. Cte. N° 9427-8910",
     docFuente: "Contrato firmado. Barranco Amarillo.pdf (firma electrónica avanzada Juan Pablo González Jaramillo, 04/05/2026).",
+    docUrl: "/documentos/contratos/C-006.pdf",
     obs: "Contrato de arrendamiento de equipos usados/reacondicionados, plazo fijo 24 meses (término 05/04/2028). Pago inicial de 3.051,93 UF + IVA = $145.563.464 (factura SII F58, 01/05/2026), pagado vía 'Traspaso de cuenta' $145.563.465 el 28/04/2026 + 24 cuotas mensuales de 155,74 UF + IVA (anticipadas, 05/05/2026 → 05/04/2028, facturas F62 cuota 1/24, F71 cuota 2/24…), reajuste por UF. Equipos: Generador de hielo en escama 10 TON/24h (ICEMTS MIFE-HT, R507), Máquina Baader Ba200, Unidad condensadora ICEMTS 10 TONS (2× compresores Bock HGX66E + condensador HCV6304) y tablero eléctrico de fuerza (Siemens TP700 Comfort / PLC S7-1200). RUT pagador por verificar contra cartola.",
   },
   {
@@ -254,6 +261,7 @@ export const CONTRACTS: Contract[] = [
     interesMora: "Término anticipado del contrato por retraso > 90 días corridos",
     cuentaDestino: "Banco Santander Cta. Cte. N° 9427-8910",
     docFuente: "Contrato firmado. Axopur 1.pdf (firmado 26/05/2026, Concepción).",
+    docUrl: "/documentos/contratos/C-007.pdf",
     obs: "Contrato de arriendo de equipo Axopur (electrocoagulación / electropulsos), fabricado por Axolot (Suecia), capacidad 55 L/hora. Equipo entregado físicamente 01/06/2026 en instalaciones de Caelum. Precio (Cláusula Sexto): pago inicial $7.500.000 netos + 48 cuotas de 22,66 UF + IVA, emitidas los primeros 5 días de cada mes desde junio 2026. Término anticipado por retraso > 90 días corridos. Contacto: Sebastián Riquelme, s.riquelme@udt.cl, +56 9 6909 2261. Facturas emitidas a la fecha: F77, F78, F79 (pendientes de cargar montos exactos y conciliar pagos).",
   },
 ];
