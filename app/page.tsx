@@ -7,9 +7,7 @@ import Dashboard from "./components/Dashboard";
 import Contracts from "./components/Contracts";
 import Schedule from "./components/Schedule";
 import Movements from "./components/Movements";
-import AccountVerification from "./components/AccountVerification";
 import CartolaUpload from "./components/CartolaUpload";
-import GeistReconciliation from "./components/GeistReconciliation";
 import Cobranza from "./components/Cobranza";
 import { ABONOS, Abono } from "@/lib/abonos";
 import { CONTRACTS } from "@/lib/contracts";
@@ -70,10 +68,8 @@ export default function Home() {
         <Dashboard result={result} />
         <Contracts result={result} />
         <Cobranza result={result} />
-        <GeistReconciliation />
         <Schedule result={result} />
         <Movements abonos={allAbonos} />
-        <AccountVerification />
         <CartolaUpload
           onApply={(newAbonos) => {
             const toAdd: Abono[] = newAbonos.map(({ identifiedContract, identifiedReason, ...rest }) => rest);
