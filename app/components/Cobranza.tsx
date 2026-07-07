@@ -343,14 +343,14 @@ Banco Santander
 Climate Smart Leasing SpA
 RUT 77.868.887-5
 Cuenta corriente 9427891-0
-Confirmación a: nikolasromero@climatesmartleasing.com
+Confirmación a: jgonzalez@climatesmartleasing.com
 
 Quedo atento a sus comentarios.
 
 Saludos cordiales,
 
-Nikolás Romero
-Climate Smart Leasing SpA`,
+Juan Pablo González Jaramillo
+Gerente General · Climate Smart Leasing SpA`,
     },
     VK: {
       asunto: "Estado de cuenta · Sistema ACS — Comunidad Edificio Los Vikingos",
@@ -381,14 +381,14 @@ Banco Santander
 Climate Smart Leasing SpA
 RUT 77.868.887-5
 Cuenta corriente 9427891-0
-Confirmación a: nikolasromero@climatesmartleasing.com
+Confirmación a: jgonzalez@climatesmartleasing.com
 
 Muchas gracias por su buena disposición.
 
 Saludos cordiales,
 
-Nikolás Romero
-Climate Smart Leasing SpA`,
+Juan Pablo González Jaramillo
+Gerente General · Climate Smart Leasing SpA`,
     },
     F1: {
       asunto: "Estado de cuenta SCG · Flota Volvo EX30 PLUS y CORE — conciliación al 03-jul-2026",
@@ -424,14 +424,14 @@ Banco Santander
 Climate Smart Leasing SpA
 RUT 77.868.887-5
 Cuenta corriente 9427891-0
-Confirmación a: nikolasromero@climatesmartleasing.com
+Confirmación a: jgonzalez@climatesmartleasing.com
 
 Muchas gracias por la puntualidad de siempre, Cristian. Cualquier duda, conversemos.
 
 Saludos,
 
-Nikolás Romero
-Climate Smart Leasing SpA`,
+Juan Pablo González Jaramillo
+Gerente General · Climate Smart Leasing SpA`,
     },
     F2: {
       asunto: "Estado de cuenta SCG · Flota Volvo EX30 PLUS y CORE — conciliación al 03-jul-2026",
@@ -467,14 +467,14 @@ Banco Santander
 Climate Smart Leasing SpA
 RUT 77.868.887-5
 Cuenta corriente 9427891-0
-Confirmación a: nikolasromero@climatesmartleasing.com
+Confirmación a: jgonzalez@climatesmartleasing.com
 
 Muchas gracias por la puntualidad de siempre, Cristian. Cualquier duda, conversemos.
 
 Saludos,
 
-Nikolás Romero
-Climate Smart Leasing SpA`,
+Juan Pablo González Jaramillo
+Gerente General · Climate Smart Leasing SpA`,
     },
     TK: {
       asunto: "Primera cuota pendiente · Contrato ODIN Opticept — Agrotecnologías e Ingeniería",
@@ -503,14 +503,14 @@ Banco Santander
 Climate Smart Leasing SpA
 RUT 77.868.887-5
 Cuenta corriente 9427891-0
-Confirmación a: nikolasromero@climatesmartleasing.com
+Confirmación a: jgonzalez@climatesmartleasing.com
 
 Quedo atento a sus comentarios.
 
 Saludos cordiales,
 
-Nikolás Romero
-Climate Smart Leasing SpA`,
+Juan Pablo González Jaramillo
+Gerente General · Climate Smart Leasing SpA`,
     },
     AX: {
       asunto: "Confirmación de pagos · Contrato Axopur — Bebidas Funcionales Caelum",
@@ -534,14 +534,14 @@ Banco Santander
 Climate Smart Leasing SpA
 RUT 77.868.887-5
 Cuenta corriente 9427891-0
-Confirmación a: nikolasromero@climatesmartleasing.com
+Confirmación a: jgonzalez@climatesmartleasing.com
 
 Quedo atento a sus comentarios.
 
 Saludos cordiales,
 
-Nikolás Romero
-Climate Smart Leasing SpA`,
+Juan Pablo González Jaramillo
+Gerente General · Climate Smart Leasing SpA`,
     },
     BA: {
       asunto: "Estado de cuenta al día · Planta de hielo y proceso — Procesadora Barranco Amarillo",
@@ -561,14 +561,14 @@ Banco Santander
 Climate Smart Leasing SpA
 RUT 77.868.887-5
 Cuenta corriente 9427891-0
-Confirmación a: nikolasromero@climatesmartleasing.com
+Confirmación a: jgonzalez@climatesmartleasing.com
 
 Muchas gracias por la buena disposición.
 
 Saludos cordiales,
 
-Nikolás Romero
-Climate Smart Leasing SpA`,
+Juan Pablo González Jaramillo
+Gerente General · Climate Smart Leasing SpA`,
     },
   };
 
