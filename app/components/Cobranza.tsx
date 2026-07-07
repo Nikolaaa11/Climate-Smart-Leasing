@@ -194,8 +194,8 @@ export const DEUDORES: Deudor[] = [
       "Renta: $400.000 netos/mes durante 2026 (pruebas) · Vigencia 5 años + 3 prórrogas · Desde 01-Ene-2027 tarifa por hora",
     detalleAtraso: [
       "Inicio de facturación: 01-jun-2026 (primera cuota).",
-      "Cuota junio 2026 ($476.000 IVA inc.): ATRASADA (15+ días desde emisión), sin pago.",
-      "Cuota julio 2026 ($476.000 IVA inc.): emitida el 01-jul, en plazo hasta el 16-jul, sin pago.",
+      "Cuota junio 2026 ($476.000 IVA inc.): ATRASADA (más de 30 días desde emisión), sin pago.",
+      "Cuota julio 2026 ($476.000 IVA inc.): emitida el 01-jul, en plazo (indicador de atraso a 30 días), sin pago.",
       "Equipo ODIN Opticept ya entregado el 01-mar-2026 — sin ningún pago a la fecha (verificado contra cartolas hasta el 30-jun-2026).",
     ],
     notasInternas: [
@@ -715,7 +715,7 @@ export default function Cobranza({ result }: CobranzaProps) {
             {fmtCLP(totalSaldo)}
           </div>
           <div className="text-xs mt-1">
-            <span className="text-red-500 font-medium tabular">{fmtCLP(totalAtrasado)} atrasado (15+ días)</span>
+            <span className="text-red-500 font-medium tabular">{fmtCLP(totalAtrasado)} atrasado (30+ días)</span>
             <span className="text-ink-300"> · </span>
             <span className="text-amber-600 tabular">{fmtCLP(totalEnPlazo)} en plazo</span>
           </div>
