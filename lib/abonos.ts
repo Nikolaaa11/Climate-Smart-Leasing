@@ -177,8 +177,7 @@ export const ABONOS: Abono[] = [
   { fecha: "2026-06-26", monto: 5_000_000, glosa: "0760583634 Transf. COMERCIALIZADOR", doc: "001305014", cartolaMes: "Cartola N°26 (Junio 2026)" },
   { fecha: "2026-06-26", monto: 5_000_000, glosa: "0760583634 Transf. COMERCIALIZADOR", doc: "001305014", cartolaMes: "Cartola N°26 (Junio 2026)" },
   { fecha: "2026-06-26", monto: 2_205_087, glosa: "0760583634 Transf. COMERCIALIZADOR", doc: "001305014", cartolaMes: "Cartola N°26 (Junio 2026)" },
-  // ===== CARTOLA N°27 (30/06/2026 - 27/07/2026) — Abonos $23.701.765 =====
-  { fecha: "2026-07-03", monto: 450_000, glosa: "Asesoria Marketing Erick Mendez BH (abono/reverso)", doc: "003500110", cartolaMes: "Cartola N°27 (Julio 2026)" },
+  // ===== CARTOLA N°27 (30/06/2026 - 27/07/2026) — Abonos (EXCLUYE el reverso de marketing $450.000, no es pago de cliente) =====
   { fecha: "2026-07-06", monto: 7_567_790, glosa: "00781918873 Pago de Provee", doc: "003500260", cartolaMes: "Cartola N°27 (Julio 2026)" },
   { fecha: "2026-07-10", monto: 1_983_334, glosa: "0533192734 Transf de CODOMINIO PUE", doc: "000000000", cartolaMes: "Cartola N°27 (Julio 2026)" },
   { fecha: "2026-07-13", monto: 1_983_334, glosa: "0533192734 Transf de CODOMINIO PUE", doc: "000000000", cartolaMes: "Cartola N°27 (Julio 2026)" },
