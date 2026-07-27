@@ -86,7 +86,9 @@ export const CARGOS: Cargo[] = [
   { fecha: "2026-06-01", monto: 450_000, glosa: "Servicio de Administración de red", doc: "466167525", cartolaMes: "Cartola N°26 (Junio 2026)" },
   { fecha: "2026-06-11", monto: 1_520_239, glosa: "Factura 44312. Google Workspace", doc: "467591120", cartolaMes: "Cartola N°26 (Junio 2026)" },
   { fecha: "2026-06-11", monto: 12_876_350, glosa: "Remanente Factura", doc: "469024563", cartolaMes: "Cartola N°26 (Junio 2026)" },
-  { fecha: "2026-06-15", monto: 10_710_000, glosa: "Factura 41. PTEC CÓDIGO 25PTECVR3", doc: "469091506", cartolaMes: "Cartola N°26 (Junio 2026)" },
+  // EXCLUIDO: cargo ERRÓNEO de $10.710.000 (Factura 41 PTEC) — se compensa exactamente
+  // con los 2 abonos PTEC del 11-06 ($7.000.000 + $3.710.000) que también se excluyen
+  // (ver abonos.ts). Wash bancario, neto $0; no corresponde a un egreso real.
   { fecha: "2026-06-17", monto: 5_843_693, glosa: "Número de póliza 1257104", doc: "470013146", cartolaMes: "Cartola N°26 (Junio 2026)" },
   { fecha: "2026-06-17", monto: 338_428, glosa: "Factura 12025", doc: "470254542", cartolaMes: "Cartola N°26 (Junio 2026)" },
   { fecha: "2026-06-19", monto: 1_524_763, glosa: "Pago F29 Mes de Mayo", doc: "470416557", cartolaMes: "Cartola N°26 (Junio 2026)" },

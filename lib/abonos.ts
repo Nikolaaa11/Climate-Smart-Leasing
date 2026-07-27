@@ -165,8 +165,9 @@ export const ABONOS: Abono[] = [
 
   // ============ JUNIO 2026 (Cartola oficial N°26: 29/05 - 30/06/2026) ============
   { fecha: "2026-06-01", monto: 7_447_842, glosa: "00781918873 30.05 NOMINA PAGO PROV", doc: "466674200", cartolaMes: "Cartola N°26 (Junio 2026)" },
-  { fecha: "2026-06-11", monto: 7_000_000, glosa: "Factura 41. PTEC CODIGO25PTECVR30", doc: "094278910", cartolaMes: "Cartola N°26 (Junio 2026)" },
-  { fecha: "2026-06-11", monto: 3_710_000, glosa: "Factura 41. PTEC CODIGO25PTECVR30", doc: "094278910", cartolaMes: "Cartola N°26 (Junio 2026)" },
+  // EXCLUIDOS: los 2 abonos "Factura 41 PTEC" del 11-06 ($7.000.000 + $3.710.000 =
+  // $10.710.000) son la contrapartida del cargo ERRÓNEO de $10.710.000 del 15-06
+  // (ver cargos.ts). Entra y sale el mismo monto (wash, neto $0), no es un pago de cliente.
   { fecha: "2026-06-11", monto: 1_983_334, glosa: "0533192734 Transf de CODOMINIO PUE", doc: "0", cartolaMes: "Cartola N°26 (Junio 2026)" },
   { fecha: "2026-06-15", monto: 7_542_028, glosa: "00781918873 Pago de Provee", doc: "469563714", cartolaMes: "Cartola N°26 (Junio 2026)" },
   { fecha: "2026-06-16", monto: 2_483_824, glosa: "0533219977 Transf. EDIFICIO LOS VI", doc: "016001415", cartolaMes: "Cartola N°26 (Junio 2026)" },
