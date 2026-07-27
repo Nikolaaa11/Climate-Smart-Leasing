@@ -307,7 +307,7 @@ export function generateCuotasForContract(c: Contract): Cuota[] {
       totalPagado: 0,
       estado: "vencida-sin-pago",
       matchedAbonos: [],
-      notas: "⚠️ Precio asumido = $17.205.087 recibidos el 26/06/2026 (4 transferencias, cartola N°26). Confirmar contra contrato de compraventa (precio pactado, neto/IVA).",
+      notas: "Compraventa a Resin & Polimers: neto $14.458.056 + IVA = $17.205.087, pagada el 26/06/2026 en 4 transferencias (cartola N°26). Pendiente: subir el contrato de compraventa firmado.",
     });
     return cuotas;
   }

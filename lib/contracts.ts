@@ -268,12 +268,12 @@ export const CONTRACTS: Contract[] = [
   {
     id: "C-008",
     tipo: "compraventa",
-    proyecto: "Compraventa Comercializadora",
-    cliente: "Comercializadora (razón social por confirmar)",
+    proyecto: "Resin & Polimers 1",
+    cliente: "Comercializadora Resin & Polimers Technology Limitada",
     rutCliente: "76.058.363-4",
     rutPagadorBanco: "0760583634",
     repLegal: "Por confirmar",
-    direccion: "Por confirmar",
+    direccion: "Av. Bernardo O'Higgins 241, of. 805, Torre O'Higgins, Concepción",
     fechaFirma: "2026-06-26",
     fechaInicioPagos: "2026-06-26",
     monedaRenta: "CLP",
@@ -285,8 +285,8 @@ export const CONTRACTS: Contract[] = [
     plazoPagoDias: "Contado",
     interesMora: "N/A",
     cuentaDestino: "Banco Santander Cta. Cte. N° 9427-8910",
-    docFuente: "SIN CONTRATO EN ARCHIVO — registrado a partir de las 4 transferencias recibidas el 26/06/2026 (cartola N°26).",
-    obs: "⚠️ COMPRAVENTA POR CONFIRMAR (contrato N°8): el 26-jun-2026 se recibieron $17.205.087 en 4 transferencias (3× $5.000.000 + $2.205.087) desde el RUT 76.058.363-4, glosa 'Transf. COMERCIALIZADOR'. Se registra como compraventa con precio = monto recibido, a la espera del contrato firmado: confirmar razón social del cliente, precio pactado, detalle de equipos vendidos y si el monto es neto o IVA incluido. Al recibir el PDF, actualizar este registro y subirlo a /public/contratos.",
+    docFuente: "Factura SII N°74 (11-may-2026). Contrato de compraventa firmado aún SIN ARCHIVO — el registro se apoya en la factura y en las 4 transferencias recibidas el 26/06/2026 (cartola N°26).",
+    obs: "COMPRAVENTA a Comercializadora Resin & Polimers Technology Ltda (RUT 76.058.363-4). Facturada con la Factura SII N°74 (11-may-2026): 'Curtain lamella, model drawing H008647, incluye documentación y planos de ingeniería' — neto $14.458.056 + IVA $2.747.031 = $17.205.087. Pagada el 26-jun-2026 en 4 transferencias (3× $5.000.000 + $2.205.087) desde el RUT 76.058.363-4, glosa 'Transf. COMERCIALIZADOR'. Pendiente: subir el contrato de compraventa firmado a /public/contratos (confirmar rep. legal y detalle de equipos).",
   },
 ];
 

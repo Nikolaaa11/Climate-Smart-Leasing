@@ -70,6 +70,7 @@ export const FACTURAS: FacturaSII[] = [
   { folio: 79, contrato: "C-007", cuotaKey: "Pago inicial", fecha: "2026-06-30", uf: null, valorUf: null, neto: 7500000, iva: 1425000, total: 8925000 },
   { folio: 77, contrato: "C-007", cuotaKey: "Cuota 1/48", fecha: "2026-06-30", uf: 22.66, valorUf: 40160, neto: 910026, iva: 172905, total: 1082931 },
   { folio: 78, contrato: "C-007", cuotaKey: "Cuota 2/48", fecha: "2026-06-30", uf: 22.66, valorUf: 40661, neto: 921378, iva: 175062, total: 1096440 },
+  { folio: 74, contrato: "C-008", cuotaKey: "Pago compraventa", fecha: "2026-05-11", uf: null, valorUf: null, neto: 14458056, iva: 2747031, total: 17205087 },
 ];
 
 /** Índice contrato|cuotaKey -> factura, para overlay en la conciliación. */
