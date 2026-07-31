@@ -11,7 +11,7 @@
 //   porPagarTotal  = totalContrato − pagado
 // ============================================================================
 
-import { ConciliationResult, Cuota, estaAtrasada } from "./conciliation";
+import { ConciliationResult, Cuota, estaAtrasada, EPS_REDONDEO } from "./conciliation";
 
 export interface Totales {
   /** Suma de TODAS las cuotas del contrato (pasadas y futuras) */
@@ -58,11 +58,18 @@ export function totalesDeCuotas(cuotas: Cuota[], hoy: Date = new Date()): Totale
       // El asignador nunca aplica más que lo facturado a una cuota, pero el
       // cap protege la identidad ante cualquier caso borde.
       const aplicado = Math.min(c.totalPagado, c.totalFacturado);
-      pagadoEmitido += aplicado;
       const saldo = c.totalFacturado - aplicado;
-      if (saldo > 0) {
-        if (estaAtrasada(c.fecha, hoy)) atrasado += saldo;
-        else enPlazo += saldo;
+      if (saldo > 0 && saldo <= EPS_REDONDEO) {
+        // Residuo de conversión UF (unos pocos pesos): NO es deuda. Se da por
+        // pagado para que el KPI de atraso calce con la píldora "Pagada" que
+        // muestra la cuota, y para preservar emitido = pagado + atrasado + enPlazo.
+        pagadoEmitido += aplicado + saldo;
+      } else {
+        pagadoEmitido += aplicado;
+        if (saldo > 0) {
+          if (estaAtrasada(c.fecha, hoy)) atrasado += saldo;
+          else enPlazo += saldo;
+        }
       }
     } else {
       porFacturar += c.totalFacturado;

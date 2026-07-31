@@ -87,15 +87,15 @@ Cifras verificadas con `npm run cuadratura` tras cargar la cartola N°27.
 | Contrato | Cliente | Estado | Vencido | En plazo |
 |---|---|---|---|---|
 | C-001 Puerta Patagonia | Comunidad Ed. Puerta Patagonia (53.319.273-4) | 🔴 **GRAVE** — 3 facturas vencidas (F63, F64, F69). En julio pagó DOS anticipos (10 y 13-jul), saldando F47 y F53. Cumplimiento 58,1%. | **$8.446.965** | $3.260.773 |
-| C-002 Vikingos | Comunidad Ed. Los Vikingos (53.321.997-7) | 🟢 Al día — renta de agosto (F83) pagada anticipada el 17-jul | $1.403 (residuo UF) | $0 |
+| C-002 Vikingos | Comunidad Ed. Los Vikingos (53.321.997-7) | 🟢 Al día — renta de agosto (F83) pagada anticipada el 17-jul | $0 | $0 |
 | C-003 Trongkai | Agrotecnologías e Ingeniería (77.221.203-8) | 🔴 **NUNCA HA PAGADO** — las 2 cuotas emitidas ya vencidas | $952.000 | $0 |
-| C-004 Flota 1 (Volvo PLUS) | SCG SpA — paga Cristian Allende (14.183.198-4) | 🟢 Pagó F81 en 2 parcialidades (27 y 28-jul). Cumplimiento 95,4%. | $84.870 | $1.048.273 |
+| C-004 Flota 1 (Volvo PLUS) | SCG SpA — paga Cristian Allende (14.183.198-4) | 🟡 Pagó F81 en 2 parcialidades (27 y 28-jul); la 17/48 queda VENCIDA CON SALDO. Cumplimiento 95,4%. | $84.870 | $1.048.273 |
 | C-005 Flota 2 (Volvo CORE) | SCG SpA | 🟢 Pagó F82 exacta el 28-jul; nada vencido. Cumplimiento 94,4%. | $0 | $922.462 |
 | C-006 Barranco Amarillo | Procesadora Barranco Amarillo (78.191.887-3) | 🟢 **AL DÍA 100%** — cuota de julio (F84) pagada el 06-jul, al día siguiente de emitida | $0 | $0 |
 | C-007 Axopur 1 | Bebidas Funcionales Caelum SpA — contrato FIRMADO 26-may-2026 | 🟡 Pago inicial F79 ($8.925.000) CONFIRMADO pagado el 27-jul. Quedan vencidas F77 y F78. | $2.179.371 | $0 |
 | C-008 Resin & Polimers 1 | Comercializadora Resin & Polimers (76.058.363-4) | 🟢 Pagado 100% (F74, $17.205.087) | $0 | $0 |
 
-**Total vencido: $11.664.609 · En plazo: $5.231.508 · Cobranza activa: $16.896.117.**
+**Total vencido: $11.663.206 · En plazo: $5.231.508 · Cobranza activa: $16.894.714.**
 Cada deudor tiene mail de cobro listo en la sección Cobranza (botón "Ver mail").
 
 ## 6. Pendientes abiertos (heredas esto)
@@ -139,5 +139,7 @@ Cada deudor tiene mail de cobro listo en la sección Cobranza (botón "Ver mail"
 - **06-jul-2026**: ronda "súper prompt" (ver docs/SUPER_PROMPT_CAMBIOS_2026-07-06.md): se elimina Contabilidad (datos incorrectos), UF del día vía mindicador.cl, totales de contratos en el Dashboard (total/pagado/deuda/por cobrar en CLP y UF), contratos PDF descargables (public/contratos, SIN órdenes de compra), C-008 compraventa Comercializadora (por confirmar), "Cronograma" pasa a llamarse "Consolidado de Pago de Cuota", Movimientos muestra cargos + abonos (lib/cargos.ts), y el Excel/PPT de cobranza se generan al momento con datos vivos (lib/exports.ts, dependencias xlsx + pptxgenjs).
 
 - **31-jul-2026**: cierre de la cartola N°27 completa (30-jun → 31-jul) y validación de la N°26 histórica. Se agregan los 2 abonos del 28-jul y los 7 cargos de julio, que no estaban (`lib/cargos.ts` iba sólo hasta la N°26). Se resuelve el parcial de $300.000 que estaba "por asignar": junto al abono de $747.650 del 28-jul suma exactamente los $1.047.650 de la F81 (Flota 1, cuota 17/48) — se fija con la nueva tabla `IMPUTACION_MANUAL` en `lib/conciliation.ts`. Se confirma que Axopur pagó su pago inicial (F79) el 27-jul. Se cargan las UF de junio y julio. Se actualizan los 7 diagnósticos y mails de Cobranza, que estaban congelados al 03-jul.
+
+- **31-jul-2026 (2)**: corregido un desalineamiento entre el KPI de atraso y la píldora de estado de cada cuota. `computeStatus()` sólo evaluaba el vencimiento cuando la cuota tenía pago CERO: con un pago parcial caía antes en "pagada-diferencia" y nunca se marcaba vencida, por muchos días que pasaran. El KPI de `totales.ts`, en cambio, sí contaba ese saldo como atrasado. Se agrega el estado **`vencida-parcial`** ("Vencida con saldo") y se unifica el umbral de residuo (`EPS_REDONDEO = $5.000`, ahora exportado) entre `allocateAbonos`, `computeStatus` y `totales.ts`. Con esto la suma de las cuotas rotuladas vencidas calza al peso con el KPI ($11.663.206). **Regla de atraso sin cambios: sigue en 30 días** (`DIAS_GRACIA_ATRASO`).
 
 El historial completo está en `git log` — los mensajes de commit documentan cada decisión.

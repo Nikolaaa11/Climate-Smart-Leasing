@@ -93,6 +93,7 @@ export default function Schedule({ result }: Props) {
             <option value="pagada-parcial">Pagadas parciales</option>
             <option value="pagada-diferencia">Con diferencia</option>
             <option value="vencida-sin-pago">Vencidas sin pago</option>
+            <option value="vencida-parcial">Vencidas con saldo</option>
             <option value="por-vencer">Por vencer</option>
           </select>
         </div>

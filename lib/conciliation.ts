@@ -8,6 +8,7 @@ export type EstadoCuota =
   | "pagada-parcial"
   | "pagada-diferencia"
   | "vencida-sin-pago"
+  | "vencida-parcial"
   | "por-vencer"
   | "sin-valor";
 
@@ -429,14 +430,6 @@ export function generateCuotasForContract(c: Contract): Cuota[] {
  *     spill forward. Any final excess is credited to the last cuota.
  */
 function allocateAbonos(cuotas: Cuota[], abonos: Abono[]): void {
-  // Tolerancia de redondeo: al conciliar por UF quedan residuos de unos pocos
-  // pesos (ej. $1, $382). Sin este umbral, ese residuo se "derrama" a la
-  // siguiente cuota abierta y la marca como pagada-parcial siendo en realidad
-  // impaga. Ningún pago real de estos contratos es menor a $5.000 (la cuota más
-  // pequeña supera $470.000), por lo que descartar residuos bajo este umbral es
-  // seguro y no oculta pagos parciales legítimos.
-  const EPS_REDONDEO = 5_000;
-
   const sortedAbonos = [...abonos].sort((a, b) => a.fecha.localeCompare(b.fecha));
 
   const openCuotas = () =>
@@ -493,6 +486,20 @@ function allocateAbonos(cuotas: Cuota[], abonos: Abono[]): void {
 // "en plazo / por vencer".
 export const DIAS_GRACIA_ATRASO = 30;
 
+// Tolerancia de redondeo: al convertir UF a pesos quedan residuos de unos pocos
+// pesos (ej. $1, $382, $1.403). Sin este umbral, ese residuo se "derrama" a la
+// siguiente cuota abierta y la marca como pagada-parcial siendo en realidad
+// impaga. Ningún pago real de estos contratos es menor a $5.000 (la cuota más
+// pequeña supera $470.000), por lo que descartar residuos bajo este umbral es
+// seguro y no oculta pagos parciales legítimos.
+//
+// El MISMO umbral se usa en tres lugares y debe seguir siendo uno solo:
+//   1. allocateAbonos()  — no derramar residuos a la cuota siguiente
+//   2. computeStatus()   — una cuota con residuo se muestra "Pagada"
+//   3. totales.ts        — un residuo NO se cuenta como atrasado
+// Si divergen, la píldora de una cuota deja de calzar con el KPI de atraso.
+export const EPS_REDONDEO = 5_000;
+
 /** true si una factura impaga ya está atrasada (pasaron más de 30 días desde su emisión). */
 export function estaAtrasada(fechaEmisionISO: string, today: Date): boolean {
   const venc = new Date(fechaEmisionISO + "T00:00:00");
@@ -504,19 +511,25 @@ export function estaAtrasada(fechaEmisionISO: string, today: Date): boolean {
 function computeStatus(cuotas: Cuota[], today: Date): void {
   for (const c of cuotas) {
     const fechaCuota = new Date(c.fecha + "T00:00:00");
+    const saldo = c.totalFacturado - Math.min(c.totalPagado, c.totalFacturado);
+
     if (c.totalFacturado === 0) {
       c.estado = "sin-valor";
     } else if (fechaCuota > today) {
+      // Aún no emitida.
       c.estado = c.totalPagado > 0 ? "pagada-diferencia" : "por-vencer";
-    } else if (c.totalPagado >= c.totalFacturado * 0.98) {
+    } else if (saldo <= EPS_REDONDEO) {
+      // Saldada. El residuo bajo el umbral es ruido de conversión UF, no deuda.
       c.estado = "pagada";
+    } else if (estaAtrasada(c.fecha, today)) {
+      // Emitida hace más de 30 días y con saldo REAL pendiente. El pago parcial
+      // no la salva del atraso: se distingue sólo para no rotularla "sin pago".
+      c.estado = c.totalPagado > 0 ? "vencida-parcial" : "vencida-sin-pago";
     } else if (c.totalPagado > 0) {
-      const diffPct = Math.abs(c.totalPagado - c.totalFacturado) / c.totalFacturado;
-      c.estado = diffPct < 0.10 ? "pagada-diferencia" : "pagada-parcial";
+      // Emitida, con saldo, pero todavía dentro de los 30 días de gracia.
+      c.estado = saldo / c.totalFacturado < 0.10 ? "pagada-diferencia" : "pagada-parcial";
     } else {
-      // Impaga y ya emitida: sólo se marca vencida si pasaron más de 30 días
-      // desde la emisión; dentro de ese plazo queda "por-vencer" (en plazo).
-      c.estado = estaAtrasada(c.fecha, today) ? "vencida-sin-pago" : "por-vencer";
+      c.estado = "por-vencer";
     }
   }
 }

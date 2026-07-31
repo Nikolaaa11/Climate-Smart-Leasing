@@ -25,6 +25,12 @@ const STYLES: Record<EstadoCuota, { bg: string; text: string; dot: string; label
     dot: "bg-rose-500",
     label: "Vencida sin pago",
   },
+  "vencida-parcial": {
+    bg: "bg-rose-50",
+    text: "text-rose-700",
+    dot: "bg-rose-400",
+    label: "Vencida con saldo",
+  },
   "por-vencer": {
     bg: "bg-ink-50",
     text: "text-ink-500",
