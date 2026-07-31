@@ -1,6 +1,6 @@
 # HANDOFF — Plataforma de Control Financiero Climate Smart Leasing
 
-> Documento de traspaso del proyecto. Actualizado al **06-jul-2026**.
+> Documento de traspaso del proyecto. Actualizado al **31-jul-2026**.
 > Dueño saliente: Nicolás Rietta (GitHub: Nikolaaa11) · nicolasrietta@gmail.com
 
 ---
@@ -80,42 +80,46 @@ La facturación real difiere del texto del contrato y está **hardcodeada según
 
 **Tip de verificación**: crear un script temporal que importe `buildConciliation()` y ejecutarlo con `./node_modules/.bin/sucrase-node script.ts` para ver esperado/pagado/deuda por contrato antes de publicar (borrarlo antes del commit). Los PDFs escaneados se leen con Python `pymupdf` (`fitz`); `pdftoppm` no está disponible en esta máquina.
 
-## 5. Estado al 06-jul-2026 (foto actual)
+## 5. Estado al 31-jul-2026 (foto actual)
 
-| Contrato | Cliente | Estado | Deuda |
-|---|---|---|---|
-| C-001 Puerta Patagonia | Comunidad Ed. Puerta Patagonia (53.319.273-4) | 🔴 **GRAVE** — 5 facturas vencidas (F47, F53, F63, F64, F69). Paga ~1 factura/mes, siempre ~5 atrás. Última: F43 pagada 11-jun. | **$12.413.633** |
-| C-002 Vikingos | Comunidad Ed. Los Vikingos (53.321.997-7) | 🟢 Al día (julio pagado anticipado 16-jun) | $39.080 (ajuste UF) |
-| C-003 Trongkai | Agrotecnologías e Ingeniería (77.221.203-8) | 🔴 **NUNCA HA PAGADO** — 3 cuotas vencidas | $1.428.000 |
-| C-004 Flota 1 (Volvo PLUS) | SCG SpA — paga Cristian Allende (14.183.198-4) | 🟡 Puntual, ~1 cuota de diferencia | $1.742.851 |
-| C-005 Flota 2 (Volvo CORE) | SCG SpA | 🟡 ~1 cuota de diferencia | $2.768.020 |
-| C-006 Barranco Amarillo | Procesadora Barranco Amarillo (78.191.887-3) | 🟢 AL DÍA — pago inicial F58 ($145,5MM) + cuotas may-jun pagados; julio en plazo | ~$7,5MM en plazo |
-| C-007 Axopur 1 | Bebidas Funcionales Caelum SpA — contrato FIRMADO 26-may-2026 | 🟡 Facturas F77/F78/F79 emitidas 30-jun, aún sin conciliar (falta cartola julio) | por confirmar |
-| C-008 Compraventa Comercializadora | RUT 76.058.363-4 | ⚠️ POR CONFIRMAR — $17.205.087 recibidos 26-jun registrados como pago único de compraventa; falta el contrato y datos del cliente | $0 |
+Cifras verificadas con `npm run cuadratura` tras cargar la cartola N°27.
 
-**Total cobranza activa: ~$27,2MM.** Cada deudor tiene mail de cobro listo en la sección Cobranza (botón "Ver mail").
+| Contrato | Cliente | Estado | Vencido | En plazo |
+|---|---|---|---|---|
+| C-001 Puerta Patagonia | Comunidad Ed. Puerta Patagonia (53.319.273-4) | 🔴 **GRAVE** — 3 facturas vencidas (F63, F64, F69). En julio pagó DOS anticipos (10 y 13-jul), saldando F47 y F53. Cumplimiento 58,1%. | **$8.446.965** | $3.260.773 |
+| C-002 Vikingos | Comunidad Ed. Los Vikingos (53.321.997-7) | 🟢 Al día — renta de agosto (F83) pagada anticipada el 17-jul | $1.403 (residuo UF) | $0 |
+| C-003 Trongkai | Agrotecnologías e Ingeniería (77.221.203-8) | 🔴 **NUNCA HA PAGADO** — las 2 cuotas emitidas ya vencidas | $952.000 | $0 |
+| C-004 Flota 1 (Volvo PLUS) | SCG SpA — paga Cristian Allende (14.183.198-4) | 🟢 Pagó F81 en 2 parcialidades (27 y 28-jul). Cumplimiento 95,4%. | $84.870 | $1.048.273 |
+| C-005 Flota 2 (Volvo CORE) | SCG SpA | 🟢 Pagó F82 exacta el 28-jul; nada vencido. Cumplimiento 94,4%. | $0 | $922.462 |
+| C-006 Barranco Amarillo | Procesadora Barranco Amarillo (78.191.887-3) | 🟢 **AL DÍA 100%** — cuota de julio (F84) pagada el 06-jul, al día siguiente de emitida | $0 | $0 |
+| C-007 Axopur 1 | Bebidas Funcionales Caelum SpA — contrato FIRMADO 26-may-2026 | 🟡 Pago inicial F79 ($8.925.000) CONFIRMADO pagado el 27-jul. Quedan vencidas F77 y F78. | $2.179.371 | $0 |
+| C-008 Resin & Polimers 1 | Comercializadora Resin & Polimers (76.058.363-4) | 🟢 Pagado 100% (F74, $17.205.087) | $0 | $0 |
+
+**Total vencido: $11.664.609 · En plazo: $5.231.508 · Cobranza activa: $16.896.117.**
+Cada deudor tiene mail de cobro listo en la sección Cobranza (botón "Ver mail").
 
 ## 6. Pendientes abiertos (heredas esto)
 
 1. **Clasificar con MCG/contabilidad** (aparecen en "abonos no identificados" de la plataforma):
    - ✅ RESUELTO (06-jul, JP): el traspaso de $145,5MM del 28-abr era el PAGO INICIAL de Barranco (factura N°58, 3.051,93 UF) — conciliado.
    - **$17.205.087** de "COMERCIALIZADORA" RUT 76.058.363-4 → registrado como compraventa C-008; falta el contrato y datos del cliente.
-   - **$10.710.000** "Factura 41 PTEC" — entró el 11-jun y salió el mismo total el 15-jun (¿reversa/traspaso?).
+   - ✅ RESUELTO (31-jul): los **$10.710.000** "Factura 41 PTEC" eran un wash bancario (entró el 11-jun, salió el mismo total el 15-jun) — abonos y cargo excluidos, neto $0.
    - Depósito con documento ATM de **$270.033.596** (27-mar-2026) y 4×$7MM del socio (27-mar).
-   - Facturas Axopur F77/F78/F79 (30-jun): confirmar pago en la cartola de julio.
+   - ✅ RESUELTO (31-jul): el pago inicial de Axopur (F79, $8.925.000) se pagó el 27-jul en 2 transferencias. Quedan pendientes F77 y F78.
 2. **Adenda Vikingos**: el contrato tiene RUT erróneo (dice 53.319.273-4, el real es 53.321.997-7). Redactada la necesidad, falta emitirla y firmarla.
 3. **Cobranza dura a Puerta Patagonia**: 5 facturas vencidas. El contrato (Cláusula Décimo Quinta/Sexta) permite acelerar toda la deuda, suspender el servicio y bloquear equipos con 2+ facturas impagas. Mail listo en la plataforma; decisión comercial pendiente.
 4. **Trongkai**: definir acción de cobro (nunca ha pagado; el contrato permite término anticipado con retraso > 60 días).
 5. **Axopur (C-007)**: confirmar cliente, RUT y fechas, y firmar contrato — hoy es solo modelo tentativo.
 6. **Emails de contacto de deudores**: varios son placeholders (marcados en `DEUDORES.notasInternas`) — confirmar antes de enviar mails.
-7. Al facturar la **renta julio de PP** (~06-jul, cuota 5/36): agregar el neto exacto a `C001_RENTAS_EMITIDAS`.
-8. Agregar **UF de junio y julio 2026** a `lib/uf.ts` cuando cierre cada mes (hoy usa fallback = última UF conocida, mayo).
+7. **Facturas SII de julio-2026 sin cargar en `lib/facturas.ts`**: la renta 5/36 de PP, la cuota 18/48 de Flota 1 y la 14/48 de Flota 2 se están calculando con el modelo (UF × renta), no con el folio real. Al recibir los PDF, agregarlas con su folio y neto exacto.
+8. ✅ HECHO (31-jul): **UF de junio (40.820,31) y julio 2026 (40.844,79)** cargadas en `lib/uf.ts` desde mindicador.cl.
+9. **Imputaciones manuales**: SCG partió la cuota 17/48 en dos transferencias y el heurístico no puede desambiguar parcialidades (RUT compartido Flota 1/Flota 2). Quedaron fijadas en la tabla `IMPUTACION_MANUAL` de `lib/conciliation.ts`. Si el cliente repite el patrón, agregar la entrada con la evidencia de la factura.
 
 ## 7. Documentos fuente clave
 
 - **Contratos firmados**: carpeta `C:\Users\DELL\Downloads\Contratos actuales\` y `C:\Users\DELL\Documents\000.11.CSL\`. El de Puerta Patagonia vigente es el **protocolizado 02-dic-2025** (Notaría La Reina, rep. 70.416) — fija plazo de pago **15 días corridos desde emisión** y pago desde el **inicio de los trabajos** (no desde la recepción de obra).
 - **Facturas SII de PP**: F43, F47, F52, F53, F63, F64, F69 (PDFs en Downloads; F52 está PAGADA aunque figuraba adeudada).
-- **Cartolas Santander**: N°20-26 procesadas (dic-2025 → 30-jun-2026). Las históricas son la fuente oficial; las "provisorias" se reemplazan cuando sale la histórica.
+- **Cartolas Santander**: N°20-27 procesadas (dic-2025 → 31-jul-2026). Las históricas son la fuente oficial; las "provisorias" se reemplazan cuando sale la histórica. La N°26 histórica ya reemplazó a su provisoria y confirmó las cifras; la N°27 sigue siendo provisoria.
 - La recepción de obra PP: provisoria 17-mar-2026, **definitiva 08-abr-2026 sin observaciones** (clave para la cobranza: no pueden alegar mala entrega).
 
 ## 8. Datos sensibles y precauciones
@@ -133,5 +137,7 @@ La facturación real difiere del texto del contrato y está **hardcodeada según
 - **03-jul-2026**: cartola N°26 histórica conciliada (PP pagó F43; Barranco cuota jun; Vikingos julio anticipado; aparecen COMERCIALIZADORA y PTEC sin clasificar).
 
 - **06-jul-2026**: ronda "súper prompt" (ver docs/SUPER_PROMPT_CAMBIOS_2026-07-06.md): se elimina Contabilidad (datos incorrectos), UF del día vía mindicador.cl, totales de contratos en el Dashboard (total/pagado/deuda/por cobrar en CLP y UF), contratos PDF descargables (public/contratos, SIN órdenes de compra), C-008 compraventa Comercializadora (por confirmar), "Cronograma" pasa a llamarse "Consolidado de Pago de Cuota", Movimientos muestra cargos + abonos (lib/cargos.ts), y el Excel/PPT de cobranza se generan al momento con datos vivos (lib/exports.ts, dependencias xlsx + pptxgenjs).
+
+- **31-jul-2026**: cierre de la cartola N°27 completa (30-jun → 31-jul) y validación de la N°26 histórica. Se agregan los 2 abonos del 28-jul y los 7 cargos de julio, que no estaban (`lib/cargos.ts` iba sólo hasta la N°26). Se resuelve el parcial de $300.000 que estaba "por asignar": junto al abono de $747.650 del 28-jul suma exactamente los $1.047.650 de la F81 (Flota 1, cuota 17/48) — se fija con la nueva tabla `IMPUTACION_MANUAL` en `lib/conciliation.ts`. Se confirma que Axopur pagó su pago inicial (F79) el 27-jul. Se cargan las UF de junio y julio. Se actualizan los 7 diagnósticos y mails de Cobranza, que estaban congelados al 03-jul.
 
 El historial completo está en `git log` — los mensajes de commit documentan cada decisión.

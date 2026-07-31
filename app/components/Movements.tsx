@@ -98,7 +98,7 @@ export default function Movements({ abonos }: Props) {
             Lo que se ha gastado (cargos)
           </div>
           <div className="text-2xl font-display font-semibold tabular text-red-700">{fmtCLP(totalCargos)}</div>
-          <div className="text-xs text-ink-400 mt-1">{CARGOS.length} cargos (cartolas N°20-26, dic-2025 → jun-2026) · clic para ver el detalle</div>
+          <div className="text-xs text-ink-400 mt-1">{CARGOS.length} cargos (cartolas N°20-27, dic-2025 → jul-2026) · clic para ver el detalle</div>
         </button>
       </div>
 

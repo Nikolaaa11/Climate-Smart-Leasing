@@ -1,6 +1,6 @@
 // UF values — source: SII (https://www.sii.cl/valores_y_fechas/uf/)
 // Format: "YYYY-MM-DD": number
-// Verified values for last day of each month (Jan 2025 — May 2026)
+// Verified values for last day of each month (Jan 2025 — Jul 2026)
 
 export const UF_END_OF_MONTH: Record<string, number> = {
   "2025-01": 38384.41,
@@ -20,6 +20,8 @@ export const UF_END_OF_MONTH: Record<string, number> = {
   "2026-03": 39841.72,
   "2026-04": 40120.20,
   "2026-05": 40610.69,
+  "2026-06": 40820.31,
+  "2026-07": 40844.79,
 };
 
 // UF on specific payment dates used in cartolas

@@ -46,6 +46,33 @@ function isoDate(d: Date): string {
 }
 
 /**
+ * IMPUTACIONES MANUALES — escotilla de escape del heurístico.
+ *
+ * El identificador automático desambigua por RUT y, cuando un RUT es compartido
+ * (SCG paga Flota 1 y Flota 2 desde el mismo 0141831984), por rangos de monto.
+ * Ese criterio falla cuando el cliente paga UNA factura en VARIAS partes: cada
+ * parcialidad, por sí sola, no se parece a ninguna cuota.
+ *
+ * Para esos casos se fija la imputación acá, a mano, con la evidencia documental
+ * que la respalda. Clave: `fecha|monto` del abono (ISO|CLP sin separadores).
+ * REGLA: no agregar una entrada sin escribir en `razon` contra qué factura se
+ * validó — es lo que hace auditable la decisión humana.
+ */
+const IMPUTACION_MANUAL: Record<string, { contractId: string; razon: string }> = {
+  // SCG pagó la factura F81 (Flota 1, cuota 17/48, $1.047.650) en dos partes:
+  // $300.000 el 27-jul-2026 + $747.650 el 28-jul-2026 = $1.047.650 exacto.
+  // Cartola N°27, docs 003926206 y 003926208.
+  "2026-07-27|300000": {
+    contractId: "C-004",
+    razon: "SCG — parcial 1/2 ($300.000 + $747.650 = $1.047.650, monto exacto de F81 Flota 1 cuota 17/48)",
+  },
+  "2026-07-28|747650": {
+    contractId: "C-004",
+    razon: "SCG — parcial 2/2 ($300.000 + $747.650 = $1.047.650, monto exacto de F81 Flota 1 cuota 17/48)",
+  },
+};
+
+/**
  * Identify which contract an abono belongs to by matching the RUT
  * embedded in the bank glosa against contracts' rutPagadorBanco.
  * Returns the contract or null if it's an internal/unidentified movement.
@@ -54,6 +81,13 @@ export function identifyContract(abono: Abono): { contract: Contract | null; rea
   const glosa = abono.glosa.toUpperCase();
   const monto = abono.monto;
   const fecha = abono.fecha; // ISO yyyy-mm-dd
+
+  // Las imputaciones manuales mandan por sobre cualquier heurístico.
+  const manual = IMPUTACION_MANUAL[`${fecha}|${monto}`];
+  if (manual) {
+    const c = CONTRACTS.find(ct => ct.id === manual.contractId) || null;
+    return { contract: c, reason: manual.razon };
+  }
 
   // === Puerta Patagonia (RUT 0533192734 — único) ===
   if (glosa.includes("0533192734") || glosa.includes("CODOMINIO PUE") || glosa.includes("CONDOMINIO PUE") || glosa.includes("PUERTA PATAGONIA")) {

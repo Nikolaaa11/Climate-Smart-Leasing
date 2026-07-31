@@ -177,7 +177,9 @@ export const ABONOS: Abono[] = [
   { fecha: "2026-06-26", monto: 5_000_000, glosa: "0760583634 Transf. COMERCIALIZADOR", doc: "001305014", cartolaMes: "Cartola N°26 (Junio 2026)" },
   { fecha: "2026-06-26", monto: 5_000_000, glosa: "0760583634 Transf. COMERCIALIZADOR", doc: "001305014", cartolaMes: "Cartola N°26 (Junio 2026)" },
   { fecha: "2026-06-26", monto: 2_205_087, glosa: "0760583634 Transf. COMERCIALIZADOR", doc: "001305014", cartolaMes: "Cartola N°26 (Junio 2026)" },
-  // ===== CARTOLA N°27 (30/06/2026 - 27/07/2026) — Abonos (EXCLUYE el reverso de marketing $450.000, no es pago de cliente) =====
+  // ============ CARTOLA N°27 (30/06/2026 - 31/07/2026) — Otros abonos $25.371.327 ============
+  // Registrados acá: $24.921.327. EXCLUIDO: el abono "Asesoría Marketing Erick Méndez BH"
+  // del 03-07 ($450.000) es un reverso interno, no un pago de cliente (instrucción CSL).
   { fecha: "2026-07-06", monto: 7_567_790, glosa: "00781918873 Pago de Provee", doc: "003500260", cartolaMes: "Cartola N°27 (Julio 2026)" },
   { fecha: "2026-07-10", monto: 1_983_334, glosa: "0533192734 Transf de CODOMINIO PUE", doc: "000000000", cartolaMes: "Cartola N°27 (Julio 2026)" },
   { fecha: "2026-07-13", monto: 1_983_334, glosa: "0533192734 Transf de CODOMINIO PUE", doc: "000000000", cartolaMes: "Cartola N°27 (Julio 2026)" },
@@ -185,4 +187,6 @@ export const ABONOS: Abono[] = [
   { fecha: "2026-07-27", monto: 300_000, glosa: "0141831984 Transf. Cristian Eduard", doc: "003926206", cartolaMes: "Cartola N°27 (Julio 2026)" },
   { fecha: "2026-07-27", monto: 5_000_000, glosa: "0768585725 Transf. BEBIDAS FUNCION", doc: "001227121", cartolaMes: "Cartola N°27 (Julio 2026)" },
   { fecha: "2026-07-27", monto: 3_925_000, glosa: "0768585725 Transf. BEBIDAS FUNCION", doc: "001227121", cartolaMes: "Cartola N°27 (Julio 2026)" },
+  { fecha: "2026-07-28", monto: 747_650, glosa: "0141831984 Transf.", doc: "003926208", cartolaMes: "Cartola N°27 (Julio 2026)" },
+  { fecha: "2026-07-28", monto: 921_912, glosa: "0141831984 Transf.", doc: "003926208", cartolaMes: "Cartola N°27 (Julio 2026)" },
 ];
