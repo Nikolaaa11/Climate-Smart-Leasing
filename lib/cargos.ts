@@ -1,5 +1,5 @@
 // Todos los CARGOS (egresos) de la cuenta Santander 9427-8910 de CSL
-// Fuente: cartolas oficiales N°20-27 (dic-2025 → 31-jul-2026)
+// Fuente: cartolas oficiales N°20-28 (dic-2025 → 07-ago-2026)
 // Validado: la suma de cargos por cartola calza con el total "Otros cargos" del encabezado
 
 export interface Cargo {
@@ -95,11 +95,14 @@ export const CARGOS: Cargo[] = [
   { fecha: "2026-06-25", monto: 40_171, glosa: "COM.MANTENCION PLAN", doc: "0", cartolaMes: "Cartola N°26 (Junio 2026)" },
 
   // ============ CARTOLA N°27 (30/06/2026 - 31/07/2026) — Cargos $37.781.646 ============
-  { fecha: "2026-07-03", monto: 1_612_351, glosa: "Asesoría Marketing Erick Méndez BH", doc: "003500260", cartolaMes: "Cartola N°27 (Julio 2026)" },
-  { fecha: "2026-07-03", monto: 15_484_578, glosa: "Factura 541", doc: "003500260", cartolaMes: "Cartola N°27 (Julio 2026)" },
-  { fecha: "2026-07-10", monto: 2_916_307, glosa: "Pago Factura por emitir", doc: "003500260", cartolaMes: "Cartola N°27 (Julio 2026)" },
-  { fecha: "2026-07-10", monto: 500_000, glosa: "Asesoría Marketing Erick Méndez BH", doc: "003500260", cartolaMes: "Cartola N°27 (Julio 2026)" },
-  { fecha: "2026-07-20", monto: 459_346, glosa: "F29 Junio 2026", doc: "003500260", cartolaMes: "Cartola N°27 (Julio 2026)" },
+  { fecha: "2026-07-03", monto: 1_612_351, glosa: "Asesoría Marketing Erick Méndez BH", doc: "472690920", cartolaMes: "Cartola N°27 (Julio 2026)" },
+  { fecha: "2026-07-03", monto: 15_484_578, glosa: "Factura 541", doc: "473015503", cartolaMes: "Cartola N°27 (Julio 2026)" },
+  { fecha: "2026-07-10", monto: 2_916_307, glosa: "Pago Factura por emitir", doc: "474710237", cartolaMes: "Cartola N°27 (Julio 2026)" },
+  { fecha: "2026-07-10", monto: 500_000, glosa: "Asesoría Marketing Erick Méndez BH", doc: "474813201", cartolaMes: "Cartola N°27 (Julio 2026)" },
+  { fecha: "2026-07-20", monto: 459_346, glosa: "F29 Junio 2026", doc: "476704532", cartolaMes: "Cartola N°27 (Julio 2026)" },
   { fecha: "2026-07-29", monto: 40_412, glosa: "COM.MANTENCION PLAN", doc: "0", cartolaMes: "Cartola N°27 (Julio 2026)" },
-  { fecha: "2026-07-30", monto: 16_768_652, glosa: "Transf.Masiv", doc: "003500260", cartolaMes: "Cartola N°27 (Julio 2026)" },
+  { fecha: "2026-07-30", monto: 16_768_652, glosa: "Transf.Masiv", doc: "477860567", cartolaMes: "Cartola N°27 (Julio 2026)" },
+
+  // ============ CARTOLA N°28 (31/07/2026 - 07/08/2026) — Cargos $556.639 ============
+  { fecha: "2026-08-06", monto: 556_639, glosa: "Pago FA 45394", doc: "003500260", cartolaMes: "Cartola N°28 (Agosto 2026)" },
 ];

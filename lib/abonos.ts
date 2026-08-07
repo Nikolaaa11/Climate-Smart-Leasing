@@ -178,15 +178,23 @@ export const ABONOS: Abono[] = [
   { fecha: "2026-06-26", monto: 5_000_000, glosa: "0760583634 Transf. COMERCIALIZADOR", doc: "001305014", cartolaMes: "Cartola N°26 (Junio 2026)" },
   { fecha: "2026-06-26", monto: 2_205_087, glosa: "0760583634 Transf. COMERCIALIZADOR", doc: "001305014", cartolaMes: "Cartola N°26 (Junio 2026)" },
   // ============ CARTOLA N°27 (30/06/2026 - 31/07/2026) — Otros abonos $25.371.327 ============
+  // Cartola HISTÓRICA (07-ago-2026): confirma la provisoria sin diferencias. Totales y
+  // movimientos idénticos; se actualizaron los N° de documento a los oficiales.
   // Registrados acá: $24.921.327. EXCLUIDO: el abono "Asesoría Marketing Erick Méndez BH"
   // del 03-07 ($450.000) es un reverso interno, no un pago de cliente (instrucción CSL).
-  { fecha: "2026-07-06", monto: 7_567_790, glosa: "00781918873 Pago de Provee", doc: "003500260", cartolaMes: "Cartola N°27 (Julio 2026)" },
-  { fecha: "2026-07-10", monto: 1_983_334, glosa: "0533192734 Transf de CODOMINIO PUE", doc: "000000000", cartolaMes: "Cartola N°27 (Julio 2026)" },
-  { fecha: "2026-07-13", monto: 1_983_334, glosa: "0533192734 Transf de CODOMINIO PUE", doc: "000000000", cartolaMes: "Cartola N°27 (Julio 2026)" },
-  { fecha: "2026-07-17", monto: 2_492_307, glosa: "0533219977 Transf. EDIFICIO LOS VI", doc: "001600143", cartolaMes: "Cartola N°27 (Julio 2026)" },
-  { fecha: "2026-07-27", monto: 300_000, glosa: "0141831984 Transf. Cristian Eduard", doc: "003926206", cartolaMes: "Cartola N°27 (Julio 2026)" },
-  { fecha: "2026-07-27", monto: 5_000_000, glosa: "0768585725 Transf. BEBIDAS FUNCION", doc: "001227121", cartolaMes: "Cartola N°27 (Julio 2026)" },
-  { fecha: "2026-07-27", monto: 3_925_000, glosa: "0768585725 Transf. BEBIDAS FUNCION", doc: "001227121", cartolaMes: "Cartola N°27 (Julio 2026)" },
-  { fecha: "2026-07-28", monto: 747_650, glosa: "0141831984 Transf.", doc: "003926208", cartolaMes: "Cartola N°27 (Julio 2026)" },
-  { fecha: "2026-07-28", monto: 921_912, glosa: "0141831984 Transf.", doc: "003926208", cartolaMes: "Cartola N°27 (Julio 2026)" },
+  { fecha: "2026-07-06", monto: 7_567_790, glosa: "00781918873 Pago de Provee", doc: "473750846", cartolaMes: "Cartola N°27 (Julio 2026)" },
+  { fecha: "2026-07-10", monto: 1_983_334, glosa: "0533192734 Transf de CODOMINIO PUE", doc: "0", cartolaMes: "Cartola N°27 (Julio 2026)" },
+  { fecha: "2026-07-13", monto: 1_983_334, glosa: "0533192734 Transf de CODOMINIO PUE", doc: "0", cartolaMes: "Cartola N°27 (Julio 2026)" },
+  { fecha: "2026-07-17", monto: 2_492_307, glosa: "0533219977 Transf. EDIFICIO LOS VI", doc: "016001432", cartolaMes: "Cartola N°27 (Julio 2026)" },
+  { fecha: "2026-07-27", monto: 300_000, glosa: "0141831984 Transf. Cristian Eduard", doc: "039262065", cartolaMes: "Cartola N°27 (Julio 2026)" },
+  { fecha: "2026-07-27", monto: 5_000_000, glosa: "0768585725 Transf. BEBIDAS FUNCION", doc: "012271210", cartolaMes: "Cartola N°27 (Julio 2026)" },
+  { fecha: "2026-07-27", monto: 3_925_000, glosa: "0768585725 Transf. BEBIDAS FUNCION", doc: "012271210", cartolaMes: "Cartola N°27 (Julio 2026)" },
+  { fecha: "2026-07-28", monto: 747_650, glosa: "0141831984 Transf.", doc: "039262087", cartolaMes: "Cartola N°27 (Julio 2026)" },
+  { fecha: "2026-07-28", monto: 921_912, glosa: "0141831984 Transf.", doc: "039262087", cartolaMes: "Cartola N°27 (Julio 2026)" },
+
+  // ============ CARTOLA N°28 (31/07/2026 - 07/08/2026) — Abonos $5.194.699 ============
+  // Provisoria. OJO: el banco fecha el segundo abono el 10-08, posterior al corte declarado
+  // (07-08), pero lo incluye en el saldo final ($23.682.080). Se carga tal como lo informa.
+  { fecha: "2026-08-03", monto: 1_983_334, glosa: "0533192734 Transf de CODOMINIO PUE", doc: "000000000", cartolaMes: "Cartola N°28 (Agosto 2026)" },
+  { fecha: "2026-08-10", monto: 3_211_365, glosa: "0533192734 Transf de CODOMINIO PUE", doc: "000000000", cartolaMes: "Cartola N°28 (Agosto 2026)" },
 ];

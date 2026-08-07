@@ -62,30 +62,32 @@ export const DEUDORES: Deudor[] = [
     rut: "53.319.273-4",
     repLegal: "Juan Moisés González Muñoz",
     emailRepLegal: "administracion@puertapatagonia.cl",
-    esperadoClp: 27_974_123,
-    pagadoClp: 16_266_385,
-    deudaClp: 11_707_738,
-    cumplimiento: 0.5815,
-    cuotasPagadas: "7 de 11 facturas pagadas",
+    esperadoClp: 31_236_851,
+    pagadoClp: 21_461_084,
+    deudaClp: 9_775_767,
+    cumplimiento: 0.687,
+    cuotasPagadas: "9 de 12 facturas pagadas",
     inicioFacturacion: "Anticipo: dic-2025 · Rentas: mar-2026",
     severidad: "grave",
     diagnostico:
-      "DEUDA GRAVE al 31-jul-2026 (según indicador de atraso, >30 días desde emisión): $8.446.965 en 3 facturas VENCIDAS (1 de anticipo + 2 de renta). La renta de julio (cuota 5/36, $3.260.773) está impaga pero aún 'por vencer'. Deuda total pendiente: $11.707.738. En julio pagaron DOS anticipos ($1.983.334 el 10-jul y otro el 13-jul), que saldaron las facturas N°47 y N°53 — el mejor mes desde marzo. Verificado contra facturas SII reales y cartolas Santander N°21-27 (hasta 31-jul-2026).",
+      "MEJORA al 07-ago-2026: la cartola N°28 trae dos pagos por $5.194.699 que cierran el ANTICIPO COMPLETO (N°63) y la renta 3/36 (N°64), ambos por el monto exacto. La deuda vencida baja de $8.446.965 a $6.513.039 y por primera vez es 100% renta — el capítulo del anticipo de $10MM queda cerrado. Quedan VENCIDAS las rentas 4/36 (N°69, $3.252.266) y 5/36 ($3.260.773). La renta de agosto (cuota 6/36, $3.262.728, emitida el 06-ago) está impaga pero aún en plazo. Deuda total pendiente: $9.775.767. Verificado contra facturas SII reales y cartolas Santander N°21-28 (hasta 07-ago-2026).",
     rentaTexto:
-      "Renta mensual: 67,127 UF + IVA × 36 cuotas facturadas desde marzo-2026 · Anticipo $10.000.000 + IVA en 6 facturas mensuales independientes de $1.983.334 IVA inc. (dic-2025 → may-2026).",
+      "Renta mensual: 67,127 UF + IVA × 36 cuotas facturadas desde marzo-2026 · Anticipo $10.000.000 + IVA en 6 facturas mensuales independientes de $1.983.334 IVA inc. (dic-2025 → may-2026) — ANTICIPO PAGADO EN SU TOTALIDAD.",
     detalleAtraso: [
-      "Factura N°63 (06-may-2026, anticipo 6/6): $1.983.334 — IMPAGA, vencida (>30 días) desde el 05-jun-2026.",
-      "Factura N°64 (06-may-2026, renta 3/36): $3.211.365 — IMPAGA, vencida (>30 días) desde el 05-jun-2026.",
-      "Factura N°69 (06-jun-2026, renta 4/36): $3.252.266 — IMPAGA, vencida (>30 días) desde el 06-jul-2026.",
-      "Renta de julio (cuota 5/36, $3.260.773): IMPAGA, aún 'por vencer' según el indicador de atraso; pasa a vencida al superar los 30 días de emitida.",
-      "Pagos recibidos: anticipos 1 a 5 ($1.983.334 el 17-dic-2025, 20-feb, 11-jun, 10-jul y 13-jul-2026) + renta marzo ($3.166.949 el 18-mar-2026) + renta abril / Factura N°52 ($3.182.766 el 05-may-2026). Total: $16.266.385.",
+      "Factura N°63 (06-may-2026, anticipo 6/6): $1.983.334 — PAGADA el 03-ago-2026 por el monto exacto. Con esto el anticipo de $10.000.000 + IVA queda cubierto en sus 6 cuotas. ✓",
+      "Factura N°64 (06-may-2026, renta 3/36): $3.211.365 — PAGADA el 10-ago-2026 por el monto exacto. ✓",
+      "Factura N°69 (06-jun-2026, renta 4/36): $3.252.266 — IMPAGA, vencida (>30 días) desde el 06-jul-2026. Es la más antigua pendiente.",
+      "Renta 5/36 (06-jul-2026, $3.260.773): IMPAGA, vencida (>30 días) desde el 05-ago-2026.",
+      "Renta 6/36 (06-ago-2026, $3.262.728): impaga, aún EN PLAZO; pasa a vencida el 05-sep-2026.",
+      "Pagos recibidos: anticipos 1 a 6 ($1.983.334 el 17-dic-2025, 20-feb, 11-jun, 10-jul, 13-jul y 03-ago-2026) + rentas 1/36 a 3/36 ($3.166.949 el 18-mar, $3.182.766 el 05-may y $3.211.365 el 10-ago-2026). Total: $21.461.084.",
     ],
     notasInternas: [
-      "✅ Recalculado el 31-jul-2026 contra las facturas SII reales + cartolas oficiales N°21-27 (hasta 31-jul).",
-      "✅ Cartola N°27: DOS pagos de $1.983.334 (10-jul y 13-jul) — saldaron los anticipos 4/6 (N°47) y 5/6 (N°53). Es el primer mes en que PP paga dos facturas.",
-      "⚠️ Del anticipo de $10MM sólo queda pendiente la última cuota (N°63). El grueso de la deuda ya es renta: N°64 y N°69.",
+      "✅ Recalculado el 07-ago-2026 contra las facturas SII reales + cartolas oficiales N°21-28.",
+      "✅ Cartola N°28: dos abonos por el monto EXACTO de las facturas ($1.983.334 y $3.211.365). PP mantiene el patrón de pagar factura por factura sin fraccionar.",
+      "✅ Hito: el anticipo de $10MM quedó 100% cobrado. Toda la deuda restante es renta corriente, que es el escenario normal de un leasing.",
+      "⚠️ El rezago sigue en ~2 meses: en agosto pagan lo emitido en mayo. A ese ritmo la mora no crece, pero tampoco se reduce — conviene fijar un calendario que adelante una cuota.",
+      "⚠️ El abono de $3.211.365 viene fechado 10-ago-2026 en la cartola N°28, posterior al corte declarado (07-ago), pero el banco ya lo incluye en el saldo final. Confirmar contra la histórica N°28 cuando esté disponible.",
       "La facturación real difiere del contrato: anticipo facturado en 6 facturas mensuales separadas (dic-may) y rentas desde marzo — el sistema ya refleja este esquema.",
-      "Patrón de pago: PP paga facturas exactas por transferencia, con ~2 meses de rezago. Próxima renta (cuota 6/36, ~$3,26MM) se factura ~06-ago-2026.",
     ],
   },
   {
@@ -104,7 +106,7 @@ export const DEUDORES: Deudor[] = [
     inicioFacturacion: "Anticipo: ene-2026 · Rentas: abr-2026",
     severidad: "leve",
     diagnostico:
-      "AL DÍA al 31-jul-2026 — deuda $0. Anticipo $20MM pagado completo y las 5 rentas (abr-ago) cubiertas: la de agosto (N°83, $2.492.307) la pagaron ANTICIPADA el 17-jul. Conciliado contra las facturas reales N°54/55/65/70/83, sin diferencias.",
+      "AL DÍA al 07-ago-2026 — deuda $0. Anticipo $20MM pagado completo y las 5 rentas emitidas (abr-ago) cubiertas: la de agosto (N°83, $2.492.307) la pagaron ANTICIPADA el 17-jul. La cartola N°28 no registra movimientos suyos porque no tienen nada que pagar hasta el 01-sep. Conciliado contra las facturas reales N°54/55/65/70/83, sin diferencias.",
     rentaTexto:
       "Renta mensual: 51,29 UF + IVA · Anticipo $20.000.000 IVA incluido (pagado) · 24 cuotas en total",
     detalleAtraso: [
@@ -139,8 +141,8 @@ export const DEUDORES: Deudor[] = [
     detalleAtraso: [
       "Cliente con historial impecable de pagos mensuales durante todo 2025 y 2026.",
       "Cuota 17/48 (factura N°81, $1.047.650): PAGADA en dos parcialidades — $300.000 el 27-jul y $747.650 el 28-jul-2026. ✓",
-      "Saldo VENCIDO al 31-jul-2026: $84.870 — arrastre histórico de redondeos, menos de un 10% de una cuota.",
-      "Cuota 18/48 ($1.048.273, emitida el 21-jul-2026): impaga, aún EN PLAZO (indicador de atraso a 30 días).",
+      "Saldo VENCIDO al 07-ago-2026: $84.870 — arrastre histórico de redondeos, menos de un 10% de una cuota.",
+      "Cuota 18/48 ($1.048.273, emitida el 21-jul-2026): impaga, aún EN PLAZO; pasa a vencida el 20-ago-2026.",
       "Cumplimiento actual: 95,4% del facturado esperado.",
     ],
     notasInternas: [
@@ -170,8 +172,8 @@ export const DEUDORES: Deudor[] = [
     detalleAtraso: [
       "Mismo titular que Flota Volvo EX30 PLUS — historial general de pagos puntuales.",
       "Cuota 13/48 (factura N°82, $921.912): PAGADA el 28-jul-2026 por el monto exacto. ✓",
-      "Saldo VENCIDO al 31-jul-2026: $0 — no hay nada atrasado.",
-      "Cuota 14/48 ($922.462, emitida el 21-jul-2026): impaga, aún EN PLAZO (indicador de atraso a 30 días).",
+      "Saldo VENCIDO al 07-ago-2026: $0 — no hay nada atrasado.",
+      "Cuota 14/48 ($922.462, emitida el 21-jul-2026): impaga, aún EN PLAZO; pasa a vencida el 20-ago-2026.",
       "Cumplimiento actual: 94,4% del facturado esperado.",
     ],
     notasInternas: [
@@ -187,24 +189,26 @@ export const DEUDORES: Deudor[] = [
     rut: "77.221.203-8",
     repLegal: "José Cuevas Valenzuela",
     emailRepLegal: "jcuevas@trongkai.cl",
-    esperadoClp: 952_000,
+    esperadoClp: 1_428_000,
     pagadoClp: 0,
-    deudaClp: 952_000,
+    deudaClp: 1_428_000,
     cumplimiento: 0,
-    cuotasPagadas: "0 de 2",
+    cuotasPagadas: "0 de 3",
     inicioFacturacion: "01-Jun-2026",
     severidad: "nunca_pago",
-    diagnostico: "Nunca ha pagado — al 31-jul-2026 las DOS cuotas emitidas están VENCIDAS (junio y julio, $476.000 cada una). Saldo total $952.000, 100% atrasado.",
+    diagnostico: "Nunca ha pagado — al 07-ago-2026 hay TRES cuotas emitidas y ninguna pagada. Dos están VENCIDAS (junio y julio, $476.000 cada una, $952.000) y la de agosto está por vencer. Saldo total $1.428.000, cumplimiento 0%. Es el único cliente de la cartera sin un solo pago registrado.",
     rentaTexto:
       "Renta: $400.000 netos/mes durante 2026 (pruebas) · Vigencia 5 años + 3 prórrogas · Desde 01-Ene-2027 tarifa por hora",
     detalleAtraso: [
       "Inicio de facturación: 01-jun-2026 (primera cuota).",
       "Cuota junio 2026 ($476.000 IVA inc.): ATRASADA (más de 30 días desde emisión), sin pago.",
-      "Cuota julio 2026 ($476.000 IVA inc.): emitida el 01-jul, pasó a ATRASADA el 31-jul, sin pago.",
-      "Equipo ODIN Opticept ya entregado el 01-mar-2026 — sin ningún pago a la fecha (verificado contra cartolas hasta el 31-jul-2026).",
+      "Cuota julio 2026 ($476.000 IVA inc.): emitida el 01-jul, ATRASADA desde el 31-jul, sin pago.",
+      "Cuota agosto 2026 ($476.000 IVA inc.): emitida el 01-ago, impaga, aún EN PLAZO; pasa a vencida el 31-ago-2026.",
+      "Equipo ODIN Opticept ya entregado el 01-mar-2026 — sin ningún pago a la fecha (verificado contra cartolas hasta el 07-ago-2026).",
     ],
     notasInternas: [
       "Contrato vigente por 5 años + 3 prórrogas. Tarifa por hora inicia 01-ene-2027 (mínimo $400.000/mes).",
+      "⚠️ Tercer mes consecutivo sin pago y el equipo lleva 5 meses entregado. El monto es bajo ($476.000/mes), pero el patrón es el peor de la cartera: conviene escalar por la vía contractual antes de que sume un cuarto mes.",
     ],
   },
   {
@@ -215,15 +219,15 @@ export const DEUDORES: Deudor[] = [
     rut: "78.191.887-3",
     repLegal: "Washington Gilberto Borquez Mansilla",
     emailRepLegal: "contacto@barrancoamarillo.cl",
-    esperadoClp: 168_121_124,
+    esperadoClp: 175_690_914,
     pagadoClp: 168_121_124,
-    deudaClp: 0,
-    cumplimiento: 1.0,
-    cuotasPagadas: "Pago inicial + 3 de 3 cuotas pagadas",
+    deudaClp: 7_569_790,
+    cumplimiento: 0.957,
+    cuotasPagadas: "Pago inicial + 3 de 4 cuotas pagadas",
     inicioFacturacion: "Pago inicial: 01-may-2026 · Cuotas: 05-may-2026",
     severidad: "leve",
     diagnostico:
-      "AL DÍA al 31-jul-2026 — deuda $0, cumplimiento 100%. El pago inicial (factura N°58, 3.051,93 UF = $145.563.464) fue pagado mediante el 'Traspaso de cuenta' de $145.563.465 del 28-abr-2026. Las tres cuotas emitidas (may, jun, jul) están pagadas: la de julio (N°84, $7.567.790) se pagó el 06-jul, al día siguiente de emitida. Es el mejor pagador de la cartera.",
+      "SIN NADA VENCIDO al 07-ago-2026. El pago inicial (factura N°58, 3.051,93 UF = $145.563.464) fue pagado mediante el 'Traspaso de cuenta' de $145.563.465 del 28-abr-2026. Las tres primeras cuotas (may, jun, jul) están pagadas: la de julio (N°84, $7.567.790) se pagó el 06-jul, al día siguiente de emitida. La cuota de agosto ($7.569.790, emitida el 05-ago) está impaga pero recién dentro del plazo. Sigue siendo el mejor pagador de la cartera.",
     rentaTexto:
       "Pago inicial: 3.051,93 UF + IVA = $145.563.464 (factura N°58) · Renta mensual: 155,74 UF + IVA × 24 cuotas anticipadas (primeros 5 días del mes) · Interés penal 1,5% mensual",
     detalleAtraso: [
@@ -231,7 +235,8 @@ export const DEUDORES: Deudor[] = [
       "Cuota 1/24 mayo 2026 (factura N°62, $7.447.842): PAGADA el 01-jun-2026. ✓",
       "Cuota 2/24 junio 2026 (factura N°71, $7.542.028): PAGADA el 15-jun-2026. ✓",
       "Cuota 3/24 julio 2026 (factura N°84, $7.567.790): PAGADA el 06-jul-2026. ✓",
-      "Sin saldo pendiente: lo facturado coincide exacto con lo pagado.",
+      "Cuota 4/24 agosto 2026 ($7.569.790, emitida el 05-ago): impaga, aún EN PLAZO; pasa a vencida el 04-sep-2026.",
+      "Sin saldo VENCIDO: todo lo que cumplió plazo está pagado exacto.",
     ],
     notasInternas: [
       "✅ Resuelto: el traspaso de $145,5MM (28-abr-2026, glosa 'Traspaso de cuenta') era el pago inicial (factura N°58 por 3.051,93 UF). Antes estaba en 'abonos no identificados'; ahora se concilia contra la cuota de pago inicial de C-006.",
@@ -247,25 +252,27 @@ export const DEUDORES: Deudor[] = [
     rut: "76.858.572-5",
     repLegal: "Sebastián Riquelme Riffo",
     emailRepLegal: "s.riquelme@udt.cl",
-    esperadoClp: 11_104_371,
+    esperadoClp: 12_205_767,
     pagadoClp: 8_925_000,
-    deudaClp: 2_179_371,
-    cumplimiento: 0.804,
-    cuotasPagadas: "1 de 3 facturas",
+    deudaClp: 3_280_767,
+    cumplimiento: 0.731,
+    cuotasPagadas: "1 de 4 facturas",
     inicioFacturacion: "Pago inicial + cuotas 1-2: 30-jun-2026",
     severidad: "moderado",
     diagnostico:
-      "CONFIRMADO con la cartola N°27: el pago inicial (factura N°79, $8.925.000) SE PAGÓ el 27-jul-2026, en dos transferencias de $5.000.000 y $3.925.000 que suman el monto exacto. Quedan VENCIDAS las dos primeras rentas: N°77 ($1.082.931) y N°78 ($1.096.440), total $2.179.371. Cumplimiento 80,4%. Primer cobro a gestionar: las rentas de junio y julio.",
+      "Al 07-ago-2026 el pago inicial está cursado pero NINGUNA renta se ha pagado. La factura N°79 ($8.925.000) se pagó el 27-jul-2026 en dos transferencias de $5.000.000 y $3.925.000 que suman el monto exacto (confirmado en cartola N°27). Siguen VENCIDAS las dos primeras rentas: N°77 ($1.082.931) y N°78 ($1.096.440), total $2.179.371, sin movimiento en la cartola N°28. La renta de agosto ($1.101.396) está por vencer. Cumplimiento 73,1%.",
     rentaTexto:
       "Pago inicial: $7.500.000 neto + IVA · Renta mensual: 22,66 UF + IVA × 48 cuotas (primeros 5 días de cada mes desde jun-2026)",
     detalleAtraso: [
       "Pago inicial (factura N°79, 30-jun-2026): $8.925.000 — PAGADO el 27-jul-2026 ($5.000.000 + $3.925.000). ✓",
       "Cuota 1/48 (factura N°77, 30-jun-2026): $1.082.931 — IMPAGA, vencida (>30 días) desde el 30-jul-2026.",
       "Cuota 2/48 (factura N°78, 30-jun-2026): $1.096.440 — IMPAGA, vencida (>30 días) desde el 30-jul-2026.",
-      "Saldo a cobrar: $2.179.371 (las dos rentas). El pago inicial ya está cursado.",
+      "Cuota 3/48 (05-ago-2026): $1.101.396 — impaga, aún EN PLAZO; pasa a vencida el 04-sep-2026.",
+      "Saldo VENCIDO a cobrar: $2.179.371 (las dos primeras rentas). El pago inicial ya está cursado.",
     ],
     notasInternas: [
       "Equipo Axopur (Axolot, 55 L/h) entregado el 01-jun-2026. Contacto: Sebastián Riquelme, s.riquelme@udt.cl.",
+      "⚠️ Pagaron el inicial de $8,9MM sin problema pero llevan dos rentas sin pagar. Suele indicar que el pago recurrente no quedó domiciliado — vale la pena preguntar por el mecanismo de pago, no sólo por la deuda.",
       "Los abonos de Caelum en el sistema (mar-2025, ene-2026) son ANTERIORES al contrato y corresponden a otras OC (estudios), no a Axopur.",
     ],
   },
@@ -320,27 +327,26 @@ function generarMail(d: Deudor): { asunto: string; cuerpo: string } {
       asunto: "Facturas pendientes de pago · Contrato Calderas Vilanova — Puerta Patagonia",
       cuerpo: `Estimado Juan Moisés,
 
-Junto con saludar, le escribo desde Climate Smart Leasing SpA respecto del estado de cuenta del contrato de solución energética del Edificio Puerta Patagonia, conciliado al 31 de julio de 2026 contra nuestra cuenta Santander N° 9427891-0 y las facturas electrónicas emitidas.
+Junto con saludar, le escribo desde Climate Smart Leasing SpA respecto del estado de cuenta del contrato de solución energética del Edificio Puerta Patagonia, conciliado al 7 de agosto de 2026 contra nuestra cuenta Santander N° 9427891-0 y las facturas electrónicas emitidas.
 
-Primero, agradezco especialmente los dos pagos recibidos este mes: el 10 y el 13 de julio ingresaron $1.983.334 en cada oportunidad, que aplicamos a las cuotas 4 y 5 del anticipo (facturas N°47 y N°53). Con eso, el anticipo quedó cubierto en cinco de sus seis cuotas. Junto con ello tenemos registrados: las cuotas 1, 2 y 3 del anticipo ($1.983.334 el 17 de diciembre de 2025, el 20 de febrero y el 11 de junio de 2026), la renta de marzo ($3.166.949 recibida el 18 de marzo) y la renta de abril, factura N°52 ($3.182.766 recibida el 5 de mayo). Total recibido a la fecha: $16.266.385.
+Primero, y muy especialmente: con los dos pagos recibidos estos días —$1.983.334 el 3 de agosto y $3.211.365 el 10 de agosto— el anticipo de $10.000.000 más IVA quedó pagado en su totalidad, en sus seis cuotas. Se lo agradezco, y quería dejarlo consignado porque cierra la etapa inicial del contrato. Esos mismos pagos saldaron además la renta de mayo (factura N°64). Con ello, el registro completo a la fecha es: las seis cuotas del anticipo y las rentas 1, 2 y 3 de 36, por un total recibido de $21.461.084.
 
-Dicho eso, a la fecha quedan cuatro facturas pendientes de pago. Tres de ellas ya están vencidas (más de 30 días desde su emisión) y una, la más reciente, está por vencer:
+Dicho eso, quedan tres facturas de renta pendientes de pago. Dos ya están vencidas y la tercera, emitida este mes, está por vencer:
 
 Vencidas (más de 30 días desde su emisión):
-- Factura N°63 (06-may-2026) — Anticipo cuota 6 de 6: $1.983.334
-- Factura N°64 (06-may-2026) — Renta mensual cuota 3 de 36: $3.211.365
 - Factura N°69 (06-jun-2026) — Renta mensual cuota 4 de 36: $3.252.266
+- Renta mensual cuota 5 de 36 (06-jul-2026): $3.260.773
 
-Por vencer (emitida en julio):
-- Renta mensual cuota 5 de 36: $3.260.773
+Por vencer (emitida en agosto):
+- Renta mensual cuota 6 de 36: $3.262.728
 
-Total vencido: $8.446.965 · Total pendiente (incluida la renta de julio por vencer): $11.707.738
+Total vencido: $6.513.039 · Total pendiente (incluida la renta de agosto por vencer): $9.775.767
 
-Las tres primeras facturas superan los 30 días desde su emisión, sin perjuicio de que el plazo de pago contractual es de 15 días corridos (Cláusula Tercera del contrato).
+Ambas facturas vencidas superan los 30 días desde su emisión, sin perjuicio de que el plazo de pago contractual es de 15 días corridos (Cláusula Tercera del contrato).
 
 El proyecto fue recepcionado definitivamente por ustedes el 8 de abril de 2026 sin observaciones, por lo que no existen pendientes de obra asociados a estos pagos.
 
-El ritmo de dos pagos en julio va en la dirección correcta y se lo agradezco. Aun así, la deuda pendiente sigue en torno a los $11,7 millones (de los cuales $8.446.965 ya están vencidos) y devengando interés máximo convencional conforme al contrato. Le agradecería coordinar a la brevedad la regularización de las tres facturas vencidas, o indicarme si alguno de estos pagos ya fue cursado y no figura aún en nuestra cuenta. Si necesitan un calendario de regularización, estoy disponible para conversarlo.
+Con el anticipo ya cerrado, lo que queda por delante es únicamente la renta mensual, y ahí hay un punto que me gustaría conversar: los pagos vienen corriendo con alrededor de dos meses de rezago respecto de la emisión, de modo que la mora se mantiene estable pero no se reduce, y sigue devengando interés máximo convencional conforme al contrato. Le propongo coordinar un calendario que permita adelantar una cuota y dejar el contrato al día; quedo disponible para conversarlo cuando le acomode. Si alguno de estos pagos ya fue cursado y no figura aún en nuestra cuenta, le agradezco avisarme.
 
 Los datos para transferencia son:
 
@@ -365,9 +371,9 @@ Junto con saludar, le escribo desde Climate Smart Leasing SpA con el estado de c
 
 Quiero partir agradeciendo la excelente puntualidad de la comunidad: el anticipo de $20.000.000 IVA incluido quedó cubierto en su totalidad (recibido en cuatro transferencias entre el 29 de enero y el 3 de febrero de 2026) y las rentas de abril a agosto están todas pagadas — la de agosto incluso de forma anticipada, el 17 de julio.
 
-Al conciliar contra los movimientos de la cuenta Santander N° 9427891-0 al 31 de julio de 2026, la cuenta está completamente al día, sin saldo pendiente.
+Al conciliar contra los movimientos de la cuenta Santander N° 9427891-0 al 7 de agosto de 2026, la cuenta está completamente al día, sin saldo pendiente.
 
-Estado de cuenta al 31 de julio de 2026:
+Estado de cuenta al 7 de agosto de 2026:
 
 Facturado esperado: $32.291.065
 Recibido a la fecha: $32.291.065
@@ -396,10 +402,10 @@ Juan Pablo González Jaramillo
 Gerente General · Climate Smart Leasing SpA`,
     },
     F1: {
-      asunto: "Estado de cuenta SCG · Flota Volvo EX30 PLUS y CORE — conciliación al 31-jul-2026",
+      asunto: "Estado de cuenta SCG · Flota Volvo EX30 PLUS y CORE — conciliación al 07-ago-2026",
       cuerpo: `Estimado Cristian,
 
-Junto con saludar, te escribo desde Climate Smart Leasing SpA con el estado de cuenta de los dos contratos de arrendamiento de SCG SpA — Flota Volvo EX30 PLUS y Flota Volvo EX30 CORE — conciliado al 31 de julio de 2026 contra los movimientos de la cuenta Santander N° 9427891-0.
+Junto con saludar, te escribo desde Climate Smart Leasing SpA con el estado de cuenta de los dos contratos de arrendamiento de SCG SpA — Flota Volvo EX30 PLUS y Flota Volvo EX30 CORE — conciliado al 7 de agosto de 2026 contra los movimientos de la cuenta Santander N° 9427891-0.
 
 Partir agradeciendo los pagos de fin de julio: recibimos $300.000 el 27 y $747.650 el 28, que sumados cubren exactamente la factura N°81 del EX30 PLUS, y $921.912 el 28 por la factura N°82 del EX30 CORE. Con eso ambos contratos quedan prácticamente al día — SCG sigue siendo nuestro cliente más puntual.
 
@@ -421,7 +427,7 @@ Cumplimiento: 94,4%
 
 Saldo consolidado pendiente: $2.055.605, de los cuales sólo $84.870 están vencidos.
 
-El único punto a regularizar es esa diferencia de $84.870 en el EX30 PLUS, que viene arrastrándose de ajustes de UF de meses anteriores. Si te parece, la sumamos a la cuota de agosto y la dejamos cerrada. Las cuotas de julio de ambos contratos vencen recién a fines de agosto.
+El único punto a regularizar es esa diferencia de $84.870 en el EX30 PLUS, que viene arrastrándose de ajustes de UF de meses anteriores. Si te parece, la sumamos a la cuota de agosto y la dejamos cerrada. Las cuotas de julio de ambos contratos vencen el 20 de agosto.
 
 Adjunto el estado de cuenta detallado en Excel con las cuotas de ambos contratos.
 
@@ -441,10 +447,10 @@ Juan Pablo González Jaramillo
 Gerente General · Climate Smart Leasing SpA`,
     },
     F2: {
-      asunto: "Estado de cuenta SCG · Flota Volvo EX30 PLUS y CORE — conciliación al 31-jul-2026",
+      asunto: "Estado de cuenta SCG · Flota Volvo EX30 PLUS y CORE — conciliación al 07-ago-2026",
       cuerpo: `Estimado Cristian,
 
-Junto con saludar, te escribo desde Climate Smart Leasing SpA con el estado de cuenta de los dos contratos de arrendamiento de SCG SpA — Flota Volvo EX30 PLUS y Flota Volvo EX30 CORE — conciliado al 31 de julio de 2026 contra los movimientos de la cuenta Santander N° 9427891-0.
+Junto con saludar, te escribo desde Climate Smart Leasing SpA con el estado de cuenta de los dos contratos de arrendamiento de SCG SpA — Flota Volvo EX30 PLUS y Flota Volvo EX30 CORE — conciliado al 7 de agosto de 2026 contra los movimientos de la cuenta Santander N° 9427891-0.
 
 Partir agradeciendo los pagos de fin de julio: recibimos $300.000 el 27 y $747.650 el 28, que sumados cubren exactamente la factura N°81 del EX30 PLUS, y $921.912 el 28 por la factura N°82 del EX30 CORE. Con eso ambos contratos quedan prácticamente al día — SCG sigue siendo nuestro cliente más puntual.
 
@@ -466,7 +472,7 @@ Cumplimiento: 94,4%
 
 Saldo consolidado pendiente: $2.055.605, de los cuales sólo $84.870 están vencidos.
 
-El único punto a regularizar es esa diferencia de $84.870 en el EX30 PLUS, que viene arrastrándose de ajustes de UF de meses anteriores. Si te parece, la sumamos a la cuota de agosto y la dejamos cerrada. Las cuotas de julio de ambos contratos vencen recién a fines de agosto.
+El único punto a regularizar es esa diferencia de $84.870 en el EX30 PLUS, que viene arrastrándose de ajustes de UF de meses anteriores. Si te parece, la sumamos a la cuota de agosto y la dejamos cerrada. Las cuotas de julio de ambos contratos vencen el 20 de agosto.
 
 Adjunto el estado de cuenta detallado en Excel con las cuotas de ambos contratos.
 
@@ -491,9 +497,9 @@ Gerente General · Climate Smart Leasing SpA`,
 
 Junto con saludar, le escribo desde Climate Smart Leasing SpA en relación al contrato de arrendamiento del equipo de electroporación ODIN Opticept entregado a Agrotecnologías e Ingeniería SpA el 1 de marzo de 2026.
 
-Según lo establecido en el contrato, la facturación inició el 1 de junio de 2026. Al revisar nuestros registros conciliados con la cuenta Santander N° 9427891-0 al 31 de julio de 2026, las cuotas de junio y julio figuran pendientes de pago, y ambas ya superaron los 30 días desde su emisión.
+Según lo establecido en el contrato, la facturación inició el 1 de junio de 2026. Al revisar nuestros registros conciliados con la cuenta Santander N° 9427891-0 al 7 de agosto de 2026, las cuotas de junio y julio figuran pendientes de pago, y ambas ya superaron los 30 días desde su emisión.
 
-Estado de cuenta al 31 de julio de 2026:
+Estado de cuenta al 7 de agosto de 2026:
 
 Facturado esperado: $952.000
 Recibido a la fecha: $0
