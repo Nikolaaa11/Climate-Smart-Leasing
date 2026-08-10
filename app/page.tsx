@@ -4,11 +4,13 @@ import { useState, useMemo } from "react";
 import Image from "next/image";
 import TopNav from "./components/TopNav";
 import Dashboard from "./components/Dashboard";
+import Proyectos from "./components/Proyectos";
 import Contracts from "./components/Contracts";
 import Schedule from "./components/Schedule";
 import Movements from "./components/Movements";
 import CartolaUpload from "./components/CartolaUpload";
 import Cobranza from "./components/Cobranza";
+import Consolidado from "./components/Consolidado";
 import { ABONOS, Abono } from "@/lib/abonos";
 import { CONTRACTS } from "@/lib/contracts";
 import { buildConciliation } from "@/lib/conciliation";
@@ -66,10 +68,12 @@ export default function Home() {
 
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <Dashboard result={result} />
+        <Proyectos />
         <Contracts result={result} />
         <Cobranza result={result} />
         <Schedule result={result} />
         <Movements abonos={allAbonos} />
+        <Consolidado result={result} />
         <CartolaUpload
           onApply={(newAbonos) => {
             const toAdd: Abono[] = newAbonos.map(({ identifiedContract, identifiedReason, ...rest }) => rest);

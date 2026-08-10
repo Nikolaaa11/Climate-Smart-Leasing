@@ -5,10 +5,12 @@ import Image from "next/image";
 
 const NAV_ITEMS = [
   { href: "#dashboard", label: "Resumen" },
+  { href: "#proyectos", label: "Proyectos" },
   { href: "#contratos", label: "Contratos" },
   { href: "#cobranza", label: "Cobranza" },
   { href: "#cronograma", label: "Consolidado de cuotas" },
   { href: "#movimientos", label: "Movimientos" },
+  { href: "#consolidado", label: "Consolidado" },
   { href: "#subir", label: "Subir cartola" },
 ];
 
