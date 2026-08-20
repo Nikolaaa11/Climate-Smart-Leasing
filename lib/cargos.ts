@@ -103,6 +103,9 @@ export const CARGOS: Cargo[] = [
   { fecha: "2026-07-29", monto: 40_412, glosa: "COM.MANTENCION PLAN", doc: "0", cartolaMes: "Cartola N°27 (Julio 2026)" },
   { fecha: "2026-07-30", monto: 16_768_652, glosa: "Transf.Masiv", doc: "477860567", cartolaMes: "Cartola N°27 (Julio 2026)" },
 
-  // ============ CARTOLA N°28 (31/07/2026 - 07/08/2026) — Cargos $556.639 ============
+  // ============ CARTOLA N°28 (31/07/2026 - 20/08/2026) — Cargos $3.506.615 ============
   { fecha: "2026-08-06", monto: 556_639, glosa: "Pago FA 45394", doc: "003500260", cartolaMes: "Cartola N°28 (Agosto 2026)" },
+  { fecha: "2026-08-10", monto: 10_000, glosa: "Devolución pago Carátula 2030162", doc: "003500260", cartolaMes: "Cartola N°28 (Agosto 2026)" },
+  { fecha: "2026-08-20", monto: 119_643, glosa: "Reintegro Factura 1736846 (Hotel D...)", doc: "003500260", cartolaMes: "Cartola N°28 (Agosto 2026)" },
+  { fecha: "2026-08-20", monto: 2_820_333, glosa: "FA10874 EEFF 2025", doc: "003500260", cartolaMes: "Cartola N°28 (Agosto 2026)" },
 ];
