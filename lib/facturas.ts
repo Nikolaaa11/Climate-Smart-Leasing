@@ -71,6 +71,15 @@ export const FACTURAS: FacturaSII[] = [
   { folio: 77, contrato: "C-007", cuotaKey: "Cuota 1/48", fecha: "2026-06-30", uf: 22.66, valorUf: 40160, neto: 910026, iva: 172905, total: 1082931 },
   { folio: 78, contrato: "C-007", cuotaKey: "Cuota 2/48", fecha: "2026-06-30", uf: 22.66, valorUf: 40661, neto: 921378, iva: 175062, total: 1096440 },
   { folio: 74, contrato: "C-008", cuotaKey: "Pago compraventa", fecha: "2026-05-11", uf: null, valorUf: null, neto: 14458056, iva: 2747031, total: 17205087 },
+  // ===== Facturas julio-agosto 2026 =====
+  { folio: 86, contrato: "C-004", cuotaKey: "Cuota 18/48", fecha: "2026-07-21", uf: 21.58, valorUf: 40845, neto: 881435, iva: 167473, total: 1048908 },
+  { folio: 87, contrato: "C-005", cuotaKey: "Cuota 14/48", fecha: "2026-07-21", uf: 18.99, valorUf: 40845, neto: 775647, iva: 147373, total: 923020 },
+  { folio: 88, contrato: "C-002", cuotaKey: "Cuota 6/24", fecha: "2026-08-05", uf: 51.29, valorUf: 40845, neto: 2094940, iva: 398039, total: 2492979 },
+  { folio: 89, contrato: "C-006", cuotaKey: "Cuota 4/24", fecha: "2026-08-05", uf: 155.74, valorUf: 40845, neto: 6361200, iva: 1208628, total: 7569828 },
+  // F91 (Trongkai): una sola factura cubre 3 cuotas (1/8, 2/8, 3/8) de $400.000 neto c/u
+  { folio: 91, contrato: "C-003", cuotaKey: "Cuota 1/8", fecha: "2026-08-17", uf: null, valorUf: null, neto: 400000, iva: 76000, total: 476000 },
+  { folio: 91, contrato: "C-003", cuotaKey: "Cuota 2/8", fecha: "2026-08-17", uf: null, valorUf: null, neto: 400000, iva: 76000, total: 476000 },
+  { folio: 91, contrato: "C-003", cuotaKey: "Cuota 3/8", fecha: "2026-08-17", uf: null, valorUf: null, neto: 400000, iva: 76000, total: 476000 },
 ];
 
 /** Índice contrato|cuotaKey -> factura, para overlay en la conciliación. */

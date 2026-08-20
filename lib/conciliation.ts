@@ -117,6 +117,12 @@ export function identifyContract(abono: Abono): { contract: Contract | null; rea
     const flota1 = CONTRACTS.find(c => c.id === "C-004")!;
     const flota2 = CONTRACTS.find(c => c.id === "C-005")!;
 
+    // Pago fraccionado de la cuota 17/48 Flota 1 (F81, $1.047.650):
+    // $300.000 (27-jul-2026) + $747.650 (28-jul-2026).
+    if ((monto === 300_000 && fecha === "2026-07-27") || (monto === 747_650 && fecha === "2026-07-28")) {
+      return { contract: flota1, reason: "SCG pago fraccionado cuota 17/48 Flota 1 (F81)" };
+    }
+
     if (monto >= 3_500_000) {
       return { contract: flota1, reason: `SCG monto $${monto.toLocaleString("es-CL")} ≈ 1ª renta Flota 1 (82,86 UF)` };
     }
