@@ -175,6 +175,11 @@ export function identifyContract(abono: Abono): { contract: Contract | null; rea
   if (glosa.includes("RESCATE FONDOS MUTUOS") || (glosa.includes("FONDO") && glosa.includes("MUTUO"))) {
     return { contract: null, reason: "Movimiento interno: rescate de fondo mutuo" };
   }
+  // Tesorería General de la República (RUT 60.805.000-0): devoluciones de impuestos,
+  // PPM o remanentes de IVA. Entra como abono pero no es pago de ningún contrato.
+  if (glosa.includes("0608050000") || glosa.includes("TESORER")) {
+    return { contract: null, reason: "Tesorería General de la República — devolución de impuestos, no es pago de contrato" };
+  }
   if (glosa.includes("TRASPASO CON LA CUENTA")) {
     return { contract: null, reason: "Movimiento interno: traspaso entre cuentas propias" };
   }

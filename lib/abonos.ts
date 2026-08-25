@@ -192,10 +192,12 @@ export const ABONOS: Abono[] = [
   { fecha: "2026-07-28", monto: 747_650, glosa: "0141831984 Transf.", doc: "039262087", cartolaMes: "Cartola N°27 (Julio 2026)" },
   { fecha: "2026-07-28", monto: 921_912, glosa: "0141831984 Transf.", doc: "039262087", cartolaMes: "Cartola N°27 (Julio 2026)" },
 
-  // ============ CARTOLA N°28 (31/07/2026 - 20/08/2026) — Abonos $12.764.527 ============
-  // Provisoria (al 20-ago-2026). Puerta Patagonia paga el 03-ago y 10-ago; Barranco paga
-  // la cuota 4/24 (F89, $7.569.828) el 10-ago.
+  // ============ CARTOLA N°28 (31/07/2026 - 25/08/2026) — Abonos $13.221.778 ============
+  // Provisoria (al 25-ago-2026). Puerta Patagonia paga el 03-ago y 10-ago; Barranco paga
+  // la cuota 4/24 (F89, $7.569.828) el 10-ago. El abono del 21-ago es una devolución de la
+  // Tesorería General de la República (RUT 60.805.000-0), no un pago de cliente.
   { fecha: "2026-08-03", monto: 1_983_334, glosa: "0533192734 Transf de CODOMINIO PUE", doc: "000000000", cartolaMes: "Cartola N°28 (Agosto 2026)" },
   { fecha: "2026-08-10", monto: 3_211_365, glosa: "0533192734 Transf de CODOMINIO PUE", doc: "000000000", cartolaMes: "Cartola N°28 (Agosto 2026)" },
   { fecha: "2026-08-10", monto: 7_569_828, glosa: "00781918873 Pago de Provee", doc: "003500260", cartolaMes: "Cartola N°28 (Agosto 2026)" },
+  { fecha: "2026-08-21", monto: 457_251, glosa: "0608050000 PAGO PROVEEDOR TESORER", doc: "000000000", cartolaMes: "Cartola N°28 (Agosto 2026)" },
 ];

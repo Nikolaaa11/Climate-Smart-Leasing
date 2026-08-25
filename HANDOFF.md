@@ -1,6 +1,6 @@
 # HANDOFF — Plataforma de Control Financiero Climate Smart Leasing
 
-> Documento de traspaso del proyecto. Actualizado al **07-ago-2026**.
+> Documento de traspaso del proyecto. Actualizado al **25-ago-2026**.
 > Dueño saliente: Nicolás Rietta (GitHub: Nikolaaa11) · nicolasrietta@gmail.com
 
 ---
@@ -80,26 +80,27 @@ La facturación real difiere del texto del contrato y está **hardcodeada según
 
 **Tip de verificación**: crear un script temporal que importe `buildConciliation()` y ejecutarlo con `./node_modules/.bin/sucrase-node script.ts` para ver esperado/pagado/deuda por contrato antes de publicar (borrarlo antes del commit). Los PDFs escaneados se leen con Python `pymupdf` (`fitz`); `pdftoppm` no está disponible en esta máquina.
 
-## 5. Estado al 07-ago-2026 (foto actual)
+## 5. Estado al 25-ago-2026 (foto actual)
 
-Cifras verificadas con `npm run cuadratura` tras cargar las cartolas N°27 histórica y N°28 provisoria.
+Cifras verificadas con `npm run cuadratura` tras cargar la cartola N°28 al 25-ago.
 
 | Contrato | Cliente | Estado | Vencido | En plazo |
 |---|---|---|---|---|
-| C-001 Puerta Patagonia | Comunidad Ed. Puerta Patagonia (53.319.273-4) | 🔴 **GRAVE pero mejorando** — pagó $5.194.699 en la N°28, cerrando el ANTICIPO COMPLETO (F63) y la renta 3/36 (F64). Quedan vencidas F69 y la renta 5/36. Cumplimiento 68,7%. | **$6.513.039** | $3.262.728 |
-| C-002 Vikingos | Comunidad Ed. Los Vikingos (53.321.997-7) | 🟢 Al día — nada que pagar hasta el 01-sep | $0 | $0 |
-| C-003 Trongkai | Agrotecnologías e Ingeniería (77.221.203-8) | 🔴 **NUNCA HA PAGADO** — 3 cuotas emitidas, 2 ya vencidas | $952.000 | $476.000 |
-| C-004 Flota 1 (Volvo PLUS) | SCG SpA — paga Cristian Allende (14.183.198-4) | 🟡 Sólo arrastra $84.870 de redondeos. La 18/48 vence el 20-ago. Cumplimiento 95,4%. | $84.870 | $1.048.273 |
-| C-005 Flota 2 (Volvo CORE) | SCG SpA | 🟢 Nada vencido. La 14/48 vence el 20-ago. Cumplimiento 94,4%. | $0 | $922.462 |
-| C-006 Barranco Amarillo | Procesadora Barranco Amarillo (78.191.887-3) | 🟢 **Sin nada vencido** — cuota de agosto emitida el 05-ago, recién en plazo | $0 | $7.569.790 |
-| C-007 Axopur 1 | Bebidas Funcionales Caelum SpA — contrato FIRMADO 26-may-2026 | 🟡 Pagó el inicial pero NINGUNA renta. F77 y F78 vencidas; sin movimiento en la N°28. Cumplimiento 73,1%. | $2.179.371 | $1.101.396 |
-| C-008 Resin & Polimers 1 | Comercializadora Resin & Polimers (76.058.363-4) | 🟢 Pagado 100% (F74, $17.205.087) | $0 | $0 |
+| C-001 Puerta Patagonia | Comunidad Ed. Puerta Patagonia | 🔴 **GRAVE** — anticipo cerrado, quedan 2 rentas vencidas (F69 y 5/36). Cumplimiento 68,7%. | **$6.513.039** | $3.262.728 |
+| C-002 Vikingos | Comunidad Ed. Los Vikingos | 🟢 Al día — nada vencido | $0 | $2.492.979 |
+| C-003 Trongkai | Agrotecnologías e Ingeniería | 🟡 **YA NO ESTÁ EN MORA** — la F91 (17-ago) facturó las 3 cuotas juntas; vencen el 16-sep | $0 | $1.428.000 |
+| C-004 Flota 1 (Volvo PLUS) | SCG SpA | 🟡 **NUEVO ATRASO** — la cuota 18/48 venció el 20-ago. Cumplimiento 91,5%. | **$1.133.778** | $1.048.903 |
+| C-005 Flota 2 (Volvo CORE) | SCG SpA | 🟡 **NUEVO ATRASO** — la cuota 14/48 venció el 20-ago. Cumplimiento 89,4%. | **$923.020** | $923.015 |
+| C-006 Barranco Amarillo | Procesadora Barranco Amarillo | 🟢 **100% AL DÍA** — pagó la F89 ($7.569.828) el 10-ago | $0 | $0 |
+| C-007 Axopur 1 | Bebidas Funcionales Caelum SpA | 🟡 Pagó el inicial pero ninguna renta. Cumplimiento 73,1%. | $2.179.371 | $1.101.396 |
+| C-008 Resin & Polimers 1 | Comercializadora Resin & Polimers | 🟢 Pagado 100% | $0 | $0 |
 
-**Total vencido: $9.729.280 · En plazo: $14.380.649 · Cobranza activa: $24.109.929.**
-Cada deudor tiene mail de cobro listo en la sección Cobranza (botón "Ver mail").
+**Total vencido: $10.749.208 · En plazo: $10.257.021 · Cobranza activa: $21.006.229.**
 
-> El vencido baja $1.933.926 respecto del 31-jul (Puerta Patagonia pagó dos facturas exactas).
-> El "en plazo" sube fuerte porque agosto ya emitió las cuotas de Barranco ($7,57MM), PP, Trongkai y Axopur.
+> Lo relevante del corte: **SCG entra en mora por primera vez en los dos contratos a la vez**
+> ($2.056.798). Su último abono es del 28-jul. En sentido contrario, **Trongkai sale de la
+> mora**: la F91 se emitió recién el 17-ago, así que sus 3 cuotas están en plazo
+> hasta el 16-sep. Barranco quedó 100% al día.
 
 ## 6. Pendientes abiertos (heredas esto)
 
@@ -144,6 +145,10 @@ Cada deudor tiene mail de cobro listo en la sección Cobranza (botón "Ver mail"
 - **31-jul-2026**: cierre de la cartola N°27 completa (30-jun → 31-jul) y validación de la N°26 histórica. Se agregan los 2 abonos del 28-jul y los 7 cargos de julio, que no estaban (`lib/cargos.ts` iba sólo hasta la N°26). Se resuelve el parcial de $300.000 que estaba "por asignar": junto al abono de $747.650 del 28-jul suma exactamente los $1.047.650 de la F81 (Flota 1, cuota 17/48) — se fija con la nueva tabla `IMPUTACION_MANUAL` en `lib/conciliation.ts`. Se confirma que Axopur pagó su pago inicial (F79) el 27-jul. Se cargan las UF de junio y julio. Se actualizan los 7 diagnósticos y mails de Cobranza, que estaban congelados al 03-jul.
 
 - **31-jul-2026 (2)**: corregido un desalineamiento entre el KPI de atraso y la píldora de estado de cada cuota. `computeStatus()` sólo evaluaba el vencimiento cuando la cuota tenía pago CERO: con un pago parcial caía antes en "pagada-diferencia" y nunca se marcaba vencida, por muchos días que pasaran. El KPI de `totales.ts`, en cambio, sí contaba ese saldo como atrasado. Se agrega el estado **`vencida-parcial`** ("Vencida con saldo") y se unifica el umbral de residuo (`EPS_REDONDEO = $5.000`, ahora exportado) entre `allocateAbonos`, `computeStatus` y `totales.ts`. Con esto la suma de las cuotas rotuladas vencidas calza al peso con el KPI ($11.663.206). **Regla de atraso sin cambios: sigue en 30 días** (`DIAS_GRACIA_ATRASO`).
+
+- **25-ago-2026**: se recarga la **cartola N°28** al corte 25-ago (antes llegaba al 20-ago). Suma 2 movimientos del 21-ago: un abono de $457.251 de la **Tesorería General de la República** (RUT 60.805.000-0, devolución de impuestos — NO es pago de cliente) y el cargo de $415.434 del F29 de julio. Totales de la N°28: abonos $13.221.778, cargos $3.922.049, saldo final $28.343.749, los tres calzados contra el encabezado. Se agrega una regla en `identifyContract()` para que los abonos de Tesorería queden explicados y no como ‘sin identificar’.
+  - Se corrigen 4 diagnósticos de Cobranza que habían quedado desfasados: **SCG (C-004 y C-005) entra en mora** por $2.056.798; **Trongkai (C-003) sale de la mora** porque la F91 se emitió el 17-ago y sus cuotas vencen el 16-sep; **Barranco (C-006) queda 100% al día**. Se reescriben los mails de SCG y Trongkai, que reclamaban cifras equivocadas.
+  - La N°27 histórica redescargada el 25-ago es idéntica a la ya cargada: sin cambios.
 
 - **07-ago-2026**: se cargan la **cartola N°27 histórica** y la **N°28 provisoria**. La histórica N°27 confirma la provisoria sin una sola diferencia (abonos $25.371.327, cargos $37.781.646); se actualizan los N° de documento a los oficiales del banco. La N°28 (31-jul → 07-ago) suma 2 abonos por $5.194.699 y 1 cargo de $556.639. Los dos abonos son de Puerta Patagonia y calzan al peso con la F63 (anticipo 6/6, $1.983.334) y la F64 (renta 3/36, $3.211.365): **el anticipo de $10MM queda 100% cobrado** y la mora de PP baja a $6.513.039, por primera vez sólo renta. Se actualizan los 7 diagnósticos y mails de Cobranza al nuevo corte.
   - ⚠️ **Anomalía del banco**: la N°28 declara corte al 07-ago pero incluye un movimiento fechado **10-ago-2026** ($3.211.365). Se verificó con las coordenadas del PDF que la fecha está en la columna correcta (no es un desalineamiento de extracción) y que el saldo final del encabezado ya lo incorpora. Se cargó tal como lo informa el banco; **confirmar contra la N°28 histórica** cuando salga.
