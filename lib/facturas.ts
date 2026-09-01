@@ -80,6 +80,12 @@ export const FACTURAS: FacturaSII[] = [
   { folio: 91, contrato: "C-003", cuotaKey: "Cuota 1/8", fecha: "2026-08-17", uf: null, valorUf: null, neto: 400000, iva: 76000, total: 476000 },
   { folio: 91, contrato: "C-003", cuotaKey: "Cuota 2/8", fecha: "2026-08-17", uf: null, valorUf: null, neto: 400000, iva: 76000, total: 476000 },
   { folio: 91, contrato: "C-003", cuotaKey: "Cuota 3/8", fecha: "2026-08-17", uf: null, valorUf: null, neto: 400000, iva: 76000, total: 476000 },
+  // ===== Facturas agosto-septiembre 2026 =====
+  { folio: 92, contrato: "C-004", cuotaKey: "Cuota 19/48", fecha: "2026-08-21", uf: 21.58, valorUf: 40861, neto: 881780, iva: 167538, total: 1049318 },
+  { folio: 93, contrato: "C-005", cuotaKey: "Cuota 15/48", fecha: "2026-08-21", uf: 18.99, valorUf: 40861, neto: 775950, iva: 147431, total: 923381 },
+  { folio: 94, contrato: "C-002", cuotaKey: "Cuota 7/24", fecha: "2026-09-05", uf: 51.29, valorUf: 40880, neto: 2096735, iva: 398380, total: 2495115 },
+  { folio: 95, contrato: "C-001", cuotaKey: "Cuota 5/36", fecha: "2026-09-06", uf: 67.13, valorUf: 40837, neto: 2741388, iva: 520864, total: 3262252 },
+  { folio: 96, contrato: "C-006", cuotaKey: "Cuota 5/24", fecha: "2026-09-05", uf: 155.74, valorUf: 40880, neto: 6366651, iva: 1209664, total: 7576315 },
 ];
 
 /** Índice contrato|cuotaKey -> factura, para overlay en la conciliación. */
