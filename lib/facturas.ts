@@ -68,8 +68,9 @@ export const FACTURAS: FacturaSII[] = [
   { folio: 71, contrato: "C-006", cuotaKey: "Cuota 2/24", fecha: "2026-06-05", uf: 155.74, valorUf: 40695, neto: 6337839, iva: 1204189, total: 7542028 },
   { folio: 84, contrato: "C-006", cuotaKey: "Cuota 3/24", fecha: "2026-07-05", uf: 155.74, valorUf: 40834, neto: 6359487, iva: 1208303, total: 7567790 },
   { folio: 79, contrato: "C-007", cuotaKey: "Pago inicial", fecha: "2026-06-30", uf: null, valorUf: null, neto: 7500000, iva: 1425000, total: 8925000 },
-  { folio: 77, contrato: "C-007", cuotaKey: "Cuota 1/48", fecha: "2026-06-30", uf: 22.66, valorUf: 40160, neto: 910026, iva: 172905, total: 1082931 },
-  { folio: 78, contrato: "C-007", cuotaKey: "Cuota 2/48", fecha: "2026-06-30", uf: 22.66, valorUf: 40661, neto: 921378, iva: 175062, total: 1096440 },
+  // F77 y F78 (cuotas 1/48 y 2/48, jun-2026) se ELIMINARON: por instrucción de CSL, la única
+  // factura emitida de C-007 es el pago inicial ($7.500.000 neto = F79). Las 48 cuotas de arriendo
+  // arrancan en octubre 2026 (Cláusula Sexto, contrato Rev 1) y aún no se han facturado.
   { folio: 74, contrato: "C-008", cuotaKey: "Pago compraventa", fecha: "2026-05-11", uf: null, valorUf: null, neto: 14458056, iva: 2747031, total: 17205087 },
   // ===== Facturas julio-agosto 2026 =====
   { folio: 86, contrato: "C-004", cuotaKey: "Cuota 18/48", fecha: "2026-07-21", uf: 21.58, valorUf: 40845, neto: 881435, iva: 167473, total: 1048908 },

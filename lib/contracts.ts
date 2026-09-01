@@ -251,19 +251,19 @@ export const CONTRACTS: Contract[] = [
     repLegal: "Sebastián Riquelme Riffo (RUT 15.354.775-0)",
     direccion: "Badajoz 21, San Pedro de la Paz, Concepción, Región del Biobío",
     fechaFirma: "2026-05-26",
-    fechaInicioPagos: "2026-06-05", // 48 cuotas emitidas los primeros 5 días de cada mes, a contar de junio 2026
+    fechaInicioPagos: "2026-10-05", // 48 cuotas emitidas los primeros 5 días de cada mes, a contar de octubre 2026 (Cláusula Sexto, Rev 1)
     monedaRenta: "UF",
     rentaUf: 22.66,
     pagoInicialNeto: 7_500_000, // SEXTO: pago inicial $7.500.000 netos facturados frente al contrato
     nCuotas: 48,
     ivaIncluido: false,
     vigenciaMeses: 48,
-    facturacionDia: "Primeros 5 días de cada mes, a contar de junio 2026",
+    facturacionDia: "Primeros 5 días de cada mes, a contar de octubre 2026",
     plazoPagoDias: "Por confirmar (contrato no lo detalla)",
     interesMora: "Término anticipado del contrato por retraso > 90 días corridos",
     cuentaDestino: "Banco Santander Cta. Cte. N° 9427-8910",
     docFuente: "Contrato de arrendamiento Caelum. Rev 1.pdf (firmado 26/05/2026, Concepción).",
-    obs: "Contrato de arriendo de equipo Axopur (electrocoagulación / electropulsos), fabricado por Axolot (Suecia), capacidad 55 L/hora. Equipo entregado físicamente 01/06/2026 en instalaciones de Caelum. Precio (Cláusula Sexto, Rev 1): pago inicial $7.500.000 netos + 48 cuotas de 22,66 UF + IVA, emitidas los primeros 5 días de cada mes A CONTAR DE OCTUBRE 2026. ⚠️ Discrepancia: las facturas F77 (cuota 1/48) y F78 (cuota 2/48) se emitieron el 30/06/2026, antes del inicio de octubre que fija esta Rev 1 — pendiente de resolver. Rep. legal CSL: Juan Pablo González Jaramillo (Gerente General). Contacto Caelum: Sebastián Riquelme, s.riquelme@udt.cl, +56 9 6909 2261. Pago inicial (F79, $8.925.000) pagado el 27/07/2026.",
+    obs: "Contrato de arriendo de equipo Axopur (electrocoagulación / electropulsos), fabricado por Axolot (Suecia), capacidad 55 L/hora. Equipo entregado físicamente 01/06/2026 en instalaciones de Caelum. Precio (Cláusula Sexto, Rev 1): pago inicial $7.500.000 netos + 48 cuotas de 22,66 UF + IVA, emitidas los primeros 5 días de cada mes A CONTAR DE OCTUBRE 2026 (las cuotas de arriendo aún NO se han facturado). Única factura emitida de C-007 a la fecha: el pago inicial (F79). Rep. legal CSL: Juan Pablo González Jaramillo (Gerente General). Contacto Caelum: Sebastián Riquelme, s.riquelme@udt.cl, +56 9 6909 2261. Pago inicial (F79, $8.925.000) pagado el 27/07/2026.",
   },
   {
     id: "C-008",
