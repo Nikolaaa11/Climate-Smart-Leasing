@@ -109,21 +109,22 @@ Cifras verificadas con `npm run cuadratura` tras cargar la cartola N°28 al 25-a
    - **$17.205.087** de "COMERCIALIZADORA" RUT 76.058.363-4 → registrado como compraventa C-008; falta el contrato y datos del cliente.
    - ✅ RESUELTO (31-jul): los **$10.710.000** "Factura 41 PTEC" eran un wash bancario (entró el 11-jun, salió el mismo total el 15-jun) — abonos y cargo excluidos, neto $0.
    - Depósito con documento ATM de **$270.033.596** (27-mar-2026) y 4×$7MM del socio (27-mar).
-   - ✅ RESUELTO (31-jul): el pago inicial de Axopur (F79, $8.925.000) se pagó el 27-jul en 2 transferencias. Quedan pendientes F77 y F78.
+   - **NUEVO (11-sep-2026):** depósito de documento de otro banco por **$311.836.602** (01-sep-2026, cartola N°29) sin glosa de origen — el 10-sep salieron $300.000.000 a fondos mutuos. Además, 5×$7MM del socio RUT 77.775.176-K el 31-ago (cartola N°28). Confirmar la procedencia del depósito.
+   - ✅ RESUELTO (31-jul): el pago inicial de Axopur (F79, $8.925.000) se pagó el 27-jul en 2 transferencias. F77 y F78 se eliminaron por instrucción de CSL: con el contrato Rev 1 las cuotas corren desde nov-2026.
 2. **Adenda Vikingos**: el contrato tiene RUT erróneo (dice 53.319.273-4, el real es 53.321.997-7). Redactada la necesidad, falta emitirla y firmarla.
-3. **Cobranza dura a Puerta Patagonia**: 2 facturas de renta vencidas (bajó de 3 tras los pagos de agosto). El contrato (Cláusula Décimo Quinta/Sexta) permite acelerar toda la deuda, suspender el servicio y bloquear equipos con 2+ facturas impagas. Mail listo en la plataforma; decisión comercial pendiente.
-4. **Trongkai**: definir acción de cobro (nunca ha pagado; el contrato permite término anticipado con retraso > 60 días).
+3. **Cobranza dura a Puerta Patagonia**: sin pagos desde el 10-ago-2026; 2 facturas de renta impagas (F69, vencida desde el 06-jul, y F95 de julio, en plazo) más la renta de agosto sin factura registrada. El contrato (Cláusula Décimo Quinta/Sexta) permite acelerar toda la deuda, suspender el servicio y bloquear equipos con 2+ facturas impagas. Mail listo en la plataforma; decisión comercial pendiente.
+4. **Trongkai**: hizo su PRIMER PAGO el 11-sep-2026 ($1.000.000 a cuenta de la F91 de $1.428.000; quedan $428.000, que vencen el 16-sep). Falta emitir la factura de la cuota 4/8 (septiembre): el problema ahí es de facturación más que de cobranza.
 5. **Axopur (C-007)**: confirmar cliente, RUT y fechas, y firmar contrato — hoy es solo modelo tentativo.
 6. **Emails de contacto de deudores**: varios son placeholders (marcados en `DEUDORES.notasInternas`) — confirmar antes de enviar mails.
-7. **Facturas SII de julio y agosto-2026 sin cargar en `lib/facturas.ts`**: la renta 5/36 y 6/36 de PP, la 18/48 de Flota 1, la 14/48 de Flota 2, la 4/24 de Barranco, la 3/48 de Axopur y la de agosto de Trongkai se calculan con el modelo (UF × renta), no con el folio real. Al recibir los PDF, agregarlas con su folio y neto exacto.
-8. ✅ HECHO (31-jul): **UF de junio (40.820,31) y julio 2026 (40.844,79)** cargadas en `lib/uf.ts` desde mindicador.cl.
+7. **Facturas SII sin cargar en `lib/facturas.ts`** (al 11-sep-2026): las rentas 6/36 (agosto) y 7/36 (septiembre) de PP y la cuota 4/8 (septiembre) de Trongkai se calculan con el modelo (UF × renta / tarifa fija). Confirmar si se emitieron y agregarlas con su folio y neto exacto. Ojo: la F95 de PP (06-sep) es la renta de JULIO (5/36) facturada tarde — está a UF de julio (40.837).
+8. ✅ HECHO: **UF de junio (40.820,31), julio (40.844,79) y agosto 2026 (40.873,77)** cargadas en `lib/uf.ts` desde mindicador.cl (agosto, el 11-sep).
 9. **Imputaciones manuales**: SCG partió la cuota 17/48 en dos transferencias y el heurístico no puede desambiguar parcialidades (RUT compartido Flota 1/Flota 2). Quedaron fijadas en la tabla `IMPUTACION_MANUAL` de `lib/conciliation.ts`. Si el cliente repite el patrón, agregar la entrada con la evidencia de la factura.
 
 ## 7. Documentos fuente clave
 
 - **Contratos firmados**: carpeta `C:\Users\DELL\Downloads\Contratos actuales\` y `C:\Users\DELL\Documents\000.11.CSL\`. El de Puerta Patagonia vigente es el **protocolizado 02-dic-2025** (Notaría La Reina, rep. 70.416) — fija plazo de pago **15 días corridos desde emisión** y pago desde el **inicio de los trabajos** (no desde la recepción de obra).
 - **Facturas SII de PP**: F43, F47, F52, F53, F63, F64, F69 (PDFs en Downloads; F52 está PAGADA aunque figuraba adeudada).
-- **Cartolas Santander**: N°20-28 procesadas (dic-2025 → 07-ago-2026). Las históricas son la fuente oficial; las "provisorias" se reemplazan cuando sale la histórica. Las N°26 y N°27 históricas ya reemplazaron a sus provisorias y confirmaron las cifras sin diferencias; la **N°28 sigue siendo provisoria**.
+- **Cartolas Santander**: N°20-29 procesadas (dic-2025 → 11-sep-2026). Las históricas son la fuente oficial; las "provisorias" se reemplazan cuando sale la histórica. Las N°26, N°27 y N°28 históricas ya reemplazaron a sus provisorias (la N°28 agregó 7 abonos y 4 cargos posteriores al 25-ago); la **N°29 sigue siendo provisoria**.
 - La recepción de obra PP: provisoria 17-mar-2026, **definitiva 08-abr-2026 sin observaciones** (clave para la cobranza: no pueden alegar mala entrega).
 
 ## 8. Datos sensibles y precauciones

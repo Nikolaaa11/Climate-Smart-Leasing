@@ -1,6 +1,6 @@
 // All ABONOS (credits) extracted from cartolas Santander 9427-8910
-// Source: 12 monthly cartolas (Ene-Dic 2025) + cartolas oficiales N°21-25
-// (30/12/2025 - 29/05/2026) + cartola provisoria N°26 (29/05 - 10/06/2026)
+// Source: 12 monthly cartolas (Ene-Dic 2025) + cartolas oficiales N°21-28
+// (30/12/2025 - 31/08/2026) + cartola provisoria N°29 (31/08 - 11/09/2026)
 // Each abono has the original glosa to preserve traceability
 
 export interface Abono {
@@ -192,12 +192,34 @@ export const ABONOS: Abono[] = [
   { fecha: "2026-07-28", monto: 747_650, glosa: "0141831984 Transf.", doc: "039262087", cartolaMes: "Cartola N°27 (Julio 2026)" },
   { fecha: "2026-07-28", monto: 921_912, glosa: "0141831984 Transf.", doc: "039262087", cartolaMes: "Cartola N°27 (Julio 2026)" },
 
-  // ============ CARTOLA N°28 (31/07/2026 - 25/08/2026) — Abonos $13.221.778 ============
-  // Provisoria (al 25-ago-2026). Puerta Patagonia paga el 03-ago y 10-ago; Barranco paga
-  // la cuota 4/24 (F89, $7.569.828) el 10-ago. El abono del 21-ago es una devolución de la
-  // Tesorería General de la República (RUT 60.805.000-0), no un pago de cliente.
-  { fecha: "2026-08-03", monto: 1_983_334, glosa: "0533192734 Transf de CODOMINIO PUE", doc: "000000000", cartolaMes: "Cartola N°28 (Agosto 2026)" },
-  { fecha: "2026-08-10", monto: 3_211_365, glosa: "0533192734 Transf de CODOMINIO PUE", doc: "000000000", cartolaMes: "Cartola N°28 (Agosto 2026)" },
-  { fecha: "2026-08-10", monto: 7_569_828, glosa: "00781918873 Pago de Provee", doc: "003500260", cartolaMes: "Cartola N°28 (Agosto 2026)" },
-  { fecha: "2026-08-21", monto: 457_251, glosa: "0608050000 PAGO PROVEEDOR TESORER", doc: "000000000", cartolaMes: "Cartola N°28 (Agosto 2026)" },
+  // ============ CARTOLA N°28 (31/07/2026 - 31/08/2026) — Otros abonos $50.193.706 ============
+  // Cartola HISTÓRICA (11-sep-2026). Confirma los 4 abonos de la provisoria (al 25-ago), ahora
+  // con N° de documento oficiales — incluido el de PP del 10-ago, que en la provisoria venía
+  // fechado después del corte. Agrega 7 abonos posteriores: SCG transfiere el 28-ago los montos
+  // exactos de las facturas F86 ($1.048.908, Flota 1) y F87 ($923.020, Flota 2), y el 31-ago
+  // entran 5 transferencias de $7.000.000 del RUT 77.775.176-K (aporte de socio, misma regla
+  // de identifyContract que en abr-2025 y mar-2026).
+  // Validado: 11 abonos = $50.193.706 = "Otros abonos" del encabezado.
+  { fecha: "2026-08-03", monto: 1_983_334, glosa: "0533192734 Transf de CODOMINIO PUE", doc: "0", cartolaMes: "Cartola N°28 (Agosto 2026)" },
+  { fecha: "2026-08-10", monto: 3_211_365, glosa: "0533192734 Transf de CODOMINIO PUE", doc: "0", cartolaMes: "Cartola N°28 (Agosto 2026)" },
+  { fecha: "2026-08-10", monto: 7_569_828, glosa: "00781918873 Pago de Provee", doc: "480727493", cartolaMes: "Cartola N°28 (Agosto 2026)" },
+  { fecha: "2026-08-21", monto: 457_251, glosa: "0608050000 PAGO PROVEEDOR TESORER", doc: "0", cartolaMes: "Cartola N°28 (Agosto 2026)" },
+  { fecha: "2026-08-28", monto: 1_048_908, glosa: "0141831984 Transf.", doc: "039262399", cartolaMes: "Cartola N°28 (Agosto 2026)" },
+  { fecha: "2026-08-28", monto: 923_020, glosa: "0141831984 Transf.", doc: "039262399", cartolaMes: "Cartola N°28 (Agosto 2026)" },
+  { fecha: "2026-08-31", monto: 7_000_000, glosa: "077751766K Transf.", doc: "039262437", cartolaMes: "Cartola N°28 (Agosto 2026)" },
+  { fecha: "2026-08-31", monto: 7_000_000, glosa: "077751766K Transf.", doc: "039262437", cartolaMes: "Cartola N°28 (Agosto 2026)" },
+  { fecha: "2026-08-31", monto: 7_000_000, glosa: "077751766K Transf.", doc: "039262437", cartolaMes: "Cartola N°28 (Agosto 2026)" },
+  { fecha: "2026-08-31", monto: 7_000_000, glosa: "077751766K Transf.", doc: "039262437", cartolaMes: "Cartola N°28 (Agosto 2026)" },
+  { fecha: "2026-08-31", monto: 7_000_000, glosa: "077751766K Transf.", doc: "039262437", cartolaMes: "Cartola N°28 (Agosto 2026)" },
+
+  // ============ CARTOLA N°29 (31/08/2026 - 11/09/2026) — Abonos $315.328.909 ============
+  // Provisoria (al 11-sep-2026): los N° de documento son provisorios, reemplazar con la histórica.
+  // Vikingos paga el 02-sep y Trongkai registra su primer pago ($1.000.000) el 11-sep.
+  // El depósito de $311.836.602 del 01-sep es un documento de otro banco sin glosa de origen:
+  // queda como "no identificado" hasta confirmar su procedencia. El 10-sep salen $300.000.000
+  // a fondos mutuos (ver cargos.ts).
+  // Validado: 3 abonos = $315.328.909 = "Abonos" del encabezado.
+  { fecha: "2026-09-01", monto: 311_836_602, glosa: "Depósito Documento Otros Bancos", doc: "000000000", cartolaMes: "Cartola N°29 (Septiembre 2026)" },
+  { fecha: "2026-09-02", monto: 2_492_307, glosa: "0533219977 Transf. EDIFICIO LOS VI", doc: "001600146", cartolaMes: "Cartola N°29 (Septiembre 2026)" },
+  { fecha: "2026-09-11", monto: 1_000_000, glosa: "77.221.203-8 Transf. AGROTECNO", doc: "000000000", cartolaMes: "Cartola N°29 (Septiembre 2026)" },
 ];

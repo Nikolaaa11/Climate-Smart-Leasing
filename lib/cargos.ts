@@ -1,5 +1,5 @@
 // Todos los CARGOS (egresos) de la cuenta Santander 9427-8910 de CSL
-// Fuente: cartolas oficiales N°20-28 (dic-2025 → 25-ago-2026)
+// Fuente: cartolas oficiales N°20-28 + provisoria N°29 (dic-2025 → 11-sep-2026)
 // Validado: la suma de cargos por cartola calza con el total "Otros cargos" del encabezado
 
 export interface Cargo {
@@ -103,10 +103,50 @@ export const CARGOS: Cargo[] = [
   { fecha: "2026-07-29", monto: 40_412, glosa: "COM.MANTENCION PLAN", doc: "0", cartolaMes: "Cartola N°27 (Julio 2026)" },
   { fecha: "2026-07-30", monto: 16_768_652, glosa: "Transf.Masiv", doc: "477860567", cartolaMes: "Cartola N°27 (Julio 2026)" },
 
-  // ============ CARTOLA N°28 (31/07/2026 - 25/08/2026) — Cargos $3.922.049 ============
-  { fecha: "2026-08-06", monto: 556_639, glosa: "Pago FA 45394", doc: "003500260", cartolaMes: "Cartola N°28 (Agosto 2026)" },
-  { fecha: "2026-08-10", monto: 10_000, glosa: "Devolución pago Carátula 2030162", doc: "003500260", cartolaMes: "Cartola N°28 (Agosto 2026)" },
-  { fecha: "2026-08-20", monto: 119_643, glosa: "Reintegro Factura 1736846 (Hotel D...)", doc: "003500260", cartolaMes: "Cartola N°28 (Agosto 2026)" },
-  { fecha: "2026-08-20", monto: 2_820_333, glosa: "FA10874 EEFF 2025", doc: "003500260", cartolaMes: "Cartola N°28 (Agosto 2026)" },
-  { fecha: "2026-08-21", monto: 415_434, glosa: "F29 JULIO 2026", doc: "003500260", cartolaMes: "Cartola N°28 (Agosto 2026)" },
+  // ============ CARTOLA N°28 (31/07/2026 - 31/08/2026) — Otros cargos $65.116.087 ============
+  // Cartola HISTÓRICA (11-sep-2026): confirma los 5 cargos de la provisoria con N° de documento
+  // oficiales y agrega 4 posteriores al 25-ago. Los dos cargos "OC0087 Sany Chile FA 100"
+  // suman $60.094.227 (27-ago $7.000.000 + 31-ago $53.094.227).
+  // Validado: 9 cargos = $65.116.087 = "Otros cargos" del encabezado.
+  { fecha: "2026-08-06", monto: 556_639, glosa: "Pago FA 45394", doc: "479858792", cartolaMes: "Cartola N°28 (Agosto 2026)" },
+  { fecha: "2026-08-10", monto: 10_000, glosa: "Devolución pago Carátula 2030162", doc: "480419063", cartolaMes: "Cartola N°28 (Agosto 2026)" },
+  { fecha: "2026-08-20", monto: 119_643, glosa: "Reintegro Factura 1736846 (Hotel D...)", doc: "481844342", cartolaMes: "Cartola N°28 (Agosto 2026)" },
+  { fecha: "2026-08-20", monto: 2_820_333, glosa: "FA10874 EEFF 2025", doc: "481947191", cartolaMes: "Cartola N°28 (Agosto 2026)" },
+  { fecha: "2026-08-21", monto: 415_434, glosa: "F29 JULIO 2026", doc: "483074885", cartolaMes: "Cartola N°28 (Agosto 2026)" },
+  { fecha: "2026-08-27", monto: 7_000_000, glosa: "OC0087 Sany Chile FA 100 Truck El", doc: "484243874", cartolaMes: "Cartola N°28 (Agosto 2026)" },
+  { fecha: "2026-08-27", monto: 1_059_375, glosa: "Juan Pablo Gonzalez Jaramillo", doc: "483816274", cartolaMes: "Cartola N°28 (Agosto 2026)" },
+  { fecha: "2026-08-27", monto: 40_436, glosa: "COM.MANTENCION PLAN", doc: "0", cartolaMes: "Cartola N°28 (Agosto 2026)" },
+  { fecha: "2026-08-31", monto: 53_094_227, glosa: "OC0087 Sany Chile FA 100 Truck El", doc: "485199024", cartolaMes: "Cartola N°28 (Agosto 2026)" },
+
+  // ============ CARTOLA N°29 (31/08/2026 - 11/09/2026) — Cargos $313.148.541 ============
+  // Provisoria (al 11-sep-2026); N° de documento provisorios, reemplazar con la histórica.
+  // El 10-sep se invierten $300.000.000 en fondos mutuos (20 × $15.000.000). Es un movimiento
+  // de tesorería, no un gasto; se registra igual para que el total cuadre con la cartola, del
+  // mismo modo que los rescates de fondos mutuos figuran en abonos.ts.
+  // Validado: 25 cargos = $313.148.541 = "Cargos" del encabezado.
+  { fecha: "2026-09-01", monto: 923_501, glosa: "Transf.Masiv", doc: "003500260", cartolaMes: "Cartola N°29 (Septiembre 2026)" },
+  { fecha: "2026-09-01", monto: 140_000, glosa: "OT 58395", doc: "003500260", cartolaMes: "Cartola N°29 (Septiembre 2026)" },
+  { fecha: "2026-09-04", monto: 695_000, glosa: "Pago de Asigna", doc: "003500260", cartolaMes: "Cartola N°29 (Septiembre 2026)" },
+  { fecha: "2026-09-07", monto: 7_000_000, glosa: "Abono 70 Energia City Spa", doc: "003500260", cartolaMes: "Cartola N°29 (Septiembre 2026)" },
+  { fecha: "2026-09-08", monto: 4_390_040, glosa: "Abono 70 Energia City Spa", doc: "003500260", cartolaMes: "Cartola N°29 (Septiembre 2026)" },
+  { fecha: "2026-09-10", monto: 15_000_000, glosa: "Inversión en Fondo Mutuo", doc: "003501810", cartolaMes: "Cartola N°29 (Septiembre 2026)" },
+  { fecha: "2026-09-10", monto: 15_000_000, glosa: "Inversión en Fondo Mutuo", doc: "003501810", cartolaMes: "Cartola N°29 (Septiembre 2026)" },
+  { fecha: "2026-09-10", monto: 15_000_000, glosa: "Inversión en Fondo Mutuo", doc: "003501810", cartolaMes: "Cartola N°29 (Septiembre 2026)" },
+  { fecha: "2026-09-10", monto: 15_000_000, glosa: "Inversión en Fondo Mutuo", doc: "003501810", cartolaMes: "Cartola N°29 (Septiembre 2026)" },
+  { fecha: "2026-09-10", monto: 15_000_000, glosa: "Inversión en Fondo Mutuo", doc: "003501810", cartolaMes: "Cartola N°29 (Septiembre 2026)" },
+  { fecha: "2026-09-10", monto: 15_000_000, glosa: "Inversión en Fondo Mutuo", doc: "003501810", cartolaMes: "Cartola N°29 (Septiembre 2026)" },
+  { fecha: "2026-09-10", monto: 15_000_000, glosa: "Inversión en Fondo Mutuo", doc: "003501810", cartolaMes: "Cartola N°29 (Septiembre 2026)" },
+  { fecha: "2026-09-10", monto: 15_000_000, glosa: "Inversión en Fondo Mutuo", doc: "003501810", cartolaMes: "Cartola N°29 (Septiembre 2026)" },
+  { fecha: "2026-09-10", monto: 15_000_000, glosa: "Inversión en Fondo Mutuo", doc: "003501810", cartolaMes: "Cartola N°29 (Septiembre 2026)" },
+  { fecha: "2026-09-10", monto: 15_000_000, glosa: "Inversión en Fondo Mutuo", doc: "003501810", cartolaMes: "Cartola N°29 (Septiembre 2026)" },
+  { fecha: "2026-09-10", monto: 15_000_000, glosa: "Inversión en Fondo Mutuo", doc: "003501810", cartolaMes: "Cartola N°29 (Septiembre 2026)" },
+  { fecha: "2026-09-10", monto: 15_000_000, glosa: "Inversión en Fondo Mutuo", doc: "003501810", cartolaMes: "Cartola N°29 (Septiembre 2026)" },
+  { fecha: "2026-09-10", monto: 15_000_000, glosa: "Inversión en Fondo Mutuo", doc: "003501810", cartolaMes: "Cartola N°29 (Septiembre 2026)" },
+  { fecha: "2026-09-10", monto: 15_000_000, glosa: "Inversión en Fondo Mutuo", doc: "003501810", cartolaMes: "Cartola N°29 (Septiembre 2026)" },
+  { fecha: "2026-09-10", monto: 15_000_000, glosa: "Inversión en Fondo Mutuo", doc: "003501810", cartolaMes: "Cartola N°29 (Septiembre 2026)" },
+  { fecha: "2026-09-10", monto: 15_000_000, glosa: "Inversión en Fondo Mutuo", doc: "003501810", cartolaMes: "Cartola N°29 (Septiembre 2026)" },
+  { fecha: "2026-09-10", monto: 15_000_000, glosa: "Inversión en Fondo Mutuo", doc: "003501810", cartolaMes: "Cartola N°29 (Septiembre 2026)" },
+  { fecha: "2026-09-10", monto: 15_000_000, glosa: "Inversión en Fondo Mutuo", doc: "003501810", cartolaMes: "Cartola N°29 (Septiembre 2026)" },
+  { fecha: "2026-09-10", monto: 15_000_000, glosa: "Inversión en Fondo Mutuo", doc: "003501810", cartolaMes: "Cartola N°29 (Septiembre 2026)" },
+  { fecha: "2026-09-10", monto: 15_000_000, glosa: "Inversión en Fondo Mutuo", doc: "003501810", cartolaMes: "Cartola N°29 (Septiembre 2026)" },
 ];
