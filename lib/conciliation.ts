@@ -110,6 +110,12 @@ export function identifyContract(abono: Abono): { contract: Contract | null; rea
   if (glosa.includes("0781918873") || glosa.includes("BARRANCO") || glosa.includes("BORQUEZ")) {
     return { contract: CONTRACTS.find(c => c.id === "C-006")!, reason: "RUT/Nombre Barranco Amarillo" };
   }
+  // Barranco Amarillo también paga a través de Skyring (RUT 0765700329). Instrucción CSL
+  // (23-sep-2026): el abono "REMUNERACION SKYRING" de $7.576.315 del 11-09 (cartola N°29)
+  // es pago de Barranco — calza exacto con la cuota pendiente de C-006.
+  if (glosa.includes("0765700329") || glosa.includes("SKYRING")) {
+    return { contract: CONTRACTS.find(c => c.id === "C-006")!, reason: "Skyring paga por Barranco Amarillo (instrucción CSL 23-09-2026)" };
+  }
 
   // === SCG (RUT 0141831984 compartido entre Flota 1 y 2) ===
   // Desambiguar por monto, con fecha como tiebreaker

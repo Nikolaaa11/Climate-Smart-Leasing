@@ -215,11 +215,13 @@ export const ABONOS: Abono[] = [
   // ============ CARTOLA N°29 (31/08/2026 - 23/09/2026) — Abonos $412.157.490 ============
   // Provisoria completa (al 23-sep-2026). Reemplaza la provisoria parcial al 11-sep (3 abonos):
   // el documento oficial del 23-sep trae los movimientos hasta el 21-09.
-  // Pagos de contrato que concilian solos por glosa:
+  // Pagos de contrato que concilian por glosa/RUT:
   //   • Vikingos (C-002) $2.492.307 el 02-09  • Puerta Patagonia (C-001) $3.252.266 el 15-09
   //   • Agrotecnologías/Trongkai (C-003) $1.000.000 el 11-09 (primer pago registrado del contrato)
+  //   • Barranco Amarillo (C-006) $7.576.315 el 11-09, vía Skyring (instrucción CSL 23-09-2026;
+  //     calza exacto con la cuota pendiente de C-006 — ver regla en conciliation.ts)
   // No identificados (el usuario enviará el detalle): depósito de otro banco $311.836.602 del
-  // 01-09, "REMUNERACION SKYRING" $7.576.315 e "INGENIERIA E IN" ($5MM+$5MM+$1MM, REVTECH).
+  // 01-09 e "INGENIERIA E IN" ($5MM+$5MM+$1MM, intercompañía REVTECH).
   // Tesorería (round-trip): "Rescate Fondos Mutuos" ($15MM el 14-09 + 4×$15MM el 15-09),
   // contrapartida de las 20 "Inversión en Fondo Mutuo" de $15MM del 10-09 (ver cargos.ts).
   // Validado: 13 abonos = $412.157.490 = "Abonos" del encabezado.
