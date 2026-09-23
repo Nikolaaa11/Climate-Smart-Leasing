@@ -118,12 +118,12 @@ export const CARGOS: Cargo[] = [
   { fecha: "2026-08-27", monto: 40_436, glosa: "COM.MANTENCION PLAN", doc: "0", cartolaMes: "Cartola N°28 (Agosto 2026)" },
   { fecha: "2026-08-31", monto: 53_094_227, glosa: "OC0087 Sany Chile FA 100 Truck El", doc: "485199024", cartolaMes: "Cartola N°28 (Agosto 2026)" },
 
-  // ============ CARTOLA N°29 (31/08/2026 - 11/09/2026) — Cargos $313.148.541 ============
-  // Provisoria (al 11-sep-2026); N° de documento provisorios, reemplazar con la histórica.
-  // El 10-sep se invierten $300.000.000 en fondos mutuos (20 × $15.000.000). Es un movimiento
-  // de tesorería, no un gasto; se registra igual para que el total cuadre con la cartola, del
-  // mismo modo que los rescates de fondos mutuos figuran en abonos.ts.
-  // Validado: 25 cargos = $313.148.541 = "Cargos" del encabezado.
+  // ============ CARTOLA N°29 (31/08/2026 - 23/09/2026) — Cargos $403.322.787 ============
+  // Provisoria completa (al 23-sep-2026); reemplaza la parcial al 11-sep. Las 20 "Inversión
+  // en Fondo Mutuo" de $15.000.000 (10-09, $300.000.000) son colocación de tesorería,
+  // contrapartida de los "Rescate Fondos Mutuos" del 14-09 y 15-09 (ver abonos.ts): entra y
+  // sale, no es gasto real; se registra igual para que el total cuadre con la cartola.
+  // Validado: 29 cargos = $403.322.787 = "Cargos" del encabezado.
   { fecha: "2026-09-01", monto: 923_501, glosa: "Transf.Masiv", doc: "003500260", cartolaMes: "Cartola N°29 (Septiembre 2026)" },
   { fecha: "2026-09-01", monto: 140_000, glosa: "OT 58395", doc: "003500260", cartolaMes: "Cartola N°29 (Septiembre 2026)" },
   { fecha: "2026-09-04", monto: 695_000, glosa: "Pago de Asigna", doc: "003500260", cartolaMes: "Cartola N°29 (Septiembre 2026)" },
@@ -149,4 +149,8 @@ export const CARGOS: Cargo[] = [
   { fecha: "2026-09-10", monto: 15_000_000, glosa: "Inversión en Fondo Mutuo", doc: "003501810", cartolaMes: "Cartola N°29 (Septiembre 2026)" },
   { fecha: "2026-09-10", monto: 15_000_000, glosa: "Inversión en Fondo Mutuo", doc: "003501810", cartolaMes: "Cartola N°29 (Septiembre 2026)" },
   { fecha: "2026-09-10", monto: 15_000_000, glosa: "Inversión en Fondo Mutuo", doc: "003501810", cartolaMes: "Cartola N°29 (Septiembre 2026)" },
+  { fecha: "2026-09-14", monto: 15_485_286, glosa: "Reintegro Factura 7550528", doc: "003500260", cartolaMes: "Cartola N°29 (Septiembre 2026)" },
+  { fecha: "2026-09-14", monto: 1_880_137, glosa: "Factura 1. Proyecto PTEC Revfot", doc: "003500260", cartolaMes: "Cartola N°29 (Septiembre 2026)" },
+  { fecha: "2026-09-16", monto: 70_428_823, glosa: "Factura por emitir", doc: "003500260", cartolaMes: "Cartola N°29 (Septiembre 2026)" },
+  { fecha: "2026-09-21", monto: 2_380_000, glosa: "Factura por emitir. Proyecto PTEC", doc: "003500260", cartolaMes: "Cartola N°29 (Septiembre 2026)" },
 ];

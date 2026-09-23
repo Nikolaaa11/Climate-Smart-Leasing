@@ -212,14 +212,28 @@ export const ABONOS: Abono[] = [
   { fecha: "2026-08-31", monto: 7_000_000, glosa: "077751766K Transf.", doc: "039262437", cartolaMes: "Cartola N°28 (Agosto 2026)" },
   { fecha: "2026-08-31", monto: 7_000_000, glosa: "077751766K Transf.", doc: "039262437", cartolaMes: "Cartola N°28 (Agosto 2026)" },
 
-  // ============ CARTOLA N°29 (31/08/2026 - 11/09/2026) — Abonos $315.328.909 ============
-  // Provisoria (al 11-sep-2026): los N° de documento son provisorios, reemplazar con la histórica.
-  // Vikingos paga el 02-sep y Trongkai registra su primer pago ($1.000.000) el 11-sep.
-  // El depósito de $311.836.602 del 01-sep es un documento de otro banco sin glosa de origen:
-  // queda como "no identificado" hasta confirmar su procedencia. El 10-sep salen $300.000.000
-  // a fondos mutuos (ver cargos.ts).
-  // Validado: 3 abonos = $315.328.909 = "Abonos" del encabezado.
-  { fecha: "2026-09-01", monto: 311_836_602, glosa: "Depósito Documento Otros Bancos", doc: "000000000", cartolaMes: "Cartola N°29 (Septiembre 2026)" },
+  // ============ CARTOLA N°29 (31/08/2026 - 23/09/2026) — Abonos $412.157.490 ============
+  // Provisoria completa (al 23-sep-2026). Reemplaza la provisoria parcial al 11-sep (3 abonos):
+  // el documento oficial del 23-sep trae los movimientos hasta el 21-09.
+  // Pagos de contrato que concilian solos por glosa:
+  //   • Vikingos (C-002) $2.492.307 el 02-09  • Puerta Patagonia (C-001) $3.252.266 el 15-09
+  //   • Agrotecnologías/Trongkai (C-003) $1.000.000 el 11-09 (primer pago registrado del contrato)
+  // No identificados (el usuario enviará el detalle): depósito de otro banco $311.836.602 del
+  // 01-09, "REMUNERACION SKYRING" $7.576.315 e "INGENIERIA E IN" ($5MM+$5MM+$1MM, REVTECH).
+  // Tesorería (round-trip): "Rescate Fondos Mutuos" ($15MM el 14-09 + 4×$15MM el 15-09),
+  // contrapartida de las 20 "Inversión en Fondo Mutuo" de $15MM del 10-09 (ver cargos.ts).
+  // Validado: 13 abonos = $412.157.490 = "Abonos" del encabezado.
+  { fecha: "2026-09-01", monto: 311_836_602, glosa: "Depósito Documento Otros Bancos (EL BOSQUE EXPRESSO)", doc: "000000000", cartolaMes: "Cartola N°29 (Septiembre 2026)" },
   { fecha: "2026-09-02", monto: 2_492_307, glosa: "0533219977 Transf. EDIFICIO LOS VI", doc: "001600146", cartolaMes: "Cartola N°29 (Septiembre 2026)" },
-  { fecha: "2026-09-11", monto: 1_000_000, glosa: "77.221.203-8 Transf. AGROTECNO", doc: "000000000", cartolaMes: "Cartola N°29 (Septiembre 2026)" },
+  { fecha: "2026-09-11", monto: 1_000_000, glosa: "077221203-8 Transf. AGROTECNO", doc: "000000000", cartolaMes: "Cartola N°29 (Septiembre 2026)" },
+  { fecha: "2026-09-11", monto: 7_576_315, glosa: "0765700329 REMUNERACION SKYRING", doc: "000000000", cartolaMes: "Cartola N°29 (Septiembre 2026)" },
+  { fecha: "2026-09-14", monto: 15_000_000, glosa: "Rescate Fondos Mutuos", doc: "000000000", cartolaMes: "Cartola N°29 (Septiembre 2026)" },
+  { fecha: "2026-09-15", monto: 3_252_266, glosa: "0533192734 Transf de CODOMINIO PUE", doc: "000000000", cartolaMes: "Cartola N°29 (Septiembre 2026)" },
+  { fecha: "2026-09-15", monto: 15_000_000, glosa: "Rescate Fondos Mutuos", doc: "000000000", cartolaMes: "Cartola N°29 (Septiembre 2026)" },
+  { fecha: "2026-09-15", monto: 15_000_000, glosa: "Rescate Fondos Mutuos", doc: "000000000", cartolaMes: "Cartola N°29 (Septiembre 2026)" },
+  { fecha: "2026-09-15", monto: 15_000_000, glosa: "Rescate Fondos Mutuos", doc: "000000000", cartolaMes: "Cartola N°29 (Septiembre 2026)" },
+  { fecha: "2026-09-15", monto: 15_000_000, glosa: "Rescate Fondos Mutuos", doc: "000000000", cartolaMes: "Cartola N°29 (Septiembre 2026)" },
+  { fecha: "2026-09-15", monto: 5_000_000, glosa: "0770187397 Transf. INGENIERIA E IN", doc: "000112572", cartolaMes: "Cartola N°29 (Septiembre 2026)" },
+  { fecha: "2026-09-15", monto: 5_000_000, glosa: "0770187397 Transf. INGENIERIA E IN", doc: "000112572", cartolaMes: "Cartola N°29 (Septiembre 2026)" },
+  { fecha: "2026-09-15", monto: 1_000_000, glosa: "0770187397 Transf. INGENIERIA E IN", doc: "000112572", cartolaMes: "Cartola N°29 (Septiembre 2026)" },
 ];
