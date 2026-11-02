@@ -88,7 +88,8 @@ export const FACTURAS: FacturaSII[] = [
   { folio: 94, contrato: "C-002", cuotaKey: "Cuota 7/24", fecha: "2026-09-05", uf: 51.29, valorUf: 40880, neto: 2096735, iva: 398380, total: 2495115 },
   { folio: 95, contrato: "C-001", cuotaKey: "Cuota 5/36", fecha: "2026-09-06", uf: 67.13, valorUf: 40837, neto: 2741388, iva: 520864, total: 3262252 },
   { folio: 96, contrato: "C-006", cuotaKey: "Cuota 5/24", fecha: "2026-09-05", uf: 155.74, valorUf: 40880, neto: 6366651, iva: 1209664, total: 7576315 },
-  // ===== Facturas octubre-noviembre 2026 (F105-F110) =====
+  // ===== Facturas septiembre-noviembre 2026 (F97-F110) =====
+  { folio: 97, contrato: "C-004", cuotaKey: "Cuota 20/48", fecha: "2026-09-21", uf: 21.58, valorUf: 40984, neto: 884435, iva: 168043, total: 1052478 },
   { folio: 106, contrato: "C-004", cuotaKey: "Cuota 21/48", fecha: "2026-10-21", uf: 21.58, valorUf: 41195, neto: 888988, iva: 168908, total: 1057896 },
   { folio: 107, contrato: "C-005", cuotaKey: "Cuota 17/48", fecha: "2026-10-21", uf: 18.99, valorUf: 41195, neto: 782293, iva: 148636, total: 930929 },
   { folio: 105, contrato: "C-007", cuotaKey: "Cuota 1/48", fecha: "2026-11-05", uf: 22.66, valorUf: 41274, neto: 935269, iva: 177701, total: 1112970 },
