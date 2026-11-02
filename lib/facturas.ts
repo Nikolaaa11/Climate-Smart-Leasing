@@ -69,9 +69,9 @@ export const FACTURAS: FacturaSII[] = [
   { folio: 84, contrato: "C-006", cuotaKey: "Cuota 3/24", fecha: "2026-07-05", uf: 155.74, valorUf: 40834, neto: 6359487, iva: 1208303, total: 7567790 },
   { folio: 79, contrato: "C-007", cuotaKey: "Pago inicial", fecha: "2026-06-30", uf: null, valorUf: null, neto: 7500000, iva: 1425000, total: 8925000 },
   // F77 y F78 (cuotas 1/48 y 2/48, jun-2026) se ELIMINARON: por instrucción de CSL, la primera
-  // factura de C-007 fue el pago inicial ($7.500.000 neto = F79). Las 48 cuotas de arriendo
-  // arrancan en noviembre 2026 (Cláusula Sexto, contrato Rev 1); la cuota 1/48 se facturó el
-  // 05-11-2026 (F105, 22,66 UF) — ver sección "Facturas octubre-noviembre 2026" más abajo.
+  // factura de C-007 fue el pago inicial ($7.500.000 neto = F79). Las cuotas de arriendo (22,66 UF)
+  // se facturan desde octubre 2026: cuota 1/48 = F103 (05-10-2026) y cuota 2/48 = F104 (05-11-2026)
+  // — ver sección "Facturas septiembre-noviembre 2026" más abajo. (F105 duplica la cuota 1, no se carga.)
   { folio: 74, contrato: "C-008", cuotaKey: "Pago compraventa", fecha: "2026-05-11", uf: null, valorUf: null, neto: 14458056, iva: 2747031, total: 17205087 },
   // ===== Facturas julio-agosto 2026 =====
   { folio: 86, contrato: "C-004", cuotaKey: "Cuota 18/48", fecha: "2026-07-21", uf: 21.58, valorUf: 40845, neto: 881435, iva: 167473, total: 1048908 },
@@ -88,11 +88,16 @@ export const FACTURAS: FacturaSII[] = [
   { folio: 94, contrato: "C-002", cuotaKey: "Cuota 7/24", fecha: "2026-09-05", uf: 51.29, valorUf: 40880, neto: 2096735, iva: 398380, total: 2495115 },
   { folio: 95, contrato: "C-001", cuotaKey: "Cuota 5/36", fecha: "2026-09-06", uf: 67.13, valorUf: 40837, neto: 2741388, iva: 520864, total: 3262252 },
   { folio: 96, contrato: "C-006", cuotaKey: "Cuota 5/24", fecha: "2026-09-05", uf: 155.74, valorUf: 40880, neto: 6366651, iva: 1209664, total: 7576315 },
-  // ===== Facturas septiembre-noviembre 2026 (F97-F110) =====
+  // ===== Facturas septiembre-noviembre 2026 (F97, F103-F110) =====
   { folio: 97, contrato: "C-004", cuotaKey: "Cuota 20/48", fecha: "2026-09-21", uf: 21.58, valorUf: 40984, neto: 884435, iva: 168043, total: 1052478 },
   { folio: 106, contrato: "C-004", cuotaKey: "Cuota 21/48", fecha: "2026-10-21", uf: 21.58, valorUf: 41195, neto: 888988, iva: 168908, total: 1057896 },
   { folio: 107, contrato: "C-005", cuotaKey: "Cuota 17/48", fecha: "2026-10-21", uf: 18.99, valorUf: 41195, neto: 782293, iva: 148636, total: 930929 },
-  { folio: 105, contrato: "C-007", cuotaKey: "Cuota 1/48", fecha: "2026-11-05", uf: 22.66, valorUf: 41274, neto: 935269, iva: 177701, total: 1112970 },
+  { folio: 103, contrato: "C-007", cuotaKey: "Cuota 1/48", fecha: "2026-10-05", uf: 22.66, valorUf: 41098, neto: 931281, iva: 176943, total: 1108224 },
+  { folio: 104, contrato: "C-007", cuotaKey: "Cuota 2/48", fecha: "2026-11-05", uf: 22.66, valorUf: 41274, neto: 935269, iva: 177701, total: 1112970 },
+  // F105 (C-007, 05-11-2026, "cuota 01 de 48", neto $935.269) NO se carga: duplica la cuota 01
+  // (ya facturada en F103, 05-10-2026). Mismo monto que F104 (cuota 02). Se presume RE-EMISIÓN
+  // ERRÓNEA anulada con nota de crédito — PENDIENTE confirmar con CSL. Si F105 es la válida y
+  // F103 la anulada, invertir: F105 pasa a Cuota 1/48 y se elimina F103.
   { folio: 108, contrato: "C-002", cuotaKey: "Cuota 9/24", fecha: "2026-11-05", uf: 51.29, valorUf: 41275, neto: 2116995, iva: 402229, total: 2519224 },
   { folio: 109, contrato: "C-001", cuotaKey: "Cuota 7/36", fecha: "2026-11-05", uf: 67.13, valorUf: 41274, neto: 2770724, iva: 526438, total: 3297162 },
   { folio: 110, contrato: "C-006", cuotaKey: "Cuota 7/24", fecha: "2026-11-05", uf: 155.74, valorUf: 41275, neto: 6428169, iva: 1221352, total: 7649521 },
