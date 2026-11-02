@@ -118,12 +118,14 @@ export const CARGOS: Cargo[] = [
   { fecha: "2026-08-27", monto: 40_436, glosa: "COM.MANTENCION PLAN", doc: "0", cartolaMes: "Cartola N°28 (Agosto 2026)" },
   { fecha: "2026-08-31", monto: 53_094_227, glosa: "OC0087 Sany Chile FA 100 Truck El", doc: "485199024", cartolaMes: "Cartola N°28 (Agosto 2026)" },
 
-  // ============ CARTOLA N°29 (31/08/2026 - 23/09/2026) — Cargos $403.322.787 ============
+  // ============ CARTOLA N°29 (31/08/2026 - 30/09/2026) — Cargos $404.422.627 ============
   // Provisoria completa (al 23-sep-2026); reemplaza la parcial al 11-sep. Las 20 "Inversión
   // en Fondo Mutuo" de $15.000.000 (10-09, $300.000.000) son colocación de tesorería,
   // contrapartida de los "Rescate Fondos Mutuos" del 14-09 y 15-09 (ver abonos.ts): entra y
   // sale, no es gasto real; se registra igual para que el total cuadre con la cartola.
-  // Validado: 29 cargos = $403.322.787 = "Cargos" del encabezado.
+  // Histórica (02-nov-2026): confirma la provisoria y extiende al 30-09 con 2 cargos más
+  // (25-09 traspaso a JPG $1.059.375 y 28-09 comisión $40.465).
+  // Validado: 31 cargos = $404.422.627 = "Otros cargos" del encabezado.
   { fecha: "2026-09-01", monto: 923_501, glosa: "Transf.Masiv", doc: "003500260", cartolaMes: "Cartola N°29 (Septiembre 2026)" },
   { fecha: "2026-09-01", monto: 140_000, glosa: "OT 58395", doc: "003500260", cartolaMes: "Cartola N°29 (Septiembre 2026)" },
   { fecha: "2026-09-04", monto: 695_000, glosa: "Pago de Asigna", doc: "003500260", cartolaMes: "Cartola N°29 (Septiembre 2026)" },
@@ -153,4 +155,22 @@ export const CARGOS: Cargo[] = [
   { fecha: "2026-09-14", monto: 1_880_137, glosa: "Factura 1. Proyecto PTEC Revfot", doc: "003500260", cartolaMes: "Cartola N°29 (Septiembre 2026)" },
   { fecha: "2026-09-16", monto: 70_428_823, glosa: "Factura por emitir", doc: "003500260", cartolaMes: "Cartola N°29 (Septiembre 2026)" },
   { fecha: "2026-09-21", monto: 2_380_000, glosa: "Factura por emitir. Proyecto PTEC", doc: "003500260", cartolaMes: "Cartola N°29 (Septiembre 2026)" },
+  // Histórica N°29 (02-nov-2026): extiende el período al 30-09 y agrega estos 2 cargos.
+  { fecha: "2026-09-25", monto: 1_059_375, glosa: "Juan Pablo Gonzalez Jaramillo", doc: "490330291", cartolaMes: "Cartola N°29 (Septiembre 2026)" },
+  { fecha: "2026-09-28", monto: 40_465, glosa: "COM.MANTENCION PLAN", doc: "0", cartolaMes: "Cartola N°29 (Septiembre 2026)" },
+
+  // ============ CARTOLA N°30 (30/09/2026 - 30/10/2026) — Otros cargos $35.505.501 ============
+  // Histórica (02-nov-2026). Pagos a proveedores (Revtec, marketing, punto eléctrico camión,
+  // reintegro viaje), F29 septiembre y comisión de mantención.
+  // EXCLUIDO: el cargo "GemaVisita Proveedor FA 27" $289.527 (14-10) se compensa con un abono
+  // idéntico del mismo día (reverso, neto $0); no se registra para no inflar el movimiento.
+  // Validado: 8 cargos = $35.215.974 (encabezado $35.505.501 incluye el reverso GemaVisita).
+  { fecha: "2026-10-01", monto: 7_000_000, glosa: "Factura Pruebas Proyecto Revtec", doc: "491820790", cartolaMes: "Cartola N°30 (Octubre 2026)" },
+  { fecha: "2026-10-01", monto: 6_520_611, glosa: "BH121 Asesoria Marketing", doc: "491583679", cartolaMes: "Cartola N°30 (Octubre 2026)" },
+  { fecha: "2026-10-02", monto: 1_122_049, glosa: "FA9881 PUNTO ELECTRICO CAMION", doc: "491982776", cartolaMes: "Cartola N°30 (Octubre 2026)" },
+  { fecha: "2026-10-06", monto: 4_245_911, glosa: "Factura Pruebas Proyecto Revtec", doc: "492425286", cartolaMes: "Cartola N°30 (Octubre 2026)" },
+  { fecha: "2026-10-19", monto: 210_347, glosa: "Factura 52445", doc: "495495018", cartolaMes: "Cartola N°30 (Octubre 2026)" },
+  { fecha: "2026-10-20", monto: 15_628_451, glosa: "Reintegro Factura 7647868 (Viaje)", doc: "495557545", cartolaMes: "Cartola N°30 (Octubre 2026)" },
+  { fecha: "2026-10-20", monto: 447_958, glosa: "F29 Septiembre CSL", doc: "495716301", cartolaMes: "Cartola N°30 (Octubre 2026)" },
+  { fecha: "2026-10-28", monto: 40_647, glosa: "COM.MANTENCION PLAN", doc: "0", cartolaMes: "Cartola N°30 (Octubre 2026)" },
 ];

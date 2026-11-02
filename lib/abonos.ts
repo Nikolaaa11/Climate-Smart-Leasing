@@ -212,7 +212,7 @@ export const ABONOS: Abono[] = [
   { fecha: "2026-08-31", monto: 7_000_000, glosa: "077751766K Transf.", doc: "039262437", cartolaMes: "Cartola N°28 (Agosto 2026)" },
   { fecha: "2026-08-31", monto: 7_000_000, glosa: "077751766K Transf.", doc: "039262437", cartolaMes: "Cartola N°28 (Agosto 2026)" },
 
-  // ============ CARTOLA N°29 (31/08/2026 - 23/09/2026) — Abonos $412.157.490 ============
+  // ============ CARTOLA N°29 (31/08/2026 - 30/09/2026) — Abonos $412.157.490 ============
   // Provisoria completa (al 23-sep-2026). Reemplaza la provisoria parcial al 11-sep (3 abonos):
   // el documento oficial del 23-sep trae los movimientos hasta el 21-09.
   // Pagos de contrato que concilian por glosa/RUT:
@@ -238,4 +238,19 @@ export const ABONOS: Abono[] = [
   { fecha: "2026-09-15", monto: 5_000_000, glosa: "0770187397 Transf. INGENIERIA E IN", doc: "000112572", cartolaMes: "Cartola N°29 (Septiembre 2026)" },
   { fecha: "2026-09-15", monto: 5_000_000, glosa: "0770187397 Transf. INGENIERIA E IN", doc: "000112572", cartolaMes: "Cartola N°29 (Septiembre 2026)" },
   { fecha: "2026-09-15", monto: 1_000_000, glosa: "0770187397 Transf. INGENIERIA E IN", doc: "000112572", cartolaMes: "Cartola N°29 (Septiembre 2026)" },
+
+  // ============ CARTOLA N°30 (30/09/2026 - 30/10/2026) — Otros abonos $24.375.458 ============
+  // Histórica (02-nov-2026). SCG paga Flota 1 ($1.049.318) y Flota 2 ($923.381) el 01-10;
+  // Vikingos paga 3 veces (08-10 ×2 y 15-10); Barranco paga vía Skyring $7.616.718 el 13-10.
+  // "Rescate Fondos Mutuos" ($7.000.000) es tesorería.
+  // EXCLUIDO: "GemaVisita Proveedor FA 27" $289.527 (14-10) es un reverso (se compensa con el
+  // cargo idéntico del mismo día), no es pago de cliente.
+  // Validado: 7 abonos = $24.085.931 (encabezado $24.375.458 incluye el reverso GemaVisita).
+  { fecha: "2026-10-01", monto: 1_049_318, glosa: "0141831984 Transf.", doc: "039262739", cartolaMes: "Cartola N°30 (Octubre 2026)" },
+  { fecha: "2026-10-01", monto: 923_381, glosa: "0141831984 Transf.", doc: "039262739", cartolaMes: "Cartola N°30 (Octubre 2026)" },
+  { fecha: "2026-10-02", monto: 7_000_000, glosa: "Rescate Fondos Mutuos", doc: "0", cartolaMes: "Cartola N°30 (Octubre 2026)" },
+  { fecha: "2026-10-08", monto: 2_495_115, glosa: "0533219977 Transf. EDIFICIO LOS VI", doc: "016001482", cartolaMes: "Cartola N°30 (Octubre 2026)" },
+  { fecha: "2026-10-08", monto: 2_492_979, glosa: "0533219977 Transf. EDIFICIO LOS VI", doc: "016001482", cartolaMes: "Cartola N°30 (Octubre 2026)" },
+  { fecha: "2026-10-13", monto: 7_616_718, glosa: "0765700329 REMUNERACION SKYRING", doc: "0", cartolaMes: "Cartola N°30 (Octubre 2026)" },
+  { fecha: "2026-10-15", monto: 2_508_420, glosa: "0533219977 Transf. EDIFICIO LOS VI", doc: "016001486", cartolaMes: "Cartola N°30 (Octubre 2026)" },
 ];
