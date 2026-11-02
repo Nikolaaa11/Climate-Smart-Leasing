@@ -88,15 +88,19 @@ export const FACTURAS: FacturaSII[] = [
   { folio: 94, contrato: "C-002", cuotaKey: "Cuota 7/24", fecha: "2026-09-05", uf: 51.29, valorUf: 40880, neto: 2096735, iva: 398380, total: 2495115 },
   { folio: 95, contrato: "C-001", cuotaKey: "Cuota 5/36", fecha: "2026-09-06", uf: 67.13, valorUf: 40837, neto: 2741388, iva: 520864, total: 3262252 },
   { folio: 96, contrato: "C-006", cuotaKey: "Cuota 5/24", fecha: "2026-09-05", uf: 155.74, valorUf: 40880, neto: 6366651, iva: 1209664, total: 7576315 },
-  // ===== Facturas septiembre-noviembre 2026 (F97, F105-F110) =====
+  // ===== Facturas septiembre-noviembre 2026 (F97-F101, F105-F110) =====
   { folio: 97, contrato: "C-004", cuotaKey: "Cuota 20/48", fecha: "2026-09-21", uf: 21.58, valorUf: 40984, neto: 884435, iva: 168043, total: 1052478 },
   { folio: 106, contrato: "C-004", cuotaKey: "Cuota 21/48", fecha: "2026-10-21", uf: 21.58, valorUf: 41195, neto: 888988, iva: 168908, total: 1057896 },
+  { folio: 98, contrato: "C-005", cuotaKey: "Cuota 16/48", fecha: "2026-09-21", uf: 18.99, valorUf: 40984, neto: 778286, iva: 147874, total: 926160 },
   { folio: 107, contrato: "C-005", cuotaKey: "Cuota 17/48", fecha: "2026-10-21", uf: 18.99, valorUf: 41195, neto: 782293, iva: 148636, total: 930929 },
   { folio: 105, contrato: "C-007", cuotaKey: "Cuota 1/48", fecha: "2026-11-05", uf: 22.66, valorUf: 41274, neto: 935269, iva: 177701, total: 1112970 },
   // F103 (cuota 01, 05-10) y F104 (cuota 02, 05-11) NO se cargan: emitidas por error; la cuota
   // 1/48 válida es F105 (05-11-2026, 22,66 UF, neto $935.269) — confirmado por CSL 02-11-2026.
+  { folio: 99, contrato: "C-002", cuotaKey: "Cuota 8/24", fecha: "2026-10-05", uf: 51.29, valorUf: 41098, neto: 2107916, iva: 400504, total: 2508420 },
   { folio: 108, contrato: "C-002", cuotaKey: "Cuota 9/24", fecha: "2026-11-05", uf: 51.29, valorUf: 41275, neto: 2116995, iva: 402229, total: 2519224 },
+  { folio: 100, contrato: "C-001", cuotaKey: "Cuota 6/36", fecha: "2026-10-05", uf: 67.13, valorUf: 41098, neto: 2758909, iva: 524193, total: 3283102 },
   { folio: 109, contrato: "C-001", cuotaKey: "Cuota 7/36", fecha: "2026-11-05", uf: 67.13, valorUf: 41274, neto: 2770724, iva: 526438, total: 3297162 },
+  { folio: 101, contrato: "C-006", cuotaKey: "Cuota 6/24", fecha: "2026-10-05", uf: 155.74, valorUf: 41098, neto: 6400603, iva: 1216115, total: 7616718 },
   { folio: 110, contrato: "C-006", cuotaKey: "Cuota 7/24", fecha: "2026-11-05", uf: 155.74, valorUf: 41275, neto: 6428169, iva: 1221352, total: 7649521 },
 ];
 
